@@ -14,8 +14,7 @@ var app = angular.module('spaApp', [
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'uiGmapGoogleMapApiProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, uiGmapGoogleMapApiProvider) {
 
   uiGmapGoogleMapApiProvider.configure({
-    //Change the key, this is for mobile.
-    key: 'AIzaSyBTLip6mJStAz2siYPyrWjGcx7bk1ju_fc',
+    key: 'AIzaSyAMjg5ItWNxU2f-uw6tOz3lFBe_tXcUwlM',
     v: '3.17',
     libraries: 'places,geometry,visualization'
   });
