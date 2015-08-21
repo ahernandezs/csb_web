@@ -35,6 +35,15 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 			{ 'value' : 5 , 'label' : 'TEMPORALMENTE_SUSPENDIDO'},
 			{ 'value' : 6 , 'label' : 'NO_ESPECIFICADO'}
 		];
+		securityTokenProvider.getUserSecurityTokenState().then(
+			function(data){
+				tokenState = data.security_token_state;
+				$scope.userAdministrationStep = 2;
+			},
+			function(data){
+				$scope.setServiceError('Error en el servicio, intente más tarde');
+			}
+		);
 	}
 
  	/**
@@ -60,15 +69,6 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 		resetTokenActivationData();
 		resetTokenSynchronizationData();
 		resetTokenDisableData();
-		securityTokenProvider.getUserSecurityTokenState().then(
-			function(data){
-				tokenState = data.security_token_state;
-				$scope.userAdministrationStep = 2;
-			},
-			function(data){
-				$scope.setServiceError('Error en el servicio, intente más tarde');
-			}
-		);
 	};
 
 	/**
@@ -123,6 +123,7 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 			function(data){
 				$scope.setServiceError('Su token ha sido activado');
 				resetTokenActivationData();
+				tokenState = 1;
 			},
 			function(data){
 				$scope.setServiceError('No se pudo activar su token');
@@ -165,6 +166,7 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 			function(data){
 				$scope.setServiceError('Su token ha sido desactivado temporalmente');
 				resetTokenSynchronizationData();
+				tokenState = 3;
 			},
 			function(data){
 				$scope.setServiceError('No se pudo desactivar su token');
@@ -181,6 +183,7 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 			function(data){
 				$scope.setServiceError('Su token ha sido reactivado');
 				resetTokenSynchronizationData();
+				tokenState = 1;
 			},
 			function(data){
 				$scope.setServiceError('No se pudo reactivar su token');

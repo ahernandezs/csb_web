@@ -1,0 +1,14 @@
+<div class="data">
+    <h3>Sincronizaci&oacute;n del dispositivo de seguridad</h3>
+    <form name="synchronizeSecurityTokenForm">
+        <div class="fieldContainer" ng-class="tokenSynchronizationData.otp1.length > 0 ? 'selected' : ''">
+            <span>OTP 1</span>
+            <input type="password" numbers-only minlength="6" maxlength="6" class="input-mobile" ng-model="tokenSynchronizationData.otp1" placeholder="Captura el c&#x000F3;digo de tu token" ng-required="true">
+        </div>
+        <div class="fieldContainer" ng-class="tokenSynchronizationData.otp2.length > 0 ? 'selected' : ''">
+            <span>OTP 2</span>
+            <input type="password" numbers-only minlength="6" maxlength="6" class="input-mobile" ng-model="tokenSynchronizationData.otp2" placeholder="Captura un nuevo c&#x000F3;digo de tu token" ng-required="true">
+        </div>
+       <button ng-disabled="synchronizeSecurityTokenForm.$invalid" ng-click="synchronizeSecurityToken()">Sincronizar</button>
+    </form>
+</div>
