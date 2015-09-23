@@ -19,8 +19,12 @@
 		<h2>Mi Token</h2>
 		<div class="section">
 			<ul>
-				<li class="option cursor-pointer" ng-class="option==4 ? 'active' : ''" ng-click="gotoTokenAdministrationPage(); option=4">Sincronizaci&oacute;n de dispositivo</li>
-				<li class="option cursor-pointer" ng-class="option==5 ? 'active' : ''" ng-click="gotoTokenAdministrationPage(); option=5">Desactivaci&oacute;n de dispositivo</li>
+				<li class="option cursor-pointer" ng-class="option==10 ? 'active' : ''" ng-click="gotoTokenAdministrationPage(); option=10" ng-show="isSecurityTokenNew()">Activaci&oacute;n de dispositivo</li>
+				<li class="option cursor-pointer" ng-class="option==11 ? 'active' : ''" ng-click="gotoTokenAdministrationPage(); option=11" ng-show="isSecurityTokenEnabled()">Sincronizaci&oacute;n de dispositivo</li>
+				<li class="option cursor-pointer" ng-class="option==12 ? 'active' : ''" ng-click="gotoTokenAdministrationPage(); option=12" ng-show="isSecurityTokenEnabled()">Desactivaci&oacute;n de dispositivo</li>
+				<li class="option cursor-pointer" ng-class="option==13 ? 'active' : ''" ng-click="gotoTokenAdministrationPage(); option=13" ng-show="isSecurityTokenDisabled()">Reactivaci&oacute;n de dispositivo</li>
+				<li class="option cursor-pointer" ng-class="option==14 ? 'active' : ''" ng-click="gotoTokenAdministrationPage(); option=14" ng-show="isSecurityTokenLocked() ">Informaci&oacute;n de dispositivo</li>
+				<li class="option cursor-pointer" ng-class="option==15 ? 'active' : ''" ng-click="gotoTokenAdministrationPage(); option=15" ng-show="isSecurityTokenError()">Informaci&oacute;n de dispositivo</li>
 			</ul>
 		</div>
 	</div>
@@ -34,10 +38,22 @@
 	<div class="content-admin" ng-show="isUserPreferencesAdministrationPageActivated() && option==3">
 		<div ng-include="'views/partials/admin/update_password/change-password.html'"></div>
 	</div>
-	<div class="content-admin" ng-show="isUserTokenAdministrationPageActivated() && option==4">
-		<div ng-include="'views/partials/admin/activate-token.html'"></div>
+	<div class="content-admin" ng-show="isUserTokenAdministrationPageActivated() && option==10">
+		<div ng-include="'views/partials/admin/token/activate-token.html'"></div>
 	</div>
-	<div class="content-admin" ng-show="isUserTokenAdministrationPageActivated() && option==5">
-		<div ng-include="'views/partials/admin/deactivate-token.html'"></div>
+	<div class="content-admin" ng-show="isUserTokenAdministrationPageActivated() && option==11">
+		<div ng-include="'views/partials/admin/token/synchronize-token.html'"></div>
+	</div>
+	<div class="content-admin" ng-show="isUserTokenAdministrationPageActivated() && option==12">
+		<div ng-include="'views/partials/admin/token/disable-token.html'"></div>
+	</div>
+	<div class="content-admin" ng-show="isUserTokenAdministrationPageActivated() && option==13">
+		<div ng-include="'views/partials/admin/token/enable-token.html'"></div>
+	</div>
+	<div class="content-admin" ng-show="isUserTokenAdministrationPageActivated() && option==14">
+		<div ng-include="'views/partials/admin/token/token-locked.html'"></div>
+	</div>
+	<div class="content-admin" ng-show="isUserTokenAdministrationPageActivated() && option==15">
+		<div ng-include="'views/partials/admin/token/token-error.html'"></div>
 	</div>
 </div>
