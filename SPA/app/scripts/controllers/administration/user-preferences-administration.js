@@ -14,8 +14,8 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 	 * used for updatedata
 	 */
 	$scope.updatedata = {};
-	
-	$scope.userAdministrationStep = 1;
+
+	//$scope.userAdministrationStep = 1;
 
 	initialize();
 
@@ -38,7 +38,7 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 		securityTokenProvider.getUserSecurityTokenState().then(
 			function(data){
 				tokenState = data.security_token_state;
-				$scope.userAdministrationStep = 2;
+				//$scope.userAdministrationStep = 2;
 			},
 			function(data){
 				$scope.setServiceError('Error en el servicio, intente más tarde');
@@ -66,6 +66,7 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
  	 * goto to the security-token configuration page
  	 */
 	$scope.gotoTokenAdministrationPage = function(){
+		$scope.userAdministrationStep = 2;
 		resetTokenActivationData();
 		resetTokenSynchronizationData();
 		resetTokenDisableData();
@@ -117,8 +118,8 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
  	 * activate the user's security-token
  	 */
 	$scope.activateSecurityToken = function(){
-		securityTokenProvider.activateSecurityToken($scope.tokenActivationData.tokenId, 
-													$scope.tokenActivationData.otp1, 
+		securityTokenProvider.activateSecurityToken($scope.tokenActivationData.tokenId,
+													$scope.tokenActivationData.otp1,
 													$scope.tokenActivationData.otp2).then(
 			function(data){
 				$scope.setServiceError('Su token ha sido activado');
@@ -144,7 +145,7 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
  	 * synchronize the user's security-token
  	 */
 	$scope.synchronizeSecurityToken = function(){
-		securityTokenProvider.synchronizeSecurityToken($scope.tokenSynchronizationData.otp1, 
+		securityTokenProvider.synchronizeSecurityToken($scope.tokenSynchronizationData.otp1,
 													$scope.tokenSynchronizationData.otp2).then(
 			function(data){
 				$scope.setServiceError('Su token ha sido sincronizado');
@@ -155,7 +156,7 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 				resetTokenSynchronizationData();
 			}
 		);
-		
+
 	};
 
 	/**
@@ -172,7 +173,7 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 				$scope.setServiceError('No se pudo desactivar su token');
 			}
 		);
-		
+
 	};
 
 	/**
@@ -189,7 +190,7 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 				$scope.setServiceError('No se pudo reactivar su token');
 			}
 		);
-		
+
 	};
 
 	/**
@@ -205,5 +206,5 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 	function resetTokenDisableData(){
 		$scope.tokenDisableData = {};
 	}
-	
+
 }]);

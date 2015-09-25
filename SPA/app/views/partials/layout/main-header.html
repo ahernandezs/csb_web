@@ -3,19 +3,19 @@
     <div class="wrapper">
         <!-- =============================================================== -->
 
-        <h1 class="logo"><a href="/">Consubanco</a></h1>
+        <h1 class="logo"><a href="#/accounts">Consubanco</a></h1>
 
         <!-- =============================================================== -->
         <nav class="nav">
             <ul>
-                <li ng-click="selectNavigatOption('accounts')"
-                    data-ng-class="{'active': activeNavigationOption == 'accounts'}"> <a id="accounts" >Mis Productos</a></li>
-                <li ng-click="selectNavigatOption('transfers')"
-                    data-ng-class="{'active': activeNavigationOption == 'transfers'}"><a id="transfers" >Pagos y Transferencias</a></li>
-                <li ng-click="selectNavigatOption('investments')"
-                    data-ng-class="{'active': activeNavigationOption == 'investments'}"><a id="investments" >Inversiones</a></li>
-                <li ng-click="selectNavigatOption('administration')"
-                    data-ng-class="{'active': activeNavigationOption == 'administration'}"><a id="administration" >Administraci&oacute;n</a></li>
+                <li
+                    data-ng-class="{'active': isActive('accounts')}"> <a id="accounts" href="#/accounts">Mis Productos</a></li>
+                <li
+                    data-ng-class="{'active': isActive('transfers')}"><a id="transfers" href="#/transfers">Pagos y Transferencias</a></li>
+                <li
+                    data-ng-class="{'active': isActive('investments')}"><a id="investments" href="#/investments">Inversiones</a></li>
+                <li
+                    data-ng-class="{'active': isActive('administration')}"><a id="administration" href="#/administration">Administraci&oacute;n</a></li>
             </ul>
         </nav>
         <!-- =============================================================== -->
@@ -36,7 +36,7 @@
             <ul class="sub-menu">
                 <ul>
                     <li ng-click="selectNavigatOption('map')"><a>Sucursales y M&oacute;dulos de Atenci&oacute;n</a></li>
-                    <li><a href="#">Cont&aacute;ctanos</a></li>
+                    <li><a href="#/contacto">Cont&aacute;ctanos</a></li>
                     <li><a href="#">Ayuda</a></li>
                 </ul>
             </ul>

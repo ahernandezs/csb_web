@@ -45,7 +45,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     .state('contacto',{
       url: '/contacto',
       templateUrl: 'views/contact.html',
-      controller: 'LoginCtrl'
+      controller: 'ContactCtrl'
     })
 
     .state('dashboard', {
