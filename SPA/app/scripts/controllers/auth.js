@@ -83,7 +83,7 @@ angular.module('spaApp')
         setErrorWithStatus(status, errorObject);
         $scope.checkingUser = false;
       });
-    
+
     }
   }
 
@@ -193,7 +193,7 @@ angular.module('spaApp')
       var message = 'Error en el servicio, intente más tarde';
       if (code === 401) {
         message = errorObject.message;
-      } 
+      }
       setError(message);
     }
   }
@@ -202,14 +202,6 @@ angular.module('spaApp')
     $scope.error = false;
     $scope.registerError = false;
     $scope.errorMessage = "";
-  }
-
-  $scope.selectNavigatOption = function(selectedOption){
-    switch(selectedOption) {
-      case 'map':
-        $location.path('map');
-      break;
-    }
   }
 
   /**
@@ -223,13 +215,13 @@ angular.module('spaApp')
         case 0 :
           $scope.setServiceError('Su token no ha sido activado, debe activarlo en el panel de administración');
           break;
-        case 2 : 
+        case 2 :
           $scope.setServiceError('Su token está bloqueado, por favor llame al centro de atención a clientes');
           break;
-        case 3 : 
+        case 3 :
           $scope.setServiceError('Su token está desactivado');
           break;
-        case 99 : 
+        case 99 :
           $scope.setServiceError('Error técnico, no pudimos obtener el estado de tu token');
           break;
       }
@@ -256,5 +248,3 @@ angular.module('spaApp')
     setErrorWithStatus(parseInt($window.status), null);
   }
 }]);
-
-

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProvider', 'uiGmapGoogleMapApi', 'codeStatusErrors', 'userProvider', 'timerService', '$location', function ($scope,  $rootScope, mapProvider, uiGmapGoogleMapApi, codeStatusErrors, userProvider, timerService, $location) {
+angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProvider', 'uiGmapGoogleMapApi', 'codeStatusErrors', 'userProvider', 'timerService', '$location', 'logoutService', function ($scope,  $rootScope, mapProvider, uiGmapGoogleMapApi, codeStatusErrors, userProvider, timerService, $location, logoutService) {
 
 	$scope.conSesion = $rootScope.session_token == null || $rootScope.session_token == undefined || $rootScope.session_token == '' ? false : true;
 	$scope.details = {};
@@ -202,5 +202,16 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
       });
   };
 
+	$scope.$on('IdleTimeout', function() {
+    $scope.showIdleAlert = true;
+  });
+
+  $scope.$on('WarningTimeout', function() {
+    $scope.logout();
+  });
+
+  $scope.$on('IdleReset', function() {
+    $scope.showIdleAlert = false;
+  });
 
 }]);

@@ -60,9 +60,12 @@ angular.module('spaApp').controller('DashBoardCtrl', ['$rootScope', '$scope', '$
           $scope.activeNavigationOption = selectedOption;
           $location.path(selectedOption);
         }
-        $(this).css('cursor', 'pointer');
       });
   };
+
+  $scope.isActive = function(viewLocation) {
+    return $location.path().indexOf(viewLocation) >= 0;
+  }
 
   $scope.$on('IdleTimeout', function() {
     $scope.showIdleAlert = true;
