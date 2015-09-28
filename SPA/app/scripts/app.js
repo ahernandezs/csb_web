@@ -87,6 +87,9 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
 
     .state('dashboard.administration', {
         url: 'administration',
+        params: {
+          opt : 1
+        },
         views: {
         'administrationContent' : {
           templateUrl: 'views/administration.html',

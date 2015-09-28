@@ -20,7 +20,6 @@
                     <span>{{transfer.account.detail}}</span></p>
             </div>
             <ul class="dropdown-menu" role="menu">
-                <li class="dropdown-header">Cuentas propias</li>
                 <li ng-repeat="item in theAccounts | filter: { account_type: 'DEP' }" ng-model="transfer.account" ng-click="transfer.account = item; evaluateDestiny()" ng-required="true">{{item.displayName}}</li>
             </ul>
         </div>
@@ -37,7 +36,7 @@
                 <li ng-repeat="item in theAccounts | filter: { _account_id: transfer.account ? '!'+transfer.account._account_id : 0, account_type: 'DEP', group: 'Cuentas Propias' }" ng-click="transfer.destiny = item">{{item.displayName}}</li>
                 <li class="dropdown-header">Cuentas terceros</li>
                 <li ng-repeat="item in theAccounts | filter: { account_type: 'DEB_T', group: 'Cuentas Terceros' }" ng-model="transfer.destiny " ng-click="transfer.destiny = item" ng-required="true">{{item.displayName}}</li>
-                <li ng-show="isCompleteUser()"><a href="#/administration" ng-click="selectNavigatOption('administration')">Agregar nuevo beneficiario</a></li>
+                <li ng-show="isCompleteUser()"><a ui-sref="dashboard.administration({opt:4})">Agregar nuevo beneficiario</a></li>
             </ul>
         </div>
 
