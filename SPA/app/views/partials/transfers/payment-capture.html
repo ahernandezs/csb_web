@@ -5,7 +5,6 @@
         <div class="progress-div" id="progressWrapper">
             <div class="progress-fill"  ng-style="stepStyle"></div>
         </div>
-        <!--<progress max="3" value="{{selection}}"></progress>-->
         <div class="progress">
             <p class="orange">captura</p>
             <p>confirmaci&oacute;n</p>
@@ -21,7 +20,6 @@
                     <span>{{payment.account.detail}}</span></p>
             </div>
             <ul class="dropdown-menu" role="menu" ng-model="payment.account">
-                <li class="dropdown-header">Cuentas propias</li>
                 <li ng-repeat="item in theAccounts | filter: { account_type: 'DEP' }" ng-model="payment.account" ng-click="payment.account = item" ng-required="true">{{item.displayName}}</li>
             </ul>
         </div>
@@ -34,11 +32,11 @@
                     <span>{{payment.destiny.detail}}</span></p>
             </div>
             <ul class="dropdown-menu" role="menu">
-                <li class="dropdown-header">Cuentas propias</li>
+                <li class="dropdown-header">TDC propias</li>
                 <li ng-repeat="item in theAccounts | filter: { account_type: 'TDC', group: 'Cuentas Propias' }" ng-model="payment.destiny" ng-click="payment.destiny = item; getAccountDetail()">{{item.displayName}}</li>
-                <li class="dropdown-header">Cuentas terceros</li>
+                <li class="dropdown-header">TDC terceros</li>
                 <li ng-repeat="item in theAccounts | filter: { account_type: 'TDC_T', group: 'Cuentas Terceros' }" ng-model="payment.destiny" ng-click="payment.destiny = item" ng-required="true">{{item.displayName}}</li>
-                <li ng-show="isCompleteUser()"><a href="#/administration" ng-click="selectNavigatOption('administration')">Agregar nuevo beneficiario</a></li>
+                <li ng-show="isCompleteUser()"><a ui-sref="dashboard.administration({opt:4})">Agregar nuevo beneficiario</a></li>
             </ul>
         </div>
 

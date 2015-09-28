@@ -1,11 +1,13 @@
 'use strict';
 
-angular.module('spaApp').controller('AdminCtrl', ['$rootScope', '$scope', 'adminProvider', '$location', 'userProvider', 'thirdAccountProvider', 'codeStatusErrors', function ($rootScope, $scope, adminProvider, $location, userProvider, thirdAccountProvider,codeStatusErrors) {
+angular.module('spaApp').controller('AdminCtrl', ['$rootScope', '$scope', 'adminProvider', '$location', 'userProvider', 'thirdAccountProvider', 'codeStatusErrors', '$stateParams',
+function ($rootScope, $scope, adminProvider, $location, userProvider, thirdAccountProvider, codeStatusErrors, $stateParams) {
 
 	var len;
 	//if the user has full access, the default page is the configuration one. otherwise it is the contract-information page
 	if(userProvider.isCompleteUser()){
-		$scope.adminOpt = 1;
+		// $stateParams contians the received opt (by default 1)
+		$scope.adminOpt = $stateParams.opt;
 		$scope.option = 1;
 	}else{
 		$scope.adminOpt = 5;
@@ -14,7 +16,8 @@ angular.module('spaApp').controller('AdminCtrl', ['$rootScope', '$scope', 'admin
 	$scope.asktoken = false;
 
 	$scope.selection = 1;
-	$scope.action = 1;
+	// If we are showing beneficiaries, also display the first step to add a new one
+	$scope.action = $scope.adminOpt === 4 ? 3 : 1;
 
     $scope.stage = 1;
     $scope.beneficiary = {};
@@ -82,20 +85,20 @@ angular.module('spaApp').controller('AdminCtrl', ['$rootScope', '$scope', 'admin
 					third_accounts_others.push(acc);
 				}
 			});
-		}				
+		}
 		if(third_accounts_own.length > 0){
 			for(var i=0; i <  third_accounts_own.length; i++){
-				var account_type= third_accounts_own[i].account_type;				
+				var account_type= third_accounts_own[i].account_type;
 				if(account_type == "TDC_T"){
 					third_accounts_own[i].account_type_name="Tarjeta de Crédito Propia Mismo Banco";
 				}else if(account_type == "DEB_T"){
 					third_accounts_own[i].account_type_name="Débito Propia Mismo Banco";
 				}
 			}
-		}//End if validate			
+		}//End if validate
 		if(third_accounts_others.length > 0){
-			for(var i=0; i < third_accounts_others.length; i++){		
-				var account_type = third_accounts_others[i].account_type;		
+			for(var i=0; i < third_accounts_others.length; i++){
+				var account_type = third_accounts_others[i].account_type;
 				if(account_type == "DEB_T") {
 					third_accounts_others[i].account_type_name="Débito Propia Otros Bancos";
 				}
@@ -215,15 +218,15 @@ Adding a beneficary actions
     }
 
 	adminProvider.getLimits().then(
-		function(){		
-			if($rootScope.limits.length > 0){			
-				for(var i=0; i <  $rootScope.limits.length; i++){										
-					var type_name = $rootScope.limits[i].type;								
-					if(type_name == "PAYCARD_CONSUBANCO"){					
+		function(){
+			if($rootScope.limits.length > 0){
+				for(var i=0; i <  $rootScope.limits.length; i++){
+					var type_name = $rootScope.limits[i].type;
+					if(type_name == "PAYCARD_CONSUBANCO"){
 						 $rootScope.limits[i].type_name="Pago a TDC Terceros Consubanco";
-					}else if (type_name == "TRANSFER_CONSUBANCO") {							
+					}else if (type_name == "TRANSFER_CONSUBANCO") {
 						 $rootScope.limits[i].type_name="Transferencia Terceros Consubanco";
-					}else if (type_name == "TRANSFER_SPEI"){ 							
+					}else if (type_name == "TRANSFER_SPEI"){
 						 $rootScope.limits[i].type_name="Transferencia Terceros Otro Banco";
 					}
 				}
@@ -237,16 +240,16 @@ Adding a beneficary actions
 				adminProvider.getLimits().then(
 					function(){
 						var limits= $rootScope.limits;
-						for(var i=0; i <  limits.length; i++){							
-							var type_name = limits[i].type;														
-							if(type_name == "PAYCARD_CONSUBANCO"){					
+						for(var i=0; i <  limits.length; i++){
+							var type_name = limits[i].type;
+							if(type_name == "PAYCARD_CONSUBANCO"){
 								 limits[i].type_name="Pago a TDC Terceros Consubanco";
-							}else if (type_name == "TRANSFER_CONSUBANCO") {							
+							}else if (type_name == "TRANSFER_CONSUBANCO") {
 								 limits[i].type_name="Transferencia Terceros Consubanco";
-							}else if (type_name == "TRANSFER_SPEI"){ 							
+							}else if (type_name == "TRANSFER_SPEI"){
 								 limits[i].type_name="Transferencia Terceros Otro Banco";
 							}
-						}						
+						}
 						$scope.limits = $rootScope.limits;
 					}
 				);

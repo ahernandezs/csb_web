@@ -20,7 +20,6 @@
                     <span>{{transfer.account.detail}}</span></p>
             </div>
             <ul class="dropdown-menu" role="menu">
-                <li class="dropdown-header">Cuentas propias</li>
                 <li ng-repeat="item in theAccounts | filter: { account_type: 'DEP' }" ng-model="transfer.account" ng-click="transfer.account = item; evaluateDestiny()" ng-required="true">{{item.displayName}}</li>
             </ul>
         </div>

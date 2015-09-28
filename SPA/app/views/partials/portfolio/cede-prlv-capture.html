@@ -13,8 +13,8 @@
         <i class="inv-first-select"><span>Cuenta PRLV de la cual se har&aacute; el retiro</span></i>
         <div class="dropdown">
             <div class="dropdown-toggle select-style" type="button" data-toggle="dropdown" ng-class="investment.destinationProduct != '' ? 'selected' : ''">
-                <span>Producto de inversi&oacute;n</span>
-                <p>{{investment.destinationProduct == '' ? 'Producto de inversi&oacute;n' : investment.destinationProduct.product_name}}</p>
+                <span>Tipo de inversi&oacute;n a contratar</span>
+                <p>{{investment.destinationProduct == '' ? 'Tipo de inversi&oacute;n a contratar' : investment.destinationProduct.product_name}}</p>
             </div>
             <ul class="dropdown-menu" role="menu">
                 <li ng-repeat="item in investmentProducts | filter: { category: investmentCategory }" ng-model="investment.destinationProduct" ng-click="investment.destinationProduct = item" ng-required="true">{{item.product_name}}</li>
