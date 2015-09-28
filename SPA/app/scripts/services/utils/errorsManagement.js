@@ -28,7 +28,7 @@ angular.module('spaApp')
         // business or technical exception
         // message = 'unknown problem. Please retry later';
         // error taken from:  transfers.js
-        message = 'Problema desconocido, por favor intente más tarde';
+        message = 'Se detectó un error en el proceso favor de comunicarse al teléfono 018008003234 o al 55 9177 7999';
         return message;
       }
       return message;
