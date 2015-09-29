@@ -14,6 +14,12 @@
         <td>{{mapUserActivity(activity.action)}}</td>
         <td>{{mapActivityStatus(activity.successful)}}</td>
       </tr>
+      <tr>
+        <td>
+          <button ng-click='activity("ant")' ng-model="button" ng-disabled='status' >Atras </button>
+          <button ng-click='activity("next")' ng-model="button" ng-disabled='indexStatus'>Siguiente</button>
+      </td>
+     </tr>
       </tbody>
     </table>
   </div>
