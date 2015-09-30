@@ -65,9 +65,9 @@ angular.module('spaApp').factory('adminProvider', ['$rootScope', 'adminService',
 			return deferred.promise;
 		},
 
-    getUserActivity: function(page,size) {
+    getUserActivity: function() {
       var deferred = $q.defer();
-      adminService.getUserActivity(page,size).success(function(data, status, headers) {
+      adminService.getUserActivity().success(function(data, status, headers) {
         deferred.resolve(data);
       }).error(function(data, status) {
         return deferred.reject('Error getting user activity');
