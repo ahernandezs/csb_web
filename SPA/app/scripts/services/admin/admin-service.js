@@ -71,8 +71,8 @@ angular.module('spaApp').service('adminService', ['$http','$rootScope', function
 		});
 	};
 
-  this.getUserActivity = function(page,size) {
-    return $http.get($rootScope.restAPIBaseUrl + '/useractivity?page='+page+'&size='+size);
+  this.getUserActivity = function() {
+    return $http.get($rootScope.restAPIBaseUrl + '/useractivity');
   };
 
 }]);
