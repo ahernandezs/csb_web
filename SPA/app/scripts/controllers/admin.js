@@ -4,6 +4,13 @@ angular.module('spaApp').controller('AdminCtrl', ['$rootScope', '$scope', 'admin
 function ($rootScope, $scope, adminProvider, $location, userProvider, thirdAccountProvider, codeStatusErrors, $stateParams) {
 
 	var len;
+
+	$scope.page=0
+	$scope.status=true;
+	$scope.indexStatus=false;
+	var size = 10;
+
+
 	//if the user has full access, the default page is the configuration one. otherwise it is the contract-information page
 	if(userProvider.isCompleteUser()){
 		// $stateParams contians the received opt (by default 1)
@@ -265,12 +272,49 @@ Adding a beneficary actions
 		);
 	}
 
-  adminProvider.getUserActivity().then(
+  adminProvider.getUserActivity($scope.page, size).then(
     function(data) {
-      //console.log(data);
-      $scope.userActivity = data.user_activity;
+			$scope.userActivity = data.user_activity;
+    },
+    function(error) {
+			$scope.status=true;
+      $scope.indexStatus=true;
     }
   );
+
+	$scope.activity=function(option) {
+
+	adminProvider.getUserActivity($scope.page, size).then(
+
+		function(data) {
+				$scope.userActivity = data.user_activity;
+
+				if(option=='ant'&& $scope.page != 0 ){
+					$scope.page--;
+					$scope.indexStatus=false;
+				}
+
+				if (option=='ant' && $scope.page == 0){
+					$scope.indexStatus=false;
+					$scope.status=true;
+				}
+
+				if(option=='next'){
+					$scope.status=false;
+					$scope.page++;
+				}
+
+				if(option=='next' && $scope.userActivity.length-1){
+					$scope.indexStatus=true;
+				}
+		},
+		function(error) {
+				$scope.status=true;
+				$scope.indexStatus=true;
+		}
+	 );
+	};
+
 
   $scope.mapUserActivity = function(activity) {
     var activityName = activity;
