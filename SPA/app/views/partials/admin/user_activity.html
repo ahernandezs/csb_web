@@ -1,4 +1,4 @@
-<div class="user-activity">
+<div class="user-activity margin-top-admin">
   <div class="transactions">
     <table class="details">
       <thead>
@@ -14,13 +14,18 @@
         <td>{{mapUserActivity(activity.action)}}</td>
         <td>{{mapActivityStatus(activity.successful)}}</td>
       </tr>
-      <tr>
-        <td>
-          <button ng-click='activity("ant")' ng-model="button" ng-disabled='status' >Atras </button>
-          <button ng-click='activity("next")' ng-model="button" ng-disabled='indexStatus'>Siguiente</button>
-      </td>
-     </tr>
       </tbody>
     </table>
   </div>
+</div>
+<div class="pagination">
+  <ul>
+      <li class="disabled"></li>
+      <li class="active">1</li>
+      <li>2</li>
+      <li>3</li>
+      <li></li>
+  </ul>
+  <!--button ng-click='activity("ant")' ng-model="button" ng-disabled='status' >Atras </button>
+  <button ng-click='activity("next")' ng-model="button" ng-disabled='indexStatus'>Siguiente</button-->
 </div>

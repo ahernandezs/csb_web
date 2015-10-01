@@ -22,12 +22,72 @@
 		strong{color:$blue;}
 	}
 }
-
+.pagination{
+	margin: 30px auto;
+	text-align: center;
+	ul{
+		display: inline-block;
+		margin: auto;
+		overflow: hidden;
+		li{
+			position: relative;
+			cursor: pointer;
+			display: block;
+			float:left;
+			color:$dgray;
+			font-weight: bold;
+			font-size: 1.5em;
+			padding:0 18px;
+			height: 30px;
+			line-height: 30px;
+			border:1px solid $gray;
+			&.active{
+				color:$orange;
+			}
+			&:first-child, &:last-child{
+				background:$orange;
+				border-color:$orange;
+				&.disabled{
+					background:$gray;
+					border-color:$gray;
+					&:before{
+						border-color:$dgray;
+					}
+				}
+				&:before{
+					content: "";
+					display: block;
+					position: absolute;
+					top:8px;
+					left:8px;
+					width: 12px;
+					height: 12px;
+					border-top:2px solid white;
+					border-right:2px solid white;
+					@include rotate();
+				}
+			}
+			&:first-child{
+				@include border-radius(20px 0 0 20px);
+				&:before{
+					@include rotate(-135deg);
+					top:7px;
+					left:15px;
+				}
+			}
+			&:last-child{
+				@include border-radius(0 20px 20px 0);
+			}
+		}
+	}
+}
+.margin-top-admin{
+	margin-top: 80px;
+}
 //PREFERNCIAS Y SEGURIDAD
 .dropdown-menu li{cursor:pointer;}
 
 .prefyseg{
-	margin-top: 20px;
 	overflow:hidden;
 	.menu-admin{
 		float:left;
@@ -142,36 +202,36 @@
 		}
 	}
 }
-
-.submenu:before{
-	content:"";
-	display: block;
-	height:1px;
-	width: 100%;
-	top:0;
+.submenu{
+	position: fixed;
+	z-index: 999999;
+	height:50px !important;
+	top:118px;
 	left:0;
 	right:0;
-	margin-top:58px;
 	border-bottom: 1px solid $lgray;
-	position: absolute;
-}
-.submenu{
+	background:rgba(255,255,255,1);
 	nav{
 		ul{
 			overflow: hidden;
+			display: block;
+			margin: 0 2em;
 			li{
 				float:left;
-				margin-right:60px;
+				margin-right:2em;
+				&:last-child{
+					margin: 0;
+				}
 				a{
+					display: block;
 					color:$blue;
 					font-weight: bold;
 					display: block;
-					padding: 20px 0 17px 0;
-					border-bottom:3px solid white;
-				}
-				a:hover, a:active, a.active{
-					color:$orange;
-					border-color:$orange;
+					height: 49px;
+					&:hover, &:active, &.active{
+						color:$orange;
+						border-bottom:3px solid $orange;
+					}
 				}
 			}
 		}
@@ -186,7 +246,6 @@
 
 .agregarBeneficiario{
 	width:70%;
-	border-right:1px solid $lgray;
 	>form{
 		margin: 15px;
 		position: relative;
@@ -417,7 +476,6 @@
 }
 //TARJETAS
 .transactions.adminTarjetas{
-	margin-top: 30px;
 	width: 100% !important;
 	th{text-align: center;}
 	td{
@@ -475,7 +533,6 @@
 //BITACORA
 .user-activity{
 	width:100%;
-	margin-top: 30px;
 	border:1px solid $gray;
 	background:white;
 	@include border-radius(4px);

@@ -83,6 +83,12 @@
 |    utilities
 |-------------------------------------------------------------------------------------
 */
+@mixin rotate( $degrees: 45deg ){
+    -ms-transform: rotate($degrees); 
+    -webkit-transform: rotate($degrees); 
+    transform: rotate($degrees);
+}
+
 @mixin arrow-up($size, $color) {
     height: 0;  width: 0;
     border-right: $size solid transparent;
