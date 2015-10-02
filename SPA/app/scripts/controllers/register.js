@@ -4,7 +4,7 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
 
     // the register-flow's current-step
 	$scope.selection = 0;
-    
+
     // stores the register's data inputed by the user
     $scope.registerData = {};
 
@@ -14,8 +14,6 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
     // the error's message (is incorrectData is true)
     $scope.errorMessage = null;
 
-
-    
     /**
      * initialize the scope with the model's data (coming from the preRegister operation)
      */
@@ -47,7 +45,7 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
         timerService.warningDuration(60);
         timerService.start();
     };
-    
+
 	/**
 	 * go to the next flow's step
 	 */
@@ -79,10 +77,10 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
     $scope.invalidPassword = true;
     var password = $scope.registerData.password;
     if(password) {
-      var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/g;
+      var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}$/g;
       if(!pattern.test(password)) {
-        setError("La contraseña deberá tener caracteres alfanuméricos, \
-            al menos una mayúscula y una minúscula, y con un carácter numérico");
+        setError("La contraseña debe tener de 8 a 10 caracteres, \
+					contar con al menos una mayúscula, una minúscula, y un numérico. NO incluir caracteres especiales");
         return;
       }
 
@@ -222,7 +220,7 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
 	};
 
     /**
-     * confirm token 
+     * confirm token
      */
     $scope.confirmToken = function () {
       userProvider.setCardId($scope.registerData.token);
