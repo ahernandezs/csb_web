@@ -14,7 +14,7 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 			$scope.errorMessage = "Ingresa la contraseña actual";
 			$scope.error = true;
 		} else if ( $scope.change.new === undefined && $scope.change.repeatNew === undefined ) {
-			$scope.errorMessage = "La contraseña debe tener de 8 a 10 caracteres, \
+			$scope.errorMessage = "La contraseña debe tener de 8 a 15 caracteres, \
 					contar con al menos una mayúscula, una minúscula, y un numérico. NO incluir caracteres especiales";
             $scope.error = true;
 		} else if ( $scope.change.new !== $scope.change.repeatNew ){
@@ -55,9 +55,9 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 		var password = $scope.change.new;
 
 		if(password) {
-			var pattern = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}$/g);
+			var pattern = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/g);
 			if(!pattern.test(password)) {
-				setError("La contraseña debe tener de 8 a 10 caracteres, \
+				setError("La contraseña debe tener de 8 a 15 caracteres, \
             contar con al menos una mayúscula, una minúscula, y un numérico. NO incluir caracteres especiales");
 				return;
 			}

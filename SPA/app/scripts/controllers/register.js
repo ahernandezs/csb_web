@@ -77,9 +77,9 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
     $scope.invalidPassword = true;
     var password = $scope.registerData.password;
     if(password) {
-      var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}$/g;
+      var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/g;
       if(!pattern.test(password)) {
-        setError("La contraseña debe tener de 8 a 10 caracteres, \
+        setError("La contraseña debe tener de 8 a 15 caracteres, \
 					contar con al menos una mayúscula, una minúscula, y un numérico. NO incluir caracteres especiales");
         return;
       }
