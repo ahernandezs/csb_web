@@ -5,6 +5,4 @@
  */
 angular.module('spaApp').controller('ChecksCtrl', ['$rootScope', '$scope', 'checkAccountsProvider', function ($rootScope, checkAccountsProvider,$scope) {
 
-
-
 }]);
