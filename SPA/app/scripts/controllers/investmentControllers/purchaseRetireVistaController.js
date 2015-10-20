@@ -3,10 +3,9 @@
 /**
  * The transactions controller. For transactions between own accounts.
  */
-angular.module('spaApp').controller('purchaseRetireVistaCtrl', ['$rootScope', '$scope', '$location', '$routeParams', 'accountsProvider', 'transferProvider', '$filter', 'codeStatusErrors', function ($rootScope, $scope, $location, $routeParams, accountsProvider, transferProvider, $filter, codeStatusErrors) {
+angular.module('spaApp').controller('purchaseRetireVistaCtrl', ['$scope', 'transferProvider', 'accountsProvider', 'codeStatusErrors', function ($scope, transferProvider, accountsProvider, codeStatusErrors) {
 
     $scope.investmentCategory = null;
-
     initialize();
 
     $scope.investment.vistaAccount = '';
@@ -89,6 +88,46 @@ angular.module('spaApp').controller('purchaseRetireVistaCtrl', ['$rootScope', '$
                     $scope.investmentResult.interestInfo.amount = data.interest.amount;
                 }
                 $scope.step++;
+                accountsProvider.getAccounts().then(
+                    function(data) {
+                        $rootScope.accounts.forEach(
+                            function (value, index, ar) {
+
+                                switch ( value.account_type ) {
+                                    case 'DEP':
+                                        value.displayName = value.name + ' ' + value.masked_account_number + ' - ' + value.currency + ': ' + $filter('currency')(value.current_balance, '$');
+                                        value.detail = value.name + ' | ' + value.currency + ': ' + $filter('currency')(value.current_balance, '$');
+                                        $scope.ownAccounts.push( value );
+                                        $scope.depositAccounts.push(value );
+                                        break;
+                                    case 'INV':
+                                        if ( value.category === 'VISTA' ) {
+                                            value.displayName = value.name + ' ' + value.masked_account_number + ' - ' + value.currency + ': ' + $filter('currency')(value.current_balance, '$');
+                                            value.detail = value.name + ' | ' + value.currency + ': ' + $filter('currency')(value.current_balance, '$');
+                                            $scope.vistaAccounts.push(value);
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        );
+                     },
+                     function(errorObject) {
+                         var status = errorObject.status;
+                         if (status === 406) {
+                             $scope.setServiceError('datos inválidos');
+                         } else if(status === 500) {
+                             var message = errorObject.response.message;
+                             $scope.setServiceError(message);
+                         } else {
+                             $scope.setServiceError('Error en el servicio, intente más tarde');
+                         }
+                     }
+                );
+
+
+
             },
             processServiceError
         );
@@ -102,6 +141,43 @@ angular.module('spaApp').controller('purchaseRetireVistaCtrl', ['$rootScope', '$
         transferProvider.retireVista($scope.investment.vistaAccount._account_id, $scope.investment.depositAccount._account_id, $scope.investment.amount).then(
             function(data){
                 $scope.step++;
+                accountsProvider.getAccounts().then(
+                    function(data) {
+                        $rootScope.accounts.forEach(
+                            function (value, index, ar) {
+
+                                switch ( value.account_type ) {
+                                    case 'DEP':
+                                        value.displayName = value.name + ' ' + value.masked_account_number + ' - ' + value.currency + ': ' + $filter('currency')(value.current_balance, '$');
+                                        value.detail = value.name + ' | ' + value.currency + ': ' + $filter('currency')(value.current_balance, '$');
+                                        $scope.ownAccounts.push( value );
+                                        $scope.depositAccounts.push(value );
+                                        break;
+                                    case 'INV':
+                                        if ( value.category === 'VISTA' ) {
+                                            value.displayName = value.name + ' ' + value.masked_account_number + ' - ' + value.currency + ': ' + $filter('currency')(value.current_balance, '$');
+                                            value.detail = value.name + ' | ' + value.currency + ': ' + $filter('currency')(value.current_balance, '$');
+                                            $scope.vistaAccounts.push(value);
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        );
+                     },
+                     function(errorObject) {
+                         var status = errorObject.status;
+                         if (status === 406) {
+                             $scope.setServiceError('datos inválidos');
+                         } else if(status === 500) {
+                             var message = errorObject.response.message;
+                             $scope.setServiceError(message);
+                         } else {
+                             $scope.setServiceError('Error en el servicio, intente más tarde');
+                         }
+                     }
+                );
             },
             processServiceError
         );

@@ -1,15 +1,11 @@
 'use strict';
 
-/**
- * The transactions controller. For transactions between own accounts.
- */
-angular.module('spaApp').controller('PortfolioCtrl', ['$rootScope', '$scope', '$location', '$routeParams', 'accountsProvider', 'transferProvider', 'productProvider', '$filter', function ($rootScope, $scope, $location, $routeParams, accountsProvider, transferProvider, productProvider, $filter) {
+angular.module('spaApp').controller('PortfolioCtrl', ['$rootScope', '$scope', 'accountsProvider', 'productProvider', '$filter', function ($rootScope, $scope, accountsProvider, productProvider, $filter) {
 
     $scope.ownAccounts = [];
     $scope.depositAccounts = [];
     $scope.vistaAccounts = [];
 
-     //Get investments products.
     productProvider.getProductsList().then(
       function(data) {
           $scope.investmentProducts = data.products;
@@ -45,9 +41,6 @@ angular.module('spaApp').controller('PortfolioCtrl', ['$rootScope', '$scope', '$
       }
     );
 
-    /**
-     * Get own accounts.
-     */
     accountsProvider.getAccounts().then(
         function(data) {
             $rootScope.accounts.forEach(
