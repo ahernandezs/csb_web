@@ -135,20 +135,20 @@ angular.module('spaApp').controller('creditCardCtrl', ['$scope', '$location', '$
 	};
 }]);
 
-	/**
-	* Service for share information between controllers .
-	**/
-	angular.module('spaApp').factory('paymentCreditCardService', function() {
-	    var account = {};
-	    account.accountId;
-	    account.amount;
-	    account.paymentType;
+/**
+* Service for share information between controllers .
+**/
+angular.module('spaApp').factory('paymentCreditCardService', function() {
+    var account = {};
+    account.accountId;
+    account.amount;
+    account.paymentType;
 
-	    account.prepForShared = function(msg) {
-	        this.accountId = msg.accountId;
-	        this.amount = msg.amount;
-	        this.paymentType = msg.paymentType;
-	    };
+    account.prepForShared = function(msg) {
+        this.accountId = msg.accountId;
+        this.amount = msg.amount;
+        this.paymentType = msg.paymentType;
+    };
 
-	    return account;
-	});
+    return account;
+});

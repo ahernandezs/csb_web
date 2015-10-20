@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('spaApp').controller('AdminCtrl', ['$rootScope', '$scope', 'adminProvider', '$location', 'userProvider', 'thirdAccountProvider', 'codeStatusErrors', '$stateParams',
-function ($rootScope, $scope, adminProvider, $location, userProvider, thirdAccountProvider, codeStatusErrors, $stateParams) {
+angular.module('spaApp').controller('AdminCtrl', ['$rootScope', '$scope', 'adminProvider', 'userProvider', 'thirdAccountProvider', 'codeStatusErrors', '$stateParams',
+function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider, codeStatusErrors, $stateParams) {
 
 	var len;
 	//if the user has full access, the default page is the configuration one. otherwise it is the contract-information page

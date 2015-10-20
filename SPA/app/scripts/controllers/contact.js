@@ -1,17 +1,11 @@
 'use strict';
 
-/**
- * The accounts controller. Gets accounts passing auth parameters
- */
 angular.module('spaApp').controller('ContactCtrl', ['$rootScope', '$scope',
-  '$location', 'accountsProvider', 'codeStatusErrors', 'timerService', 'logoutService', 'userProvider',
-  function ( $rootScope, $scope, $location, accountsProvider, codeStatusErrors, timerService, logoutService, userProvider) {
+  '$location', 'timerService', 'logoutService', 'userProvider',
+  function ( $rootScope, $scope, $location, timerService, logoutService, userProvider) {
 
 	$scope.conSesion = $rootScope.session_token ? true : false;
 
-  /**
-    Function for logout application
-  **/
   $scope.logout = function() {
     userProvider.logout().then(
       function(data) {

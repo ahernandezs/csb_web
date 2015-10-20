@@ -1,9 +1,6 @@
 'use strict';
 
-/**
- * The accounts controller. Gets accounts passing auth parameters
- */
-angular.module('spaApp').controller('InvestmentsCtrl', ['$scope', '$location', 'ngTableParams',  '$stateParams', 'accountsProvider', '$rootScope', 'codeStatusErrors', function ($scope, $location, ngTableParams, $stateParams, accountsProvider, $rootScope, codeStatusErrors) {
+angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams', 'accountsProvider', '$rootScope', 'codeStatusErrors', function ($scope, $stateParams, accountsProvider, $rootScope, codeStatusErrors) {
 
     var params = {};
     params.numPage = 0;
@@ -63,59 +60,51 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope', '$location', '
         );
     };
 
-    /**
-     * Hide the search message.
-     */
     $scope.clearMessage = function() {
         $scope.searchMessage = 'false';
     };
 
     $scope.search = function() {
         var todaysDate = new Date();
-        var dd = todaysDate.getDate();      // day
-        var mm = todaysDate.getMonth()+1;   // month (January is 0!)
-        var yy = todaysDate.getFullYear();  // year
-        dd = dd < 10 ? '0' + dd : dd; 
-        mm = mm < 10 ? '0' + mm : mm;
-        todaysDate = yy+mm+dd;
-        if ($scope.searchParams.date_start !== undefined)
-            // startDate pass from String to Int
-            var startDate = parseInt($scope.searchParams.date_start.split("/").reverse().join("")); 
-        if ($scope.searchParams.date_end !== undefined)
-            // endDate pass from String to Int
-            var endDate = parseInt($scope.searchParams.date_end.split("/").reverse().join("")); 
+        var startDate;
+        var endDate;
+        if ($scope.searchParams.date_start !== undefined){
+            var fecha = $scope.searchParams.date_start.split("/");
+            startDate = new Date(fecha[2], fecha[1]-1, fecha[0]);
+        }
+        if ($scope.searchParams.date_end !== undefined){
+            var fecha = $scope.searchParams.date_end.split("/");
+            endDate = new Date(fecha[2], fecha[1]-1, fecha[0])
+        }
         if($scope.searchParams.date_start && $scope.searchParams.date_end) {
             if (startDate > todaysDate || endDate > todaysDate){
-                //console.log('\t\t\tBúsqueda no realizada');
                 $scope.setServiceError('Búsqueda no realizada: Fecha Inicial y/o Fecha Final NO pueden ser posteriores a la Fecha de Hoy');
+                return;
             }
-            else if (startDate > endDate) {
-                //console.log('\t\t\tBúsqueda no realizada');
+            if (startDate > endDate) {
                 $scope.setServiceError('Búsqueda no realizada: Fecha Inicial debe ser anterior a la Fecha Final');
+                return;
             }
-            else {
-                //console.log('\t\t\tBúsqueda a realizarse');
-                $scope.getTransactions($scope.searchParams.date_start, $scope.searchParams.date_end);
-            }
+            $scope.getTransactions($scope.searchParams.date_start, $scope.searchParams.date_end);
+            return;
         } 
-        else if($scope.searchParams.date_start === null && $scope.searchParams.date_end === null) {
-        params.date_end = null;
-        params.date_start = null;
-        accountsProvider.getTransactions($scope.selectedAcccountId, params).then(
-            function(data){
-              $scope.investmentTransactions = $rootScope.transactions;
-            },
-            function(errorObject) {
-                var status = errorObject.status;
-                var msg = codeStatusErrors.errorMessage(status);
-                if (status === 500){
-                    $scope.setServiceError(msg + errorObject.response.message);
-                } else {
-                    $scope.setServiceError(msg);
+        if($scope.searchParams.date_start === null && $scope.searchParams.date_end === null) {
+            params.date_end = null;
+            params.date_start = null;
+            accountsProvider.getTransactions($scope.selectedAcccountId, params).then(
+                function(data){
+                    $scope.investmentTransactions = $rootScope.transactions;
+                },
+                function(errorObject) {
+                    var status = errorObject.status;
+                    var msg = codeStatusErrors.errorMessage(status);
+                    if (status === 500){
+                        $scope.setServiceError(msg + errorObject.response.message);
+                    } else {
+                        $scope.setServiceError(msg);
+                    }
                 }
-            }
-        );
-      }
+            );
+        }
     };
-
 }]);
