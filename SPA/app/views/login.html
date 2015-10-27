@@ -49,6 +49,10 @@
                                 <div ng-include="'views/partials/login/image_login.html'">
                                 </div>
                             </div>
+                            <div class="animate-switch" ng-switch-when="2">
+                                <div ng-include="'views/partials/login/unblock.html'">
+                                </div>
+                            </div>
                         </div>
                         <form class="user-registration" ng-submit="preRegister(client,contract)" ng-show="step == 0" name="registrationForm">
                             <label for="user-register"><strong>¿Eres nuevo aqu&iacute;?</strong></label>

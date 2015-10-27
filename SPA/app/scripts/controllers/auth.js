@@ -228,6 +228,10 @@ angular.module('spaApp')
     }
   }
 
+  $scope.unblock = function(){
+    $scope.step = 2;
+  }
+
 
   // Review if last session was in timeout
   if(timerService.isTimeout()) {
