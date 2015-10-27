@@ -4,4 +4,5 @@
      ng-pattern="/^[0-9]+$/"  required>
     <div class="error" ng-show="error">{{errorMessage}}</div>
     <input type="submit" value="Continuar" ng-click="checkUser()" ng-disabled="userLoginForm.$invalid||checkingUser">
+    <!--a href="javascript:void(0);" ng-click="unblock()">Desbloquear usuario</a-->
 </form>
