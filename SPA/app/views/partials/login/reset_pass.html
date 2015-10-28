@@ -1,0 +1,24 @@
+<form class="user-login images" name="userImagePassword">
+
+    <label for="user"><strong>Nueva Contraseña</strong></label>
+    <p>Es necesario crear una nueva contraseña, asegúrate de usar mayúsculas, minúsculas y números</p>
+
+    <input ng-class="incorrectLoginData ? 'rojo' : ''" type="password" name="password" ng-model="loginData.password" id="password" placeholder="Nueva contraseña" ng-minlength="8"  maxlength="15" required>
+    <input ng-class="incorrectLoginData ? 'rojo' : ''" type="password" name="password" ng-model="loginData.password" id="password" placeholder="Confirmar nueva contraseña" ng-minlength="8"  maxlength="15" required>
+
+    <label for="user"><strong>Nueva imagen de seguridad</strong></label>
+    <p>Selecciona una nueva imagen de seguridad</p>
+    <!-- images -->
+    <div class="radioGroupBelow" align="center">
+        <div ng-repeat="image in images">
+            <span ng-click="selectImage(image.image_id)" ng-class="{'selected' : image.image_id === loginData.selectedImage}">
+                <i></i><img ng-src="{{restAPIBaseUrl}}/{{image.url}}">
+            </span>
+        </div>
+    </div>
+    <div class="error" ng-show="error"> {{errorMessage}}</div>
+    <div class="buttons">
+        <input type="submit" value="Guardar cambios" ng-click="login()" ng-disabled="userImagePassword.$invalid || !loginData.selectedImage || isLogin" >
+    </div>
+    <p>¿Olvidaste tu contrase&ntilde;a? Comun&iacute;cate con nosotros al 01 800 800 32 24</p>
+</form>

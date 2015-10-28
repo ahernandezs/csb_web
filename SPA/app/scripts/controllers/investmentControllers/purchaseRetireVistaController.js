@@ -18,6 +18,7 @@ angular.module('spaApp').controller('purchaseRetireVistaCtrl', ['$scope', 'trans
         $scope.investment.depositAccount = '';
         $scope.investmentResult = [];
         resetError();
+        $scope.obtenCuentas();
     }
 
     /**
