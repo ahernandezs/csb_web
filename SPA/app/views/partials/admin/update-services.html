@@ -11,14 +11,22 @@
 		</div>
 	    <ng-form name="serviceForm">
 		    <div ng-switch-when="2">
-	            <div class="fieldContainer" ng-class="data.otp.length > 0 ? 'selected' : ''">
-	                <span>Tokense</span>
-	                <input class="input-token" type="password" ng-model="updateDigitalBankServiceState.otp" ng-required="true" numbers-only minlength="6" maxlength="6" placeholder="Introduce el c&oacute;digo de tu Token F&iacute;sico">
-	            </div>
-	            <div class="double-btn">
-	                <input type="submit" value="Regresar" ng-click="updateService(1,'');">
-	                <input type="submit" value="Continuar" ng-click="updateDigitalBankServiceState()" ng-disabled="serviceForm.$invalid">
-	            </div>
+					<!-- Delete these messages when the service is ready -->
+					<p ng-show="updateDigitalBankServiceState.state === 'S'" style="text-align:center;">
+						Para suspender temporalmente el servicio de Banca Digital llame por favor al 01 800 800 32 34
+					</p>
+					<p ng-show="updateDigitalBankServiceState.state === 'C'" style="text-align:center;">
+						Para cancelar el servicio de Banca Digital llame por favor al 01 800 800 32 34
+					</p>
+					<!--uncomment once the service is ready (also Continuar button below)
+					<div class="fieldContainer" ng-class="data.otp.length > 0 ? 'selected' : ''">
+              <span>Tokense</span>
+              <input class="input-token" type="password" ng-model="updateDigitalBankServiceState.otp" ng-required="true" numbers-only minlength="6" maxlength="6" placeholder="Introduce el c&oacute;digo de tu Token F&iacute;sico">
+          </div>
+					<div class="double-btn">-->
+						<button ng-click="updateService(1,'');">Regresar</button>
+						<!--<input type="submit" value="Continuar" ng-click="updateDigitalBankServiceState()" ng-disabled="serviceForm.$invalid">
+					</div>-->
 			</div>
 		</ng-form>
 	    <div ng-switch-when="3">
