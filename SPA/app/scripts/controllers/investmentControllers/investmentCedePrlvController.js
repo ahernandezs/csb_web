@@ -16,12 +16,13 @@ angular.module('spaApp').controller('InvestmentCedePrlvCtrl', ['$rootScope', '$s
 
     function initialize(){
         $scope.step = 1;
-        $scope.investment = [];
-        $scope.investment.destinationProduct = '';
+        $scope.investment = []
+;        $scope.investment.destinationProduct = '';
         $scope.investment.originAccount = '';
         $scope.investment.expirationInstruction = '';
         $scope.investmentResult = [];
         resetError();
+        $scope.obtenCuentas();
     }
 
     /**
