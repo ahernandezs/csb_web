@@ -46,6 +46,10 @@ angular.module('spaApp').controller('PortfolioCtrl', ['$rootScope', '$scope', 'a
 
     $scope.obtenCuentas = function(){
       console.log('obteniendo cuentas');
+      $scope.ownAccounts = [];
+      $scope.depositAccounts = [];
+      $scope.vistaAccounts = [];
+
       accountsProvider.getAccounts().then(
           function(data) {
               $rootScope.accounts.forEach(
