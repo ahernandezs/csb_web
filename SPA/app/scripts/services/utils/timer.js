@@ -3,7 +3,7 @@
 angular.module('spaApp')
   .service('timerService', ['$rootScope', '$interval', function($rootScope, $interval) {
     var options = {
-      idle: 240,
+      idle: 600,
       warning: 30,
       idleTimer: null,
       warningTimer: null,
