@@ -45,7 +45,6 @@ angular.module('spaApp').controller('PortfolioCtrl', ['$rootScope', '$scope', 'a
     obtenListaProductos();
 
     $scope.obtenCuentas = function(){
-      console.log('obteniendo cuentas');
       $scope.ownAccounts = [];
       $scope.depositAccounts = [];
       $scope.vistaAccounts = [];
