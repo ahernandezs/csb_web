@@ -4,7 +4,7 @@ angular.module('spaApp').controller('AdminCtrl', ['$rootScope', '$scope', 'admin
 function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider, codeStatusErrors, $stateParams) {
 
 	$scope.page = -1;
-	$scope.size = 100;
+	$scope.size = 10;
 	$scope.status = true;
 	$scope.totalItems = 0;
 	$scope.totalPages = 0;
