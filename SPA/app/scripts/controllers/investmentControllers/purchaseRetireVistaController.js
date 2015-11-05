@@ -83,12 +83,6 @@ angular.module('spaApp').controller('purchaseRetireVistaCtrl', ['$scope', 'trans
                 $scope.investmentResult = [];
                 $scope.investmentResult.account_number = data.account_number;
                 $scope.investmentResult.expiration_date = data.expiration_date;
-                delete data.interest;
-                if(data.interest != null){
-                    $scope.investmentResult.interestInfo =[];
-                    $scope.investmentResult.interestInfo.operation_date = data.interest.operation_date;
-                    $scope.investmentResult.interestInfo.amount = data.interest.amount;
-                }
                 $scope.step++;
             },
             processServiceError
