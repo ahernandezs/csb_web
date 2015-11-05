@@ -5,21 +5,16 @@
  */
 angular.module('spaApp').controller('InvestmentCedePrlvCtrl', ['$rootScope', '$scope', '$location', '$routeParams', 'accountsProvider', 'transferProvider', 'productProvider', 'codeStatusErrors', function ($rootScope, $scope, $location, $routeParams, accountsProvider, transferProvider, productProvider, codeStatusErrors) {
 
-
     $scope.investmentCategory = null;
 
     initialize();
 
-    $scope.investment.destinationProduct = '';
-    $scope.investment.originAccount = '';
-    $scope.investment.expirationInstruction = '';
-
     function initialize(){
         $scope.step = 1;
-        $scope.investment = []
-;        $scope.investment.destinationProduct = '';
+        $scope.investment = [];
+        $scope.investment.destinationProduct = '';
         $scope.investment.originAccount = '';
-        $scope.investment.expirationInstruction = '';
+        $scope.investment.expirationInstruction = {};
         $scope.investmentResult = [];
         resetError();
         $scope.obtenCuentas();
@@ -76,7 +71,8 @@ angular.module('spaApp').controller('InvestmentCedePrlvCtrl', ['$rootScope', '$s
         $scope.investmentCategory = investmentCategory;
         //initialize the instruction investment array
         //TODO: manage the labels with i18n
-        $scope.investmentInstructions = [{'investAgain' : false, 'label' : "Transferencia Cuenta Eje"}];
+        $scope.investmentInstructions = [];
+        $scope.investmentInstructions.push({'investAgain' : false, 'label' : "Transferencia Cuenta Eje"});
         if($scope.investmentCategory === 'CEDE'){
             $scope.investmentInstructions.push({'investAgain' : true, 'label' : "Reinversión de Capital con Pago de Interés"});
         }else if($scope.investmentCategory === 'PRLV'){

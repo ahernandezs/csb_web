@@ -39,27 +39,14 @@
         </label>
 
         <div class="dropdown">
-          <div class="dropdown-toggle select-style" type="button" data-toggle="dropdown" ng-class="investment.expirationInstruction != '' ? 'selected' : ''">
+          <div class="dropdown-toggle select-style" type="button" data-toggle="dropdown" ng-class="investment.expirationInstruction.label !== undefined ? 'selected' : ''">
             <span>Instrucciones al vencimiento</span>
-            <p>{{investment.expirationInstruction == '' ? 'Instrucciones al vencimiento' : investment.expirationInstruction}}</p>
+            <p>{{investment.expirationInstruction.label === undefined ? 'Instrucciones al vencimiento' : investment.expirationInstruction.label}}</p>
           </div>
           <ul class="dropdown-menu" role="menu">
-            <li ng-repeat="opt in investmentInstructions" ng-model="investment.expirationInstruction" ng-click="investment.expirationInstruction = opt.label" ng-required="true">{{opt.label}}</li>
+            <li ng-repeat="opt in investmentInstructions" ng-model="investment.expirationInstruction" ng-click="investment.expirationInstruction = opt" ng-required="true">{{opt.label}}</li>
           </ul>
         </div>
-
-        <!--<div class="select-style" ng-class="investment.expirationInstruction ? 'selected' : ''">
-            <span>Instrucciones al vencimiento</span>
-            <select ng-model="investment.expirationInstruction" ng-options="opt as opt.label for opt in investmentInstructions" ng-required="true">
-                <option value="">Instrucciones al vencimiento</option>
-            </select>
-        </div>-->
-        <!--
-        <input type="submit" value="Estimar" ng-click="calculateEstimation()" ng-disabled="!investmentForm.productId.$valid || !investmentForm.amount.$valid">
-        <div ng-show="investmentEstimation">
-            Estimacion para {{investmentEstimation.amount}}: tasa: {{investmentEstimation.rate}}, term: {{investmentEstimation.term}}
-        <div>
-        -->
     </form>
     <a href="http://www.consubanco.com/catalogoinversiones.php" onclick="window.open(this.href,'_blank'); return false;">Catálogo de Plazos y Montos de Inversión</a>
     <div class="double-btn">
