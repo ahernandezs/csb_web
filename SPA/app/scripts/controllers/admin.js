@@ -3,7 +3,37 @@
 angular.module('spaApp').controller('AdminCtrl', ['$rootScope', '$scope', 'adminProvider', 'userProvider', 'thirdAccountProvider', 'codeStatusErrors', '$stateParams',
 function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider, codeStatusErrors, $stateParams) {
 
-	var len;
+	$scope.page = -1;
+	$scope.size = 100;
+	$scope.status = true;
+	$scope.totalItems = 0;
+	$scope.totalPages = 0;
+	$scope.disableAnt = false;
+	$scope.disableSig = false;
+
+	$scope.activity = function(option) {
+		if(option == 'ant' && $scope.disableAnt){
+			return;
+		}
+		if(option == 'sig' && $scope.disableSig ){
+			return;
+		}
+		$scope.page = option == 'ant' ? $scope.page-1 : $scope.page+1 ;
+		adminProvider.getUserActivity($scope.page, $scope.size).then(
+			function(data) {
+				$scope.userActivities = data.user_activities;
+				$scope.totalPages = Math.ceil(data.total_items / $scope.size );
+				$scope.disableAnt = $scope.page == 0 ? true : false;
+				$scope.disableSig = $scope.page+1 == $scope.totalPages ? true : false;
+			},
+			function(error) {
+				$scope.disableAnt = true;
+				$scope.disableSig = true;
+			}
+		);
+	};
+	$scope.activity('sig');
+
 	//if the user has full access, the default page is the configuration one. otherwise it is the contract-information page
 	if(userProvider.isCompleteUser()){
 		// $stateParams contians the received opt (by default 1)
@@ -264,13 +294,6 @@ Adding a beneficary actions
 			}
 		);
 	}
-
-  adminProvider.getUserActivity().then(
-    function(data) {
-      //console.log(data);
-      $scope.userActivity = data.user_activity;
-    }
-  );
 
   $scope.mapUserActivity = function(activity) {
     var activityName = activity;

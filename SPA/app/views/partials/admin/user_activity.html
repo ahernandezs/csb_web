@@ -1,4 +1,4 @@
-<div class="user-activity">
+<div class="user-activity margin-top-admin">
   <div class="transactions">
     <table class="details">
       <thead>
@@ -9,7 +9,7 @@
         </tr>
       </thead>
       <tbody>
-      <tr ng-repeat="activity in userActivity | filter:search">
+      <tr ng-repeat="activity in userActivities">
         <td>{{activity.date | date:'dd/MM/yy HH:mm' }} hrs.</td>
         <td>{{mapUserActivity(activity.action)}}</td>
         <td>{{mapActivityStatus(activity.successful)}}</td>
@@ -17,4 +17,11 @@
       </tbody>
     </table>
   </div>
+</div>
+<div class="pagination">
+  <ul>
+      <li ng-click='activity("ant")' ng-class="disableAnt ? 'disabled' : ''"></li>
+      <li class="active">{{page+1}}/{{totalPages}}</li>
+      <li ng-click='activity("sig")' ng-class="disableSig ? 'disabled' : ''"></li>
+  </ul>
 </div>
