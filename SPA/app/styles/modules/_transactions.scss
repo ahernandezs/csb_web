@@ -22,7 +22,7 @@ form[name="investmentForm"], form[name="transferForm"], form[name="paymentForm"]
         width: 30px;
         height: 30px;
         position: absolute;
-        z-index: 999999;
+        z-index: 990;
         margin-left: 72%;
         margin-top: 2px;
         span{display: none;}
@@ -49,8 +49,8 @@ form[name="investmentForm"], form[name="transferForm"], form[name="paymentForm"]
                     width: 10px;
                     height: 10px;
                     -ms-transform: rotate(45deg);
-                    -webkit-transform: rotate(45deg); 
-                    transform: rotate(45deg);   
+                    -webkit-transform: rotate(45deg);
+                    transform: rotate(45deg);
                 }
             }
         }
@@ -69,8 +69,8 @@ form[name="investmentForm"], form[name="transferForm"], form[name="paymentForm"]
                 width: 10px;
                 height: 10px;
                 -ms-transform: rotate(45deg);
-                -webkit-transform: rotate(45deg); 
-                transform: rotate(45deg);    
+                -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
             }
         }
     }
@@ -199,7 +199,7 @@ input[name="account"] + p{
 }
 table input[type="submit"]{font-weight: bold;}
 .message + table + .double-btn button{
-    margin-top: 20px; 
+    margin-top: 20px;
     min-width:120px;
     @include border-radius(4px);
 }
