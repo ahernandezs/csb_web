@@ -3,8 +3,8 @@
         <h3>Informaci&oacute;n de la cuenta</h3>
         <p>¿A d&oacute;nde te enviaremos tus notificaciones y alertas sobre la actividad de tus cuentas?</p>
         <form name="updateForm">
-            <div class="fieldContainer" ng-class="data.otp.length > 0 ? 'selected' : ''">
-                <span>Token</span>
+            <div class="fieldContainer" ng-class="updatedata.otp.length > 0 ? 'selected' : ''">
+                <span>OTP</span>
                 <input id="inputOTP" class="input-token" type="password" ng-model="updatedata.otp" ng-required="true" numbers-only minlength="6" maxlength="6" placeholder="Introduce el c&oacute;digo de tu Token F&iacute;sico">
             </div>
             <table>
