@@ -12,10 +12,7 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 	$scope.disableSig = false;
 
 	$scope.activity = function(option) {
-		if(option == 'ant' && $scope.disableAnt){
-			return;
-		}
-		if(option == 'sig' && $scope.disableSig ){
+		if(($scope.disableSig && option == 'sig' ) || ($scope.disableAnt && option == 'ant')){
 			return;
 		}
 		$scope.page = option == 'ant' ? $scope.page-1 : $scope.page+1 ;

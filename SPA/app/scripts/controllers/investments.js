@@ -5,7 +5,9 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
     var params = {};
     params.numPage = 0;
     params.size = 100;
-
+    $scope.modify = false;
+    $scope.instructions = {"1":"Transferencia a Cuenta Eje","2":"Reinversión de Capital con Pago de interés","3":"Reinversión de Capital e Intereses"}
+    $scope.result = {};
     $scope.searchMessage = 'false';
 
     $scope.searchParams = {};
@@ -13,6 +15,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
     accountsProvider.getAccountDetail($stateParams.accountId).then(
         function(data) {
             $scope.investmentHeader = $rootScope.accountDetail.investment;
+            $scope.instruction = $scope.investmentHeader.instruction_investment;
         },
         function(errorObject) {
             var status = errorObject.status;
@@ -107,4 +110,11 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
             );
         }
     };
+
+    $scope.save = function(){
+        $scope.modify = false;
+        $scope.result.success = true;
+        $scope.result.error = true;
+    }
+
 }]);
