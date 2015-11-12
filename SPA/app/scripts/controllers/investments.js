@@ -112,9 +112,23 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
     };
 
     $scope.save = function(){
-        $scope.modify = false;
-        $scope.result.success = true;
-        $scope.result.error = true;
+        accountsProvider.setInstruction($stateParams.accountId, $scope.instruction).then(
+            function(data){
+                $scope.modify = false;
+                $scope.result.success = true;
+                console.log(data);
+            },
+            function(errorObject) {
+                var status = errorObject.status;
+                $scope.result.error = true;
+                var msg = codeStatusErrors.errorMessage(status);
+                if (status === 500){
+                    $scope.setServiceError(msg + errorObject.response.message);
+                } else {
+                    $scope.setServiceError(msg);
+                }
+            }
+        )
     }
 
 }]);

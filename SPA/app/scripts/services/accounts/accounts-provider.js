@@ -131,6 +131,18 @@ angular.module('spaApp').factory('accountsProvider', ['$rootScope', 'accountsSer
       $rootScope.statement = null;
       $rootScope.accountDetail = null;
       $rootScope.transactions = null;
+    },
+
+    setInstruction: function(accountId, instruction){
+      var deferred = $q.defer();
+      accountsService.setInstruction(accountId, instruction).success(function(data, status, headers) {
+        $rootScope.statements = data.statements;
+        deferred.resolve();
+      }).error(function(data, status) {
+        var result = {'response' : data, 'status': status};
+        return deferred.reject(result);
+      });
+      return deferred.promise;
     }
 
   };
