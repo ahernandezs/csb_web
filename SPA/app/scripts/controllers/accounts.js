@@ -10,14 +10,11 @@
     $scope.showInvestmentAccount = false;
     $scope.showSavingAccount = false;
     $scope.showCreditAccount = false;
-	//console.log('Load account dashboard information');
 	  accountsProvider.getAccounts().then(
           function(data) {
             $scope.accounts = $rootScope.accounts;
             $scope.selectNavigatOption('accounts');
             $scope.selectAccount( $scope.accounts[0]);
-            //console.log('Getting accounts ......');
-            //console.log($scope.accounts);
             verifyExistAccount();
           },
           function(errorObject) {

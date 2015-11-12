@@ -36,9 +36,6 @@ angular.module('spaApp')
             searchParams.length > 0 ? optionsParams.push('search=' + encodeURIComponent(searchParams.join('&'))) : '';
 
             options = optionsParams.length > 0 ? '?' + optionsParams.join('&') : '';
-
-            //console.log('Sending: '+$rootScope.restAPIBaseUrl+'/accounts/'+accountId+'/transactions' + options);
-
             return $http.get($rootScope.restAPIBaseUrl+'/accounts/'+accountId+'/transactions' + options);
         };
 
@@ -57,22 +54,27 @@ angular.module('spaApp')
         };
 
         this.getStates = function(accountId){
-            //console.log($rootScope.restAPIBaseUrl+'/accounts/'+accountId+'/states');
             return $http.get($rootScope.restAPIBaseUrl+'/accounts/'+accountId+'/states');
         };
 
         function validateDate(date) {
           var newDate = null;
-          try
-          {
+          try{
             var parsedDate = $.datepicker.parseDate('dd/mm/yy', date);
             newDate = $.datepicker.formatDate( "yy-mm-dd", parsedDate);
-          }
-          catch (e)
-          {
-
-          }
+          }catch (e){}
           return newDate;
         }
+        
+        this.setInstruction = function(accountId, instruction){
+            return $http({
+                url: $rootScope.restAPIBaseUrl+'/accounts/'+accountId+'/transactions',
+                method: 'POST',
+                data: JSON.stringify({
+                    'option_investment': instruction,
+                    'instruction_investment': 'true'
+                })
+                ,headers: {'Content-Type': 'application/json','X-AUTH-TOKEN': $http.defaults.headers.common['X-AUTH-TOKEN'] }
+            });        };
 
 }]);

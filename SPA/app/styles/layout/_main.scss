@@ -62,3 +62,41 @@ body.showLoader:after{
 .cursor-pointer{
 	cursor:pointer;
 }
+.success-message{
+        position: relative;
+        overflow: hidden;
+        min-height: 60px;
+        border: 1px solid #42B129;
+        margin: 15px 0;
+        background: url(../images/ico-hecho.png) no-repeat 3% center;
+        background-size: 40px;
+        border-radius: 2px;
+    }
+.success-message p {
+    float: left;
+    padding: 13px 0;
+    width: 75%;
+    font-size: 0.9em;
+    margin-left: 10%;
+    text-align: left;
+    color: #42B129;
+}
+.error-message{
+        position: relative;
+        overflow: hidden;
+        min-height: 60px;
+        border: 1px solid #FF0000;
+        margin: 15px 0;
+        background: url(../images/ico-error.png) no-repeat 3% center;
+        background-size: 40px;
+        border-radius: 2px;
+    }
+.error-message p {
+    float: left;
+    padding: 13px 0;
+    width: 75%;
+    font-size: 0.9em;
+    margin-left: 10%;
+    text-align: left;
+    color: #FF0000;
+}
