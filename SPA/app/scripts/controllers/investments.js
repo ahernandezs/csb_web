@@ -90,7 +90,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
             }
             $scope.getTransactions($scope.searchParams.date_start, $scope.searchParams.date_end);
             return;
-        } 
+        }
         if($scope.searchParams.date_start === null && $scope.searchParams.date_end === null) {
             params.date_end = null;
             params.date_start = null;
@@ -111,12 +111,18 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
         }
     };
 
+    /*
+     * Assign the new value for the investment instruction.
+     */
+    $scope.assignInstruction = function( id ) {
+      $scope.instruction = id;
+    };
+
     $scope.save = function(){
         accountsProvider.setInstruction($stateParams.accountId, $scope.instruction).then(
             function(data){
                 $scope.modify = false;
                 $scope.result.success = true;
-                console.log(data);
             },
             function(errorObject) {
                 var status = errorObject.status;
