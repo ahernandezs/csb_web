@@ -45,9 +45,9 @@
                         <p>{{instructions[instruction]}}</p>
                     </div>
                     <ul class="dropdown-menu" role="menu">
-                        <li ng-click="instruction = 1" ng-required="true">{{instructions['1']}}</li>
-                        <li ng-show="investmetCategory=='CEDE'" ng-click="instruction = 2" ng-required="true">{{instructions['2']}}</li>
-                        <li ng-show="investmetCategory=='PRLV'" ng-click="instruction = 3" ng-required="true">{{instructions['3']}}</li>
+                        <li ng-click="assignInstruction(1)" ng-required="true">{{instructions['1']}}</li>
+                        <li ng-show="investmetCategory=='CEDE'" ng-click="assignInstruction(2)" ng-required="true">{{instructions['2']}}</li>
+                        <li ng-show="investmetCategory=='PRLV'" ng-click="assignInstruction(3)" ng-required="true">{{instructions['3']}}</li>
                     </ul>
                 </div>
                 <br>
@@ -67,4 +67,3 @@
         </ul>
     </div>
 </div>
-    

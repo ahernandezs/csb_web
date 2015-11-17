@@ -81,7 +81,7 @@ angular.module('spaApp').factory('accountsProvider', ['$rootScope', 'accountsSer
         //if accounts has undefinied transactions get transactions from API
           //console.log('getting transactions for account ' + accountId + ' from page ' + numPage);
           accountsService.getAccount(accountId,numPage, size).success(function(data, status, headers) {
-            
+
             if(data.transactions){
               var items = data.transactions;
               for (var i = 0; i < items.length; i++) {
@@ -136,8 +136,8 @@ angular.module('spaApp').factory('accountsProvider', ['$rootScope', 'accountsSer
     setInstruction: function(accountId, instruction){
       var deferred = $q.defer();
       accountsService.setInstruction(accountId, instruction).success(function(data, status, headers) {
-        $rootScope.statements = data.statements;
-        deferred.resolve();
+        $rootScope.statements = data;
+        deferred.resolve(data);
       }).error(function(data, status) {
         var result = {'response' : data, 'status': status};
         return deferred.reject(result);

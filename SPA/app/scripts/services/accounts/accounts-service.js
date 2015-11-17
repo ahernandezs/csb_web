@@ -65,16 +65,9 @@ angular.module('spaApp')
           }catch (e){}
           return newDate;
         }
-        
+
         this.setInstruction = function(accountId, instruction){
-            return $http({
-                url: $rootScope.restAPIBaseUrl+'/accounts/'+accountId+'/transactions',
-                method: 'POST',
-                data: JSON.stringify({
-                    'option_investment': instruction,
-                    'instruction_investment': 'true'
-                })
-                ,headers: {'Content-Type': 'application/json','X-AUTH-TOKEN': $http.defaults.headers.common['X-AUTH-TOKEN'] }
-            });        };
+          return $http.get( $rootScope.restAPIBaseUrl+'/products/'+accountId+'?amount='+instruction );
+        };
 
 }]);
