@@ -6,7 +6,8 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
     params.numPage = 0;
     params.size = 100;
     $scope.modify = false;
-    $scope.instructions = {"1":"Transferencia a Cuenta Eje","2":"Reinversión de Capital con Pago de interés","3":"Reinversión de Capital e Intereses"}
+    $scope.instructions = [];
+    $scope.instructions.push( 'Transferencia a Cuenta Eje','Reinversión de Capital con Pago de interés','Reinversión de Capital e Intereses' );
     $scope.result = {};
     $scope.searchMessage = 'false';
 
@@ -15,7 +16,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
     accountsProvider.getAccountDetail($stateParams.accountId).then(
         function(data) {
             $scope.investmentHeader = $rootScope.accountDetail.investment;
-            $scope.instruction = $scope.investmentHeader.instruction_investment;
+            $scope.instruction = $scope.investmentHeader.instruction_investment.ins_inv_to_print;
         },
         function(errorObject) {
             var status = errorObject.status;
@@ -115,26 +116,27 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
      * Assign the new value for the investment instruction.
      */
     $scope.assignInstruction = function( id ) {
-      $scope.instruction = id;
+      $scope.instruction = $scope.instructions[id];
     };
 
     $scope.save = function(){
-        accountsProvider.setInstruction($stateParams.accountId, $scope.instruction).then(
-            function(data){
-                $scope.modify = false;
-                $scope.result.success = true;
-            },
-            function(errorObject) {
-                var status = errorObject.status;
-                $scope.result.error = true;
-                var msg = codeStatusErrors.errorMessage(status);
-                if (status === 500){
-                    $scope.setServiceError(msg + errorObject.response.message);
-                } else {
-                    $scope.setServiceError(msg);
-                }
-            }
-        )
-    }
+      var instruction = 1;
+      instruction += $scope.instructions.indexOf( $scope.instruction );
+      accountsProvider.setInstruction($stateParams.accountId, instruction).then(
+        function(data){
+          $scope.modify = false;
+          $scope.result.success = true;
+        },
+        function(errorObject) {
+          var status = errorObject.status;
+          $scope.result.error = true;
+          var msg = codeStatusErrors.errorMessage(status);
+          if (status === 500)
+            $scope.setServiceError(msg + errorObject.response.message);
+          else
+            $scope.setServiceError(msg);
+        }
+      );
+    };
 
 }]);

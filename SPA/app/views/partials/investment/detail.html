@@ -29,31 +29,35 @@
             <li>Fecha de vencimiento de inversi&oacute;n:<span>{{investmentHeader.last_renewal_date | date:'dd-MM-yyyy' }}</span></li>
             <li>Fecha de vencimiento de inter&eacute;s:  <span>{{investmentHeader.expiration_date | date:'dd-MM-yyyy' }}</span></li>
             <li>Intereses generados:    <span>{{investmentHeader.projected_interest_amount}}%</span></li>
-            <li>Porcentaje de ISR:      <span>{{investmentHeader.isr_taxt}}%</span></li>
         </ul>
         <ul>
-            <li>Monto del ISR:          <span class="amount">{{investmentHeader.isr_taxt_amount | currency}}</span></li>
-            <li>Tasa de inter&eacute;s:    <span>{{investmentHeader.interest_rate}}%</span></li>
-            <li ng-show='modify == false'>Instrucci&oacute;n al vencimiento: <span>{{instructions[instruction]}}</span></li>
-            <li ng-show='modify == false'>
-                <button ng-click='modify = true'>Modificar instrucci&oacute;n al vencimiento</button>
-            </li>
-            <li ng-show='modify == true'>
-                <div class="dropdown">
-                    <div class="dropdown-toggle select-style" type="button" data-toggle="dropdown">
-                        <span>Cuenta retiro</span>
-                        <p>{{instructions[instruction]}}</p>
-                    </div>
-                    <ul class="dropdown-menu" role="menu">
-                        <li ng-click="assignInstruction(1)" ng-required="true">{{instructions['1']}}</li>
-                        <li ng-show="investmetCategory=='CEDE'" ng-click="assignInstruction(2)" ng-required="true">{{instructions['2']}}</li>
-                        <li ng-show="investmetCategory=='PRLV'" ng-click="assignInstruction(3)" ng-required="true">{{instructions['3']}}</li>
-                    </ul>
+          <li>Porcentaje de ISR:         <span>{{investmentHeader.isr_taxt}}%</span></li>
+          <li>Monto del ISR:             <span class="amount">{{investmentHeader.isr_taxt_amount | currency}}</span></li>
+          <li>Tasa de inter&eacute;s:    <span>{{investmentHeader.interest_rate}}%</span></li>
+          <li class="instructions">
+            <div ng-show='modify == false' class="first-div">
+              <p>Instrucci&oacute;n al vencimiento:</p>
+              <span>{{instruction}}</span>
+              <button ng-click='modify = true'>Modificar instrucci&oacute;n al vencimiento</button>
+            </div>
+            <div ng-show='modify == true' class="second-div">
+              <div class="dropdown">
+                <div class="dropdown-toggle select-style" type="button" data-toggle="dropdown">
+                  <span>Cuenta retiro</span>
+                  <p>{{instruction}}</p>
                 </div>
-                <br>
-                <button ng-click='modify = false; instruction = investmentHeader.instruction_investment'>Cancelar</button>
+                <ul class="dropdown-menu" role="menu">
+                  <li ng-click="assignInstruction(0)" ng-required="true">{{investmentHeader.instruction_investment.ins_inv_in_box01}}</li>
+                  <li ng-show="investmetCategory=='CEDE'" ng-click="assignInstruction(1)" ng-required="true">{{investmentHeader.instruction_investment.ins_inv_in_box02}}</li>
+                  <li ng-show="investmetCategory=='PRLV'" ng-click="assignInstruction(2)" ng-required="true">{{investmentHeader.instruction_investment.ins_inv_in_box02}}</li>
+                </ul>
+              </div>
+              <div class="buttons">
                 <button ng-click='save();'>Guardar</button>
-            </li>
+                <button ng-click='modify = false; instruction = investmentHeader.instruction_investment.ins_inv_to_print'>Cancelar</button>
+              </div>
+            </div>
+          </li>
         </ul>
     </div>
 </div>

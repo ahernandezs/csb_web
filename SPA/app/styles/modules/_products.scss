@@ -251,6 +251,7 @@ hr[ng-show="!showAccountHeader"]{
 		span {
 			float: right;
 			font-weight: bold;
+			text-align: right;
 		}
 	}
 }
@@ -522,6 +523,35 @@ hr[ng-show="!showAccountHeader"]{
 				margin-bottom: 3px;
 				background: url(../images/ico-pdf.png) no-repeat center center;
 				background-size:28px;
+			}
+		}
+	}
+}
+.instructions {
+	.first-div {
+		p {
+			float: left;
+			width: 30%;
+		}
+		span {
+			width: 50%;
+		}
+		button {
+			margin: 2% 0 0 20%;
+		}
+	}
+	.second-div {
+		.select-style {
+			width: 100%;
+		}
+		.dropdown ul.dropdown-menu {
+			width: 100%;
+		}
+		.buttons {
+			width: 100%;
+			button {
+				float: right;
+				margin: 3% 3% 0 0;
 			}
 		}
 	}
