@@ -4,6 +4,9 @@ angular.module('spaApp').controller('updateServicesController', ['$scope', 'admi
 
 	$scope.actionUpdateState = 1;
 	$scope.updateDigitalBankServiceState = [];
+	$scope.result = {};
+	$scope.result.success = false;
+	$scope.result.error = false;
 
 	$scope.updateService = function(action, state){
 		$scope.actionUpdateState = action;
@@ -19,23 +22,14 @@ angular.module('spaApp').controller('updateServicesController', ['$scope', 'admi
 				$scope.exception = false;
 				$scope.actionUpdateState = 3;
 				$scope.updateDigitalBankServiceState.otp = '';
-				$scope.message = "La información se actualizó correctamente.";
+				$scope.result.success = true;
 			},
 			function(errorObject){
 				$scope.exception = true;
 				$scope.actionUpdateState = 3;
 				$scope.updateDigitalBankServiceState.otp = '';
 				var status = errorObject.status;
-				if(status === 403){
-					$scope.manageOtpErrorMessage(errorObject.response);
-				} else {
-					var msg = codeStatusErrors.errorMessage(status);
-					if (status === 500){
-						$scope.setServiceError(msg + errorObject.response.message);
-					} else {
-						$scope.setServiceError(msg);
-					}
-				}
+				$scope.result.error = true;
 			}
 		);
 	}

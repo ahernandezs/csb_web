@@ -129,6 +129,20 @@
 				margin:0 auto 10px auto;
 			}
 		}
+		h2{
+			color:$orange;
+			width: 90%;
+			margin:0 auto 20px auto;
+			font-size: 1.2em;
+			text-align: center;
+			padding-bottom: 20px;
+			border-bottom:1px solid $gray;
+			+ p, + p + p{
+				width: 90%;
+				text-align: center;
+				margin:0 auto 10px auto;
+			}
+		}
 		table{
 			width: 90%;
 			margin: 20px auto;
@@ -199,6 +213,38 @@
 			width: 80%;
 			margin-left:10%;
 			margin-bottom: 15px;
+		}
+
+		h3{
+			color:$blue;
+			width: 90%;
+			margin:0 auto 20px auto;
+			font-size: 1.2em;
+			text-align: center;
+			padding-bottom: 20px;
+			border-bottom:1px solid $gray;
+			+ p, + p + p{
+				width: 90%;
+				text-align: center;
+				margin:0 auto 10px auto;
+			}
+		}
+		.servicio{
+			width: 80%;
+			margin: 0 auto;
+			overflow: hidden;
+			border-bottom: 1px solid #CCC;
+			padding-bottom: 20px;
+		}
+		.icono{
+			float: left;
+			width: 20%;
+		}
+		.mensaje{
+			float: right;
+			width: 80%;
+			border-left: solid #2976b6 2px;
+			padding-left: 20px;
 		}
 	}
 }
@@ -474,6 +520,7 @@
 		}
 	}
 }
+
 //TARJETAS
 .transactions.adminTarjetas{
 	width: 100% !important;

@@ -11,7 +11,8 @@
 		<h2>Seguridad</h2>
 		<div class="section">
 			<ul>
-				<li class="option cursor-pointer" ng-class="option==2 ? 'active' : ''" ng-click="gotoUserPreferencesPage(); option=2">Cancelar servicio de banca</li>
+				<li class="option cursor-pointer" ng-class="option==2 ? 'active' : ''" ng-click="gotoUserPreferencesPage(); option=2">Cancelar Consubanco por Internet</li>
+				<li class="option cursor-pointer" ng-class="option==4 ? 'active' : ''" ng-click="gotoUserPreferencesPage(); option=4">Suspender Consubanco por Internet</li>
 				<li class="option cursor-pointer" ng-class="option==3 ? 'active' : ''" ng-click="gotoUserPreferencesPage(); option=3">Cambio de contrase&ntilde;a</li>
 			</ul>
 		</div>
@@ -33,7 +34,10 @@
 		<div ng-include="'views/partials/admin/update_communication/update-communication.html'"></div>
 	</div>
 	<div class="content-admin" ng-show="isUserPreferencesAdministrationPageActivated() && option==2">
-		<div ng-include="'views/partials/admin/update-services.html'"></div>
+		<div ng-include="'views/partials/admin/service-cancel.html'"></div>
+	</div>
+	<div class="content-admin" ng-show="isUserPreferencesAdministrationPageActivated() && option==4">
+		<div ng-include="'views/partials/admin/service-suspend.html'"></div>
 	</div>
 	<div class="content-admin" ng-show="isUserPreferencesAdministrationPageActivated() && option==3">
 		<div ng-include="'views/partials/admin/update_password/change-password.html'"></div>

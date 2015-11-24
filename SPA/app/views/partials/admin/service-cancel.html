@@ -1,0 +1,47 @@
+<div class="row" ng-controller="updateServicesController" >
+
+	<div class="success-message" ng-show="result.success">
+		<p>Su servicio ha sido cancelado correctamente</p>
+	</div>
+	<div class="error-message" ng-show="result.error">
+		<p>Hubo un error al cancelar el servicio</p>
+	</div>
+
+	<h2>Cancelar Consubanco por Internet</h2>
+	<ng-form name="serviceForm">
+		<div ng-show="actionUpdateState == 2">
+			<div class="fieldContainer" ng-class="data.otp.length > 0 ? 'selected' : ''">
+				<span>Token</span>
+				<input class="input-token" type="password" ng-model="updateDigitalBankServiceState.otp" ng-required="true" numbers-only minlength="6" maxlength="6" placeholder="Introduce el c&oacute;digo de tu Token F&iacute;sico">
+			</div>
+		</div>
+	</ng-form>
+	<div class="servicio">
+		<h3>¡Este proceso es irreversible!</h3>
+		<div class="icono">
+			<img src="../images/ico-alert.png" alt="" height="50" width="50" align="middle">		
+		</div>
+		<div class="mensaje">
+			<p>El servicio de Consubanco por Internet será dado de baja.</p>
+			<p>Para reactivarlo es necesario acudir a tu sucursal m&aacute;s cercana y solicitar la reactivaci&oacute;n.</p>
+		</div>
+	</div>
+	<br>
+	<div ng-switch on="actionUpdateState">
+		<div ng-switch-when="1">
+			<div class="double-btn">
+				<button ng-click="updateService(2,'C')">Continuar</button>
+				<button ng-click="">Cancelar</button>
+			</div>
+		</div>
+		<div ng-switch-when="2">
+			<div class="double-btn">
+				<button ng-click="updateDigitalBankServiceState()" ng-disabled="serviceForm.$invalid">Continuar</button>
+				<button ng-click="updateService(1,'');">Cancelar</button>
+			</div>
+		</div>
+		<div ng-switch-when="3">
+			<button ng-click="updateService(1,'');">Regresar</button>
+		</div>
+	</div>
+</div>
