@@ -2,7 +2,7 @@
 
 angular.module('spaApp')
 .factory('userProvider', ['$q','$rootScope','userService','accountsProvider','productProvider','thirdAccountProvider', function ($q, $rootScope, userService, accountsProvider,productProvider,thirdAccountProvider) {
-  
+
   /**
     * the http token-registration header value use to retreive the client's information
     * between the preRegister and register operations
@@ -73,7 +73,7 @@ angular.module('spaApp')
 
 
   return {
-    
+
     /**
      * setter for client_id
      */
@@ -131,7 +131,7 @@ angular.module('spaApp')
     },
 
     /**
-     * setter for identifier 
+     * setter for identifier
      */
     setIdentifier : function(identifier){
       _identifier = identifier;
@@ -179,7 +179,7 @@ angular.module('spaApp')
         var result = {'response' : data, 'status': status};
         return deferred.reject(result);
       })
-      return deferred.promise;      
+      return deferred.promise;
     },
 
     registerUser: function(){
@@ -211,6 +211,30 @@ angular.module('spaApp')
       })
       return deferred.promise;
     },
+
+	unlockUserPreRequest: function(clientId, folioId) {
+		var deferred = $q.defer();
+		userService.unlockUserPreRequest( clientId, folioId ).
+			success( function(data, status, headers) {
+				deferred.resolve( data );
+			}).
+			error( function( data, status ) {
+				deferred.reject( data );
+			});
+		return deferred.promise;
+	},
+
+	unlockUserRequest: function(clientId, folioId, password, imageId ) {
+		var deferred = $q.defer();
+		userService.unlockUserRequest( clientId, folioId, password, imageId ).
+			success( function(data, status, headers) {
+				deferred.resolve( data );
+			}).
+			error( function( data, status ) {
+				deferred.reject( data );
+			});
+		return deferred.promise;
+	},
 
     logout: function(){
       var deferred = $q.defer();

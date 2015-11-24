@@ -24,6 +24,34 @@ angular.module('spaApp')
 		});
 	}
 
+	this.unlockUserPreRequest = function(clientId, folioId) {
+		return $http({
+			url: $rootScope.restAPIBaseUrl+'/unlockPasswordPrerequest',
+			method: 'POST',
+			data: JSON.stringify({
+				           'user_login': clientId,
+				             'folio_id': folioId,
+				'client_application_id': 'PROSA-DIG'
+			}),
+			headers: {'Content-Type': 'application/json'}
+		});
+	};
+
+	this.unlockUserRequest = function(clientId, folioId, password, imageId) {
+		return $http({
+			url: $rootScope.restAPIBaseUrl+'/unlockPasswordRequest',
+			method: 'POST',
+			data: JSON.stringify({
+				           'user_login': clientId,
+				             'folio_id': folioId,
+				'client_application_id': 'PROSA-DIG',
+				             'password': password,
+				             'image_id': imageId
+			}),
+			headers: {'Content-Type': 'application/json'}
+		});
+	};
+
 	this.logout = function(){
 		return $http({
 			url: $rootScope.restAPIBaseUrl+'/logout',
