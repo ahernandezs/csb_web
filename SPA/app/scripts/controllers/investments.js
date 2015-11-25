@@ -7,7 +7,6 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
     params.size = 100;
     $scope.modify = false;
     $scope.instructions = [];
-    $scope.instructions.push( 'Transferencia a Cuenta Eje','Reinversión de Capital con Pago de interés','Reinversión de Capital e Intereses' );
     $scope.result = {};
     $scope.searchMessage = 'false';
 
@@ -16,7 +15,8 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
     accountsProvider.getAccountDetail($stateParams.accountId).then(
         function(data) {
             $scope.investmentHeader = $rootScope.accountDetail.investment;
-            $scope.instruction = $scope.investmentHeader.instruction_investment.ins_inv_to_print;
+            $scope.instructions = $scope.investmentHeader.instruction_investment;
+			$scope.instruction = $scope.instructions.ins_inv_to_print;
         },
         function(errorObject) {
             var status = errorObject.status;
@@ -115,14 +115,12 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
     /*
      * Assign the new value for the investment instruction.
      */
-    $scope.assignInstruction = function( id ) {
-      $scope.instruction = $scope.instructions[id];
+    $scope.assignInstruction = function( selection ) {
+      $scope.instruction = selection;
     };
 
     $scope.save = function(){
-      var instruction = 1;
-      instruction += $scope.instructions.indexOf( $scope.instruction );
-      accountsProvider.setInstruction($stateParams.accountId, instruction).then(
+      accountsProvider.setInstruction($stateParams.accountId, $scope.instruction.ins_inv_id).then(
         function(data){
           $scope.modify = false;
           $scope.result.success = true;
