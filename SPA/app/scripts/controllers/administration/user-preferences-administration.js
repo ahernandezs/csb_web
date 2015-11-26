@@ -14,6 +14,7 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 	 * used for updatedata
 	 */
 	$scope.updatedata = {};
+	$scope.tokenSynchronizationData = {};
 
 	//$scope.userAdministrationStep = 1;
 
