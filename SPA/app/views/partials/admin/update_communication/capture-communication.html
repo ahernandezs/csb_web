@@ -1,12 +1,14 @@
 <div class="record">
     <div class="data">
-        <h3>Informaci&oacute;n de la cuenta</h3>
-        <p>¿A d&oacute;nde te enviaremos tus notificaciones y alertas sobre la actividad de tus cuentas?</p>
+        <h3>Alertas y notificaciones</h3>
+        <p>Ingresa tu número celular, correo electr&oacute;nico y selecciona uno o ambos medios
+        <br>por el cual quieras que se notifiquen tus movimientos de Consubanco por Internet</p>
         <form name="updateForm">
             <div class="fieldContainer" ng-class="data.phone.length > 0 ? 'selected' : ''">
             	<span>N&uacute;mero celular</span>
                 <input type="text" numbers-only ng-minlength="10" ng-maxlength="10"  minlength="10" maxlength="10" class="input-mobile" ng-model="updatedata.phone" placeholder="N&uacute;mero celular" ng-required="true">
             </div>
+            <!--img src="images/ico-alert.png" alt="" height="25px"></span-->
             <div class="fieldContainer" ng-class="data.e_mail.length > 0 ? 'selected' : ''">
             	<span>Correo electr&oacute;nico</span>
                 <input type="email" alphanumeric class="input-mail" ng-model="updatedata.e_mail" placeholder="Correo electr&oacute;nico" ng-required="true">
