@@ -22,6 +22,7 @@ angular.module('spaApp')
    * else put an error message in the scope
    */
   $scope.loginData = {};
+	$scope.unlockData = {};
 
   /**
    * the error boolean
@@ -46,6 +47,7 @@ angular.module('spaApp')
   $scope.reset=function(){
     resetError();
     $scope.loginData = {};
+	$scope.unlockData = {};
     $scope.step = 0;
     $scope.showTimeoutAlert = false;
     $scope.showErrorLogoutAlert = false;
@@ -230,7 +232,113 @@ angular.module('spaApp')
 
   $scope.unblock = function(){
     $scope.step = 2;
+	$scope.selection = 0;
   }
+
+	$scope.changeSelection = function(step) {
+		$scope.selection = step;
+	};
+
+	$scope.gobackLogin = function() {
+		$scope.selection = 0;
+		$scope.reset();
+	};
+
+	$scope.requestChange = function() {
+		userProvider.unlockUserPreRequest( $scope.unlockData.username, $scope.unlockData.folio ).
+			then( function(data) {
+				$scope.unlockImages = data.images;
+				$scope.selection++;
+			}, function(data, status) {
+				setError( data.message );
+			});
+	};
+
+	$scope.validatePassword = function() {
+		$scope.error = false;
+		$scope.invalidPassword = true;
+		var password = $scope.unlockData.password;
+		if(password) {
+			var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/g;
+			if(!pattern.test(password)) {
+				setError("La contraseña debe tener de 8 a 15 caracteres, \
+					contar con al menos una mayúscula, una minúscula, y un numérico. NO incluir caracteres especiales");
+				return;
+			}
+
+			var rexUser1 = new RegExp($scope.unlockData.username, "g");
+			if(rexUser1.test(password)) {
+				setError("No puede usar su id de usuario como contraseña");
+				return;
+			}
+
+			var rexInstName1 = new RegExp("consubanco", "i");
+			if(rexInstName1.test(password)) {
+				setError("No puede usar el nombre de la institución como contraseña");
+				return;
+			}
+
+			var repeatedChars = /(.)\1{2,}/;
+			if(repeatedChars.test(password)) {
+				setError("No puede repetir más de tres carácteres iguales como 111 o aaa");
+				return;
+			}
+
+			if(consecutivePassword(password)) {
+				setError("No puede tener secuencia de caracteres como 123 o abc");
+				return;
+			}
+
+			$scope.invalidPassword = false;
+		}
+	};
+
+	function consecutivePassword(password) {
+		var charArray = password.split('');
+		var isConSeq = false;
+		var asciiCode = 0;
+		var previousAsciiCode = 0;
+		var numSeqcount = 0;
+
+		for(var i = 0; i < password.length; i++) {
+			asciiCode = password.charCodeAt(i);
+			if((previousAsciiCode + 1) === asciiCode) {
+				numSeqcount++;
+				if(numSeqcount >= 2) {
+					isConSeq = true;
+					break;
+				}
+			} else {
+				numSeqcount = 0;
+			}
+			previousAsciiCode = asciiCode;
+		}
+
+		return isConSeq;
+	};
+
+	$scope.confirmPassword = function () {
+		if(!$scope.unlockData.password)
+            setError("Las contraseñas no puede estar vacías");
+		else if($scope.unlockData.password != $scope.unlockData.passwordAgain)
+            setError("Las contraseñas ingresadas no coinciden");
+        else if ( $scope.confirmImage() ) {
+			userProvider.unlockUserRequest( $scope.unlockData.username, $scope.unlockData.folio,
+				$scope.unlockData.password, $scope.loginData.selectedImage).
+				then( function(status) {
+					$scope.selection++;
+				}, function(error) {
+					setError( error.message );
+				});
+		}
+	};
+
+	$scope.confirmImage = function () {
+        if($scope.loginData.selectedImage)
+        	return true;
+        else
+            setError("Debe elegir una imagen");
+	};
 
 
   // Review if last session was in timeout
