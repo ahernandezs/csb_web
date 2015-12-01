@@ -30,14 +30,15 @@ angular.module('spaApp').service('adminService', ['$http','$rootScope', function
 		});
 	};
 
-	this.updateCommunication = function(phone, e_mail, otp) {
+	this.updateCommunication = function(phone, e_mail, otp, prefered) {
 		return $http({
 			url: $rootScope.restAPIBaseUrl+'/userInformation/communication',
 			method: 'POST',
 			data: JSON.stringify({
 				'phone': phone,
 				'e_mail': e_mail,
-				'otp': otp
+				'otp': otp,
+				'prefer_comunication_type': prefered
 			})
 		});
 	};
@@ -74,5 +75,9 @@ angular.module('spaApp').service('adminService', ['$http','$rootScope', function
   this.getUserActivity = function(page,size) {
     return $http.get($rootScope.restAPIBaseUrl + '/useractivity?page='+page+'&size='+size);
   };
+
+  this.getCommunication = function(){
+    return $http.get($rootScope.restAPIBaseUrl + '/userInformation/communication');
+  }
 
 }]);
