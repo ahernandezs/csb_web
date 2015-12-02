@@ -6,88 +6,88 @@
 </div>
 <div class="noEm">
     <div class="actions">
-        <div class="scroll">
-        <div class="section" ng-show="showTDCAccount">
-            <h2>Tarjeta de cr&eacute;dito</h2>
-            <div class="product" ng-repeat="account in accounts| filter:{account_type:'TDC'}:true"
-            data-ng-class="{'active': account._account_id == activeClass}" data-ng-click="selectAccount(account)">
-                <p class="name">
-                    <span class="text-capitalize">{{account.name | lowercase}}</span>
-                    <span class="id">{{account.masked_account_number}}</span>
-                </p>
-                <div>
-                    <p class="amount">{{account.current_balance | currency}}</p>
-                    <p class="info">Saldo deudor</p>
-                </div>
-            </div>
-        </div>
+        <div class="scroll" ng-scrollbars>
+	        <div class="section" ng-show="showTDCAccount">
+	            <h2>Tarjeta de cr&eacute;dito</h2>
+	            <div class="product" ng-repeat="account in accounts| filter:{account_type:'TDC'}:true"
+	            data-ng-class="{'active': account._account_id == activeClass}" data-ng-click="selectAccount(account)">
+	                <p class="name">
+	                    <span class="text-capitalize">{{account.name | lowercase}}</span>
+	                    <span class="id">{{account.masked_account_number}}</span>
+	                </p>
+	                <div>
+	                    <p class="amount">{{account.current_balance | currency}}</p>
+	                    <p class="info">Saldo deudor</p>
+	                </div>
+	            </div>
+	        </div>
 
-        <div class="section" ng-show='showInvestmentAccount'>
-            <h2>Inversiones</h2>
-            <div class="product" ng-repeat="account in accounts | filter:{account_type:'INV'}:true | filter:{category:'VISTA'}:true"
-            data-ng-class="{'active': account._account_id == activeClass}" data-ng-click="selectAccount(account)">
-                <p class="name" ng-click="active = $id" ng-class="{active: $id === active}">
-                    <span>{{account.name}}</span>
-                    <span class="id">{{account.masked_account_number}}</span>
-                </p>
-                <div>
-                    <p class="amount">{{account.current_balance | currency}}</p>
-                    <p class="info">Saldo</p>
-                </div>
-            </div>
-            <div class="product" ng-repeat="account in accounts | filter:{account_type:'INV'}:true | filter:{category:'CEDE'}:true"
-            data-ng-class="{'active': account._account_id == activeClass}" data-ng-click="selectAccount(account)">
-                <p class="name" ng-click="active = $id" ng-class="{active: $id === active}">
-                    <span>{{account.name}}</span>
-                    <span class="id">{{account.masked_account_number}}</span>
-                </p>
-                <div>
-                    <p class="amount">{{account.current_balance | currency}}</p>
-                    <p class="info">Saldo</p>
-                </div>
-            </div>
-            <div class="product" ng-repeat="account in accounts | filter:{account_type:'INV'}:true | filter:{category:'PRLV'}:true"
-            data-ng-class="{'active': account._account_id == activeClass}" data-ng-click="selectAccount(account)">
-                <p class="name" ng-click="active = $id" ng-class="{active: $id === active}">
-                    <span class="text-capitalize">{{account.name | lowercase}}</span>
-                    <span class="id">{{account.masked_account_number}}</span>
-                </p>
-                <div>
-                    <p class="amount">{{account.current_balance | currency}}</p>
-                    <p class="info">Saldo</p>
-                </div>
-            </div>
-        </div>
+	        <div class="section" ng-show='showInvestmentAccount'>
+	            <h2>Inversiones</h2>
+	            <div class="product" ng-repeat="account in accounts | filter:{account_type:'INV'}:true | filter:{category:'VISTA'}:true"
+	            data-ng-class="{'active': account._account_id == activeClass}" data-ng-click="selectAccount(account)">
+	                <p class="name" ng-click="active = $id" ng-class="{active: $id === active}">
+	                    <span>{{account.name}}</span>
+	                    <span class="id">{{account.masked_account_number}}</span>
+	                </p>
+	                <div>
+	                    <p class="amount">{{account.current_balance | currency}}</p>
+	                    <p class="info">Saldo</p>
+	                </div>
+	            </div>
+	            <div class="product" ng-repeat="account in accounts | filter:{account_type:'INV'}:true | filter:{category:'CEDE'}:true"
+	            data-ng-class="{'active': account._account_id == activeClass}" data-ng-click="selectAccount(account)">
+	                <p class="name" ng-click="active = $id" ng-class="{active: $id === active}">
+	                    <span>{{account.name}}</span>
+	                    <span class="id">{{account.masked_account_number}}</span>
+	                </p>
+	                <div>
+	                    <p class="amount">{{account.current_balance | currency}}</p>
+	                    <p class="info">Saldo</p>
+	                </div>
+	            </div>
+	            <div class="product" ng-repeat="account in accounts | filter:{account_type:'INV'}:true | filter:{category:'PRLV'}:true"
+	            data-ng-class="{'active': account._account_id == activeClass}" data-ng-click="selectAccount(account)">
+	                <p class="name" ng-click="active = $id" ng-class="{active: $id === active}">
+	                    <span class="text-capitalize">{{account.name | lowercase}}</span>
+	                    <span class="id">{{account.masked_account_number}}</span>
+	                </p>
+	                <div>
+	                    <p class="amount">{{account.current_balance | currency}}</p>
+	                    <p class="info">Saldo</p>
+	                </div>
+	            </div>
+	        </div>
 
-        <div class="section" ng-show="showSavingAccount">
-            <h2>Cuenta</h2>
-            <div class="product" ng-repeat="account in accounts | filter:{account_type:'DEP'}:true"
-            data-ng-class="{'active': account._account_id == activeClass}" data-ng-click="selectAccount(account)" >
-                <p class="name" ng-click="active = $id" ng-class="{active: $id === active}" >
-                    <span class="text-capitalize">{{account.name | lowercase}}</span>
-                    <span class="id">{{account.masked_account_number}}</span>
-                </p>
-                <div>
-                    <p class="amount">{{account.current_balance | currency}}</p>
-                    <p class="info">Saldo</p>
-                </div>
-            </div>
-        </div>
+	        <div class="section" ng-show="showSavingAccount">
+	            <h2>Cuenta</h2>
+	            <div class="product" ng-repeat="account in accounts | filter:{account_type:'DEP'}:true"
+	            data-ng-class="{'active': account._account_id == activeClass}" data-ng-click="selectAccount(account)" >
+	                <p class="name" ng-click="active = $id" ng-class="{active: $id === active}" >
+	                    <span class="text-capitalize">{{account.name | lowercase}}</span>
+	                    <span class="id">{{account.masked_account_number}}</span>
+	                </p>
+	                <div>
+	                    <p class="amount">{{account.current_balance | currency}}</p>
+	                    <p class="info">Saldo</p>
+	                </div>
+	            </div>
+	        </div>
 
-        <div class="section" ng-show="showCreditAccount">
-            <h2>Cr&eacute;ditos</h2>
-                <div class="product" ng-repeat="account in accounts | filter:{account_type:'CXN'}:true"
-                data-ng-class="{'active': account._account_id == activeClass}" data-ng-click="selectAccount(account)">
-                <p class="name">
-                    <span class="text-capitalize">{{account.name | lowercase}}</span>
-                    <span class="id">{{account.masked_account_number}}</span>
-                </p>
-                <div>
-                    <p class="amount">{{account.current_balance | currency}}</p>
-                    <p class="info">Disponible</p>
-                </div>
-            </div>
-        </div>
+	        <div class="section" ng-show="showCreditAccount">
+	            <h2>Cr&eacute;ditos</h2>
+	                <div class="product" ng-repeat="account in accounts | filter:{account_type:'CXN'}:true"
+	                data-ng-class="{'active': account._account_id == activeClass}" data-ng-click="selectAccount(account)">
+	                <p class="name">
+	                    <span class="text-capitalize">{{account.name | lowercase}}</span>
+	                    <span class="id">{{account.masked_account_number}}</span>
+	                </p>
+	                <div>
+	                    <p class="amount">{{account.current_balance | currency}}</p>
+	                    <p class="info">Disponible</p>
+	                </div>
+	            </div>
+	        </div>
         </div>
     </div>
     <div ui-view='detailCreditCard'></div>
