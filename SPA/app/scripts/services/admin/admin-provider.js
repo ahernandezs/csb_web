@@ -73,8 +73,7 @@ angular.module('spaApp').factory('adminProvider', ['$rootScope', 'adminService',
 		getCommunication: function(){
 			var deferred = $q.defer();
 			adminService.getCommunication().success(function(data, status, headers){
-				$rootScope.communication = data;
-				deferred.resolve();
+				deferred.resolve(data);
 			}).error(function(data, status){
 				var result = {'response' : data, 'status': status};
 		        return deferred.reject(result);

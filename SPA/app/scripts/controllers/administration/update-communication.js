@@ -9,16 +9,25 @@ angular.module('spaApp').controller('updateCommunicationController', ['$scope', 
 	$scope.getCommunication = function(){
 		adminProvider.getCommunication().then(
 			function(data){
-				$scope.updatedata = data; //somehow
+				$scope.updatedata = data;
+				if($scope.updatedata.prefered_communication_type == "AMBOS"){
+					$scope.updatedata.mailSelect = true;
+					$scope.updatedata.phoneSelect = true;
+				}else if($scope.updatedata.prefered_communication_type == "MAIL"){
+					$scope.updatedata.mailSelect = true;
+				}else if($scope.updatedata.prefered_communication_type == "CELULAR"){
+					$scope.updatedata.phoneSelect = true;
+				}
 			},
 			function(errorObject){
-				console.err(errorObject);
+				console.log(errorObject);
 			}
 		);
 	}
-	//$scope.getCommunication();
+	$scope.getCommunication();
 
 	$scope.resetUpdateData = function () {
+		$scope.getCommunication();
 		$scope.stage_updatecommunication = 1;
 	};
 
@@ -32,7 +41,6 @@ angular.module('spaApp').controller('updateCommunicationController', ['$scope', 
 		}else if($scope.updatedata.phoneSelect){
 			prefered = "CELULAR";
 		}
-
 		adminProvider.updateCommunication($scope.updatedata.phone, $scope.updatedata.e_mail, $scope.updatedata.otp, prefered).then(
 			function (data) {
 				$scope.stage_updatecommunication = 3;

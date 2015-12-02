@@ -38,7 +38,7 @@ angular.module('spaApp').service('adminService', ['$http','$rootScope', function
 				'phone': phone,
 				'e_mail': e_mail,
 				'otp': otp,
-				'prefer_comunication_type': prefered
+				'prefered_communication_type': prefered
 			})
 		});
 	};
