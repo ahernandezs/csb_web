@@ -10,19 +10,17 @@ angular.module('spaApp').factory('adminProvider', ['$rootScope', 'adminService',
 				deferred.resolve();
 			}).error(function(data, status){
 				var result = {'response' : data, 'status': status};
-		        //console.log(data, status);
 		        return deferred.reject(result);
 			})
 			return deferred.promise;
 	    },
 
-		updateCommunication: function(phone, e_mail, otp) {
+		updateCommunication: function(phone, e_mail, otp, prefered) {
 			var deferred = $q.defer();
-			adminService.updateCommunication(phone, e_mail, otp).success(function(){
+			adminService.updateCommunication(phone, e_mail, otp, prefered).success(function(){
 				deferred.resolve();
 			}).error(function(data, status){
 				var result = {'response' : data, 'status': status};
-		        //console.log(data, status);
 		        return deferred.reject(result);
 			});
 			return deferred.promise;
@@ -34,7 +32,6 @@ angular.module('spaApp').factory('adminProvider', ['$rootScope', 'adminService',
 				deferred.resolve();
 			}).error(function(data, status){
 				var result = {'response' : data, 'status': status};
-		        //console.log(data, status);
 		        return deferred.reject(result);
 			});
 			return deferred.promise;
@@ -47,7 +44,6 @@ angular.module('spaApp').factory('adminProvider', ['$rootScope', 'adminService',
 				deferred.resolve();
 			}).error(function(data, status){
 				var result = {'response' : data, 'status': status};
-		        //console.log(data, status);
 		        return deferred.reject(result);
 			});
 			return deferred.promise;
@@ -59,21 +55,32 @@ angular.module('spaApp').factory('adminProvider', ['$rootScope', 'adminService',
 				deferred.resolve();
 			}).error(function(data, status){
 				var result = {'response' : data, 'status': status};
-		        //console.log(data, status);
 		        return deferred.reject(result);
 			});
 			return deferred.promise;
 		},
 
-    getUserActivity: function(page,size) {
-      var deferred = $q.defer();
-      adminService.getUserActivity(page,size).success(function(data, status, headers) {
-        deferred.resolve(data);
-      }).error(function(data, status) {
-        return deferred.reject('Error getting user activity');
-      });
-      return deferred.promise;
-    }
+		getUserActivity: function(page,size) {
+			var deferred = $q.defer();
+			adminService.getUserActivity(page,size).success(function(data, status, headers) {
+				deferred.resolve(data);
+			}).error(function(data, status) {
+				return deferred.reject('Error getting user activity');
+			});
+			return deferred.promise;
+		},
+
+		getCommunication: function(){
+			var deferred = $q.defer();
+			adminService.getCommunication().success(function(data, status, headers){
+				deferred.resolve(data);
+			}).error(function(data, status){
+				var result = {'response' : data, 'status': status};
+		        return deferred.reject(result);
+			});
+			return deferred.promise;
+		},
+
 	};
 
 }]);

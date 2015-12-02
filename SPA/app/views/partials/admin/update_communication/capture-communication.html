@@ -1,19 +1,43 @@
 <div class="record">
     <div class="data">
         <h3>Alertas y notificaciones</h3>
-        <p>Ingresa tu número celular, correo electr&oacute;nico y selecciona uno o ambos medios
-        <br>por el cual quieras que se notifiquen tus movimientos de Consubanco por Internet</p>
+        <p>Ingresa tu número celular, correo electr&oacute;nico y selecciona uno o ambos medios por el cual quieras que se notifiquen tus movimientos de Consubanco por Internet</p>
         <form name="updateForm">
-            <div class="fieldContainer" ng-class="data.phone.length > 0 ? 'selected' : ''">
-            	<span>N&uacute;mero celular</span>
-                <input type="text" numbers-only ng-minlength="10" ng-maxlength="10"  minlength="10" maxlength="10" class="input-mobile" ng-model="updatedata.phone" placeholder="N&uacute;mero celular" ng-required="true">
+            <div class="mensajeCom">
+                <div class="fieldContainer" ng-class="data.phone.length > 0 ? 'selected' : ''" style="float: left;">
+                    <span>N&uacute;mero celular</span>
+                    <input type="text" numbers-only ng-minlength="10" ng-maxlength="10"  minlength="10" maxlength="10" class="input-mobile" ng-model="updatedata.phone" placeholder="N&uacute;mero celular" style="align: left">
+                </div>
+                <div class="mensajeIco">
+                    <img ng-show="updatedata.phoneSelect" ng-click="updatedata.phoneSelect = false" src="images/CSB_ico_paloma_naranja.svg" alt="" height="35px" width="35px" align="right">
+                    <img ng-hide="updatedata.phoneSelect" ng-click="updatedata.phoneSelect = true" src="images/CSB_ico_paloma_gris.svg" alt="" height="35px" width="35px" align="right">
+                </div>
             </div>
-            <!--img src="images/ico-alert.png" alt="" height="25px"></span-->
-            <div class="fieldContainer" ng-class="data.e_mail.length > 0 ? 'selected' : ''">
-            	<span>Correo electr&oacute;nico</span>
-                <input type="email" alphanumeric class="input-mail" ng-model="updatedata.e_mail" placeholder="Correo electr&oacute;nico" ng-required="true">
+            <div class="mensajeCom">
+                <div class="fieldContainer" ng-class="data.e_mail.length > 0 ? 'selected' : ''" style="float: left;">
+                    <span>Correo electr&oacute;nico</span>
+                    <input type="email" alphanumeric class="input-mail" ng-model="updatedata.e_mail" placeholder="Correo electr&oacute;nico" style="align: left">
+                </div>
+                <div class="mensajeIco">
+                    <img ng-show="updatedata.mailSelect" ng-click="updatedata.mailSelect = false" src="images/CSB_ico_paloma_naranja.svg" alt="" height="35px" width="35px" align="right">
+                    <img ng-hide="updatedata.mailSelect" ng-click="updatedata.mailSelect = true" src="images/CSB_ico_paloma_gris.svg" alt="" height="35px" width="35px" align="right">
+                </div>
             </div>
-           <button ng-disabled="updateForm.$invalid" ng-click="validateEmail()">Continuar</button>
+            <div>
+                <div ng-show="paso == 0">
+                    <button ng-click="paso=1">Continuar</button>
+                </div>
+                <div ng-show="paso == 1">
+                    <div class="fieldContainer">
+                        <span>Introduce el código de tu Token Físico</span>
+                        <input type="text" numbers-only ng-minlength="10" ng-maxlength="10"  minlength="10" maxlength="10" class="input-token" ng-model="updatedata.token" placeholder="Introduce el código de tu Token Físico" style="align: left">
+                    </div>
+                    <div>
+                        <button ng-click="paso = 0" style="width: 35%">Cancelar</button>
+                        <button ng-disabled="updateForm.$invalid" ng-click="sendCommunication()" style="width: 35%">Guardar</button>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 </div>
