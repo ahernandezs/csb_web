@@ -8,10 +8,22 @@ var app = angular.module('spaApp', [
   'infinite-scroll',
   'ngTable',
   'ui.router',
-  'uiGmapgoogle-maps'
+  'uiGmapgoogle-maps',
+  'ngScrollbars'
 ]);
 
-app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'uiGmapGoogleMapApiProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, uiGmapGoogleMapApiProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'uiGmapGoogleMapApiProvider', 'ScrollBarsProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, uiGmapGoogleMapApiProvider, ScrollBarsProvider) {
+
+	ScrollBarsProvider.defaults = {
+        scrollButtons: {
+            scrollAmount: 'auto',
+            enable: true
+        },
+        scrollInertia: 400,
+        axis: 'yx',
+        theme: 'minimal-dark',
+        autoHideScrollbar: true
+    };
 
   uiGmapGoogleMapApiProvider.configure({
     key: 'AIzaSyAMjg5ItWNxU2f-uw6tOz3lFBe_tXcUwlM',
