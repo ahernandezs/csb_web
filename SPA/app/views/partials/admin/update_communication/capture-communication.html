@@ -25,16 +25,16 @@
             </div>
             <div>
                 <div ng-show="paso == 0">
-                    <button ng-click="paso=1">Continuar</button>
+                    <button ng-click="paso=1" ng-disabled="!updatedata.phoneSelect && !updatedata.mailSelect">Continuar</button>
                 </div>
                 <div ng-show="paso == 1">
                     <div class="fieldContainer">
                         <span>Introduce el código de tu Token Físico</span>
-                        <input type="text" numbers-only ng-minlength="10" ng-maxlength="10"  minlength="10" maxlength="10" class="input-token" ng-model="updatedata.token" placeholder="Introduce el código de tu Token Físico" style="align: left">
+                        <input type="text" numbers-only ng-minlength="6" ng-maxlength="10" minlength="6" maxlength="10" class="input-token" ng-model="updatedata.token" placeholder="Introduce el código de tu Token Físico" style="align: left" ng-required="true">
                     </div>
                     <div>
                         <button ng-click="paso = 0" style="width: 35%">Cancelar</button>
-                        <button ng-disabled="updateForm.$invalid" ng-click="sendCommunication()" style="width: 35%">Guardar</button>
+                        <button ng-disabled="updateForm.$invalid || !(updatedata.phoneSelect || updatedata.mailSelect)" ng-click="sendCommunication()" style="width: 35%">Guardar</button>
                     </div>
                 </div>
             </div>
