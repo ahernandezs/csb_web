@@ -3,7 +3,6 @@
 |	Login
 |-------------------------------------------------------------------------------------
 */
-
 .login {
   height: 100%;
 	.outter {
@@ -86,7 +85,7 @@
 
 	.incorrectUser{
 		margin: 2px auto;
-	  background:url(../images/ico-error.png) no-repeat left top;
+	    background:url(../images/ico-error.png) no-repeat left top;
 	 	background-size:15px;
 	 	color:#e00101;
 	 	font-size: 13px;
@@ -141,7 +140,7 @@
 
 	h3 {
 		text-align: center;
-		margin: 15px -18px;
+		margin: 15px;
 		padding-bottom: 15px;
 		border-bottom: 1px solid #f4f4f4;
 		color:$dgray;
@@ -200,7 +199,7 @@
 		background-size:25px;
 	}
 	input[type="password"]{
-		background:url(../images/ico-password-login.png) no-repeat 95% center, white;
+		background:url(../images/ico-password-login2.png) no-repeat 95% center, white;
 		background-size:25px;
 		margin:15px auto !important;
 		width: 90%;
@@ -270,7 +269,7 @@
 			height: 50px;
 			@include hide-text;
 			&:first-child{
-				margin-right: 4%;
+				/*margin-right: 4%;*/
 				background: url(../images/logo-apple-store.svg) no-repeat left center;
 				background-size: auto 50px;
 			}
@@ -370,4 +369,8 @@
 			height: auto;
 		}
 	}
+}
+/*Se usa para que en IE10 el pleaceholder se quede con el mismo color que Chrome*/
+:-ms-input-placeholder {  
+   color: #CCC;  
 }
