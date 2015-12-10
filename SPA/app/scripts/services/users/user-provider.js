@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('spaApp')
-.factory('userProvider', ['$q','$rootScope','userService','accountsProvider','productProvider','thirdAccountProvider', function ($q, $rootScope, userService, accountsProvider,productProvider,thirdAccountProvider) {
+.factory('userProvider', ['$q','userService','thirdAccountProvider','accountsProvider','productProvider', function ($q, userService, thirdAccountProvider, accountsProvider, productProvider) {
 
   /**
     * the http token-registration header value use to retreive the client's information
