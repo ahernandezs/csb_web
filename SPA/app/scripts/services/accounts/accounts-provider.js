@@ -1,21 +1,16 @@
 'use strict';
 
-/**
- * api initializer factory
- */
-
-angular.module('spaApp').factory('accountsProvider', ['$rootScope', 'accountsService', '$q', function ($rootScope, accountsService, $q) {
+angular.module('spaApp')
+.factory('accountsProvider', ['$rootScope', 'accountsService', '$q', function ($rootScope, accountsService, $q) {
 
   return {
     getAccounts: function () {
       var deferred = $q.defer();
-      //console.log('getting accounts');
       accountsService.getAccounts().success(function(data, status, headers) {
         $rootScope.accounts = data.accounts;
         deferred.resolve();
       }).error(function(data, status) {
         var result = {'response' : data, 'status': status};
-        //console.log(data, status);
         return deferred.reject(result);
       });
 
@@ -24,14 +19,11 @@ angular.module('spaApp').factory('accountsProvider', ['$rootScope', 'accountsSer
 
     getAccountDetail: function(accountId) {
       var deferred = $q.defer();
-      //console.log('getting account details');
-
       accountsService.getAccountsDetail(accountId).success(function(data, status, headers) {
         $rootScope.accountDetail = data;
         deferred.resolve();
       }).error(function(data, status) {
         var result = {'response' : data, 'status': status};
-        //console.log(data, status);
         return deferred.reject(result);
       });
 
@@ -41,14 +33,11 @@ angular.module('spaApp').factory('accountsProvider', ['$rootScope', 'accountsSer
     getTransactions: function(accountId, params){
 
       var deferred = $q.defer();
-      //console.log('getting transactions');
-
       accountsService.getTransactions(accountId, params).success(function(data, status, headers) {
         $rootScope.transactions = data.transactions;
         deferred.resolve();
       }).error(function(data, status) {
         var result = {'response' : data, 'status': status};
-        //console.log(data, status);
         return deferred.reject(result);
       });
 
@@ -62,7 +51,6 @@ angular.module('spaApp').factory('accountsProvider', ['$rootScope', 'accountsSer
         deferred.resolve();
       }).error(function(data, status){
         var result = {'response' : data, 'status': status};
-        //console.log(data, status);
         return deferred.reject(result);
       });
       return deferred.promise;
@@ -98,7 +86,6 @@ angular.module('spaApp').factory('accountsProvider', ['$rootScope', 'accountsSer
             deferred.resolve();
           }).error(function(data, status) {
             var response = {'data' : data, 'status': status};
-            //console.log(data, status);
             return deferred.reject(response);
           });
       }
@@ -112,14 +99,11 @@ angular.module('spaApp').factory('accountsProvider', ['$rootScope', 'accountsSer
      */
     getStates: function(accountId){
       var deferred = $q.defer();
-      //console.log('getting list of statements');
       accountsService.getStates(accountId).success(function(data, status, headers) {
         $rootScope.statements = data.statements;
-        //console.log(JSON.stringify($rootScope.statements));
         deferred.resolve();
       }).error(function(data, status) {
         var result = {'response' : data, 'status': status};
-        //console.log(data, status);
         return deferred.reject(result);
       });
       return deferred.promise;

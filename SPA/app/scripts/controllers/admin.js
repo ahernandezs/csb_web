@@ -225,7 +225,7 @@ Adding a beneficary actions
                                                  $scope.beneficiary.email, $scope.beneficiary.phone,
                                                  $scope.beneficiary._account_id, $scope.beneficiary.token).then(
             function(data) {
-                dispatchThirdAccountByType(data);
+								loadBeneficiary();
                 $scope.selection = 4;
             },
 	        function(errorObject) {

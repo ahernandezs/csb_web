@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('spaApp').factory('thirdAccountProvider', ['$q','thirdAccountService',function ($q, thirdAccountService){
+angular.module('spaApp')
+.factory('thirdAccountProvider', ['$q','thirdAccountService', function ($q, thirdAccountService){
   
   /**
    * the third-accounts-cache

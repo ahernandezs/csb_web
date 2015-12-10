@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('spaApp')
-  .factory('productProvider', ['$q','$rootScope','productService',function ($q, $rootScope, productService) {
+.factory('productProvider', ['$q', 'productService', function ($q, productService) {
 
     var investmentProducts = null;
 
