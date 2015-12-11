@@ -23,6 +23,7 @@ angular.module('spaApp').controller('updateServicesController', ['$scope', 'admi
 				$scope.actionUpdateState = 3;
 				$scope.updateDigitalBankServiceState.otp = '';
 				$scope.result.success = true;
+				$scope.logout();
 			},
 			function(errorObject){
 				$scope.exception = true;
