@@ -47,7 +47,7 @@ angular.module('spaApp')
   $scope.reset=function(){
     resetError();
     $scope.loginData = {};
-	$scope.unlockData = {};
+    $scope.unlockData = {};
     $scope.step = 0;
     $scope.showTimeoutAlert = false;
     $scope.showErrorLogoutAlert = false;
@@ -60,12 +60,10 @@ angular.module('spaApp')
   **/
   $scope.checkUser = function(){
     resetError();
-    //console.log($scope.loginData.username);
     if(!$scope.loginData.username.trim()) {
       setError('!Usuario incorrecto¡ favor de verificarlo');
     }else{
       var json = JSON.stringify({'user_login':$scope.loginData.username,'client_application_id': 'PROSA-DIG'});
-      //console.log(json);
       $scope.checkingUser = true;
       $http({
         url: $scope.restAPIBaseUrl+'/checkLogin',
@@ -75,13 +73,11 @@ angular.module('spaApp')
       }).
       success(function(data, status, headers) {
         $scope.step = 1;
-        //console.log(data);
         $scope.client_name = data.client_name;
         $scope.images = data.images;
         $scope.checkingUser = false;
       }).
       error(function(errorObject, status) {
-        //console.log("Status : ", status);
         setErrorWithStatus(status, errorObject);
         $scope.checkingUser = false;
       });
@@ -131,7 +127,6 @@ angular.module('spaApp')
           function(errorObject, status) {
             //put an error message in the scope
             $scope.isLogin = false;
-            //console.log("HttpStatus code : ", status);
             setErrorWithStatus(status, errorObject);
           }
         );
@@ -231,8 +226,9 @@ angular.module('spaApp')
   }
 
   $scope.unblock = function(){
+    resetError();
     $scope.step = 2;
-	$scope.selection = 0;
+    $scope.selection = 0;
   }
 
 	$scope.changeSelection = function(step) {
