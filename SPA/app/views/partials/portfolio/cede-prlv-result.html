@@ -10,8 +10,7 @@
         </div>
     </div>
     <div class="message">
-        <p>Tu compra se ha realizado con &eacute;xito. N&uacute;mero de cuenta: <span>{{investmentResult.account_number}}</span>, fecha de expiraci&oacute;n: <span>{{investmentResult.expiration_date | date:'dd-MM-yyyy' }}</span>
-        <span ng-show="investmentResult.interestInfo != null"> El monto <span>{{investmentResult.interestInfo.amount | currency: ""}}</span> estar&aacute; disponible hasta el <span>{{investmentResult.interestInfo.operation_date | date:'dd-MM-yyyy' }}</span> </span>
+        <p>Tu compra se ha realizado con &eacute;xito. N&uacute;mero de cuenta: <span>{{investmentResult.account_number}}</span>. El monto de inversi&oacute;n por <span>${{investmentResult.interestInfo.amount | currency: ""}}</span> estar&aacute; disponible hasta el <span>{{investmentResult.expiration_date | date:'dd-MM-yyyy' }}</span>
         </p>
         <div class="print" onClick="window.print()"><i></i>Imprimir</div>
     </div>
