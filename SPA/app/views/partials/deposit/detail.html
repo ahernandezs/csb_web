@@ -17,7 +17,7 @@
 <hr ng-show='!showAccountHeader'>
 <div class="box" ng-show='showAccountHeader'>
     <ul>
-        <li>Periodo:        <span>Del {{accountDetail.start_date | date:'dd-MM-yyyy' }} al {{accountDetail.end_date | date:'dd-MM-yyyy' }}</span></li>
+        <li>Periodo:        <span>Del {{accountDetail.start_date | date:'dd/MM/yyyy' }} al {{accountDetail.end_date | date:'dd/MM/yyyy' }}</span></li>
         <li>Dep&oacute;sitos en tr&aacute;nsito:          <span class="amount">{{accountDetail.confirmation_balance | currency}}</span></li>
     </ul>
     <ul>

@@ -27,8 +27,8 @@
 <hr ng-show='!showAccountHeader'>
 <div class="box" ng-show='showAccountHeader'> <!-- expended box -->
     <ul>
-        <li>Fecha de corte:         <span>{{creditsHeader.cycle_date | date:"dd' / 'MMM' / 'yyyy" | uppercase}}</span></li>
-        <li>Fecha l&iacute;mite de pago:   <span>{{creditsHeader.payment_due_date | date:"dd' / 'MMM' / 'yyyy" | uppercase}}</span></li>
+        <li>Fecha de corte:         <span>{{creditsHeader.cycle_date | date:"dd'/'MM'/'yyyy"}}</span></li>
+        <li>Fecha l&iacute;mite de pago:   <span>{{creditsHeader.payment_due_date | date:"dd'/'MM'/'yyyy"}}</span></li>
         <li>Pago m&iacute;nimo:         <span class="amount">{{creditsHeader.minimum_payment | currency}}</span></li>
         <li>Saldo al corte:         <span class="amount">{{creditsHeader.statement_balance | currency}}</span></li>
     </ul>

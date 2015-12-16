@@ -6,17 +6,17 @@ angular.module('mockedProductsInvest', [])
             [
                 {
                     "category": "CEDE",
-                    "productName": "CEDE 60 DIAS",
+                    "productName": "CEDE 60 DÍAS",
                     "product_id": "500-CEDE"
                 },
                 {
                     "category": "CEDE",
-                    "productName": "CEDE 90 DIAS",
+                    "productName": "CEDE 90 DÍAS",
                     "product_id": "501-CEDE"
                 },
                 {
                     "category": "CEDE",
-                    "productName": "CEDE 120 DIAS",
+                    "productName": "CEDE 120 DÍAS",
                     "product_id": "502-CEDE"
                 },
                 {
@@ -26,22 +26,22 @@ angular.module('mockedProductsInvest', [])
                 },
                 {
                     "category": "PRLV",
-                    "productName": "PRLV 7 DIAS",
+                    "productName": "PRLV 7 DÍAS",
                     "product_id": "400-PRLV"
                 },
                 {
                     "category": "PRLV",
-                    "productName": "PRLV 14 DIAS",
+                    "productName": "PRLV 14 DÍAS",
                     "product_id": "401-PRLV"
                 },
                 {
                     "category": "PRLV",
-                    "productName": "PRLV 21 DIAS",
+                    "productName": "PRLV 21 DÍAS",
                     "product_id": "402-PRLV"
                 },
                 {
                     "category": "PRLV",
-                    "productName": "Fondo de Inversi?n Tipo PRLV",
+                    "productName": "Fondo de Inversión Tipo PRLV",
                     "product_id": "401-PRLV"
                 },
                 {

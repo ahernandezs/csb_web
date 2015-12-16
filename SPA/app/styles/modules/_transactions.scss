@@ -32,17 +32,18 @@ form[name="investmentForm"], form[name="transferForm"], form[name="paymentForm"]
                 display: block;
                 width: 130px;
                 margin:-5px 0 0 35px;
-                border:1px solid $blue;
+                border:1px solid #2976b6;
                 padding: 5px;
-                color:$blue;
+                color: white; /*Se cambio a blanco para unificar*/
                 text-align: center;
+                background: #2976b6; /*Se agrego para unificar el color con el otro tooltip*/
                 @include border-radius(4px);
                 &:before{
                     content:"";
                     position: absolute;
                     display: block;
-                    background:white;
-                    border:1px solid $blue;
+                    background: #2976b6; /*Se cambio de blanco a azul para unificar*/
+                    border:1px solid #2976b6;
                     border-top: none;
                     border-right: none;
                     margin: 10px 0 0 -11px;
@@ -109,6 +110,7 @@ form[name="investmentForm"], form[name="transferForm"], form[name="paymentForm"]
         width: 70%;
         padding:0;
         overflow: hidden;
+        margin: -1px 0 0; /*Se agregó para que la lista al desplegarse no se viera separada*/
         li{
             font-size:0.9em;
             color:$dgray;

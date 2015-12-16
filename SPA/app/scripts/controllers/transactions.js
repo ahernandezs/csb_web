@@ -291,7 +291,5 @@ angular.module('spaApp').controller('TransactionsCtrl', ['$rootScope', '$scope',
       sort.column = column;
       sort.descending = false;
     }
-  }
-
- 
+  } 
 }]);
