@@ -29,7 +29,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="trans in accountTransactions | filter:busqueda">
-                <td>{{trans.date | date:'dd-MM-yyyy' }}</td>
+                <td>{{trans.date | date:'dd/MM/yyyy' }}</td>
                 <td>{{trans._transaction_id}}</td>
                 <td>{{trans.description}}</td>
                 <td>{{ (trans.operation_type !== 'D') ? null :  trans.amount | currency }}</td>

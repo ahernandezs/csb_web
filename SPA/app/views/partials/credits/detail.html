@@ -17,7 +17,7 @@
 <hr ng-show='!showAccountHeader'>
 <div class="box" ng-show='showAccountHeader'><!-- expended box -->
     <ul>
-        <li>Fecha de otorgamiento:      <span>{{creditsHeader.position_date | date:'dd-MM-yyyy' }}</span></li>
+        <li>Fecha de otorgamiento:      <span>{{creditsHeader.position_date | date:'dd/MM/yyyy' }}</span></li>
         <li>Monto del cr&eacute;dito:          <span class="amount">{{creditsHeader.amount_due.amount | currency}}</span></li>
         <li>N&uacute;mero de pagos pactados:   <span>{{creditsHeader.number_payments_total}}</span></li>
         <li>Monto del descuento:        <span class="amount">{{creditsHeader.amount_discount.amount | currency}}</span></li>
@@ -26,7 +26,7 @@
     <ul>
         <li>Monto vencido:              <span class="amount">{{creditsHeader.amount_due.amount | currency}}</span></li>
         <li>Monto del pr&oacute;ximo pago:     <span class="amount">{{creditsHeader.amount_payable.amount | currency}}</span></li>
-        <li>Fecha del pr&oacute;ximo pago:     <span>{{creditsHeader.end_date | date:'dd-MM-yyyy' }}</span></li>
+        <li>Fecha del pr&oacute;ximo pago:     <span>{{creditsHeader.end_date | date:'dd/MM/yyyy' }}</span></li>
         <li>Dias de atraso:             <span>{{creditsHeader.delinquent_days}}</span></li>
         <li>Dependencia:                <span>{{creditsHeader.dependency.description}}</span></li>
     </ul>

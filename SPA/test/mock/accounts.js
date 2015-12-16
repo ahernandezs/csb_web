@@ -23,7 +23,7 @@ angular.module('mockedAccounts', [])
         "category":"PRLV",
         "maskedAccountNumber":"*****8F379",
         "account_number":"0050568032C41EE4A1E1429FBF28F379",
-        "name":"PRLV 60 DIAS",
+        "name":"PRLV 60 DÍAS",
         "currency":"PESOS",
         "account_type":"INV"
       },
@@ -33,7 +33,7 @@ angular.module('mockedAccounts', [])
         "category":"CEDE",
         "maskedAccountNumber":"*****A7379",
         "account_number":"0050568032C41EE4A5D9433AE82A7379",
-        "name":"CEDE 60 DIAS",
+        "name":"CEDE 60 DÍAS",
         "currency":"PESOS",
         "account_type":"INV"
       },

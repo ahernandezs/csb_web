@@ -28,12 +28,12 @@
         </thead>
         <tbody>
                 <tr ng-repeat="trans in creditTransactions">
-                    <td>{{trans.date | date:'dd-MM-yyyy' }}</td>
+                    <td>{{trans.date | date:'dd/MM/yyyy' }}</td>
                     <td>{{trans.description}}</td>
                     <td>{{trans.capital | currency}}</td>
                     <td>{{trans.tax | currency}}</td>
                     <td>{{trans.amount | currency}}</td>
-                    <td>{{trans.date_application | date:'dd-MM-yyyy' }}</td>
+                    <td>{{trans.date_application | date:'dd/MM/yyyy' }}</td>
                 </tr>
         </tbody>
     </table>

@@ -29,7 +29,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="trans in creditCardTransactions | filter:busqueda">
-                <td>{{trans.date | date:'dd-MM-yyyy' }}</td>
+                <td>{{trans.date | date:'dd/MM/yyyy' }}</td>
                 <td>{{trans.authorization_number}}</td>
                 <td>{{trans.description}}</td>
                 <td>{{trans.code}}</td>
