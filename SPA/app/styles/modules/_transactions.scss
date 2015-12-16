@@ -34,15 +34,15 @@ form[name="investmentForm"], form[name="transferForm"], form[name="paymentForm"]
                 margin:-5px 0 0 35px;
                 border:1px solid #2976b6;
                 padding: 5px;
-                color: white; /*Se cambio a blanco para unificar*/
+                color: white; 
                 text-align: center;
-                background: #2976b6; /*Se agrego para unificar el color con el otro tooltip*/
+                background: #2976b6; 
                 @include border-radius(4px);
                 &:before{
                     content:"";
                     position: absolute;
                     display: block;
-                    background: #2976b6; /*Se cambio de blanco a azul para unificar*/
+                    background: #2976b6; 
                     border:1px solid #2976b6;
                     border-top: none;
                     border-right: none;
@@ -110,7 +110,7 @@ form[name="investmentForm"], form[name="transferForm"], form[name="paymentForm"]
         width: 70%;
         padding:0;
         overflow: hidden;
-        margin: -1px 0 0; /*Se agregó para que la lista al desplegarse no se viera separada*/
+        margin: -1px 0 0; 
         li{
             font-size:0.9em;
             color:$dgray;
@@ -493,4 +493,9 @@ table input[type="submit"]{font-weight: bold;}
             margin: 0;
         }
     }
+}
+
+.space-header{
+    margin-top:-10px !important;
+    padding-left:0px !important;
 }

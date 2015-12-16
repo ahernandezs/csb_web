@@ -23,7 +23,7 @@ angular.module('mockedAccounts', [])
         "category":"PRLV",
         "maskedAccountNumber":"*****8F379",
         "account_number":"0050568032C41EE4A1E1429FBF28F379",
-        "name":"PRLV 60 DÍAS",S
+        "name":"PRLV 60 DÍAS",
         "currency":"PESOS",
         "account_type":"INV"
       },

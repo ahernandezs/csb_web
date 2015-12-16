@@ -4,7 +4,7 @@
         <p>Ingresa tu número celular, correo electr&oacute;nico y selecciona uno o ambos medios por el cual quieras que se notifiquen tus movimientos de Consubanco por Internet</p>
         <form name="updateForm">
             <div class="mensajeCom">
-                <div class="fieldContainer" ng-class="data.phone.length > 0 ? 'selected' : ''" style="float: left;">
+                <div class="fieldContainer pull-left" ng-class="data.phone.length > 0 ? 'selected' : ''">
                     <span>N&uacute;mero celular</span>
                     <input type="text" numbers-only ng-minlength="10" ng-maxlength="10"  minlength="10" maxlength="10" class="input-mobile" ng-model="updatedata.phone" placeholder="N&uacute;mero celular" style="align: left">
                 </div>
@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="mensajeCom">
-                <div class="fieldContainer" ng-class="data.e_mail.length > 0 ? 'selected' : ''" style="float: left;">
+                <div class="fieldContainer pull-left" ng-class="data.e_mail.length > 0 ? 'selected' : ''">
                     <span>Correo electr&oacute;nico</span>
                     <input type="email" alphanumeric class="input-mail" ng-model="updatedata.e_mail" placeholder="Correo electr&oacute;nico" style="align: left">
                 </div>
@@ -29,8 +29,8 @@
                 </div>
                 <div ng-show="paso == 1">
                     <div class="fieldContainer">
-                        <span>Introduce el código de tu Token físico</span>
-                        <input type="text" numbers-only ng-minlength="6" ng-maxlength="10" minlength="6" maxlength="10" class="input-token" ng-model="updatedata.token" placeholder="Introduce el código de tu Token físico" style="align: left" ng-required="true">
+                        <span>Introduce el código de tu Token f&iacute;sico</span>
+                        <input type="text" numbers-only ng-minlength="6" ng-maxlength="10" minlength="6" maxlength="10" class="input-token" ng-model="updatedata.token" placeholder="Introduce el código de tu Token Físico" style="align: left" ng-required="true">
                     </div>
                     <div>
                         <button ng-click="paso = 0" style="width: 35%">Cancelar</button>
