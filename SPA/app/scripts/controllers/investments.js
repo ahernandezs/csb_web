@@ -119,6 +119,28 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
       $scope.instruction = selection;
     };
 
+    $scope.getStatements = function(){
+        $scope.statementStatus.showStatement = true
+        accountsProvider.getStates($stateParams.accountId).then(
+            function(data) {
+                $scope.statements = $rootScope.statements;
+            },
+            function(errorObject) {
+                var status = errorObject.status;
+                var msg = codeStatusErrors.errorMessage(status);
+                if (status === 500){
+                    $scope.setServiceError(msg + errorObject.response.message);
+                } else {
+                    $scope.setServiceError(msg);
+                }
+            }
+        );
+    };
+
+    $scope.getStatementUrl = function(id, format){
+        return $scope.restAPIBaseUrl+'/files/statement?format='+format+'&id='+id+'&session_id='+$rootScope.session_token;
+    }
+
     $scope.save = function(){
       accountsProvider.setInstruction($stateParams.accountId, $scope.instruction.ins_inv_id).then(
         function(data){

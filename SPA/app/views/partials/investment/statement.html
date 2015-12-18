@@ -5,14 +5,9 @@
     <hr class="statement-hr">
     <div class="transactions pull-left">    
         <table class="details statement-table">
-            <!--thead>
-                <tr>
-                    <th scope="col" colspan="3">{{year.label}}</th>
-                </tr>
-            </thead-->
             <tbody>
                     <tr ng-repeat="statement in statements">
-                        <td class="text-left"><i class="ico-estados"></i>{{statement.date}}</td>
+                        <td><i class="ico-estados"></i>{{statement.date}}</td>
                         <td><a target="_blank" href="javascript:void(0);" ng-href="{{getStatementUrl(statement.id, 'PDF');}}"><i class="ico-pdf"></i>Descargar PDF</a></td>
                         <td><a target="_blank" href="javascript:void(0);" ng-href="{{getStatementUrl(statement.id, 'XML');}}"><i class="ico-pdf"></i>Descargar XML</a></td>
                     </tr>

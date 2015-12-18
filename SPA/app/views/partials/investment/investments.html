@@ -1,4 +1,11 @@
-<div class="product-details">
-  <div ng-include="'views/partials/investment/detail.html'"></div>
-  <div ng-include="'views/partials/investment/transactions.html'"></div>
+<div ng-hide="statementStatus.showStatement">
+	<div class="product-details">
+		<div ng-include="'views/partials/investment/detail.html'"></div>
+		<div ng-include="'views/partials/investment/transactions.html'"></div>
+	</div>
+</div>
+<div ng-show="statementStatus.showStatement">
+	<div class="product-details">
+		<div ng-include="'views/partials/investment/statement.html'"></div>
+	</div>
 </div>

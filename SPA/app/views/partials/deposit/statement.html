@@ -5,17 +5,18 @@
     <hr class="statement-hr">
     <div class="transactions pull-left">    
         <table class="details statement-table">
-            <thead>
+            <!--thead>
                 <tr>
                     <th scope="col" colspan="3">{{year.label}}</th>
                 </tr>
-            </thead>
+            </thead-->
             <tbody>
                     <tr ng-repeat="statement in statements">
                         <td><i class="ico-estados"></i>{{statement.date}}</td>
-                        <!--td><a target="_blank" href="#" ng-href="{{getStatementUrl(statement.id, 'PDF');}}"><i class="ico-pdf"></i>Descargar PDF</a></td-->
-                        <td><a target="_blank" href="javascript:void(0);" ng-click="ask4Token('PDF');"><i class="ico-pdf"></i>Descargar PDF</a></td>
-                        <td><a target="_blank" href="#" ng-href="{{getStatementUrl(statement.id, 'XML');}}"><i class="ico-pdf"></i>Descargar XML</a></td>
+                        <!--td><a target="_blank" href="javascript:void(0);" ng-click="ask4Token('PDF');"><i class="ico-pdf"></i>Descargar PDF</a></td>
+                        <td><a target="_blank" href="javascript:void(0);" ng-click="ask4Token('XML');"><i class="ico-pdf"></i>Descargar XML</a></td-->
+                        <td><a target="_blank" href="javascript:void(0);" ng-href="{{getStatementUrl(statement.id, 'PDF');}}"><i class="ico-pdf"></i>Descargar PDF</a></td>
+                        <td><a target="_blank" href="javascript:void(0);" ng-href="{{getStatementUrl(statement.id, 'XML');}}"><i class="ico-pdf"></i>Descargar XML</a></td>
                     </tr>
             </tbody>
         </table>
