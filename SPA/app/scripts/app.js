@@ -9,7 +9,8 @@ var app = angular.module('spaApp', [
   'ngTable',
   'ui.router',
   'uiGmapgoogle-maps',
-  'ngScrollbars'
+  'ngScrollbars',
+  'ngDialog'
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'uiGmapGoogleMapApiProvider', 'ScrollBarsProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, uiGmapGoogleMapApiProvider, ScrollBarsProvider) {
