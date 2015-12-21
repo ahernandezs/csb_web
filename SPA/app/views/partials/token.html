@@ -1,14 +1,16 @@
 <div>
-	<h1>Ingresa un token</h1>
+	<h4>Ingresa un token</h4>
 	<p>
 		Por seguridad en el uso	de datos sensibles en tus estados de cuenta es necesario que ingreses un código de tu token físico.
 	</p>
 	<form name="statement">
         <label class="fieldContainer">
             <span>Token</span>
-            <input class="input-token" type="password" ng-model="beneficiary.token" ng-required="true" numbers-only minlength="6" maxlength="6" placeholder="Introduce el c&oacute;digo de tu Token F&iacute;sico">
+            <input class="input-token" type="password" ng-model="otp" ng-required="true" numbers-only ng-minlength="6" minlength="6" maxlength="6" ng-maxlength="6" placeholder="Introduce el c&oacute;digo de tu Token F&iacute;sico">
         </label>
-		<button>Cancelar</button>
-		<button>Continuar</button>
+        <div>
+			<button ng-click="closeThisDialog();">Cancelar</button>
+			<button ng-click="confirm(otp);" ng-disabled="statement.$invalid">Continuar</button>
+        </div>
 	</form>
 </div>

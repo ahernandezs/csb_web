@@ -145,8 +145,4 @@ angular.module('spaApp').controller('AccountDepositDetailCtrl', ['$scope','$root
 		);
 	};
 
-	$scope.getStatementUrl = function(id, format){
-		return $scope.restAPIBaseUrl+'/files/statement?format='+format+'&id='+id+'&session_id='+$rootScope.session_token;
-	}
-
 }]);

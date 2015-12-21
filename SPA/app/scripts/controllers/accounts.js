@@ -111,8 +111,10 @@
         }
     }
 
-    $scope.ask4Token = function () {
-        ngDialog.open({ template: 'views/partials/token.html' });
+    $scope.ask4Token = function (format, id) {
+        ngDialog.openConfirm({ template: 'views/partials/token.html', showClose: false }).then(function(otp){
+            window.open($scope.restAPIBaseUrl+'/files/statement?format='+format+'&id='+id+'&session_id='+$rootScope.session_token+'&otp='+otp   );
+        })
     };
 
 }]);

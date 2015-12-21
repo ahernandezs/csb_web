@@ -8,8 +8,8 @@
             <tbody>
                     <tr ng-repeat="statement in statements">
                         <td><i class="ico-estados"></i>{{statement.date}}</td>
-                        <td><a target="_blank" href="javascript:void(0);" ng-href="{{getStatementUrl(statement.id, 'PDF');}}"><i class="ico-pdf"></i>Descargar PDF</a></td>
-                        <td><a target="_blank" href="javascript:void(0);" ng-href="{{getStatementUrl(statement.id, 'XML');}}"><i class="ico-pdf"></i>Descargar XML</a></td>
+                        <td><a target="_blank" href="javascript:void(0);" ng-click="ask4Token('PDF', statement.id);"><i class="ico-pdf"></i>Descargar PDF</a></td>
+                        <td><a target="_blank" href="javascript:void(0);" ng-click="ask4Token('XML', statement.id);"><i class="ico-pdf"></i>Descargar XML</a></td>
                     </tr>
             </tbody>
         </table>
