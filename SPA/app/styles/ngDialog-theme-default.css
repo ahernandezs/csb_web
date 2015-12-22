@@ -67,15 +67,12 @@
 .ngdialog.ngdialog-theme-default .ngdialog-content {
   -webkit-animation: ngdialog-flyin .5s;
   animation: ngdialog-flyin .5s;
-  background: #f0f0f0;
   border-radius: 5px;
   color: #444;
   font-family: 'Helvetica',sans-serif;
-  font-size: 1.1em;
   line-height: 1.5em;
   margin: 0 auto;
   max-width: 100%;
-  padding: 1em;
   position: relative;
   width: 450px;
 }
@@ -189,3 +186,19 @@
   background: #e0e0e0;
   color: #777;
 }
+.ngdialog .contenido{
+  padding: 1em 2em 1em 2em;
+}
+.ngdialog .gris {
+  background: #f0f0f0;
+}
+.ngdialog .w100{
+  width: 100%;
+}
+.ngdialog .w47{
+  width: 47%;
+}
+.ngdialog .derecha{
+  float: right;
+}
+

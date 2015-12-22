@@ -137,10 +137,6 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
         );
     };
 
-    $scope.getStatementUrl = function(id, format){
-        return $scope.restAPIBaseUrl+'/files/statement?format='+format+'&id='+id+'&session_id='+$rootScope.session_token;
-    }
-
     $scope.save = function(){
       accountsProvider.setInstruction($stateParams.accountId, $scope.instruction.ins_inv_id).then(
         function(data){
