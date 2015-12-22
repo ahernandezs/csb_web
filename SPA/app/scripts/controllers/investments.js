@@ -16,7 +16,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
         function(data) {
             $scope.investmentHeader = $rootScope.accountDetail.investment;
             $scope.instructions = $scope.investmentHeader.instruction_investment;
-			$scope.instruction = $scope.instructions.ins_inv_to_print;
+            $scope.instruction = $scope.instructions.ins_inv_to_print;
         },
         function(errorObject) {
             var status = errorObject.status;
@@ -72,13 +72,14 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
         var todaysDate = new Date();
         var startDate;
         var endDate;
+        var fecha;
         if ($scope.searchParams.date_start !== undefined){
-            var fecha = $scope.searchParams.date_start.split("/");
+            fecha = $scope.searchParams.date_start.split('/');
             startDate = new Date(fecha[2], fecha[1]-1, fecha[0]);
         }
         if ($scope.searchParams.date_end !== undefined){
-            var fecha = $scope.searchParams.date_end.split("/");
-            endDate = new Date(fecha[2], fecha[1]-1, fecha[0])
+            fecha = $scope.searchParams.date_end.split('/');
+            endDate = new Date(fecha[2], fecha[1]-1, fecha[0]);
         }
         if($scope.searchParams.date_start && $scope.searchParams.date_end) {
             if (startDate > todaysDate || endDate > todaysDate){

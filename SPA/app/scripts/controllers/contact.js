@@ -8,12 +8,12 @@ angular.module('spaApp').controller('ContactCtrl', ['$rootScope', '$scope',
 
   $scope.logout = function() {
     userProvider.logout().then(
-      function(data) {
+      function() {
         timerService.stop();
         $rootScope.session_token = null;
         $location.path('login');
       },
-      function(data){
+      function(){
         logoutService.displayErrorMessage();
         timerService.stop();
         $rootScope.session_token = null;

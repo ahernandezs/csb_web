@@ -2,7 +2,7 @@
 
 angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProvider', 'uiGmapGoogleMapApi', 'codeStatusErrors', 'userProvider', 'timerService', '$location', 'logoutService', function ($scope,  $rootScope, mapProvider, uiGmapGoogleMapApi, codeStatusErrors, userProvider, timerService, $location, logoutService) {
 
-	$scope.conSesion = $rootScope.session_token == null || $rootScope.session_token == undefined || $rootScope.session_token == '' ? false : true;
+	$scope.conSesion = $rootScope.session_token === null || $rootScope.session_token === undefined || $rootScope.session_token === '' ? false : true;
 	$scope.details = {};
 	$scope.estados = [	{'id':'df','name':'Distrito Federal','lat':19.3200988,'lon':-99.1521845,'zoom':10},
 						{'id':'ags','name':'Aguascalientes','lat':21.8890872,'lon':-102.2919885,'zoom':12},
@@ -44,7 +44,7 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 			if($scope.estado!=undefined){
 				$scope.showBranches = true;
 				mapProvider.getBranches({'lat':$scope.estado.lat,'lng':$scope.estado.lon}).then(
-					function(data) {
+					function() {
 						$scope.map.branches = $rootScope.branches;
 					},
 					function(errorObject) {
@@ -61,7 +61,7 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 		}else{
 			$scope.showBranches = true;
 			mapProvider.getBranches({'lat':$scope.details.geometry.location.k,'lng':$scope.details.geometry.location.D}).then(
-				function(data) {
+				function() {
 					$scope.map.branches = $rootScope.branches;
 				},
 				function(errorObject) {
@@ -75,14 +75,14 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 		        }
 			);
 		}
-	}
+	};
 
 	$scope.searchNearMe = function(){
 		$scope.showBranches = true;
 		if(navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position){
 				mapProvider.getBranches({'lat':position.coords.latitude,'lng':position.coords.longitude}).then(
-					function(data) {
+					function() {
 						$scope.map.branches = $rootScope.branches;
 						$scope.showBranches = true;
 					},
@@ -102,7 +102,7 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 		} else {
 			handleNoGeolocation(false);
 		}
-	}
+	};
 
 	//Center defined by default
 	$scope.map = { center: { latitude: 19.432602, longitude: -99.13320499999998 }, zoom: 15, bounds: {}};
@@ -141,18 +141,12 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 	}
 
 	function handleNoGeolocation(errorFlag) {
-		if (errorFlag) {
-			//console.log('Error: The Geolocation service failed.');
-			var content = 'Error: The Geolocation service failed.';
-		} else {
-			//console.log('Error: Your browser does not support geolocation.');
-			var content = 'Error: Your browser does not support geolocation.';
-		}
+		var content = errorFlag ? 'Error: The Geolocation service failed.' : 'Error: Your browser does not support geolocation.';
 	}
 
 	//this function fetch all the bank's branches at the beginning
 	mapProvider.getBranches({}).then(
-		function(data) {
+		function() {
 			$scope.map.branches = $rootScope.branches;
 		},
 		function(errorObject) {
@@ -182,19 +176,19 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 
 	$scope.comoLlegar = function(branch){
 		window.open('https://www.google.com.mx/maps/dir//'+branch.description.address.street.replace('#','No.')+'%20'+branch.description.address.street2+'%20'+branch.description.address.city);
-	}
+	};
 
   /**
     Function for logout application
   **/
   $scope.logout = function() {
     userProvider.logout().then(
-      function(data) {
+      function() {
         timerService.stop();
         $rootScope.session_token = null;
         $location.path('login');
       },
-      function(data){
+      function(){
         logoutService.displayErrorMessage();
         timerService.stop();
         $rootScope.session_token = null;

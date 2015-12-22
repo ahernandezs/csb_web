@@ -9,7 +9,6 @@ angular.module('spaApp').controller('DashBoardCtrl', ['$rootScope', '$scope', '$
     'accountsProvider', 'userProvider', 'timerService', 'logoutService', 'userData', function ($rootScope, $scope, $location, $routeParams, $window, accountsProvider, userProvider, timerService, logoutService, userData) {
 
   if(!$rootScope.session_token) {
-    //console.log("Redirecting to login");
     $location.path('login');
     return;
   }
@@ -28,19 +27,19 @@ angular.module('spaApp').controller('DashBoardCtrl', ['$rootScope', '$scope', '$
   $scope.hideWelcome = function(){
     app.value('userData', true);
     $scope.userData = true;
-  }
+  };
 
   /**
     Function for logout application
   **/
   $scope.logout = function() {
     userProvider.logout().then(
-      function(data) {
+      function() {
         timerService.stop();
         $rootScope.session_token = null;
         $location.path('login');
       },
-      function(data){
+      function(){
         logoutService.displayErrorMessage();
         timerService.stop();
         $rootScope.session_token = null;
@@ -50,22 +49,23 @@ angular.module('spaApp').controller('DashBoardCtrl', ['$rootScope', '$scope', '$
 
 
   $scope.selectNavigatOption = function(selectedOption) {
-    if ( $scope.activeNavigationOption === selectedOption )
-      return;
-    else if ( selectedOption === 'map' )
+    if ( $scope.activeNavigationOption === selectedOption ){
+      return;  
+    } else if ( selectedOption === 'map' ){
       $location.path('map');
-    else
-      $('.wrapper .nav li a').each( function(index) {
+    } else{
+      $('.wrapper .nav li a').each( function() {
         if ( $(this).attr('id') === selectedOption ) {
           $scope.activeNavigationOption = selectedOption;
           $location.path(selectedOption);
         }
       });
+    } 
   };
 
   $scope.isActive = function(viewLocation) {
     return $location.path().indexOf(viewLocation) >= 0;
-  }
+  };
 
   $scope.$on('IdleTimeout', function() {
     $scope.showIdleAlert = true;

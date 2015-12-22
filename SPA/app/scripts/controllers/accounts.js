@@ -10,7 +10,7 @@
     $scope.showInvestmentAccount = false;
     $scope.showSavingAccount = false;
     $scope.showCreditAccount = false;
-    $scope.statementData = {};    
+    $scope.statementData = {};
 
     function getAccounts(){
         accountsProvider.getAccounts().then(
@@ -63,7 +63,7 @@
 
         $scope.returnData.prevAccount = accountSelected;
         $scope.returnData.prevId = accountSelected._account_id;
-        $scope.returnData.prevType = accountSelected.account_type
+        $scope.returnData.prevType = accountSelected.account_type;
 
         switch (type) {
             case 'TDC':

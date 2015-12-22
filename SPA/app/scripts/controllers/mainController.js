@@ -27,24 +27,24 @@
      * manage a custom message when OTP validation fails
      */
     $scope.manageOtpErrorMessage= function(response) {
-        var message = "otp inválido";
-        if(response.code != null){
+        var message = 'OTP inválido';
+        if(response.code !== null){
             var tokenStatusCode = response.code;
             switch(tokenStatusCode){
                 case 0 :
-                    message = "Su token no ha sido activado, debe activarlo en el panel de administración";
+                    message = 'Su token no ha sido activado, debe activarlo en el panel de administración';
                     break;
                 case 1 :
-                    message = "OTP Inválido, si estás seguro que tu OTP es válido tal vez necesites sincronizarlo en el panel de administración";
+                    message = 'OTP inválido, si estás seguro que tu OTP es válido tal vez necesites sincronizarlo en el panel de administración';
                     break;
-                case 2 : 
-                    message = "Su token está bloqueado, por favor llame al centro de atención a clientes";
+                case 2 :
+                    message = 'Su token está bloqueado, por favor llame al centro de atención a clientes';
                     break;
-                case 3 : 
-                    message = "Su token está deshabilitado";
+                case 3 :
+                    message = 'Su token está deshabilitado';
                     break;
-                case 99 : 
-                    message = "Error técnico, no pudimos obtener el estado de tu token";
+                case 99 :
+                    message = 'Error técnico, no pudimos obtener el estado de tu token';
                     break;
             }
         }

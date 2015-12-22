@@ -12,26 +12,26 @@ angular.module('spaApp')
 
       link: function(scope, element, attrs, model) {
 
-        var opts
+        var opts;
 
         var initOpts = function() {
-          opts = {}
+          opts = {};
           if (scope.options) {
             if (scope.options.types) {
-              opts.types = []
-              opts.types.push(scope.options.types)
+              opts.types = [];
+              opts.types.push(scope.options.types);
             }
             if (scope.options.bounds) {
-              opts.bounds = scope.options.bounds
+              opts.bounds = scope.options.bounds;
             }
             if (scope.options.country) {
               opts.componentRestrictions = {
-                country: scope.options.country
+                country: scope.options.country;
               }
             }
           }
         }
-        initOpts()
+        initOpts();
 
         var newAutocomplete = function() {
           scope.gPlace = new google.maps.places.Autocomplete(element[0], opts);
@@ -42,14 +42,14 @@ angular.module('spaApp')
             });
           })
         }
-        newAutocomplete()
+        newAutocomplete();
 
         scope.watchOptions = function () {
-          return scope.options
+          return scope.options;
         };
         scope.$watch(scope.watchOptions, function () {
-          initOpts()
-          newAutocomplete()
+          initOpts();
+          newAutocomplete();
           element[0].value = '';
           scope.ngAutocomplete = element.val();
         }, true);

@@ -30,7 +30,7 @@ angular.module('spaApp').controller('creditCtrl', ['$scope', '$stateParams', 'ac
 	$scope.searchMessage = 'false';
 
 	accountsProvider.getAccountDetail($scope.selectedAcccountId).then(
-		function(data) {
+		function() {
 			$scope.creditsHeader = $rootScope.accountDetail;
 		},
 		function(errorObject) {
@@ -45,7 +45,7 @@ angular.module('spaApp').controller('creditCtrl', ['$scope', '$stateParams', 'ac
 	);
 
 	accountsProvider.getTransactions($scope.selectedAcccountId, params).then(
-		function(data){
+		function(){
 			$scope.creditTransactions = $rootScope.transactions;
 		},
 		function(errorObject) {
@@ -63,7 +63,7 @@ angular.module('spaApp').controller('creditCtrl', ['$scope', '$stateParams', 'ac
 		params.date_end = date_end;
 		params.date_start = date_start;
 		accountsProvider.getTransactions($scope.selectedAcccountId, params).then(
-			function(data){
+			function(){
 				$scope.creditTransactions = $rootScope.transactions;
 				$scope.searchMessage = 'true';
 			},
@@ -87,13 +87,14 @@ angular.module('spaApp').controller('creditCtrl', ['$scope', '$stateParams', 'ac
 		var todaysDate = new Date();
 		var startDate;
 		var endDate;
+		var fecha;
 		if ($scope.searchParams.date_start !== undefined){
-			var fecha = $scope.searchParams.date_start.split("/");
+			fecha = $scope.searchParams.date_start.split('/');
 			startDate = new Date(fecha[2], fecha[1]-1, fecha[0]);
 		}
 		if ($scope.searchParams.date_end !== undefined){
-			var fecha = $scope.searchParams.date_end.split("/");
-			endDate = new Date(fecha[2], fecha[1]-1, fecha[0])
+			fecha = $scope.searchParams.date_end.split('/');
+			endDate = new Date(fecha[2], fecha[1]-1, fecha[0]);
 		}
 		if($scope.searchParams.date_start && $scope.searchParams.date_end) {
 			if (startDate > todaysDate || endDate > todaysDate){
@@ -111,7 +112,7 @@ angular.module('spaApp').controller('creditCtrl', ['$scope', '$stateParams', 'ac
 			params.date_end = null;
 			params.date_start = null;
 			accountsProvider.getTransactions($scope.selectedAcccountId, params).then(
-				function(data){
+				function(){
 					$scope.investmentTransactions = $rootScope.transactions;
 				},
 				function(errorObject) {
@@ -130,7 +131,7 @@ angular.module('spaApp').controller('creditCtrl', ['$scope', '$stateParams', 'ac
 	$scope.getStatements = function(){
 		$scope.statementStatus.showStatement = true;
 		accountsProvider.getStates($stateParams.accountId).then(
-			function(data) {
+			function() {
 				$scope.statements = $rootScope.statements;
 			},
 			function(errorObject) {
