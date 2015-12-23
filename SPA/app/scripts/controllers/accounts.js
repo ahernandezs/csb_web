@@ -3,7 +3,8 @@
 /**
  * The accounts controller. Gets accounts passing auth parameters
  */
- angular.module('spaApp').controller('AccountsCtrl', ['$rootScope', '$scope', '$location', 'accountsProvider', 'codeStatusErrors', 'ngDialog', function ( $rootScope, $scope, $location, accountsProvider, codeStatusErrors, ngDialog) {
+ angular.module('spaApp').controller('AccountsCtrl', ['$rootScope', '$scope', '$location', 'accountsProvider', 'codeStatusErrors',
+     'ngDialog', '$http', function ( $rootScope, $scope, $location, accountsProvider, codeStatusErrors, ngDialog, $http) {
 
     $scope.statementStatus = [];
     $scope.showTDCAccount = false;
@@ -113,7 +114,39 @@
 
     $scope.ask4Token = function (format, id) {
         ngDialog.openConfirm({ template: 'views/partials/token.html', showClose: false }).then(function(otp){
-            window.open($scope.restAPIBaseUrl+'/files/statement?format='+format+'&id='+id+'&session_id='+$rootScope.session_token+'&otp='+otp   );
+          var type = 'application/pdf';
+          if(format === 'XML') {
+            type = 'application/xml';
+          }
+
+          $http({
+            url: $scope.restAPIBaseUrl+'/files/statement?format='+format+'&id='+id+'&otp='+otp,
+            method: "GET",
+            headers: {
+              'Content-type': 'application/json'
+            },
+            responseType: 'arraybuffer'
+          }).success(function (data, status, headers, config) {
+            var blob = new Blob([data], {type: type});
+            var objectUrl = URL.createObjectURL(blob);
+            window.open(objectUrl);
+          }).error(function (data, status, headers, config) {
+            var decodedString = String.fromCharCode.apply(null, new Uint8Array(data));
+            var obj = JSON.parse(decodedString);
+
+            if(status === 403){
+              $scope.manageOtpErrorMessage(obj);
+            } else {
+              var msg = codeStatusErrors.errorMessage(status);
+              if (status === 500){
+                $scope.setServiceError(msg + obj.message);
+              } else {
+                $scope.setServiceError(msg);
+              }
+            }
+
+          });
+
         })
     };
 
