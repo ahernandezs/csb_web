@@ -26,7 +26,7 @@ angular.module('spaApp')
             }
             if (scope.options.country) {
               opts.componentRestrictions = {
-                country: scope.options.country;
+                country: scope.options.country
               }
             }
           }
