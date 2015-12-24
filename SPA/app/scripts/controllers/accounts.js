@@ -115,8 +115,10 @@
     $scope.ask4Token = function (format, id) {
         ngDialog.openConfirm({ template: 'views/partials/token.html', showClose: false }).then(function(otp){
           var type = 'application/pdf';
+          var filename = 'EstadodeCuenta.pdf';
           if(format === 'XML') {
             type = 'application/xml';
+            filename = 'EstadodeCuenta.xml';
           }
 
           $http({
@@ -129,7 +131,12 @@
           }).success(function (data, status, headers, config) {
             var blob = new Blob([data], {type: type});
             var objectUrl = URL.createObjectURL(blob);
-            window.open(objectUrl);
+            var a = document.createElement("a");
+            document.body.appendChild(a);
+            a.href = objectUrl;
+            a.download = filename;
+            a.click();
+            window.URL.revokeObjectURL(objectUrl);
           }).error(function (data, status, headers, config) {
             var decodedString = String.fromCharCode.apply(null, new Uint8Array(data));
             var obj = JSON.parse(decodedString);
