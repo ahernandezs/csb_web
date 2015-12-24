@@ -30,7 +30,7 @@ angular.module('spaApp').factory('httpInterceptor', ['$q', '$window', '$location
         $rootScope.session_token = null;
         if($window.x_session_token) {
           $window.x_session_token = null;
-          $window.location.href = "#/login";
+          $window.location.href = '#/login';
         }
         // we got a problem here: at this moment, we should clean al the services to remove the user's data
         //the problem is that it is not the correct place to do it (if we import the userProvider here, we have a circular dependency

@@ -5,5 +5,5 @@ angular.module('spaApp')
     return {
       restrict: 'E',
       templateUrl: 'views/directives/credits.html'
-    }
+    };
 }]);

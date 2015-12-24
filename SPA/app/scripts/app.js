@@ -15,16 +15,16 @@ var app = angular.module('spaApp', [
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'uiGmapGoogleMapApiProvider', 'ScrollBarsProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, uiGmapGoogleMapApiProvider, ScrollBarsProvider) {
 
-	ScrollBarsProvider.defaults = {
-        scrollButtons: {
-            scrollAmount: 'auto',
-            enable: true
-        },
-        scrollInertia: 400,
-        axis: 'yx',
-        theme: 'minimal-dark',
-        autoHideScrollbar: true
-    };
+  ScrollBarsProvider.defaults = {
+    scrollButtons: {
+        scrollAmount: 'auto',
+        enable: true
+      },
+    scrollInertia: 400,
+    axis: 'yx',
+    theme: 'minimal-dark',
+    autoHideScrollbar: true
+  };
 
   uiGmapGoogleMapApiProvider.configure({
     key: 'AIzaSyAMjg5ItWNxU2f-uw6tOz3lFBe_tXcUwlM',
@@ -32,7 +32,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     libraries: 'places,geometry,visualization'
   });
 
-  $urlRouterProvider.otherwise("/login");
+  $urlRouterProvider.otherwise('/login');
   $httpProvider.interceptors.push('httpInterceptor');
 
   $stateProvider
@@ -62,15 +62,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     })
 
     .state('dashboard', {
-    abstract: true,
-    url: '/',
-    templateUrl: 'views/dashboard.html',
-    controller: 'DashBoardCtrl'
+      abstract: true,
+      url: '/',
+      templateUrl: 'views/dashboard.html',
+      controller: 'DashBoardCtrl'
     })
 
     .state('dashboard.accounts', {
-    url: 'accounts',
-    views: {
+      url: 'accounts',
+      views: {
         'accountContent' : {
           templateUrl: 'views/accounts.html',
           controller: 'AccountsCtrl'
@@ -79,8 +79,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     })
 
     .state('dashboard.transfers', {
-        url: 'transfers',
-        views: {
+      url: 'transfers',
+      views: {
         'transferContent' : {
           templateUrl: 'views/transfers.html',
           controller: 'TransfersCtrl'
@@ -89,21 +89,21 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     })
 
     .state('dashboard.investments', {
-        url: 'investments',
-        views: {
-            'investmentsContent' : {
-                templateUrl: 'views/portfolio.html',
-                controller: 'PortfolioCtrl'
-            }
+      url: 'investments',
+      views: {
+        'investmentsContent' : {
+          templateUrl: 'views/portfolio.html',
+          controller: 'PortfolioCtrl'
         }
+      }
     })
 
     .state('dashboard.administration', {
-        url: 'administration',
-        params: {
-          opt : 1
-        },
-        views: {
+      url: 'administration',
+      params: {
+        opt : 1
+      },
+      views: {
         'administrationContent' : {
           templateUrl: 'views/administration.html',
           controller: 'AdminCtrl'
@@ -124,7 +124,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     .state('dashboard.accounts.investment', {
       url: '/:accountId/investment',
       views:{
-          'detailInvestment' : {
+        'detailInvestment' : {
           templateUrl: 'views/partials/investment/investments.html',
           controller: 'InvestmentsCtrl'
         }
@@ -135,8 +135,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
       url: '/:accountId/deposit',
       views:{
         'detailDeposit' : {
-        templateUrl: 'views/partials/deposit/deposit.html',
-        controller: 'AccountDepositDetailCtrl'
+          templateUrl: 'views/partials/deposit/deposit.html',
+          controller: 'AccountDepositDetailCtrl'
         }
       }
     })
@@ -145,11 +145,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
       url: '/:accountId/credit',
       views:{
         'detailCredit' : {
-        templateUrl: 'views/partials/credits/credit.html',
-         controller: 'creditCtrl'
+          templateUrl: 'views/partials/credits/credit.html',
+          controller: 'creditCtrl'
         }
       }
-    })
+    });
 
   }]);
 
@@ -157,7 +157,7 @@ app.run(['api', '$window', '$rootScope',function(api, $window, $rootScope) {
   api.config();
   api.init();
 
-  $rootScope.requestStack = new Array();
+  $rootScope.requestStack = [];
 
   $window.onbeforeunload = function(e) {
     var message = 'Te vas a salir de Consubanco, ¿estás seguro?';
@@ -169,5 +169,5 @@ app.run(['api', '$window', '$rootScope',function(api, $window, $rootScope) {
 
       return message;
     }
-  }
+  };
 }]);

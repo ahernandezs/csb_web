@@ -28,7 +28,7 @@ angular.module('spaApp')
 					}
 				});
 
-				element.bind("change", function() {
+				element.bind('change', function() {
 					if ( ctrl.$error.currency ) return undefined;
 
 					var formattedModel = format(ctrl.$modelValue);
@@ -42,7 +42,7 @@ angular.module('spaApp')
 					}
 				});
 
-				element.bind("focus", function() {
+				element.bind('focus', function() {
 					var value = ctrl.$modelValue;
 
 					if ( value && ctrl.$isEmpty(value) ) {
@@ -50,7 +50,7 @@ angular.module('spaApp')
 					}
 				});
 
-				element.bind("blur", function() {
+				element.bind('blur', function() {
 					var formattedModel = format(ctrl.$modelValue);
 
 					if ( !ctrl.$isEmpty(formattedModel) ) {
@@ -67,7 +67,7 @@ angular.module('spaApp')
 					var value = modelValue ? modelValue.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',') : undefined;
 
 					if ( !ctrl.$isEmpty(value) ) {
-						if ( value.indexOf(".") != -1 ) {
+						if ( value.indexOf(".") !== -1 ) {
 							return '$' + value;
 						} else {
 							return '$' + value + '.00';

@@ -51,7 +51,7 @@ angular.module('spaApp')
     $scope.step = 0;
     $scope.showTimeoutAlert = false;
     $scope.showErrorLogoutAlert = false;
-  }
+  };
 
 
   /************************ Navigation ***********************************/
@@ -71,7 +71,7 @@ angular.module('spaApp')
         data: json,
         headers: {'Content-Type': 'application/json','X-BANK-TOKEN': '4'}
       }).
-      success(function(data, status, headers) {
+      success(function(data) {
         $scope.step = 1;
         $scope.client_name = data.client_name;
         $scope.images = data.images;
@@ -83,7 +83,7 @@ angular.module('spaApp')
       });
 
     }
-  }
+  };
 
 	/**
 	 * assign image
@@ -114,7 +114,7 @@ angular.module('spaApp')
             $scope.isLogin = false;
             var token = headers('X-AUTH-TOKEN');
             $rootScope.session_token = token;
-            $rootScope.last_access_date = data.last_access_date
+            $rootScope.last_access_date = data.last_access_date;
             $rootScope.last_access_media = data.last_client_application_id;
             $rootScope.client_name = data.client_name;
             userProvider.setCurrentUser(data);
@@ -138,19 +138,19 @@ angular.module('spaApp')
    * Function for validate data before register
    */
   $scope.preRegister = function(client,contract){
-      resetError();
-      $scope.registering = true;
-      //TODO:Veryfy with REST service if exists contract?
-      userProvider.setClientId(client);
-      userProvider.preRegisterUser(contract).then(
-        function(data) {
-          $location.path( '/register');
-        },
-        function(data, status) {
-          setRegisterError("Ha ocurrido un error en el registro");
-          $scope.registering = false;
-        });
-  }
+    resetError();
+    $scope.registering = true;
+    //TODO:Veryfy with REST service if exists contract?
+    userProvider.setClientId(client);
+    userProvider.preRegisterUser(contract).then(
+      function() {
+        $location.path( '/register');
+      },
+      function() {
+        setRegisterError('Ha ocurrido un error en el registro');
+      $scope.registering = false;
+    });
+  };
 
   if($window.username) {
     $scope.loginData.username = $window.username;
@@ -198,7 +198,7 @@ angular.module('spaApp')
   function resetError(){
     $scope.error = false;
     $scope.registerError = false;
-    $scope.errorMessage = "";
+    $scope.errorMessage = '';
   }
 
   /**
@@ -206,7 +206,7 @@ angular.module('spaApp')
    */
   function displayTokenStateIfRequired(data){
     // if user has complete rights
-    if(data.role_id == 1){
+    if(data.role_id === 1){
       var tokenState = data.security_token_state;
       switch(tokenState){
         case 0 :
@@ -229,7 +229,7 @@ angular.module('spaApp')
     resetError();
     $scope.step = 2;
     $scope.selection = 0;
-  }
+  };
 
 	$scope.changeSelection = function(step) {
 		$scope.selection = step;
@@ -245,7 +245,7 @@ angular.module('spaApp')
 			then( function(data) {
 				$scope.unlockImages = data.images;
 				$scope.selection++;
-			}, function(data, status) {
+			}, function(data) {
 				setError( data.message );
 			});
 	};
@@ -257,31 +257,30 @@ angular.module('spaApp')
 		if(password) {
 			var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/g;
 			if(!pattern.test(password)) {
-				setError("La contraseña debe tener de 8 a 15 caracteres, \
-					contar con al menos una mayúscula, una minúscula, y un numérico. NO incluir caracteres especiales");
+				setError('La contraseña debe tener de 8 a 15 caracteres, contar con al menos una mayúscula, una minúscula, y un numérico. NO incluir caracteres especiales');
 				return;
 			}
 
-			var rexUser1 = new RegExp($scope.unlockData.username, "g");
+			var rexUser1 = new RegExp($scope.unlockData.username, 'g');
 			if(rexUser1.test(password)) {
-				setError("No puede usar su id de usuario como contraseña");
+				setError('No puede usar su id de usuario como contraseña');
 				return;
 			}
 
-			var rexInstName1 = new RegExp("consubanco", "i");
+			var rexInstName1 = new RegExp('consubanco', 'i');
 			if(rexInstName1.test(password)) {
-				setError("No puede usar el nombre de la institución como contraseña");
+				setError('No puede usar el nombre de la institución como contraseña');
 				return;
 			}
 
 			var repeatedChars = /(.)\1{2,}/;
 			if(repeatedChars.test(password)) {
-				setError("No puede repetir más de tres carácteres iguales como 111 o aaa");
+				setError('No puede repetir más de tres carácteres iguales como 111 o aaa');
 				return;
 			}
 
 			if(consecutivePassword(password)) {
-				setError("No puede tener secuencia de caracteres como 123 o abc");
+				setError('No puede tener secuencia de caracteres como 123 o abc');
 				return;
 			}
 
@@ -290,7 +289,6 @@ angular.module('spaApp')
 	};
 
 	function consecutivePassword(password) {
-		var charArray = password.split('');
 		var isConSeq = false;
 		var asciiCode = 0;
 		var previousAsciiCode = 0;
@@ -311,17 +309,17 @@ angular.module('spaApp')
 		}
 
 		return isConSeq;
-	};
+	}
 
 	$scope.confirmPassword = function () {
-		if(!$scope.unlockData.password)
-            setError("Las contraseñas no puede estar vacías");
-		else if($scope.unlockData.password != $scope.unlockData.passwordAgain)
-            setError("Las contraseñas ingresadas no coinciden");
-        else if ( $scope.confirmImage() ) {
+		if(!$scope.unlockData.password){
+      setError('Las contraseñas no puede estar vacías');
+		} else if($scope.unlockData.password != $scope.unlockData.passwordAgain){
+      setError('Las contraseñas ingresadas no coinciden');
+    } else if ( $scope.confirmImage() ) {
 			userProvider.unlockUserRequest( $scope.unlockData.username, $scope.unlockData.folio,
 				$scope.unlockData.password, $scope.loginData.selectedImage).
-				then( function(status) {
+				then( function() {
 					$scope.selection++;
 				}, function(error) {
 					setError( error.message );
@@ -331,9 +329,9 @@ angular.module('spaApp')
 
 	$scope.confirmImage = function () {
         if($scope.loginData.selectedImage)
-        	return true;
+          return true;
         else
-            setError("Debe elegir una imagen");
+          setError("Debe elegir una imagen");
 	};
 
 

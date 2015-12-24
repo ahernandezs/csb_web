@@ -12,16 +12,16 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 	$scope.disableSig = false;
 
 	$scope.activity = function(option) {
-		if(($scope.disableSig && option == 'sig' ) || ($scope.disableAnt && option == 'ant')){
+		if(($scope.disableSig && option === 'sig' ) || ($scope.disableAnt && option === 'ant')){
 			return;
 		}
-		$scope.page = option == 'ant' ? $scope.page-1 : $scope.page+1 ;
+		$scope.page = option === 'ant' ? $scope.page-1 : $scope.page+1 ;
 		adminProvider.getUserActivity($scope.page, $scope.size).then(
 			function(data) {
 				$scope.userActivities = data.user_activities;
 				$scope.totalPages = Math.ceil(data.total_items / $scope.size );
-				$scope.disableAnt = $scope.page == 0 ? true : false;
-				$scope.disableSig = $scope.page+1 == $scope.totalPages ? true : false;
+				$scope.disableAnt = $scope.page === 0 ? true : false;
+				$scope.disableSig = $scope.page+1 === $scope.totalPages ? true : false;
 			},
 			function(error) {
 				$scope.disableAnt = true;
@@ -51,24 +51,24 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 	$scope.today = new Date();
 	loadBeneficiary();
 
-	 $scope.errorMessage = null;
+	$scope.errorMessage = null;
 
 	$scope.selectBeneficiary = function(account){
 		$scope.action = 2;
 		$scope.stage = 1;
 		$scope.selectedAccount = account;
-		$scope.delete.otp='';
-	}
+		$scope.delete.otp = '';
+	};
 
 	$scope.siguiente = function(){
 		$scope.stage += 1;
-	}
+	};
 
 	$scope.regresar = function(){
 		$scope.action = 1;
 		$scope.stage = 1;
-		$scope.delete.otp='';
-	}
+		$scope.delete.otp = '';
+	};
 
 	/**
 	 * delete a third-account
@@ -83,19 +83,19 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 			function(errorObject) {
 				$scope.delete.otp = '';
 				var status = errorObject.status;
-		        if(status === 403){
+				if(status === 403){
 					$scope.manageOtpErrorMessage(errorObject.response);
-			    } else {
-			    	var msg = codeStatusErrors.errorMessage(status);
+				} else {
+					var msg = codeStatusErrors.errorMessage(status);
 					if (status === 500){
-		            	$scope.setServiceError(msg + errorObject.response.message);
-		        	} else {
-		        		$scope.setServiceError(msg);
-		        	}
-			    }
+						$scope.setServiceError(msg + errorObject.response.message);
+					} else {
+						$scope.setServiceError(msg);
+					}
+				}
 			}
 		);
-	}
+	};
 
 	/**
 	 * dispatch the third-account by their type (if they are from Consubanco or not)
@@ -104,7 +104,7 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 		$scope.third_accounts = data;
 		var third_accounts_own = [];
 		var third_accounts_others = [];
-		if (typeof $scope.third_accounts != 'undefined'){
+		if (typeof $scope.third_accounts !== 'undefined'){
 			$scope.third_accounts.forEach(function(acc){
 				if(acc.same_bank){
 					third_accounts_own.push(acc);
@@ -116,18 +116,18 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 		if(third_accounts_own.length > 0){
 			for(var i=0; i <  third_accounts_own.length; i++){
 				var account_type= third_accounts_own[i].account_type;
-				if(account_type == "TDC_T"){
-					third_accounts_own[i].account_type_name="Tarjeta de Crédito Propia Mismo Banco";
-				}else if(account_type == "DEB_T"){
-					third_accounts_own[i].account_type_name="Débito Propia Mismo Banco";
+				if(account_type === 'TDC_T'){
+					third_accounts_own[i].account_type_name = 'Tarjeta de Crédito Propia Mismo Banco';
+				}else if(account_type == 'DEB_T'){
+					third_accounts_own[i].account_type_name = 'Débito Propia Mismo Banco';
 				}
 			}
 		}//End if validate
 		if(third_accounts_others.length > 0){
 			for(var i=0; i < third_accounts_others.length; i++){
 				var account_type = third_accounts_others[i].account_type;
-				if(account_type == "DEB_T") {
-					third_accounts_others[i].account_type_name="Débito Propia Otros Bancos";
+				if(account_type === 'DEB_T') {
+					third_accounts_others[i].account_type_name = 'Débito Propia Otros Bancos';
 				}
 			}
 		}//End if validate
@@ -144,16 +144,16 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 				dispatchThirdAccountByType(data);
 			},function(errorObject) {
 				var status = errorObject.status;
-		        if(status === 403){
-		        $scope.manageOtpErrorMessage(errorObject.response.message);
-			    } else {
-			    	var msg = codeStatusErrors.errorMessage(status);
+				if(status === 403){
+				$scope.manageOtpErrorMessage(errorObject.response.message);
+				} else {
+					var msg = codeStatusErrors.errorMessage(status);
 					if (status === 500){
-		            	$scope.setServiceError(msg + errorObject.response.message);
-		        	} else {
-		        		$scope.setServiceError(msg);
-		        	}
-			    }
+						$scope.setServiceError(msg + errorObject.response.message);
+					} else {
+						$scope.setServiceError(msg);
+					}
+				}
 			}
 		)
 	};

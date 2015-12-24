@@ -33,49 +33,49 @@ angular.module('spaApp').controller('creditCardCtrl', ['$scope', '$location', '$
 	$scope.searchMessage = 'false';
 
 	accountsProvider.getAccountDetail($stateParams.accountId).then(
-		function(data) {
+		function() {
 			$scope.creditsHeader = $rootScope.accountDetail.credit_card;
 		},
 		function(errorObject) {
 			var status = errorObject.status;
-	        var msg = codeStatusErrors.errorMessage(status);
+			var msg = codeStatusErrors.errorMessage(status);
 			if (status === 500){
-            	$scope.setServiceError(msg + errorObject.response.message);
-        	} else {
-        		$scope.setServiceError(msg);
-        	}
+				$scope.setServiceError(msg + errorObject.response.message);
+			} else {
+				$scope.setServiceError(msg);
+			}
 		}
 	);
 
-	accountsProvider.getTransactions($scope.selectedAcccountId == null ? $stateParams.accountId : $scope.selectedAcccountId, params).then(
-		function(data){
+	accountsProvider.getTransactions($scope.selectedAcccountId === null ? $stateParams.accountId : $scope.selectedAcccountId, params).then(
+		function(){
 			$scope.creditCardTransactions = $rootScope.transactions;
 		},
 		function(errorObject) {
 			var status = errorObject.status;
-	        var msg = codeStatusErrors.errorMessage(status);
+			var msg = codeStatusErrors.errorMessage(status);
 			if (status === 500){
-            	$scope.setServiceError(msg + errorObject.response.message);
-        	} else {
-        		$scope.setServiceError(msg);
-        	}
+				$scope.setServiceError(msg + errorObject.response.message);
+			} else {
+				$scope.setServiceError(msg);
+			}
 		}
 	);
 
 	$scope.getStatements = function(){
-		$scope.statementStatus.showStatement = true
+		$scope.statementStatus.showStatement = true;
 		accountsProvider.getStates($stateParams.accountId).then(
-			function(data) {
+			function() {
 				$scope.statements = $rootScope.statements;
 			},
 			function(errorObject) {
 				var status = errorObject.status;
-		        var msg = codeStatusErrors.errorMessage(status);
+				var msg = codeStatusErrors.errorMessage(status);
 				if (status === 500){
-	            	$scope.setServiceError(msg + errorObject.response.message);
-	        	} else {
-	        		$scope.setServiceError(msg);
-	        	}
+					$scope.setServiceError(msg + errorObject.response.message);
+				} else {
+					$scope.setServiceError(msg);
+				}
 			}
 		);
 	};
@@ -83,16 +83,16 @@ angular.module('spaApp').controller('creditCardCtrl', ['$scope', '$location', '$
 	/**
      * Display the search message.
      */
-    $scope.displayMessage = function() {
-        $scope.searchMessage = 'true';
-    };
+	$scope.displayMessage = function() {
+		$scope.searchMessage = 'true';
+	};
 
 	/**
      * Hide the search message.
      */
-    $scope.clearMessage = function() {
-        $scope.searchMessage = 'false';
-    };
+	$scope.clearMessage = function() {
+		$scope.searchMessage = 'false';
+	};
 
 	$scope.back = function(){
 		$scope.statementStatus.showStatement = true;
@@ -103,17 +103,17 @@ angular.module('spaApp').controller('creditCardCtrl', ['$scope', '$location', '$
 			$scope.previousPeriod = previousPeriod;
 			params.previousPeriod = previousPeriod;
 			accountsProvider.getTransactions($scope.selectedAcccountId, params).then(
-				function(data){
+				function(){
 					$scope.creditCardTransactions = $rootScope.transactions;
 				},
 				function(errorObject) {
 					var status = errorObject.status;
-			        var msg = codeStatusErrors.errorMessage(status);
+					var msg = codeStatusErrors.errorMessage(status);
 					if (status === 500){
-		            	$scope.setServiceError(msg + errorObject.response.message);
-		        	} else {
-		        		$scope.setServiceError(msg);
-		        	}
+						$scope.setServiceError(msg + errorObject.response.message);
+					} else {
+						$scope.setServiceError(msg);
+					}
 				}
 			);
 		}
@@ -124,7 +124,7 @@ angular.module('spaApp').controller('creditCardCtrl', ['$scope', '$location', '$
 	**/
 	$scope.doPaymentFlow = function(type,minPayment){
 		$scope.selectNavigatOption('transfers');
-        paymentCreditCardService.prepForShared({ accountId:$stateParams.accountId , amount:minPayment, paymentType: type  });
+		paymentCreditCardService.prepForShared({ accountId:$stateParams.accountId , amount:minPayment, paymentType: type  });
 	};
 }]);
 
@@ -132,16 +132,16 @@ angular.module('spaApp').controller('creditCardCtrl', ['$scope', '$location', '$
 * Service for share information between controllers .
 **/
 angular.module('spaApp').factory('paymentCreditCardService', function() {
-    var account = {};
-    account.accountId;
-    account.amount;
-    account.paymentType;
+	var account = {};
+	account.accountId = '';
+	account.amount = '';
+	account.paymentType = '';
 
-    account.prepForShared = function(msg) {
-        this.accountId = msg.accountId;
-        this.amount = msg.amount;
-        this.paymentType = msg.paymentType;
-    };
+	account.prepForShared = function(msg) {
+		this.accountId = msg.accountId;
+		this.amount = msg.amount;
+		this.paymentType = msg.paymentType;
+	};
 
-    return account;
+	return account;
 });
