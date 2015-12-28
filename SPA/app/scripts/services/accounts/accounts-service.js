@@ -7,8 +7,9 @@
 angular.module('spaApp')
     .service('accountsService', ['$http','$rootScope', function ($http, $rootScope) {
 
-		this.getAccounts = function () {
-            return $http.get($rootScope.restAPIBaseUrl+'/accounts');
+		this.getAccounts = function ( type ) {
+            type = ( type === undefined ) ? '' : type;
+            return $http.get($rootScope.restAPIBaseUrl+'/accounts?type=' + type);
         };
 
         this.getAccountsDetail = function (accountId) {
@@ -66,8 +67,16 @@ angular.module('spaApp')
           return newDate;
         }
 
-        this.setInstruction = function(accountId, instruction){
-          return $http.get( $rootScope.restAPIBaseUrl+'/products/'+accountId+'?amount='+instruction );
+        this.updateInstructionInvestment = function(accountId, instruction, ejeAccount){
+          return $http( {
+              url: $rootScope.restAPIBaseUrl+'/products/'+accountId,
+              method: 'POST',
+              data: JSON.stringify({
+                             'instruction' : instruction,
+                  'account_id_destination' : ejeAccount
+              }),
+              headers: {'Content-Type': 'application/json', 'X-AUTH-TOKEN': $http.defaults.headers.common['X-AUTH-TOKEN']}
+          } );
         };
 
 }]);
