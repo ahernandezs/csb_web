@@ -40,6 +40,9 @@ angular.module('spaApp').controller('updateCommunicationController', ['$scope', 
 			prefered = "MAIL";
 		}else if($scope.updatedata.phoneSelect){
 			prefered = "CELULAR";
+		}else{
+			$scope.setServiceError('Selecciona al menos un medio preferido');
+			return;
 		}
 		adminProvider.updateCommunication($scope.updatedata.phone, $scope.updatedata.e_mail, $scope.updatedata.otp, prefered).then(
 			function (data) {

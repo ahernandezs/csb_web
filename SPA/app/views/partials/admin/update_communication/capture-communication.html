@@ -25,7 +25,7 @@
             </div>
             <div>
                 <div ng-show="paso == 0">
-                    <button ng-click="paso=1" ng-disabled="!updatedata.phoneSelect && !updatedata.mailSelect">Continuar</button>
+                    <button ng-click="paso=1" ng-disabled="(!updatedata.phoneSelect && !updatedata.mailSelect) || (updatedata.phoneSelect && updatedata.phone === '') || (updatedata.mailSelect && updatedata.e_mail === '')">Continuar</button>
                 </div>
                 <div ng-show="paso == 1">
                     <div class="fieldContainer">
