@@ -43,7 +43,11 @@ angular.module('spaApp').controller('updateCommunicationController', ['$scope', 
 		}
 		adminProvider.updateCommunication($scope.updatedata.phone, $scope.updatedata.e_mail, $scope.updatedata.otp, prefered).then(
 			function (data) {
-				$scope.stage_updatecommunication = 3;
+				if(data.status === 'E'){
+					$scope.setServiceError(data.response);
+				}else{
+					$scope.stage_updatecommunication = 3;
+				}
 			},
 			function(errorObject) {
 				var status = errorObject.status;
