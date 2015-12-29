@@ -117,7 +117,32 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
      * Assign the new value for the investment instruction.
      */
     $scope.assignInstruction = function( selection ) {
-      $scope.instruction = selection;
+        $scope.instruction = selection;
+        if ( $scope.instruction.ins_inv_id == 1 || $scope.instruction.ins_inv_id == 2 )
+            $scope.getEjeAccounts();
+    };
+
+    $scope.getEjeAccounts = function() {
+        $scope.ejeAccount = {};
+        accountsProvider.getAccounts('DEP').then(
+            function(data) {
+                $scope.ejeAccounts = $rootScope.accounts;
+                $scope.ejeAccount = $scope.ejeAccounts[0];
+            },
+            function(errorObject) {
+                var status = errorObject.status;
+                var msg = codeStatusErrors.errorMessage(status);
+                if (status === 500){
+                    $scope.setServiceError(msg + errorObject.response.message);
+                } else {
+                    $scope.setServiceError(msg);
+                }
+            }
+        );
+    };
+
+    $scope.assignEjeAccount = function( account ) {
+        $scope.ejeAccount = account;
     };
 
     $scope.getStatements = function(){
@@ -139,7 +164,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
     };
 
     $scope.save = function(){
-      accountsProvider.setInstruction($stateParams.accountId, $scope.instruction.ins_inv_id).then(
+      accountsProvider.updateInstructionInvestment($stateParams.accountId, $scope.instruction.ins_inv_id, $scope.ejeAccount._account_id).then(
         function(data){
           $scope.modify = false;
           $scope.result.success = true;

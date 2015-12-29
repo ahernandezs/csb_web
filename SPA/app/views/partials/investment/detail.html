@@ -39,7 +39,7 @@
             <div ng-show='modify == false' class="first-div">
               <p>Instrucci&oacute;n al vencimiento:</p>
               <span>{{instruction.ins_inv_name}}</span>
-              <button ng-click='modify = true'>Modificar instrucci&oacute;n al vencimiento</button>
+              <button ng-click='modify = true; assignInstruction( instruction )'>Modificar instrucci&oacute;n al vencimiento</button>
             </div>
             <div ng-show='modify == true' class="second-div">
               <div class="dropdown">
@@ -50,6 +50,15 @@
                 <ul class="dropdown-menu" role="menu">
                   <li ng-click="assignInstruction(instructions.ins_inv_to_print)" ng-required="true">{{instructions.ins_inv_to_print.ins_inv_name}}</li>
                   <li ng-click="assignInstruction(instructions.ins_inv_in_box01)" ng-required="true">{{instructions.ins_inv_in_box01.ins_inv_name}}</li>
+                </ul>
+              </div>
+              <div class="dropdown" ng-show="ejeAccounts.length >= 1 && instruction.ins_inv_id == 1 || instruction.ins_inv_id == 2">
+                <div class="dropdown-toggle select-style" type="button" data-toggle="dropdown">
+                  <span>Selecciona la cuenta destino</span>
+                  <p>{{ejeAccount.name + ' ' + ejeAccount.masked_account_number}}</p>
+                </div>
+                <ul class="dropdown-menu" role="menu">
+                  <li ng-repeat="account in ejeAccounts" ng-click="assignEjeAccount(account)" ng-required="true">{{account.name + ' ' + account.masked_account_number}}</li>
                 </ul>
               </div>
               <div class="buttons">

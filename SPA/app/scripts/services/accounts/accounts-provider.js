@@ -4,9 +4,9 @@ angular.module('spaApp')
 .factory('accountsProvider', ['$rootScope', 'accountsService', '$q', function ($rootScope, accountsService, $q) {
 
   return {
-    getAccounts: function () {
+    getAccounts: function (type) {
       var deferred = $q.defer();
-      accountsService.getAccounts().success(function(data, status, headers) {
+      accountsService.getAccounts(type).success(function(data, status, headers) {
         $rootScope.accounts = data.accounts;
         deferred.resolve();
       }).error(function(data, status) {
@@ -117,16 +117,17 @@ angular.module('spaApp')
       $rootScope.transactions = null;
     },
 
-    setInstruction: function(accountId, instruction){
-      var deferred = $q.defer();
-      accountsService.setInstruction(accountId, instruction).success(function(data, status, headers) {
-        $rootScope.statements = data;
-        deferred.resolve(data);
-      }).error(function(data, status) {
-        var result = {'response' : data, 'status': status};
-        return deferred.reject(result);
-      });
-      return deferred.promise;
+    updateInstructionInvestment: function(accountId, instruction, ejeAccount) {
+        var deferred = $q.defer();
+        ejeAccount = ( instruction == 3 ) ? '' : ejeAccount;
+        accountsService.updateInstructionInvestment(accountId, instruction, ejeAccount)
+            .success(function(data, status, headers) {
+                deferred.resolve(data);
+            }).error(function(data, status) {
+                var result = {'response' : data, 'status': status};
+                return deferred.reject(result);
+            });
+        return deferred.promise;
     }
 
   };
