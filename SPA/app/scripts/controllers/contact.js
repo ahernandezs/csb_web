@@ -6,20 +6,9 @@ angular.module('spaApp').controller('ContactCtrl', ['$rootScope', '$scope',
 
 	$scope.conSesion = $rootScope.session_token ? true : false;
 
-  $scope.logout = function() {
-    userProvider.logout().then(
-      function() {
-        timerService.stop();
-        $rootScope.session_token = null;
-        $location.path('login');
-      },
-      function(){
-        logoutService.displayErrorMessage();
-        timerService.stop();
-        $rootScope.session_token = null;
-        $location.path('login');
-      });
-  };
+	$scope.logout = function() {
+		logoutService.closeSession( true );
+	};
 
   $scope.$on('IdleTimeout', function() {
     $scope.showIdleAlert = true;

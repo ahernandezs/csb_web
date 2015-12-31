@@ -52,11 +52,8 @@ angular.module('spaApp')
 		});
 	};
 
-	this.logout = function(){
-		return $http({
-			url: $rootScope.restAPIBaseUrl+'/logout',
-			method: 'GET'
-		});
-	}
+	this.logout = function() {
+		return $http.get( $rootScope.restAPIBaseUrl+'/logout' );
+	};
 
 }]);

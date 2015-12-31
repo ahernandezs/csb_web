@@ -178,27 +178,16 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 		window.open('https://www.google.com.mx/maps/dir//'+branch.description.address.street.replace('#','No.')+'%20'+branch.description.address.street2+'%20'+branch.description.address.city);
 	};
 
-  /**
-    Function for logout application
-  **/
-  $scope.logout = function() {
-    userProvider.logout().then(
-      function() {
-        timerService.stop();
-        $rootScope.session_token = null;
-        $location.path('login');
-      },
-      function(){
-        logoutService.displayErrorMessage();
-        timerService.stop();
-        $rootScope.session_token = null;
-        $location.path('login');
-      });
-  };
+	/**
+	 * call service to close session
+	 */
+	$scope.logout = function() {
+		logoutService.closeSession( true );
+	};
 
 	$scope.$on('IdleTimeout', function() {
-    $scope.showIdleAlert = true;
-  });
+		$scope.showIdleAlert = true;
+	});
 
   $scope.$on('WarningTimeout', function() {
     $scope.logout();

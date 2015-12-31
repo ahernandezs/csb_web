@@ -8,10 +8,17 @@ app.value('userData', false);
 angular.module('spaApp').controller('DashBoardCtrl', ['$rootScope', '$scope', '$location', '$routeParams', '$window',
     'accountsProvider', 'userProvider', 'timerService', 'logoutService', 'userData', function ($rootScope, $scope, $location, $routeParams, $window, accountsProvider, userProvider, timerService, logoutService, userData) {
 
-  if(!$rootScope.session_token) {
-    $location.path('login');
-    return;
-  }
+	/**
+	 * Call service to close session
+	 */
+	$scope.logout = function( close ) {
+       logoutService.closeSession( close );
+    };
+
+	if(!$rootScope.session_token) {
+		$scope.logout( false );
+		return;
+	}
 
   $scope.userData = userData;
 
@@ -29,28 +36,9 @@ angular.module('spaApp').controller('DashBoardCtrl', ['$rootScope', '$scope', '$
     $scope.userData = true;
   };
 
-  /**
-    Function for logout application
-  **/
-  $scope.logout = function() {
-    userProvider.logout().then(
-      function() {
-        timerService.stop();
-        $rootScope.session_token = null;
-        $location.path('login');
-      },
-      function(){
-        logoutService.displayErrorMessage();
-        timerService.stop();
-        $rootScope.session_token = null;
-        $location.path('login');
-      });
-  };
-
-
   $scope.selectNavigatOption = function(selectedOption) {
     if ( $scope.activeNavigationOption === selectedOption ){
-      return;  
+      return;
     } else if ( selectedOption === 'map' ){
       $location.path('map');
     } else{
@@ -60,7 +48,7 @@ angular.module('spaApp').controller('DashBoardCtrl', ['$rootScope', '$scope', '$
           $location.path(selectedOption);
         }
       });
-    } 
+    }
   };
 
   $scope.isActive = function(viewLocation) {
@@ -72,7 +60,7 @@ angular.module('spaApp').controller('DashBoardCtrl', ['$rootScope', '$scope', '$
   });
 
   $scope.$on('WarningTimeout', function() {
-    $scope.logout();
+    $scope.logout( true );
   });
 
   $scope.$on('IdleReset', function() {
