@@ -3,7 +3,7 @@
 angular.module('spaApp').controller('updateCommunicationController', ['$scope', 'adminProvider', function ($scope, adminProvider) {
 
 	$scope.updatedata = {};
-	$scope.paso = 0;
+	$scope.captureToken = false;
 
 	$scope.getCommunication = function(){
 		$scope.stage_updatecommunication = 1;
