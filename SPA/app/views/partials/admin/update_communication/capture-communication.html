@@ -30,11 +30,11 @@
                 <div ng-show="paso == 1">
                     <div class="fieldContainer">
                         <span>Introduce el código de tu Token f&iacute;sico</span>
-                        <input type="text" numbers-only ng-minlength="6" ng-maxlength="10" minlength="6" maxlength="10" class="input-token text-left" ng-model="updatedata.otp" placeholder="Introduce el código de tu Token físico" ng-required="true">
+                        <input type="text" numbers-only ng-minlength="6" ng-maxlength="10" minlength="6" maxlength="10" class="input-token text-left" ng-model="updatedata.otp" placeholder="Introduce el código de tu Token físico" ng-required="paso == 1">
                     </div>
                     <div>
                         <button class="w35" ng-click="paso = 0; updatedata.otp=''">Cancelar</button>
-                        <button class="w35" ng-disabled="updateForm.$invalid || !(updatedata.phoneSelect || updatedata.mailSelect)" ng-click="sendCommunication()">Guardar</button>
+                        <button class="w35" ng-disabled="updateForm.$invalid || (!updatedata.phoneSelect && !updatedata.mailSelect) || (updatedata.phoneSelect && updatedata.phone === '') || (updatedata.mailSelect && updatedata.e_mail === '')" ng-click="sendCommunication()">Guardar</button>
                     </div>
                 </div>
             </div>

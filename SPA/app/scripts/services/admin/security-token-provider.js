@@ -10,61 +10,54 @@ angular.module('spaApp').factory('securityTokenProvider', ['securityTokenService
 				deferred.resolve(data);
 			}).error(function(data, status){
 				var result = {'response' : data, 'status': status};
-		        //console.log(data, status);
-		        return deferred.reject(result);
+				return deferred.reject(result);
 			})
 			return deferred.promise;
-	    },
+	 	},
 
 		synchronizeSecurityToken: function(otp1, otp2){
 			var deferred = $q.defer();
-			securityTokenService.synchronizeSecurityToken(otp1, otp2).success(function(){
-				deferred.resolve();
+			securityTokenService.synchronizeSecurityToken(otp1, otp2).success(function(data){
+				deferred.resolve(data);
 			}).error(function(data, status){
 				var result = {'response' : data, 'status': status};
-		        //console.log(data, status);
-		        return deferred.reject(result);
+				return deferred.reject(result);
 			})
 			return deferred.promise;
-	    },
+		},
 
-
-	    activateSecurityToken: function(tokenId, otp1, otp2){
+		activateSecurityToken: function(tokenId, otp1, otp2){
 			var deferred = $q.defer();
-			securityTokenService.activateSecurityToken(tokenId, otp1, otp2).success(function(){
-				deferred.resolve();
+			securityTokenService.activateSecurityToken(tokenId, otp1, otp2).success(function(data){
+				deferred.resolve(data);
 			}).error(function(data, status){
 				var result = {'response' : data, 'status': status};
-		        //console.log(data, status);
-		        return deferred.reject(result);
+				return deferred.reject(result);
 			})
 			return deferred.promise;
-	    },
+		},
 
-	    disableSecurityToken: function(code){
+		disableSecurityToken: function(code){
 			var deferred = $q.defer();
-			securityTokenService.disableSecurityToken(code).success(function(){
-				deferred.resolve();
+			securityTokenService.disableSecurityToken(code).success(function(data){
+				deferred.resolve(data);
 			}).error(function(data, status){
 				var result = {'response' : data, 'status': status};
-		        //console.log(data, status);
-		        return deferred.reject(result);
+				return deferred.reject(result);
 			})
 			return deferred.promise;
-	    },
+		},
 
-
-	    enableSecurityToken: function(tokenId, otp1, otp2){
+		enableSecurityToken: function(tokenId, otp1, otp2){
 			var deferred = $q.defer();
-			securityTokenService.enableSecurityToken().success(function(){
-				deferred.resolve();
+			securityTokenService.enableSecurityToken().success(function(data){
+				deferred.resolve(data);
 			}).error(function(data, status){
 				var result = {'response' : data, 'status': status};
-		        //console.log(data, status);
-		        return deferred.reject(result);
+				return deferred.reject(result);
 			})
 			return deferred.promise;
-	    }
+		}
 	};
 
 }]);
