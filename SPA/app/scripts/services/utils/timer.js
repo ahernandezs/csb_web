@@ -32,7 +32,6 @@ angular.module('spaApp')
         options.idleTimer = $interval(idleTimeout, options.idle * 1000, 1);
         $rootScope.$broadcast('IdleReset');
       }
-
     };
 
     this.stop = function() {
@@ -54,12 +53,10 @@ angular.module('spaApp')
       if(options.warningTimer) {
         $interval.cancel(options.warningTimer);
       }
-
     }
 
     function idleTimeout() {
       $rootScope.$broadcast('IdleTimeout');
-
       options.warningTimer = $interval(warningTimeout, options.warning * 1000, 1);
     }
 
