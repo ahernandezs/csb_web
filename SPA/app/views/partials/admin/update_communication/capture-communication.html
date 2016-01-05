@@ -30,7 +30,7 @@
                 <div ng-show="captureToken">
                     <div class="fieldContainer">
                         <span>Introduce el código de tu Token f&iacute;sico</span>
-                        <input type="text" numbers-only ng-minlength="6" ng-maxlength="10" minlength="6" maxlength="10" class="input-token text-left" ng-model="updatedata.otp" placeholder="Introduce el código de tu Token físico" ng-required="captureToken">
+                        <input type="password" numbers-only ng-minlength="6" ng-maxlength="10" minlength="6" maxlength="10" class="input-token text-left" ng-model="updatedata.otp" placeholder="Introduce el código de tu Token físico" ng-required="captureToken">
                     </div>
                     <div>
                         <button class="w35" ng-click="captureToken = false; updatedata.otp=''">Cancelar</button>
