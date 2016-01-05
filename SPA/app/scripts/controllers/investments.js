@@ -123,6 +123,9 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
     };
 
     $scope.getEjeAccounts = function() {
+		if ( typeof $scope.ejeAccount == 'object' )
+			return;
+		
         $scope.ejeAccount = {};
         accountsProvider.getAccounts('DEP').then(
             function(data) {
