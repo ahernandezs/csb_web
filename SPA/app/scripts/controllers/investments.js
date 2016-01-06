@@ -5,7 +5,8 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
     var params = {};
     params.numPage = 0;
     params.size = 100;
-    $scope.modify = false;
+    $scope.modify = {};
+	$scope.modify.show = false;
     $scope.instructions = [];
     $scope.result = {};
     $scope.searchMessage = 'false';
@@ -125,7 +126,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
     $scope.getEjeAccounts = function() {
 		if ( typeof $scope.ejeAccount == 'object' )
 			return;
-		
+
         $scope.ejeAccount = {};
         accountsProvider.getAccounts('DEP').then(
             function(data) {
@@ -169,7 +170,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
     $scope.save = function(){
       accountsProvider.updateInstructionInvestment($stateParams.accountId, $scope.instruction.ins_inv_id, $scope.ejeAccount._account_id).then(
         function(data){
-          $scope.modify = false;
+          $scope.modify.show = false;
           $scope.result.success = true;
         },
         function(errorObject) {

@@ -36,12 +36,12 @@
           <li>Monto del ISR:             <span class="amount">{{investmentHeader.isr_taxt_amount | currency}}</span></li>
           <li>Tasa de inter&eacute;s:    <span>{{investmentHeader.interest_rate}}%</span></li>
           <li class="instructions">
-            <div ng-show='modify == false' class="first-div">
+            <div ng-hide='modify.show' class="first-div">
               <p>Instrucci&oacute;n al vencimiento:</p>
               <span>{{instruction.ins_inv_name}}</span>
-              <button ng-click='modify = true; assignInstruction( instruction )'>Modificar instrucci&oacute;n al vencimiento</button>
+              <button ng-click='modify.show = true; assignInstruction( instruction )'>Modificar instrucci&oacute;n al vencimiento</button>
             </div>
-            <div ng-show='modify == true' class="second-div">
+            <div ng-show='modify.show' class="second-div">
               <div class="dropdown">
                 <div class="dropdown-toggle select-style" type="button" data-toggle="dropdown">
                   <span>Cuenta retiro</span>
@@ -63,7 +63,7 @@
               </div>
               <div class="buttons">
                 <button ng-click='save();'>Guardar</button>
-                <button ng-click='modify = false; instruction = instructions.ins_inv_to_print'>Cancelar</button>
+                <button ng-click='modify.show = false; instruction = instructions.ins_inv_to_print'>Cancelar</button>
               </div>
             </div>
           </li>
