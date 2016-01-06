@@ -212,29 +212,29 @@ angular.module('spaApp')
       return deferred.promise;
     },
 
-	unlockUserPreRequest: function(clientId, folioId) {
-		var deferred = $q.defer();
-		userService.unlockUserPreRequest( clientId, folioId ).
-			success( function(data, status, headers) {
-				deferred.resolve( data );
-			}).
-			error( function( data, status ) {
-				deferred.reject( data );
-			});
-		return deferred.promise;
-	},
+    unlockUserPreRequest: function(clientId, folioId) {
+      var deferred = $q.defer();
+      userService.unlockUserPreRequest( clientId, folioId ).
+        success( function(data, status, headers) {
+        	deferred.resolve( data );
+        }).
+        error( function( data, status ) {
+        	deferred.reject( data );
+        });
+      return deferred.promise;
+    },
 
-	unlockUserRequest: function(clientId, folioId, password, imageId ) {
-		var deferred = $q.defer();
-		userService.unlockUserRequest( clientId, folioId, password, imageId ).
-			success( function(data, status, headers) {
-				deferred.resolve( data );
-			}).
-			error( function( data, status ) {
-				deferred.reject( data );
-			});
-		return deferred.promise;
-	},
+    unlockUserRequest: function(clientId, folioId, password, imageId ) {
+      var deferred = $q.defer();
+      userService.unlockUserRequest( clientId, folioId, password, imageId ).
+        success( function(data, status, headers) {
+        	deferred.resolve( data );
+        }).
+        error( function( data, status ) {
+        	deferred.reject( data );
+        });
+      return deferred.promise;
+    },
 
     logout: function(){
       var deferred = $q.defer();
@@ -260,10 +260,7 @@ angular.module('spaApp')
     },
 
     isCompleteUser: function(){
-      var result = false;
-      if(currentLoggedUser != null && currentLoggedUser.role_id == 1){
-        result = true;
-      }
+      var result = currentLoggedUser != null && currentLoggedUser.role_id == 1 ? true : false;
       return result;
     }
   };
