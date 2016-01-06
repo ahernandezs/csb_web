@@ -39,7 +39,7 @@
             <div ng-hide='modify.show' class="first-div">
               <p>Instrucci&oacute;n al vencimiento:</p>
               <span>{{instruction.ins_inv_name}}</span>
-              <button ng-click='modify.show = true; assignInstruction( instruction )'>Modificar instrucci&oacute;n al vencimiento</button>
+              <button ng-click='assignInstruction( instruction, true )'>Modificar instrucci&oacute;n al vencimiento</button>
             </div>
             <div ng-show='modify.show' class="second-div">
               <div class="dropdown">
@@ -48,8 +48,8 @@
                   <p>{{instruction.ins_inv_name}}</p>
                 </div>
                 <ul class="dropdown-menu" role="menu">
-                  <li ng-click="assignInstruction(instructions.ins_inv_to_print)" ng-required="true">{{instructions.ins_inv_to_print.ins_inv_name}}</li>
-                  <li ng-click="assignInstruction(instructions.ins_inv_in_box01)" ng-required="true">{{instructions.ins_inv_in_box01.ins_inv_name}}</li>
+                  <li ng-click="assignInstruction(instructions.ins_inv_to_print, true)" ng-required="true">{{instructions.ins_inv_to_print.ins_inv_name}}</li>
+                  <li ng-click="assignInstruction(instructions.ins_inv_in_box01, true)" ng-required="true">{{instructions.ins_inv_in_box01.ins_inv_name}}</li>
                 </ul>
               </div>
               <div class="dropdown" ng-show="ejeAccounts.length >= 1 && instruction.ins_inv_id == 1 || instruction.ins_inv_id == 2">
@@ -63,7 +63,7 @@
               </div>
               <div class="buttons">
                 <button ng-click='save();'>Guardar</button>
-                <button ng-click='modify.show = false; instruction = instructions.ins_inv_to_print'>Cancelar</button>
+                <button ng-click='assignInstruction( instructions.ins_inv_to_print, false )'>Cancelar</button>
               </div>
             </div>
           </li>
