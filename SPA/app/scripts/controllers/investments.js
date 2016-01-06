@@ -119,6 +119,8 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
      */
     $scope.assignInstruction = function( selection, show ) {
 		$scope.modify.show = show;
+		$scope.result.success = false;
+		$scope.result.error = false;
         $scope.instruction = selection;
         if ( $scope.instruction.ins_inv_id == 1 || $scope.instruction.ins_inv_id == 2 )
             $scope.getEjeAccounts();

@@ -25,7 +25,7 @@ angular.module('spaApp')
             function() {
 
             }, function() {
-              logoutService.displayErrorMessage();
+              displayErrorMessage();
           });
           timerService.stop();
           $rootScope.session_token = null;
