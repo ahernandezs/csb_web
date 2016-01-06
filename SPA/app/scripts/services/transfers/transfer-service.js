@@ -2,10 +2,10 @@
 
 angular.module('spaApp')
 .service('transferService', ['$http', '$rootScope',function ($http, $rootScope) {
-	/**
-	 * transfer to an account owned by the user
-	 */
-	this.transferToOwnAccount = function(sourceAccount, destinationAccount, amount, description){
+     /**
+      * transfer to an account owned by the user
+      */
+     this.transferToOwnAccount = function(sourceAccount, destinationAccount, amount, description){
         var jsonBody = JSON.stringify({
             'account_id_destination':destinationAccount,
             'amount':amount,
@@ -15,9 +15,9 @@ angular.module('spaApp')
     };
 
     /**
-	 * transfer to a third-account from Consubanco
-	 */
-	this.transferThirdAccountSameBank = function(sourceAccount, destinationAccount, amount, description, otp){
+    * transfer to a third-account from Consubanco
+    */
+    this.transferThirdAccountSameBank = function(sourceAccount, destinationAccount, amount, description, otp){
         var jsonBody = JSON.stringify({
             'account_id_destination':destinationAccount,
             'amount':amount,
@@ -28,9 +28,9 @@ angular.module('spaApp')
     };
 
     /**
-	 * transfer to a third-account another than Consubanco
-	 */
-	this.transferThirdAccountOtherBank = function(sourceAccount, destinationAccount, amount, description, otp, referenceNumber, completionDate){
+    * transfer to a third-account another than Consubanco
+    */
+    this.transferThirdAccountOtherBank = function(sourceAccount, destinationAccount, amount, description, otp, referenceNumber, completionDate){
         var jsonBody = JSON.stringify({
             'account_id_destination':destinationAccount,
             'amount':amount,
@@ -43,9 +43,9 @@ angular.module('spaApp')
     };
 
     /**
-	 * pay a credit-card own by the user
-	 */
-	this.payOwnCard = function(sourceAccount, cardAccount, amount, description, date){
+      * pay a credit-card own by the user
+      */
+     this.payOwnCard = function(sourceAccount, cardAccount, amount, description, date){
         var jsonBody = JSON.stringify({
             'account_id_destination':cardAccount,
             'amount':amount,
@@ -56,9 +56,9 @@ angular.module('spaApp')
     };
 
     /**
-	 * pay a third credit-card
-	 */
-	this.payThirdCard = function(sourceAccount, cardAccount, amount, description, date, otp){
+      * pay a third credit-card
+      */
+     this.payThirdCard = function(sourceAccount, cardAccount, amount, description, date, otp){
         var jsonBody = JSON.stringify({
             'account_id_destination':cardAccount,
             'amount':amount,
@@ -70,9 +70,9 @@ angular.module('spaApp')
     };
 
     /**
-	 * invest money in a user own VISTA investment-account
-	 */
-	this.investVista = function(sourceAccount, destinationVistaAccount, amount){
+      * invest money in a user own VISTA investment-account
+      */
+     this.investVista = function(sourceAccount, destinationVistaAccount, amount){
         var jsonBody = JSON.stringify({
             'account_id_destination':destinationVistaAccount,
             'amount':amount
@@ -81,9 +81,9 @@ angular.module('spaApp')
     };
 
     /**
-	 * retire money from a own VISTA investment-account
-	 */
-	this.retireVista = function(sourceVistaAccount, destinationAccount, amount){
+      * retire money from a own VISTA investment-account
+      */
+     this.retireVista = function(sourceVistaAccount, destinationAccount, amount){
         var jsonBody = JSON.stringify({
             'account_id_destination':destinationAccount,
             'amount':amount
@@ -92,12 +92,12 @@ angular.module('spaApp')
     };
 
     /**
-	 * invest money in a CEDE product
-	 */
-	this.investCEDE = function(sourceAccount, productId, amount, investAgain){
+      * invest money in a CEDE product
+      */
+     this.investCEDE = function(sourceAccount, productId, amount, investAgain){
         var investmentInstruction = 1;
         if(investAgain){
-        	investmentInstruction = 2;
+         investmentInstruction = 2;
         }
         var jsonBody = JSON.stringify({
             'account_id_destination':productId,
@@ -108,12 +108,12 @@ angular.module('spaApp')
     };
 
     /**
-	 * invest money in a PRLV product
-	 */
-	this.investPRLV = function(sourceAccount, productId, amount, investAgain){
+      * invest money in a PRLV product
+      */
+     this.investPRLV = function(sourceAccount, productId, amount, investAgain){
         var investmentInstruction = 1;
         if(investAgain){
-        	investmentInstruction = 3;
+         investmentInstruction = 3;
         }
         var jsonBody = JSON.stringify({
             'account_id_destination':productId,
@@ -123,11 +123,11 @@ angular.module('spaApp')
         return sendHttp(sourceAccount, jsonBody);
     };
 
-	/**
-	 * internal function to send a http-request to the transfer REST-API service
-	 */
+     /**
+      * internal function to send a http-request to the transfer REST-API service
+      */
     function sendHttp(sourceAccount, jsonBody){
-    	return $http({
+     return $http({
             url: $rootScope.restAPIBaseUrl+'/accounts/'+sourceAccount+'/transactions',
             method: 'POST',
             data: jsonBody,

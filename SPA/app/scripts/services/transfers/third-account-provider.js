@@ -21,7 +21,6 @@ angular.module('spaApp')
         }
       ).catch(
         function(response){
-          //console.log(response);
           var result = {'response' : response.data, 'status': response.status};
           deferred.reject(result);
         }
@@ -34,23 +33,19 @@ angular.module('spaApp')
      */
     getThirdAccounts: function () {
       var deferred = $q.defer();
-      //console.log('getting third-accounts');
       if(!thirdAccounts) {
         thirdAccountService.getThirdAcounts().then(
           function(response) {
-            //console.log('third-account loaded successfully', response);
             thirdAccounts = response.data.third_accounts;
             deferred.resolve(thirdAccounts);
           }
         ).catch(
           function(response) {
-            //console.log('third-account failed to load', response);
             var result = {'response' : response.data, 'status': response.status};
             deferred.reject(result);
           }
         );
       } else {
-        //console.log('getting third-accounts from cache');
         deferred.resolve(thirdAccounts);
       }
       return deferred.promise;
@@ -61,23 +56,18 @@ angular.module('spaApp')
      */
     registerThirdAccount: function(alias, beneficiaryName, e_mail, phone, accountNumber, otp){
       var deferred = $q.defer();
-      //console.log('registering third-account');
       thirdAccountService.registerThirdAccount(alias, beneficiaryName, e_mail, phone, accountNumber, otp).then(
         function(response){
-          //console.log('third-account registered successfully');
           return thirdAccountService.getThirdAcounts();
         }
       ).then(
         function(response){
-          //console.log('third-account refreshed successfully');
           thirdAccounts = response.data.third_accounts;
           deferred.resolve(thirdAccounts);
         }
       ).catch(
         function(response){
-          //console.log('failed ro register third-account');
           var result = {'response' : response.data, 'status': response.status};
-          //console.log(response);
           deferred.reject(result);
         }
       )
@@ -89,20 +79,16 @@ angular.module('spaApp')
      */
     unregisterThirdAccount:function(thirdAccountID,otp){
       var deferred = $q.defer();
-      //console.log('unregistering third-account');
       thirdAccountService.unregisterThirdAccount(thirdAccountID,otp).then(
         function(response){
-          //console.log('third-account unregistered successfully');
           return thirdAccountService.getThirdAcounts();
         }
       ).then(
         function(response){
-          //console.log('third-account refreshed successfully');
           thirdAccounts = response.data.third_accounts;
           deferred.resolve(thirdAccounts);
         }
       ).catch(function(response){
-        //console.log('failed to unregister third-account',response);
         var result = {'response' : response.data, 'status': response.status};
         return deferred.reject(result);
       })
