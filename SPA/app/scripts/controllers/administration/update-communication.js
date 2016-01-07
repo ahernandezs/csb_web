@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('spaApp').controller('updateCommunicationController', ['$scope', 'adminProvider', function ($scope, adminProvider) {
+angular.module('spaApp').controller('updateCommunicationController', ['$scope', 'adminProvider', 'codeStatusErrors', function ($scope, adminProvider, codeStatusErrors) {
 
 	$scope.updatedata = {};
 	$scope.captureToken = false;
@@ -31,7 +31,8 @@ angular.module('spaApp').controller('updateCommunicationController', ['$scope', 
 				}
 			},
 			function(errorObject) {
-				$scope.setServiceError(errorObject.response.response);
+				var msg = codeStatusErrors.errorMessage(errorObject.status);
+				$scope.setServiceError(msg);
 			}
 		);
 	};
