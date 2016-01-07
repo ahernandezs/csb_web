@@ -53,7 +53,7 @@ angular.module('spaApp')
 		};
 
 		this.logout = function() {
-			return $http.get( $rootScope.restAPIBaseUrl+'/logout' );
+			return $http.get( $rootScope.restAPIBaseUrl+'/logout', { cache: false } );
 		};
 
 }]);
