@@ -3,7 +3,7 @@
 /**
  * The transactions controller. For transactions between own accounts.
  */
-angular.module('spaApp').controller('purchaseRetireVistaCtrl', ['$scope', 'transferProvider', 'accountsProvider', 'codeStatusErrors', function ($scope, transferProvider, accountsProvider, codeStatusErrors) {
+angular.module('spaApp').controller('purchaseRetireVistaCtrl', ['$scope', 'transferProvider', 'codeStatusErrors', function ($scope, transferProvider, codeStatusErrors) {
 
     $scope.investmentCategory = null;
     initialize();

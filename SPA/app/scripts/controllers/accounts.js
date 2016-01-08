@@ -114,12 +114,9 @@
 
     $scope.ask4Token = function (format, id) {
         ngDialog.openConfirm({ template: 'views/partials/token.html', showClose: false }).then(function(otp){
-          var type = 'application/pdf';
-          var filename = 'EstadodeCuenta.pdf';
-          if(format === 'XML') {
-            type = 'application/xml';
-            filename = 'EstadodeCuenta.xml';
-          }
+
+          var type = format === 'XML'?'application/xml':'application/pdf';
+          var filename = format === 'XML'?'EstadodeCuenta.xml':'EstadodeCuenta.pdf';
 
           $http({
             url: $scope.restAPIBaseUrl+'/files/statement?format='+format+'&id='+id+'&otp='+otp,

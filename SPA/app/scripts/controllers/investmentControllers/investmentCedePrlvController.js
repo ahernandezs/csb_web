@@ -3,11 +3,9 @@
 /**
  * The transactions controller. For transactions between own accounts.
  */
-angular.module('spaApp').controller('InvestmentCedePrlvCtrl', ['$rootScope', '$scope', '$location', '$routeParams', 'accountsProvider', 'transferProvider', 'productProvider', 'codeStatusErrors', function ($rootScope, $scope, $location, $routeParams, accountsProvider, transferProvider, productProvider, codeStatusErrors) {
+angular.module('spaApp').controller('InvestmentCedePrlvCtrl', ['$scope', 'transferProvider', 'productProvider', 'codeStatusErrors', function ($scope, transferProvider, productProvider, codeStatusErrors) {
 
     $scope.investmentCategory = null;
-
-    initialize();
 
     function initialize(){
         $scope.step = 1;
@@ -19,6 +17,7 @@ angular.module('spaApp').controller('InvestmentCedePrlvCtrl', ['$rootScope', '$s
         resetError();
         $scope.obtenCuentas();
     }
+    initialize();
 
     /**
      * set an error message on the current view
@@ -59,7 +58,6 @@ angular.module('spaApp').controller('InvestmentCedePrlvCtrl', ['$rootScope', '$s
         if (status === 500){
             $scope.setServiceError(msg + errorObject.response.message);
         } else {
-            // $scope.setServiceError('Ha ocurrido un problema, favor de contactar al servicio de atención al cliente');
             $scope.setServiceError(msg);
         }
     }
@@ -69,8 +67,6 @@ angular.module('spaApp').controller('InvestmentCedePrlvCtrl', ['$rootScope', '$s
      */
     $scope.setInvestmentType = function(investmentCategory){
         $scope.investmentCategory = investmentCategory;
-        //initialize the instruction investment array
-        //TODO: manage the labels with i18n
         $scope.investmentInstructions = [];
         $scope.investmentInstructions.push({'investAgain' : false, 'label' : "Transferencia Cuenta Eje"});
         if($scope.investmentCategory === 'CEDE'){

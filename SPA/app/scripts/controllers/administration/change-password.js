@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('spaApp').controller('changePasswordController', ['$scope', 'adminProvider', function ($scope, adminProvider) {
+angular.module('spaApp').controller('changePasswordController', ['$scope', 'adminProvider', 'codeStatusErrors', function ($scope, adminProvider, codeStatusErrors) {
 
 	$scope.stage_password = 1;
 	$scope.change = {};
@@ -11,20 +11,19 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 
 	$scope.verifyNewPass = function () {
 		if ($scope.change.old === undefined ) {
-			$scope.errorMessage = "Ingresa la contraseña actual";
+			$scope.errorMessage = 'Ingresa la contraseña actual';
 			$scope.error = true;
 		} else if ( $scope.change.new === undefined && $scope.change.repeatNew === undefined ) {
-			$scope.errorMessage = "La contraseña debe tener de 8 a 15 caracteres, \
-					contar con al menos una mayúscula, una minúscula, y un numérico. NO incluir caracteres especiales";
-            $scope.error = true;
+			$scope.errorMessage = 'La contraseña debe tener de 8 a 15 caracteres, contar con al menos una mayúscula, una minúscula, y un numérico. NO incluir caracteres especiales';
+			$scope.error = true;
 		} else if ( $scope.change.new !== $scope.change.repeatNew ){
-			$scope.errorMessage = "Las contraseñas no coinciden";
-            $scope.error = true;
-        }else{
+			$scope.errorMessage = 'Las contraseñas no coinciden';
+			$scope.error = true;
+		}else{
 			$scope.error = false;
-            $scope.stage_password = 2;
-        }
-    };
+			$scope.stage_password = 2;
+		}
+	};
 
 	$scope.modifyPassword = function() {
 		adminProvider.updatePassword($scope.change.old, $scope.change.new, $scope.change.otp).then(
@@ -57,19 +56,18 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 		if(password) {
 			var pattern = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/g);
 			if(!pattern.test(password)) {
-				setError("La contraseña debe tener de 8 a 15 caracteres, \
-            contar con al menos una mayúscula, una minúscula, y un numérico. NO incluir caracteres especiales");
+				setError('La contraseña debe tener de 8 a 15 caracteres, contar con al menos una mayúscula, una minúscula, y un numérico. NO incluir caracteres especiales');
 				return;
 			}
 
 			var repeatedChars = /(.)\1{2,}/;
 				if(repeatedChars.test(password)) {
-				setError("No puede repetir más de tres caracteres iguales como 111 o aaa");
+				setError('No puede repetir más de tres caracteres iguales como 111 o aaa');
 				return;
 			}
 
 			if(consecutivePassword(password)) {
-				setError("No puede tener secuencia de caracteres como 123 o abc");
+				setError('No puede tener secuencia de caracteres como 123 o abc');
 				return;
 			}
 			$scope.invalidPassword = false;

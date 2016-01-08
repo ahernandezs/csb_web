@@ -47,9 +47,9 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 		);
 	}
 
- 	/**
- 	 * goto to the user-preference configuration page
- 	 */
+	/**
+	 * goto to the user-preference configuration page
+	 */
 	$scope.gotoUserPreferencesPage = function(){
 		if($scope.userAdministrationStep!=1) $scope.updatedata.otp = '';
 		$scope.userAdministrationStep = 1;
@@ -57,15 +57,15 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 	};
 
 	/**
- 	 * check if the user is on the user-preference configuration page
- 	 */
+	 * check if the user is on the user-preference configuration page
+	 */
 	$scope.isUserPreferencesAdministrationPageActivated = function(){
 		return $scope.userAdministrationStep == 1;
 	};
 
 	/**
- 	 * goto to the security-token configuration page
- 	 */
+	 * goto to the security-token configuration page
+	 */
 	$scope.gotoTokenAdministrationPage = function(){
 		$scope.userAdministrationStep = 2;
 		resetTokenActivationData();
@@ -109,15 +109,15 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 	};
 
 	/**
- 	 * check if the user is on the security-token configuration page
- 	 */
+	 * check if the user is on the security-token configuration page
+	 */
 	$scope.isUserTokenAdministrationPageActivated = function(){
 		return $scope.userAdministrationStep == 2;
 	};
 
 	/**
- 	 * activate the user's security-token
- 	 */
+	 * activate the user's security-token
+	 */
 	$scope.activateSecurityToken = function(){
 		securityTokenProvider.activateSecurityToken($scope.tokenActivationData.tokenId,
 													$scope.tokenActivationData.otp1,
@@ -143,8 +143,8 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 
 
 	/**
- 	 * synchronize the user's security-token
- 	 */
+	 * synchronize the user's security-token
+	 */
 	$scope.synchronizeSecurityToken = function(){
 		securityTokenProvider.synchronizeSecurityToken($scope.tokenSynchronizationData.otp1,
 													$scope.tokenSynchronizationData.otp2).then(
@@ -161,8 +161,8 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 	};
 
 	/**
- 	 * synchronize the user's security-token
- 	 */
+	 * synchronize the user's security-token
+	 */
 	$scope.disableSecurityToken = function(){
 		securityTokenProvider.disableSecurityToken($scope.tokenDisableData.reason.value).then(
 			function(data){
@@ -178,8 +178,8 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 	};
 
 	/**
- 	 * synchronize the user's security-token
- 	 */
+	 * synchronize the user's security-token
+	 */
 	$scope.enableSecurityToken = function(){
 		securityTokenProvider.enableSecurityToken().then(
 			function(data){
