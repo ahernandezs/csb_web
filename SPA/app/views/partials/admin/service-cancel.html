@@ -29,13 +29,13 @@
 	<br>
 	<div ng-switch on="actionUpdateState">
 		<div ng-switch-when="1">
-			<div class="double-btn">
+			<div>
 				<button ng-click="updateService(2,'C')">Continuar</button>
 				<button ng-click="">Cancelar</button>
 			</div>
 		</div>
 		<div ng-switch-when="2">
-			<div class="double-btn">
+			<div>
 				<button ng-click="updateDigitalBankServiceState()" ng-disabled="serviceForm.$invalid">Continuar</button>
 				<button ng-click="updateService(1,'');">Cancelar</button>
 			</div>

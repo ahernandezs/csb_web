@@ -5,7 +5,7 @@
     </form>
     <table class="transactions">
         <thead>
-            <tr>
+            <tr class="titulos-admin">
                <th>Nombre del beneficiario</th>
                 <th>Cuenta / Referencia</th>
                 <th>Alias</th>
@@ -14,7 +14,7 @@
         </thead>
         <tbody>
             <tr>
-                <td colspan="4">Terceros Consubanco</td>
+                <td class="titulos-admin" colspan="4">Terceros Consubanco</td>
             </tr>
             <tr ng-repeat="accounts in third_accounts_own | filter:busqueda" ng-click="selectBeneficiary(accounts);">
                 <td>{{accounts.name}}</td>
@@ -23,7 +23,7 @@
                 <td>{{accounts.account_type_name}}</td>
             </tr>
             <tr>
-                <td colspan="4">Terceros Otros Bancos</td>
+                <td class="titulos-admin" colspan="4">Terceros Otros Bancos</td>
             </tr>
             <tr ng-repeat="accounts in third_accounts_others | filter:busqueda" ng-click="selectBeneficiary(accounts);">
                 <td>{{accounts.name}}</td>
