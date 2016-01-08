@@ -1,6 +1,6 @@
 <table class="transactions adminTarjetas margin-top-admin">
     <thead>
-        <tr>
+        <tr class="titulos-admin">
             <th>Tipo de operaci&oacute;n</th>
             <th>L&iacute;mite de monto</th>
         </tr>   
@@ -13,7 +13,7 @@
                   <span>{{ limit.amount | currency: '$'}}</span>
                   <button ng-click="asktoken=true">Editar</button>
                 </div>
-                <div ng-show="asktoken">
+                <div ng-show="asktoken" class="monto-size">
                     <form name="limitform">
                         <input type="text" currency ng-model="limit.newamount" placeholder="Nuevo l&iacute;mite" required>
                         <label class="fieldContainer" ng-class="limit.otp.length > 0 ? 'selected' : ''">

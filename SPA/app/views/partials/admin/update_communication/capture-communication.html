@@ -25,7 +25,7 @@
             </div>
             <div>
                 <div ng-hide="captureToken">
-                    <button ng-click="captureToken = true" ng-disabled="(!updatedata.phoneSelect && !updatedata.mailSelect) || (updatedata.phoneSelect && updatedata.phone === '') || (updatedata.mailSelect && updatedata.e_mail === '')">Continuar</button>
+                    <button class="botton-alertynot" ng-click="captureToken = true" ng-disabled="(!updatedata.phoneSelect && !updatedata.mailSelect) || (updatedata.phoneSelect && updatedata.phone === '') || (updatedata.mailSelect && updatedata.e_mail === '')">Continuar</button>
                 </div>
                 <div ng-show="captureToken">
                     <div class="fieldContainer">

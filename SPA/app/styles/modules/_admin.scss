@@ -210,15 +210,15 @@
 			}
 		}
 		button{
-			width: 80%;
-			margin-left:10%;
+			width: 287px;
+			margin-left: 18%;
 			margin-bottom: 15px;
 		}
 
 		h3{
 			color:$blue;
-			width: 90%;
-			margin:0 auto 20px auto;
+			width: 100%;
+			margin:0 0 20px 0;
 			font-size: 1.2em;
 			text-align: center;
 			padding-bottom: 20px;
@@ -230,7 +230,7 @@
 			}
 		}
 		.servicio{
-			width: 80%;
+			width: 90%;
 			margin: 0 auto;
 			overflow: hidden;
 			border-bottom: 1px solid #CCC;
@@ -301,7 +301,7 @@
 .agregarBeneficiario{
 	width:70%;
 	>form{
-		margin: 15px;
+		margin: 15px 0 15px 0;
 		position: relative;
 		overflow: hidden;
 		input{
@@ -537,10 +537,10 @@
 		width: 50%;
 		padding: 10px 15px;
 		&:first-child{
-			text-align: left;
+			text-align: center;
 		}
 		&:last-child{
-			text-align: right;
+			text-align: center;
 		}
 		div{
 			span{margin-right: 20px;}
@@ -612,7 +612,7 @@
 	}
 	table{width:100%;}
 	th{text-align: center;}
-	td{width: 33%;&:last-child{text-align: center;}}
+	td{width: 33%; text-align: center;&:last-child{text-align: center;}}
 	/*.transactions{
 		max-height:600px;
 		overflow:auto;
@@ -621,4 +621,17 @@
 
 .w35{
 	width:35%
+}
+
+.botton-alertynot{
+	width: 80% !important;
+    margin-left: 10% !important;
+}
+
+.titulos-admin{
+	font-size:14px !important
+}
+
+.tabular-data td span:first-child, .transactions td span:first-child{
+	font-size: 14px
 }

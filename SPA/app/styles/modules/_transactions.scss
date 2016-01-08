@@ -352,12 +352,13 @@ table input[type="submit"]{font-weight: bold;}
         @include border-radius(2px);
         p{
             float: left;
-            padding:13px 0;
+            padding:23px 0;
             width: 75%;
             font-size: 0.9em;
             margin-left: 10%;
             text-align: left;
             color: $green;
+            font-weight: bold;
             span{
                 font-weight: bold;
             }
