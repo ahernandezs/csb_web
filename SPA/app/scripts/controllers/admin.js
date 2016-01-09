@@ -136,8 +136,8 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 	}
 
 	/**
-	 * get the third-account when initializing the controller.
-	 */
+	* get the third-account when initializing the controller.
+	*/
 	function loadBeneficiary(){
 		thirdAccountProvider.getThirdAccounts().then(
 			function(data) {
@@ -158,12 +158,12 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 		)
 	};
 
-    /**
-     * return true if user has full accesses
-     */
-    $scope.isCompleteUser = function(){
-        return userProvider.isCompleteUser();
-    };
+	/**
+	* return true if user has full accesses
+	*/
+	$scope.isCompleteUser = function(){
+		return userProvider.isCompleteUser();
+	};
 
 
 /**********************
@@ -174,75 +174,71 @@ Adding a beneficary actions
 		$scope.action = 3;
 	}
 
-    $scope.completeStep = function(nextStep) {
+	$scope.completeStep = function(nextStep) {
 		$scope.selection = nextStep;
 		if (nextStep === 1) {
 			$scope.beneficiary = {};
 			$scope.payment = {};
 			$scope.transfer = {};
 		}
-	 };
+	};
 
-    $scope.validateThirdAccount = function(){
-        thirdAccountProvider.validateThirdAccount($scope.beneficiary.account).then(
-            function(data) {
-                //console.log(JSON.stringify(data));
-                $scope.beneficiary._account_id = data._account_id;
-                $scope.beneficiary.bank_name = data.bank_name;
-                $scope.beneficiary.same_bank = data.same_bank;
-                if($scope.beneficiary.same_bank){
-                    $scope.beneficiary.name = data.client_name;
-                }
-                $scope.selection = 2;
-            },
-	        function(errorObject) {
+	$scope.validateThirdAccount = function(){
+		thirdAccountProvider.validateThirdAccount($scope.beneficiary.account).then(
+			function(data) {
+				$scope.beneficiary._account_id = data._account_id;
+				$scope.beneficiary.bank_name = data.bank_name;
+				$scope.beneficiary.same_bank = data.same_bank;
+				if($scope.beneficiary.same_bank){
+					$scope.beneficiary.name = data.client_name;
+				}
+				$scope.selection = 2;
+			},
+			function(errorObject) {
 				var status = errorObject.status;
-		        var msg = codeStatusErrors.errorMessage(status);
+				var msg = codeStatusErrors.errorMessage(status);
 				if (status === 500){
-		            $scope.setServiceError(msg + errorObject.response.message);
-		        } else if(status === 406){
-		        	if(errorObject.response.code){
-		        		var validationErrorCode = errorObject.response.code;
-		        		switch(validationErrorCode){
-		        			case 100 : msg="El Formato es invalido"; break;
-		        			case 101 : msg="La CLABE es invalida"; break;
-		        			case 102 : msg="El número de tarjeta de credito es invalido"; break;
-		        			case 103 : msg="El número de cuenta es invalido"; break;
-		        			case 200 : msg="El número de cuenta no está registrado en el sistema"; break;
-		        		}
-		        	}
-		        	$scope.setServiceError(msg);
-		    	}else {
-		        	$scope.setServiceError(msg);
-		        }
+					$scope.setServiceError(msg + errorObject.response.message);
+				} else if(status === 406){
+					if(errorObject.response.code){
+						var validationErrorCode = errorObject.response.code;
+						switch(validationErrorCode){
+							case 100 : msg="El Formato es invalido"; break;
+							case 101 : msg="La CLABE es invalida"; break;
+							case 102 : msg="El número de tarjeta de credito es invalido"; break;
+							case 103 : msg="El número de cuenta es invalido"; break;
+							case 200 : msg="El número de cuenta no está registrado en el sistema"; break;
+						}
+					}
+					$scope.setServiceError(msg);
+				}else {
+					$scope.setServiceError(msg);
+				}
 			}
-        );
-    }
+		);
+	}
 
-    $scope.sendBeneficiary = function() {
-        // account = 18 digitos (002123456789012347) y token correcto
-        thirdAccountProvider.registerThirdAccount($scope.beneficiary.aka, $scope.beneficiary.name,
-                                                 $scope.beneficiary.email, $scope.beneficiary.phone,
-                                                 $scope.beneficiary._account_id, $scope.beneficiary.token).then(
-            function(data) {
-								loadBeneficiary();
-                $scope.selection = 4;
-            },
-	        function(errorObject) {
+	$scope.sendBeneficiary = function() {
+		thirdAccountProvider.registerThirdAccount($scope.beneficiary.aka, $scope.beneficiary.name,v$scope.beneficiary.email, $scope.beneficiary.phone, $scope.beneficiary._account_id, $scope.beneficiary.token).then(
+			function(data) {
+				loadBeneficiary();
+				$scope.selection = 4;
+			},
+			function(errorObject) {
 				var status = errorObject.status;
-		        if(status === 403){
+				if(status === 403){
 					$scope.manageOtpErrorMessage(errorObject.response);
-			    } else {
-			    	var msg = codeStatusErrors.errorMessage(status);
+				} else {
+					var msg = codeStatusErrors.errorMessage(status);
 					if (status === 500){
-		            	$scope.setServiceError(msg + errorObject.response.message);
-		        	} else {
-		        		$scope.setServiceError(msg);
-		        	}
-			    }
+						$scope.setServiceError(msg + errorObject.response.message);
+					} else {
+						$scope.setServiceError(msg);
+					}
+				}
 			}
-        );
-    }
+		);
+	}
 
 	adminProvider.getLimits().then(
 		function(){
@@ -250,11 +246,11 @@ Adding a beneficary actions
 				for(var i=0; i <  $rootScope.limits.length; i++){
 					var type_name = $rootScope.limits[i].type;
 					if(type_name == "PAYCARD_CONSUBANCO"){
-						 $rootScope.limits[i].type_name="Pago a TDC Terceros Consubanco";
+						$rootScope.limits[i].type_name="Pago a TDC Terceros Consubanco";
 					}else if (type_name == "TRANSFER_CONSUBANCO") {
-						 $rootScope.limits[i].type_name="Transferencia Terceros Consubanco";
+						$rootScope.limits[i].type_name="Transferencia Terceros Consubanco";
 					}else if (type_name == "TRANSFER_SPEI"){
-						 $rootScope.limits[i].type_name="Transferencia Terceros Otro Banco";
+						$rootScope.limits[i].type_name="Transferencia Terceros Otro Banco";
 					}
 				}
 			}//End if validate length
@@ -270,11 +266,11 @@ Adding a beneficary actions
 						for(var i=0; i <  limits.length; i++){
 							var type_name = limits[i].type;
 							if(type_name == "PAYCARD_CONSUBANCO"){
-								 limits[i].type_name="Pago a TDC Terceros Consubanco";
+								limits[i].type_name="Pago a TDC Terceros Consubanco";
 							}else if (type_name == "TRANSFER_CONSUBANCO") {
-								 limits[i].type_name="Transferencia Terceros Consubanco";
+								limits[i].type_name="Transferencia Terceros Consubanco";
 							}else if (type_name == "TRANSFER_SPEI"){
-								 limits[i].type_name="Transferencia Terceros Otro Banco";
+								limits[i].type_name="Transferencia Terceros Otro Banco";
 							}
 						}
 						$scope.limits = $rootScope.limits;
@@ -282,7 +278,7 @@ Adding a beneficary actions
 				);
 			},
 			function(errorObject){
-	            $scope.setServiceError(errorObject.response.message);
+				$scope.setServiceError(errorObject.response.message);
 				adminProvider.getLimits().then(
 					function(){
 						$scope.limits = $rootScope.limits;
@@ -292,48 +288,47 @@ Adding a beneficary actions
 		);
 	}
 
-  $scope.mapUserActivity = function(activity) {
-    var activityName = activity;
+	$scope.mapUserActivity = function(activity) {
+		var activityName = activity;
 
-    var userActions = {
-      'checkLogin': 'Pre Login',
-      'authenticateUser': 'Login',
-      'logout': 'Logout',
-      'getAccounts': 'Consulta de Cuentas',
-      'setAccountsLimits': 'Modificación de Límites',
-      'getFile': 'Consulta de Estado de Cuenta',
-      'getInvestmentProductsForUser': 'Consulta de Inversiones',
-      'getThirdAccounts': 'Consulta de Cuentas de Terceros',
-      'saveThirdAccount': 'Alta de Beneficiario',
-      'removeThirdAccount': 'Baja de Beneficiario',
-      'activateSecurityToken': 'Activación de Token',
-      'disableSecurityToken': 'Baja de Token',
-      'synchronizeSecurityToken': 'Sincronización de Token',
-      'transfer': 'Transferencia',
-      'changePassword': 'Cambio de Password',
-      'updateCommunicationInfo': 'Cambio de Medio de Comunicación',
-      'updateDigitalBankServicesState': 'Cambio de Status en Banca Digital'
-    };
+		var userActions = {
+			'checkLogin': 'Pre Login',
+			'authenticateUser': 'Login',
+			'logout': 'Logout',
+			'getAccounts': 'Consulta de Cuentas',
+			'setAccountsLimits': 'Modificación de Límites',
+			'getFile': 'Consulta de Estado de Cuenta',
+			'getInvestmentProductsForUser': 'Consulta de Inversiones',
+			'getThirdAccounts': 'Consulta de Cuentas de Terceros',
+			'saveThirdAccount': 'Alta de Beneficiario',
+			'removeThirdAccount': 'Baja de Beneficiario',
+			'activateSecurityToken': 'Activación de Token',
+			'disableSecurityToken': 'Baja de Token',
+			'synchronizeSecurityToken': 'Sincronización de Token',
+			'transfer': 'Transferencia',
+			'changePassword': 'Cambio de Password',
+			'updateCommunicationInfo': 'Cambio de Medio de Comunicación',
+			'updateDigitalBankServicesState': 'Cambio de Status en Banca Digital'
+		};
 
-    if(userActions[activity]) {
-      activityName = userActions[activity];
-    }
+		if(userActions[activity]) {
+			activityName = userActions[activity];
+		}
 
-    return activityName;
-  };
+		return activityName;
+	};
 
-  $scope.mapActivityStatus = function(activityStatus) {
-    var statuses = {
-      true : 'exitoso',
-      false: 'fallo'
-    };
+	$scope.mapActivityStatus = function(activityStatus) {
+		var statuses = {
+			true : 'exitoso',
+			false: 'fallo'
+		};
+		return statuses[activityStatus];
+	};
 
-    return statuses[activityStatus];
-  };
-
-  function setError(errorMessage){
-        $scope.error = true;
-        $scope.errorMessage = errorMessage;
-    };
+	function setError(errorMessage){
+		$scope.error = true;
+		$scope.errorMessage = errorMessage;
+	};
 
 }]);

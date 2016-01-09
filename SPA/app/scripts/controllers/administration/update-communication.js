@@ -10,8 +10,8 @@ angular.module('spaApp').controller('updateCommunicationController', ['$scope', 
 		adminProvider.getCommunication().then(
 			function(data){
 				$scope.updatedata = data;
-				$scope.updatedata.mailSelect = $scope.updatedata.prefered_communication_type == "AMBOS" || $scope.updatedata.prefered_communication_type == "MAIL" ? true : false;
-				$scope.updatedata.phoneSelect = $scope.updatedata.prefered_communication_type == "AMBOS" || $scope.updatedata.prefered_communication_type == "CELULAR" ? true : false;
+				$scope.updatedata.mailSelect = $scope.updatedata.prefered_communication_type == 'AMBOS' || $scope.updatedata.prefered_communication_type == 'MAIL' ? true : false;
+				$scope.updatedata.phoneSelect = $scope.updatedata.prefered_communication_type == 'AMBOS' || $scope.updatedata.prefered_communication_type == 'CELULAR' ? true : false;
 			},
 			function(errorObject){
 				$scope.setServiceError(errorObject.response);
@@ -21,7 +21,7 @@ angular.module('spaApp').controller('updateCommunicationController', ['$scope', 
 	$scope.getCommunication();
 
 	$scope.sendCommunication = function () {
-		var prefered = $scope.updatedata.mailSelect && $scope.updatedata.phoneSelect ? "AMBOS" : $scope.updatedata.mailSelect ? "MAIL" : "CELULAR";
+		var prefered = $scope.updatedata.mailSelect && $scope.updatedata.phoneSelect ? 'AMBOS' : $scope.updatedata.mailSelect ? 'MAIL' : 'CELULAR';
 		adminProvider.updateCommunication($scope.updatedata.phone, $scope.updatedata.e_mail, $scope.updatedata.otp, prefered).then(
 			function (data) {
 				if(data.status === 'E'){
