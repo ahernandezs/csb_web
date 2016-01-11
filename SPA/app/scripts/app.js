@@ -20,11 +20,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         scrollAmount: 'auto',
         enable: true
       },
-    scrollInertia: 400,
-    axis: 'yx',
-    theme: 'minimal-dark',
-    autoHideScrollbar: true
-  };
+      scrollInertia: 400,
+      axis: 'yx',
+      theme: 'minimal-dark',
+      autoHideScrollbar: true
+    };
 
   uiGmapGoogleMapApiProvider.configure({
     key: 'AIzaSyAMjg5ItWNxU2f-uw6tOz3lFBe_tXcUwlM',
@@ -150,8 +150,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         }
       }
     });
-
-  }]);
+   }]);
 
 app.run(['api', '$window', '$rootScope',function(api, $window, $rootScope) {
   api.config();

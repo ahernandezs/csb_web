@@ -8,15 +8,15 @@ angular.module('spaApp')
         message = 'Error, verifica tu conexión a internet';
         return message;
       }
+      else if (status === 403 ) {
+        message = 'OTP inválido';
+        return message;
+      }
       else if (status === 401 || status === 423) {
-        // session expired : returned to login
-        // error taken from:  transfers.js
         message = 'La sesión ha expirado';
         return message;
       }
       else if (status === 406 || status === 417) {
-        // message = 'invalid input: TODO: analyse the code inside the json mesage body';
-        // error taken from:  transfers.js
         message = 'Datos inválidos';
         return message;
       }
@@ -25,9 +25,7 @@ angular.module('spaApp')
         return message;
       }
       else if (status === 503 || status === 504) {
-        // business or technical exception
-        // message = 'unknown problem. Please retry later';
-        // error taken from:  transfers.js
+
         message = 'Se detectó un error en el proceso, favor de ponerse en contacto con el área de Atención a Clientes';
         return message;
       }
