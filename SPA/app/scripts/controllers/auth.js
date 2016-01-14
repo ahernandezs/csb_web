@@ -187,7 +187,13 @@ angular.module('spaApp')
       setError('Usuario no tiene el servicio de banca digital');
     } else if(status === 502) {
       setError('Usuario no instalado en las bases');
-    } else if(status === 503 || status === 423) {
+    } else if(status === 503) {
+      if(errorObject.code === 305 || errorObject.code === 306 || errorObject.code === 307){
+        setError(errorObject.message);
+      }else{
+        setError('Usuario bloqueado');
+      }
+     } else if(status === 423) {
       setError('Usuario bloqueado');
     } else if(status === 504) {
       setError('Tiempo de respuesta excedido, por favor intente más tarde');
