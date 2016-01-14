@@ -6,28 +6,16 @@ angular.module('spaApp')
       var message = 'Error en el servicio, intente más tarde';
       if (status === 0 || status === 12029) {
         message = 'Error, verifica tu conexión a internet';
-        return message;
-      }
-      else if (status === 403 ) {
+      } else if (status === 403 ) {
         message = 'OTP inválido';
-        return message;
-      }
-      else if (status === 401 || status === 423) {
+      } else if (status === 401 || status === 423) {
         message = 'La sesión ha expirado';
-        return message;
-      }
-      else if (status === 406 || status === 417) {
+      } else if (status === 406 || status === 417 || status === 301) {
         message = 'Datos inválidos';
-        return message;
-      }
-      else if (status === 500) {
+      } else if (status === 500) {
         message = 'Error interno del servidor: ';
-        return message;
-      }
-      else if (status === 503 || status === 504) {
-
+      } else if (status === 503 || status === 504 || status === 505 || status === 506) {
         message = 'Se detectó un error en el proceso, favor de ponerse en contacto con el área de Atención a Clientes';
-        return message;
       }
       return message;
     };
