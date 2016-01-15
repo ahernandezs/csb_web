@@ -257,6 +257,7 @@ angular.module('spaApp')
 	$scope.requestChange = function() {
 		userProvider.unlockUserPreRequest( $scope.unlockData.username, $scope.unlockData.folio ).
 			then( function(data) {
+        resetError();
 				$scope.unlockImages = data.images;
 				$scope.selection++;
 			}, function(data) {
