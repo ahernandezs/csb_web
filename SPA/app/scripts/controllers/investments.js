@@ -16,8 +16,10 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
     accountsProvider.getAccountDetail($stateParams.accountId).then(
         function(data) {
             $scope.investmentHeader = $rootScope.accountDetail.investment;
-            $scope.instructions = $scope.investmentHeader.instruction_investment;
-            $scope.instruction = $scope.instructions.ins_inv_to_print;
+            if(typeof $scope.investmentHeader.instruction_investment !== 'undefined'){
+                $scope.instructions = $scope.investmentHeader.instruction_investment;
+                $scope.instruction = $scope.instructions.ins_inv_to_print;
+            }
         },
         function(errorObject) {
             var status = errorObject.status;
