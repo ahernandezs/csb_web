@@ -21,8 +21,8 @@ angular.module('spaApp').factory('api', ['$http', '$rootScope', '$window', funct
       // this is the token of the bank
       $http.defaults.headers.common['X-BANK-TOKEN'] = 4;
       $http.defaults.headers.common['X-AUTH-TOKEN'] = token || $rootScope.session_token;
-
-      //console.log("Executes init & token = " + $rootScope.session_token);
+      $http.defaults.headers.common['X-CLIENT-TYPE'] = 'WEB';
+      $http.defaults.headers.common['X-CLIENT-VERSION'] = '1.2.1';
     },
     config: function(){
       // Use this link for deployment
