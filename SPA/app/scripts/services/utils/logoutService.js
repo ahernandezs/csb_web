@@ -25,7 +25,7 @@ angular.module('spaApp')
             function() {
 
             }, function() {
-              displayErrorMessage();
+              options.hasError = true;
           });
           timerService.stop();
           $rootScope.session_token = null;
