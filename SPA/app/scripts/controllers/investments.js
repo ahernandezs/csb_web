@@ -13,24 +13,28 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
 
     $scope.searchParams = {};
 
-    accountsProvider.getAccountDetail($stateParams.accountId).then(
-        function(data) {
-            $scope.investmentHeader = $rootScope.accountDetail.investment;
-            if(typeof $scope.investmentHeader.instruction_investment !== 'undefined'){
-                $scope.instructions = $scope.investmentHeader.instruction_investment;
-                $scope.instruction = $scope.instructions.ins_inv_to_print;
-            }
-        },
-        function(errorObject) {
-            var status = errorObject.status;
-            var msg = codeStatusErrors.errorMessage(status);
-            if (status === 500){
-                $scope.setServiceError(msg + errorObject.response.message);
-            } else {
-                $scope.setServiceError(msg);
-            }
-        }
-    );
+	$scope.loadDetail = function() {
+		accountsProvider.getAccountDetail($stateParams.accountId).then(
+	        function(data) {
+	            $scope.investmentHeader = $rootScope.accountDetail.investment;
+	            if(typeof $scope.investmentHeader.instruction_investment !== 'undefined'){
+	                $scope.instructions = $scope.investmentHeader.instruction_investment;
+	                $scope.instruction = $scope.instructions.ins_inv_to_print;
+	            }
+	        },
+	        function(errorObject) {
+	            var status = errorObject.status;
+	            var msg = codeStatusErrors.errorMessage(status);
+	            if (status === 500){
+	                $scope.setServiceError(msg + errorObject.response.message);
+	            } else {
+	                $scope.setServiceError(msg);
+	            }
+	        }
+	    );
+	};
+
+	$scope.loadDetail();
 
     accountsProvider.getTransactions($scope.selectedAcccountId, params).then(
         function(data){
@@ -177,6 +181,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
         function(data){
           $scope.modify.show = false;
           $scope.result.success = true;
+		  $scope.loadDetail();
         },
         function(errorObject) {
           var status = errorObject.status;
