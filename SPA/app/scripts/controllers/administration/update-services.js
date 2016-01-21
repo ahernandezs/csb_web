@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('spaApp').controller('updateServicesController', ['$scope', 'adminProvider', function ($scope, adminProvider) {
+angular.module('spaApp').controller('updateServicesController', ['$scope', 'adminProvider', 'ngDialog', function ($scope, adminProvider, ngDialog) {
 
 	$scope.actionUpdateState = 1;
 	$scope.updateDigitalBankServiceState = [];
@@ -23,7 +23,12 @@ angular.module('spaApp').controller('updateServicesController', ['$scope', 'admi
 				$scope.actionUpdateState = 3;
 				$scope.updateDigitalBankServiceState.otp = '';
 				$scope.result.success = true;
-				$scope.logout();
+				ngDialog.openConfirm({
+					template: 'views/partials/admin/notification.html',
+					showClose: false,
+					data: {'state': $scope.updateDigitalBankServiceState.state} }).then(function(){
+						$scope.logout(true);
+				});
 			},
 			function(errorObject){
 				$scope.exception = true;
