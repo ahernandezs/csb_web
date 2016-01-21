@@ -1,0 +1,10 @@
+<div class="contenido">
+	<h4>Servicio {{ngDialogData.state === 'C' ? 'cancelado' : 'suspendido' }}
+</h4>
+	<p>
+		Su servicio ha sido {{ngDialogData.state === 'C' ? 'cancelado' : 'suspendido' }} exitosamente.
+	</p>
+</div>
+<div class="contenido gris">
+	<button ng-click="confirm();">Aceptar</button>
+</div>
