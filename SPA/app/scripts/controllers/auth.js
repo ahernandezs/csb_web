@@ -182,7 +182,7 @@ angular.module('spaApp')
     } else if(status === 404){
       setError('Error, recurso no encontrado');
     } else if(status === 406){
-      setError(errorObject.message);
+      setError('El password no cumple con la seguridad');
     } else if(status === 409) {
       setError('Existe una sesión vigente en otra aplicación');
     } else if(status === 501) {
