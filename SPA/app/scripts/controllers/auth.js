@@ -181,6 +181,12 @@ angular.module('spaApp')
       setError('El password o imagen son incorrectos');
     } else if(status === 404){
       setError('Error, recurso no encontrado');
+    } else if(status === 406){
+      if(errorObject.code === 404){
+        setError('El password no cumple con la seguridad');
+      }else{
+        setError('Datos no válidos');
+      }
     } else if(status === 409) {
       setError('Existe una sesión vigente en otra aplicación');
     } else if(status === 501) {
