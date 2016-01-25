@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('spaApp')
-	.service('userService', ['$http','$rootScope',function ($http, $rootScope) {
+	.service('userService', ['$http', '$rootScope', 'detectIE', function ($http, $rootScope, detectIE) {
 		this.preRegisterUser = function(clientId, folioId){
 			return $http({
 					url: $rootScope.restAPIBaseUrl+'/preregister',
@@ -53,7 +53,10 @@ angular.module('spaApp')
 		};
 
 		this.logout = function() {
-			return $http( { cache: false, url: $rootScope.restAPIBaseUrl+'/logout', method: 'GET' } );
+			if ( detectIE.isIE() )
+				return $http( { cache: false, url: $rootScope.restAPIBaseUrl+'/logout', method: 'GET', params: { 'time': new Date().getTime() } } );
+			else
+				return $http( { cache: false, url: $rootScope.restAPIBaseUrl+'/logout', method: 'GET' } );
 		};
 
 }]);
