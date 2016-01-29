@@ -263,11 +263,14 @@ angular.module('spaApp')
 	$scope.requestChange = function() {
 		userProvider.unlockUserPreRequest( $scope.unlockData.username, $scope.unlockData.folio ).
 			then( function(data) {
-        resetError();
+				resetError();
 				$scope.unlockImages = data.images;
 				$scope.selection++;
 			}, function(data) {
-				setError( data.message );
+				if ( data.code === 505 )
+					setError( 'No se pudo obtener el código de desbloqueo para la validación' );
+				else
+					setError( data.message );
 			});
 	};
 
