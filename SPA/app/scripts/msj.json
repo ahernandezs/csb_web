@@ -1,0 +1,16 @@
+{
+	"0": "Error, verifica tu conexión a internet",
+	"12029": "Error, verifica tu conexión a internet",
+	"401": "La sesión ha expirado",
+	"403": "OTP inválido",
+	"423": "La sesión ha expirado",
+	"406": "Datos inválidos",
+	"417": "Datos inválidos",
+	"301": "Datos inválidos",
+	"500": "Error interno del servidor",
+	"503": "Se detectó un error en el proceso, favor de ponerse en contacto con el área de Atención a Clientes",
+	"504": "Se detectó un error en el proceso, favor de ponerse en contacto con el área de Atención a Clientes",
+	"505": "Se detectó un error en el proceso, favor de ponerse en contacto con el área de Atención a Clientes",
+	"506": "Se detectó un error en el proceso, favor de ponerse en contacto con el área de Atención a Clientes",
+	"507": "Se detectó un error en el proceso, favor de ponerse en contacto con el área de Atención a Clientes"
+}
