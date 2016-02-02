@@ -219,7 +219,7 @@ Adding a beneficary actions
 	}
 
 	$scope.sendBeneficiary = function() {
-		thirdAccountProvider.registerThirdAccount($scope.beneficiary.aka, $scope.beneficiary.name,v$scope.beneficiary.email, $scope.beneficiary.phone, $scope.beneficiary._account_id, $scope.beneficiary.token).then(
+		thirdAccountProvider.registerThirdAccount($scope.beneficiary.aka, $scope.beneficiary.name, $scope.beneficiary.email, $scope.beneficiary.phone, $scope.beneficiary._account_id, $scope.beneficiary.token).then(
 			function(data) {
 				loadBeneficiary();
 				$scope.selection = 4;
