@@ -339,6 +339,10 @@
 	padding: 15px;
 	.fieldContainer span{
 		padding:12px 0;
+		width: 22%;
+	}
+	.fieldContainer.selected input[type="text"], input[type="password"], input[type="email"], input[type="tel"] {
+	    width: 78%;
 	}
 	.benheader{
 		border-bottom:1px solid $lgray;

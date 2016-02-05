@@ -11,7 +11,7 @@
     </div>
     <form name="beneficiaryForm">
         <label class="fieldContainer" ng-class="beneficiary.name.length > 0 ? 'selected' : ''">
-            <span>Nombre beneficiario</span>
+            <span>Nombre<br>beneficiario</span>
             <input type="text" alphanumeric ng-model="beneficiary.name" placeholder="Nombre beneficiario" class="input-usuario" ng-required="true" ng-readonly="beneficiary.same_bank" ng-disabled="beneficiary.same_bank" maxlength="60">
         </label>
         <label class="fieldContainer" ng-class="beneficiary.aka.length > 0 ? 'selected' : ''">
@@ -26,10 +26,10 @@
         <p class="instrucciones">Datos para notificar al beneficiario</p>
         <label class="fieldContainer" ng-class="beneficiary.phone.length > 0 ? 'selected' : ''">
             <span>Celular</span>
-            <input type="tel" ng-model="beneficiary.phone" placeholder="Celular" class="input-mobile" numbers-only minlength="10" maxlength="10" required>
+            <input type="text" ng-model="beneficiary.phone" placeholder="Celular" class="input-mobile" numbers-only minlength="10" maxlength="10" required>
         </label>
         <label class="fieldContainer" ng-class="beneficiary.email.length > 0 ? 'selected' : ''">
-            <span>Correo electr&oacute;nico</span>
+            <span>Correo<br>electr&oacute;nico</span>
             <input type="text" ng-model="beneficiary.email" placeholder="Correo electr&oacute;nico (opcional)" class="input-mail" name="email" alphanumeric maxlength="254">
         </label>
     </form>
