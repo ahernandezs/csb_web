@@ -5,7 +5,7 @@
  */
 angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$location', '$routeParams', 'accountsProvider', 'userProvider', 'thirdAccountProvider', 'transferProvider', '$controller','paymentCreditCardService', '$filter', 'codeStatusErrors', function ($rootScope, $scope, $location, $routeParams, accountsProvider, userProvider, thirdAccountProvider, transferProvider, $controller,paymentCreditCardService, $filter, codeStatusErrors) {
 
-	$scope.section = 'PAY';
+    $scope.section = 'PAY';
     $scope.selection = 1;
     $scope.payment = {};
     $scope.payment.select1 = false;
@@ -15,7 +15,7 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
     $scope.theAccounts = [];
     $scope.today = new Date();
 
-	/**
+    /**
      * Get the own accounts.
      */
     function obtenerCuentasPropias(){
@@ -24,23 +24,23 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
                $rootScope.accounts.forEach(
                     function (value, index, ar) {
 
-    					value.group = 'Cuentas Propias';
-    					switch ( value.account_type ) {
-    						case 'DEP':
-    							value.displayName = value.name + ' ' + value.masked_account_number + ' - ' + value.currency + ': ' + $filter('currency')(value.current_balance, '$');
-    							value.detail = value.name + ' | ' + value.currency + ': ' + $filter('currency')(value.current_balance, '$');
-    							$scope.theAccounts.push( value );
-    							break;
-    						case 'TDC':
-    							value.displayName = 'Consubanco - ' + value.name + ' ' + value.masked_account_number + ' - ' + value.currency + ': ' + $filter('currency')(value.current_balance, '$');
-    							value.detail = value.name + ' | ' + value.currency + ': ' + $filter('currency')(value.current_balance, '$');
-    							$scope.theAccounts.push( value );
-    							break;
-    						default:
-    							break;
-    					}
-    				}
-    			);
+                        value.group = 'Cuentas Propias';
+                        switch ( value.account_type ) {
+                            case 'DEP':
+                                value.displayName = value.name + ' ' + value.masked_account_number + ' - ' + value.currency + ': ' + $filter('currency')(value.current_balance, '$');
+                                value.detail = value.name + ' | ' + value.currency + ': ' + $filter('currency')(value.current_balance, '$');
+                                $scope.theAccounts.push( value );
+                                break;
+                            case 'TDC':
+                                value.displayName = 'Consubanco - ' + value.name + ' ' + value.masked_account_number + ' - ' + value.currency + ': ' + $filter('currency')(value.current_balance, '$');
+                                value.detail = value.name + ' | ' + value.currency + ': ' + $filter('currency')(value.current_balance, '$');
+                                $scope.theAccounts.push( value );
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                );
                 if(paymentCreditCardService.accountId){
                     var result = $.grep($scope.theAccounts, function(e){ return e._account_id == paymentCreditCardService.accountId });
                     $scope.payment.destiny = result[0];
@@ -53,7 +53,7 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
                         $scope.payment.other = paymentCreditCardService.amount;
                     delete paymentCreditCardService.accountId;
                 }
-    		},
+            },
             function(errorObject) {
                 var status = errorObject.status;
                 var msg = codeStatusErrors.errorMessage(status);
@@ -71,59 +71,61 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
      * Get third party accounts.
      */
      function obtenerCuentasTerceros(){
-        thirdAccountProvider.getThirdAccounts().then(
-            function(data) {
-                data.forEach(
-                    function (value, index, ar) {
-    					if ( value.account_type == 'TDC_T' || value.account_type == 'DEB_T' ) {
-    	                    value.group = 'Cuentas Terceros';
-    						value.displayName = value.bank_name + ' - ' + value.name + ' ' + value.masked_account_number + ' - ' + value.short_name;
-    						value.detail = value.bank_name + ' | ' + value.name;
-    	                    $scope.theAccounts.push( value );
-    					}
+        if(userProvider.isCompleteUser()){
+            thirdAccountProvider.getThirdAccounts().then(
+                function(data) {
+                    data.forEach(
+                        function (value, index, ar) {
+                            if ( value.account_type == 'TDC_T' || value.account_type == 'DEB_T' ) {
+                                value.group = 'Cuentas Terceros';
+                                value.displayName = value.bank_name + ' - ' + value.name + ' ' + value.masked_account_number + ' - ' + value.short_name;
+                                value.detail = value.bank_name + ' | ' + value.name;
+                                $scope.theAccounts.push( value );
+                            }
+                        }
+                    );
+                },
+                function(errorObject) {
+                    var status = errorObject.status;
+                    var msg = codeStatusErrors.errorMessage(status);
+                    if (status === 500){
+                        $scope.setServiceError(msg + errorObject.response.message);
+                    } else {
+                        $scope.setServiceError(msg);
                     }
-                );
-            },
-            function(errorObject) {
-                var status = errorObject.status;
-                var msg = codeStatusErrors.errorMessage(status);
-                if (status === 500){
-                    $scope.setServiceError(msg + errorObject.response.message);
-                } else {
-                    $scope.setServiceError(msg);
                 }
-            }
-        );
+            );
+        }
     }
     obtenerCuentasTerceros();
 
 
-	/**
-	 * Receive the section value from the UI and change the selection to 1.
-	 */
-	$scope.changeSection = function(newSection) {
-		$scope.section = newSection;
-		$scope.selection = 1;
-		$scope.payment = {};
-		$scope.transfer = {};
-	};
+    /**
+    * Receive the section value from the UI and change the selection to 1.
+    */
+    $scope.changeSection = function(newSection) {
+        $scope.section = newSection;
+        $scope.selection = 1;
+        $scope.payment = {};
+        $scope.transfer = {};
+    };
 
-	/**
-	 * Evaluate if the destiny should be deleted according to the first account selected by the user.
-	 */
-	$scope.evaluateDestiny = function () {
-		if ( $scope.transfer.destiny !== undefined && ($scope.transfer.account._account_id === $scope.transfer.destiny._account_id) )
-			delete $scope.transfer.destiny;
-	};
+    /**
+     * Evaluate if the destiny should be deleted according to the first account selected by the user.
+     */
+    $scope.evaluateDestiny = function () {
+        if ( $scope.transfer.destiny !== undefined && ($scope.transfer.account._account_id === $scope.transfer.destiny._account_id) )
+            delete $scope.transfer.destiny;
+    };
 
-	/**
+    /**
      * Function to navigate between steps. If received a second parameter (true) the objects will be created again.
      */
     $scope.goToStep = function(step, reset) {
         $scope.selection = step;
         if (step === 1) {
            $scope.transfer.otp = '';
-        	if(reset){
+            if(reset){
                 $scope.payment = {};
                 $scope.transfer = {};
                 $scope.theAccounts = [];
@@ -158,8 +160,8 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
     };
 
     /**
-	 * To fill progress bar
-	 */
+    * To fill progress bar
+    */
     $scope.updateProgress = function(nextStep){
         $scope.currentStep = nextStep;
         var wrapperWidth = document.getElementById("progressWrapper").offsetWidth
@@ -168,21 +170,20 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
         //console.log($scope.stepStyle)
     }
 
-	/**
-	 * Assign the type of payment selected by the user.
-	 */
-	$scope.assignValue = function () {
-               //console.log( 'Setting payment type to: ' + $scope.payment.type );
-             $scope.payment.otp="";
-		if ( $scope.payment.type && $scope.payment.type === 'MIN_PAYMENT' )
-			$scope.payment.amount = $scope.transferAccountDetail.minimum_payment;
-		else if ( $scope.payment.type && $scope.payment.type === 'WIHTOUT_INTEREST_PAYMENT' )
-			$scope.payment.amount = $scope.transferAccountDetail.no_interes_payment_due;
-		else if ( $scope.payment.type && $scope.payment.type === 'TOTAL_PAYMENT' )
-			$scope.payment.amount = $scope.payment.other;
-		$scope.selection++;
+    /**
+     * Assign the type of payment selected by the user.
+     */
+    $scope.assignValue = function () {
+        $scope.payment.otp="";
+        if ( $scope.payment.type && $scope.payment.type === 'MIN_PAYMENT' )
+            $scope.payment.amount = $scope.transferAccountDetail.minimum_payment;
+        else if ( $scope.payment.type && $scope.payment.type === 'WIHTOUT_INTEREST_PAYMENT' )
+            $scope.payment.amount = $scope.transferAccountDetail.no_interes_payment_due;
+        else if ( $scope.payment.type && $scope.payment.type === 'TOTAL_PAYMENT' )
+            $scope.payment.amount = $scope.payment.other;
+        $scope.selection++;
         $scope.updateProgress(2);
-	};
+    };
 
     /**
      * Send transfer to own account.
@@ -305,7 +306,7 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
                                     $scope.payment.destiny._account_id,
                                     $scope.payment.amount).then(
             function(data) {
-				$scope.paymentId = data._transaction_id;
+                $scope.paymentId = data._transaction_id;
                 $scope.selection = 3;
                 $scope.updateProgress(3);
             },
@@ -332,7 +333,7 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
                                     $scope.today,
                                     $scope.payment.otp).then(
             function(data) {
-				$scope.paymentId = data._transaction_id;
+                $scope.paymentId = data._transaction_id;
                 $scope.selection = 3;
                 $scope.updateProgress(3);
             },

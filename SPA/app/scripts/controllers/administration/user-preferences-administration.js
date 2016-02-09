@@ -3,7 +3,7 @@
 /**
  * The accounts controller. Gets accounts passing auth parameters
  */
-angular.module('spaApp').controller('UserPreferencesAdministrationController', ['$scope', 'securityTokenProvider', function ($scope, securityTokenProvider) {
+angular.module('spaApp').controller('UserPreferencesAdministrationController', ['$scope', 'securityTokenProvider', 'userProvider', function ($scope, securityTokenProvider, userProvider) {
 
 	/**
 	 * the security-token's state
@@ -36,15 +36,16 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 			{ 'value' : 5 , 'label' : 'TEMPORALMENTE_SUSPENDIDO'},
 			{ 'value' : 6 , 'label' : 'NO_ESPECIFICADO'}
 		];
-		securityTokenProvider.getUserSecurityTokenState().then(
-			function(data){
-				tokenState = data.security_token_state;
-				//$scope.userAdministrationStep = 2;
-			},
-			function(data){
-				$scope.setServiceError('Error en el servicio, intente más tarde');
-			}
-		);
+		if(userProvider.isCompleteUser()){
+			securityTokenProvider.getUserSecurityTokenState().then(
+				function(data){
+					tokenState = data.security_token_state;
+				},
+				function(data){
+					$scope.setServiceError('Error en el servicio, intente más tarde');
+				}
+			);
+		}
 	}
 
 	/**

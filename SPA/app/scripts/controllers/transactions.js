@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('spaApp').controller('TransactionsCtrl', ['$rootScope', '$scope', '$location', '$routeParams', '$timeout', 'accountsProvider','thirdAccountProvider', 'codeStatusErrors',
-                                    function($rootScope, $scope, $location, $routeParams, $timeout, accountsProvider, thirdAccountProvider, codeStatusErrors) {
+angular.module('spaApp').controller('TransactionsCtrl', ['$rootScope', '$scope', '$location', '$routeParams', '$timeout', 'accountsProvider','thirdAccountProvider', 'codeStatusErrors', 'userProvider',
+                                    function($rootScope, $scope, $location, $routeParams, $timeout, accountsProvider, thirdAccountProvider, codeStatusErrors, userProvider) {
 
   try{
     var index = accountsProvider.getAccountIndex($routeParams.accountId);
@@ -188,21 +188,22 @@ angular.module('spaApp').controller('TransactionsCtrl', ['$rootScope', '$scope',
       message: ""
     };
 
-    thirdAccountProvider.getThirdAccounts().then(
-      function(data){
-        $scope.beneficiaries = $rootScope.thirdAccounts.beneficiaries;
-      },
-      function(errorObject) {
-            var status = errorObject.status;
-            var msg = codeStatusErrors.errorMessage(status);
-            if (status === 500){
-                $scope.setServiceError(msg + errorObject.response.message);
-            } else {
-                $scope.setServiceError(msg);
-            }
-        }
-    );
-
+    if(userProvider.isCompleteUser()){
+      thirdAccountProvider.getThirdAccounts().then(
+        function(data){
+          $scope.beneficiaries = $rootScope.thirdAccounts.beneficiaries;
+        },
+        function(errorObject) {
+              var status = errorObject.status;
+              var msg = codeStatusErrors.errorMessage(status);
+              if (status === 500){
+                  $scope.setServiceError(msg + errorObject.response.message);
+              } else {
+                  $scope.setServiceError(msg);
+              }
+          }
+      );
+    }
   }
 
   $scope.showAddBeneficiary = function(){
