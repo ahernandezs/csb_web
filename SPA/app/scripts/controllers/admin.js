@@ -139,25 +139,23 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 	* get the third-account when initializing the controller.
 	*/
 	function loadBeneficiary(){
-		if(userProvider.isCompleteUser()){
-			thirdAccountProvider.getThirdAccounts().then(
-				function(data) {
-					dispatchThirdAccountByType(data);
-				},function(errorObject) {
-					var status = errorObject.status;
-					if(status === 403){
-					$scope.manageOtpErrorMessage(errorObject.response.message);
+		thirdAccountProvider.getThirdAccounts().then(
+			function(data) {
+				dispatchThirdAccountByType(data);
+			},function(errorObject) {
+				var status = errorObject.status;
+				if(status === 403){
+				$scope.manageOtpErrorMessage(errorObject.response.message);
+				} else {
+					var msg = codeStatusErrors.errorMessage(status);
+					if (status === 500){
+						$scope.setServiceError(msg + errorObject.response.message);
 					} else {
-						var msg = codeStatusErrors.errorMessage(status);
-						if (status === 500){
-							$scope.setServiceError(msg + errorObject.response.message);
-						} else {
-							$scope.setServiceError(msg);
-						}
+						$scope.setServiceError(msg);
 					}
 				}
-			)
-		}
+			}
+		)
 	};
 
 	/**

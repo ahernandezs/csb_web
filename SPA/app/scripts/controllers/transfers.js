@@ -71,31 +71,29 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
      * Get third party accounts.
      */
      function obtenerCuentasTerceros(){
-        if(userProvider.isCompleteUser()){
-            thirdAccountProvider.getThirdAccounts().then(
-                function(data) {
-                    data.forEach(
-                        function (value, index, ar) {
-                            if ( value.account_type == 'TDC_T' || value.account_type == 'DEB_T' ) {
-                                value.group = 'Cuentas Terceros';
-                                value.displayName = value.bank_name + ' - ' + value.name + ' ' + value.masked_account_number + ' - ' + value.short_name;
-                                value.detail = value.bank_name + ' | ' + value.name;
-                                $scope.theAccounts.push( value );
-                            }
+        thirdAccountProvider.getThirdAccounts().then(
+            function(data) {
+                data.forEach(
+                    function (value, index, ar) {
+                        if ( value.account_type == 'TDC_T' || value.account_type == 'DEB_T' ) {
+                            value.group = 'Cuentas Terceros';
+                            value.displayName = value.bank_name + ' - ' + value.name + ' ' + value.masked_account_number + ' - ' + value.short_name;
+                            value.detail = value.bank_name + ' | ' + value.name;
+                            $scope.theAccounts.push( value );
                         }
-                    );
-                },
-                function(errorObject) {
-                    var status = errorObject.status;
-                    var msg = codeStatusErrors.errorMessage(status);
-                    if (status === 500){
-                        $scope.setServiceError(msg + errorObject.response.message);
-                    } else {
-                        $scope.setServiceError(msg);
                     }
+                );
+            },
+            function(errorObject) {
+                var status = errorObject.status;
+                var msg = codeStatusErrors.errorMessage(status);
+                if (status === 500){
+                    $scope.setServiceError(msg + errorObject.response.message);
+                } else {
+                    $scope.setServiceError(msg);
                 }
-            );
-        }
+            }
+        );
     }
     obtenerCuentasTerceros();
 
