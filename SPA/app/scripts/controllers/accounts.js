@@ -128,12 +128,20 @@
           }).success(function (data, status, headers, config) {
             var blob = new Blob([data], {type: type});
             var objectUrl = URL.createObjectURL(blob);
-            var a = document.createElement("a");
-            document.body.appendChild(a);
-            a.href = objectUrl;
-            a.download = filename;
-            a.click();
-            window.URL.revokeObjectURL(objectUrl);
+            // IE 10 || IE 11
+            if ( window.navigator.msSaveOrOpenBlob )
+                window.navigator.msSaveBlob(blob, filename);
+            // NOT IE browsers
+            else if ( 'download' in document.createElement('a') ) {
+                var a = document.createElement("a");
+                document.body.appendChild(a);
+                a.href = objectUrl;
+                a.download = filename;
+                a.click();
+                window.open(objectUrl);
+            // IE 9
+            } else
+                window.document.execCommand('SaveAs', null, objectUrl);
           }).error(function (data, status, headers, config) {
             var decodedString = String.fromCharCode.apply(null, new Uint8Array(data));
             var obj = JSON.parse(decodedString);
