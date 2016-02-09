@@ -202,7 +202,6 @@ angular.module('spaApp').controller('TransactionsCtrl', ['$rootScope', '$scope',
             }
         }
     );
-
   }
 
   $scope.showAddBeneficiary = function(){
