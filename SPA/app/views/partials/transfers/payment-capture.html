@@ -34,7 +34,7 @@
             <ul class="dropdown-menu" role="menu">
                 <li class="dropdown-header">TDC propias</li>
                 <li ng-repeat="item in theAccounts | filter: { account_type: 'TDC', group: 'Cuentas Propias' }" ng-model="payment.destiny" ng-click="payment.destiny = item; getAccountDetail()">{{item.displayName}}</li>
-                <li class="dropdown-header">TDC terceros</li>
+                <li class="dropdown-header" ng-show="isCompleteUser()">TDC terceros</li>
                 <li ng-repeat="item in theAccounts | filter: { account_type: 'TDC_T', group: 'Cuentas Terceros' }" ng-model="payment.destiny" ng-click="payment.destiny = item" ng-required="true">{{item.displayName}}</li>
                 <li ng-show="isCompleteUser()"><a ui-sref="dashboard.administration({opt:4})">Agregar nuevo beneficiario</a></li>
             </ul>
