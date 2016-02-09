@@ -1,15 +1,15 @@
 <div>
     <div class="header statement" ng-click="closeStatement()">
         <a><div class="back-arrow pull-left cursor-pointer"></div><i class="ico-estados"></i>Estados de cuenta<span>{{activeAccountName}}</span></a>
-    </div> 
+    </div>
     <hr class="statement-hr">
-    <div class="transactions pull-left">    
+    <div class="transactions pull-left">
         <table class="details statement-table">
             <tbody>
                     <tr ng-repeat="statement in statements">
                         <td><i class="ico-estados"></i>{{statement.date}}</td>
-                        <td><a target="_blank" href="javascript:void(0);" ng-click="ask4Token('PDF', statement.id);"><i class="ico-pdf"></i>Descargar PDF</a></td>
-                        <td><a target="_blank" href="javascript:void(0);" ng-click="ask4Token('XML', statement.id);"><i class="ico-pdf"></i>Descargar XML</a></td>
+                        <td><a ng-click="ask4Token('PDF', statement.id);"><i class="ico-pdf"></i>Descargar PDF</a></td>
+                        <td><a ng-click="ask4Token('XML', statement.id);"><i class="ico-pdf"></i>Descargar XML</a></td>
                     </tr>
             </tbody>
         </table>
