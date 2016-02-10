@@ -106,14 +106,14 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 
 	//Center defined by default
 	$scope.map = { center: { latitude: 19.432602, longitude: -99.13320499999998 }, zoom: 15, bounds: {}};
-    $scope.marker = {
-      id: 0,
-      coords: {
-        latitude: 19.432602,
-        longitude: -99.13320499999998
-      },
-      options: { draggable: false }
-    };
+	$scope.marker = {
+		id: 0,
+		coords: {
+			latitude: 19.432602,
+			longitude: -99.13320499999998
+		},
+		options: { draggable: false }
+	};
 	$scope.map.branches = {};
 	var geocoder = new google.maps.Geocoder();
 
@@ -189,12 +189,12 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 		$scope.showIdleAlert = true;
 	});
 
-  $scope.$on('WarningTimeout', function() {
-    $scope.logout();
-  });
+	$scope.$on('WarningTimeout', function() {
+		$scope.logout();
+	});
 
-  $scope.$on('IdleReset', function() {
-    $scope.showIdleAlert = false;
-  });
+	$scope.$on('IdleReset', function() {
+		$scope.showIdleAlert = false;
+	});
 
 }]);
