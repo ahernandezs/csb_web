@@ -4,7 +4,7 @@
  * The accounts controller. Gets accounts passing auth parameters
  */
  angular.module('spaApp').controller('AccountsCtrl', ['$rootScope', '$scope', '$location', 'accountsProvider', 'codeStatusErrors',
-     'ngDialog', '$http', function ( $rootScope, $scope, $location, accountsProvider, codeStatusErrors, ngDialog, $http) {
+     'ngDialog', '$http', 'userProvider', function ( $rootScope, $scope, $location, accountsProvider, codeStatusErrors, ngDialog, $http, userProvider) {
 
     $scope.statementStatus = [];
     $scope.showTDCAccount = false;
@@ -161,5 +161,9 @@
 
         })
     };
+
+    $scope.isCompleteUser = function(){
+        return userProvider.isCompleteUser();
+    }
 
 }]);

@@ -22,7 +22,7 @@ angular.module('spaApp').factory('api', ['$http', '$rootScope', '$window', funct
       $http.defaults.headers.common['X-BANK-TOKEN'] = 4;
       $http.defaults.headers.common['X-AUTH-TOKEN'] = token || $rootScope.session_token;
       $http.defaults.headers.common['X-CLIENT-TYPE'] = 'WEB';
-      $http.defaults.headers.common['X-CLIENT-VERSION'] = '1.2.1';
+      $http.defaults.headers.common['X-CLIENT-VERSION'] = '1.2.HASHVERSION';
     },
     config: function(){
       // Use this link for deployment
