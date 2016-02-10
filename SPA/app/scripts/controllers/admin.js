@@ -3,13 +3,31 @@
 angular.module('spaApp').controller('AdminCtrl', ['$rootScope', '$scope', 'adminProvider', 'userProvider', 'thirdAccountProvider', 'codeStatusErrors', '$stateParams',
 function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider, codeStatusErrors, $stateParams) {
 
-	$scope.page = -1;
-	$scope.size = 10;
-	$scope.status = true;
-	$scope.totalItems = 0;
-	$scope.totalPages = 0;
-	$scope.disableAnt = false;
-	$scope.disableSig = false;
+	function init(){
+		$scope.page = -1;
+		$scope.size = 10;
+		$scope.status = true;
+		$scope.totalItems = 0;
+		$scope.totalPages = 0;
+		$scope.disableAnt = false;
+		$scope.disableSig = false;
+		$scope.asktoken = false;
+		$scope.selection = 1;
+		$scope.action = $scope.adminOpt === 4 ? 3 : 1;
+		$scope.stage = 1;
+		$scope.adminOpt = 5;
+		$scope.errorMessage = null;
+		$scope.today = new Date();
+		$scope.beneficiary = {};
+		$scope.activity('sig');
+
+		if(userProvider.isCompleteUser()){
+			$scope.adminOpt = $stateParams.opt;
+			$scope.option = 1;
+			getLimits();
+			loadBeneficiary();
+		}
+	};
 
 	$scope.activity = function(option) {
 		if(($scope.disableSig && option === 'sig' ) || ($scope.disableAnt && option === 'ant')){
@@ -19,7 +37,7 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 		adminProvider.getUserActivity($scope.page, $scope.size).then(
 			function(data) {
 				$scope.userActivities = data.user_activities;
-				$scope.totalPages = Math.ceil(data.total_items / $scope.size );
+				$scope.totalPages = Math.ceil(data.total_items / $scope.size);
 				$scope.disableAnt = $scope.page === 0 ? true : false;
 				$scope.disableSig = $scope.page+1 === $scope.totalPages ? true : false;
 			},
@@ -29,29 +47,6 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 			}
 		);
 	};
-	$scope.activity('sig');
-
-	//if the user has full access, the default page is the configuration one. otherwise it is the contract-information page
-	if(userProvider.isCompleteUser()){
-		// $stateParams contians the received opt (by default 1)
-		$scope.adminOpt = $stateParams.opt;
-		$scope.option = 1;
-	}else{
-		$scope.adminOpt = 5;
-	}
-
-	$scope.asktoken = false;
-
-	$scope.selection = 1;
-	// If we are showing beneficiaries, also display the first step to add a new one
-	$scope.action = $scope.adminOpt === 4 ? 3 : 1;
-
-    $scope.stage = 1;
-    $scope.beneficiary = {};
-	$scope.today = new Date();
-	loadBeneficiary();
-
-	$scope.errorMessage = null;
 
 	$scope.selectBeneficiary = function(account){
 		$scope.action = 2;
@@ -70,9 +65,6 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 		$scope.delete.otp = '';
 	};
 
-	/**
-	 * delete a third-account
-	 */
 	$scope.delete = function(){
 		thirdAccountProvider.unregisterThirdAccount($scope.selectedAccount._account_id, $scope.delete.otp).then(
 			function(data){
@@ -97,82 +89,13 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 		);
 	};
 
-	/**
-	 * dispatch the third-account by their type (if they are from Consubanco or not)
-	 */
-	function dispatchThirdAccountByType(data){
-		$scope.third_accounts = data;
-		var third_accounts_own = [];
-		var third_accounts_others = [];
-		if (typeof $scope.third_accounts !== 'undefined'){
-			$scope.third_accounts.forEach(function(acc){
-				if(acc.same_bank){
-					third_accounts_own.push(acc);
-				}else{
-					third_accounts_others.push(acc);
-				}
-			});
-		}
-		if(third_accounts_own.length > 0){
-			for(var i=0; i <  third_accounts_own.length; i++){
-				var account_type= third_accounts_own[i].account_type;
-				if(account_type === 'TDC_T'){
-					third_accounts_own[i].account_type_name = 'Tarjeta de Crédito Propia Mismo Banco';
-				}else if(account_type == 'DEB_T'){
-					third_accounts_own[i].account_type_name = 'Débito Propia Mismo Banco';
-				}
-			}
-		}//End if validate
-		if(third_accounts_others.length > 0){
-			for(var i=0; i < third_accounts_others.length; i++){
-				var account_type = third_accounts_others[i].account_type;
-				if(account_type === 'DEB_T') {
-					third_accounts_others[i].account_type_name = 'Débito Propia Otros Bancos';
-				}
-			}
-		}//End if validate
-		$scope.third_accounts_own = third_accounts_own;
-		$scope.third_accounts_others = third_accounts_others;
-	}
-
-	/**
-	* get the third-account when initializing the controller.
-	*/
-	function loadBeneficiary(){
-		thirdAccountProvider.getThirdAccounts().then(
-			function(data) {
-				dispatchThirdAccountByType(data);
-			},function(errorObject) {
-				var status = errorObject.status;
-				if(status === 403){
-				$scope.manageOtpErrorMessage(errorObject.response.message);
-				} else {
-					var msg = codeStatusErrors.errorMessage(status);
-					if (status === 500){
-						$scope.setServiceError(msg + errorObject.response.message);
-					} else {
-						$scope.setServiceError(msg);
-					}
-				}
-			}
-		)
-	};
-
-	/**
-	* return true if user has full accesses
-	*/
 	$scope.isCompleteUser = function(){
 		return userProvider.isCompleteUser();
 	};
 
-
-/**********************
-Adding a beneficary actions
-**********************/
-
 	$scope.addBeneficary = function(){
 		$scope.action = 3;
-	}
+	};
 
 	$scope.completeStep = function(nextStep) {
 		$scope.selection = nextStep;
@@ -216,7 +139,7 @@ Adding a beneficary actions
 				}
 			}
 		);
-	}
+	};
 
 	$scope.sendBeneficiary = function() {
 		thirdAccountProvider.registerThirdAccount($scope.beneficiary.aka, $scope.beneficiary.name, $scope.beneficiary.email, $scope.beneficiary.phone, $scope.beneficiary._account_id, $scope.beneficiary.token).then(
@@ -238,24 +161,7 @@ Adding a beneficary actions
 				}
 			}
 		);
-	}
-
-	adminProvider.getLimits().then(
-		function(){
-			if($rootScope.limits.length > 0){
-				for(var i=0; i <  $rootScope.limits.length; i++){
-					var type_name = $rootScope.limits[i].type;
-					if(type_name == "PAYCARD_CONSUBANCO"){
-						$rootScope.limits[i].type_name="Pago a TDC Terceros Consubanco";
-					}else if (type_name == "TRANSFER_CONSUBANCO") {
-						$rootScope.limits[i].type_name="Transferencia Terceros Consubanco";
-					}else if (type_name == "TRANSFER_SPEI"){
-						$rootScope.limits[i].type_name="Transferencia Terceros Otro Banco";
-					}
-				}
-			}//End if validate length
-		}
-	);
+	};
 
 	$scope.setLimits = function(amount, type, otp){
 		adminProvider.setLimits(amount, type, otp).then(
@@ -286,7 +192,7 @@ Adding a beneficary actions
 				);
 			}
 		);
-	}
+	};
 
 	$scope.mapUserActivity = function(activity) {
 		var activityName = activity;
@@ -330,5 +236,81 @@ Adding a beneficary actions
 		$scope.error = true;
 		$scope.errorMessage = errorMessage;
 	};
+
+	function dispatchThirdAccountByType(data){
+		$scope.third_accounts = data;
+		var third_accounts_own = [];
+		var third_accounts_others = [];
+		if (typeof $scope.third_accounts !== 'undefined'){
+			$scope.third_accounts.forEach(function(acc){
+				if(acc.same_bank){
+					third_accounts_own.push(acc);
+				}else{
+					third_accounts_others.push(acc);
+				}
+			});
+		}
+		if(third_accounts_own.length > 0){
+			for(var i=0; i <  third_accounts_own.length; i++){
+				var account_type= third_accounts_own[i].account_type;
+				if(account_type === 'TDC_T'){
+					third_accounts_own[i].account_type_name = 'Tarjeta de Crédito Propia Mismo Banco';
+				}else if(account_type == 'DEB_T'){
+					third_accounts_own[i].account_type_name = 'Débito Propia Mismo Banco';
+				}
+			}
+		}//End if validate
+		if(third_accounts_others.length > 0){
+			for(var i=0; i < third_accounts_others.length; i++){
+				var account_type = third_accounts_others[i].account_type;
+				if(account_type === 'DEB_T') {
+					third_accounts_others[i].account_type_name = 'Débito Propia Otros Bancos';
+				}
+			}
+		}//End if validate
+		$scope.third_accounts_own = third_accounts_own;
+		$scope.third_accounts_others = third_accounts_others;
+	};
+
+	function loadBeneficiary(){
+		thirdAccountProvider.getThirdAccounts().then(
+			function(data) {
+				dispatchThirdAccountByType(data);
+			},function(errorObject) {
+				var status = errorObject.status;
+				if(status === 403){
+				$scope.manageOtpErrorMessage(errorObject.response.message);
+				} else {
+					var msg = codeStatusErrors.errorMessage(status);
+					if (status === 500){
+						$scope.setServiceError(msg + errorObject.response.message);
+					} else {
+						$scope.setServiceError(msg);
+					}
+				}
+			}
+		)
+	};
+
+	function getLimits(){
+		adminProvider.getLimits().then(
+			function(){
+				if($rootScope.limits.length > 0){
+					for(var i=0; i <  $rootScope.limits.length; i++){
+						var type_name = $rootScope.limits[i].type;
+						if(type_name == "PAYCARD_CONSUBANCO"){
+							$rootScope.limits[i].type_name="Pago a TDC Terceros Consubanco";
+						}else if (type_name == "TRANSFER_CONSUBANCO") {
+							$rootScope.limits[i].type_name="Transferencia Terceros Consubanco";
+						}else if (type_name == "TRANSFER_SPEI"){
+							$rootScope.limits[i].type_name="Transferencia Terceros Otro Banco";
+						}
+					}
+				}
+			}
+		);
+	};
+
+	init();
 
 }]);

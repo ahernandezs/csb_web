@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-    <a ng-click='getStatements()' class="cursor-pointer statement-link"><i class="ico-estados"></i>Estados <span>de cuenta</span></a>
+    <a ng-click='getStatements()' class="cursor-pointer statement-link" ng-show="isCompleteUser()"><i class="ico-estados"></i>Estados <span>de cuenta</span></a>
 </div> <!-- ends top row -->
 <!-- =============================================================== -->
 <hr ng-show='!showAccountHeader'>
