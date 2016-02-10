@@ -6,6 +6,11 @@ angular.module('spaApp').controller('PortfolioCtrl', ['$rootScope', '$scope', 'a
     $scope.depositAccounts = [];
     $scope.vistaAccounts = [];
 
+    function init(){
+      obtenListaProductos();
+      $scope.obtenCuentas;
+    }
+
     function obtenListaProductos(){
       productProvider.getProductsList().then(
         function(data) {
@@ -42,7 +47,6 @@ angular.module('spaApp').controller('PortfolioCtrl', ['$rootScope', '$scope', 'a
         }
       );
     }
-    obtenListaProductos();
 
     $scope.obtenCuentas = function(){
       $scope.ownAccounts = [];
@@ -87,7 +91,6 @@ angular.module('spaApp').controller('PortfolioCtrl', ['$rootScope', '$scope', 'a
            }
       );
     }
-    $scope.obtenCuentas;
 
     /**
      * Assigns the value to the first view to return to and the investment type.
@@ -95,4 +98,7 @@ angular.module('spaApp').controller('PortfolioCtrl', ['$rootScope', '$scope', 'a
     $scope.change = function(type) {
         $scope.invType = type;
     };
+
+    init();
+
 }]);

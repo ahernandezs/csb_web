@@ -5,15 +5,19 @@
  */
 angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$location', '$routeParams', 'accountsProvider', 'userProvider', 'thirdAccountProvider', 'transferProvider', '$controller','paymentCreditCardService', '$filter', 'codeStatusErrors', function ($rootScope, $scope, $location, $routeParams, accountsProvider, userProvider, thirdAccountProvider, transferProvider, $controller,paymentCreditCardService, $filter, codeStatusErrors) {
 
-    $scope.section = 'PAY';
-    $scope.selection = 1;
-    $scope.payment = {};
-    $scope.payment.select1 = false;
-    $scope.payment.select2 = false;
-    $scope.payment.select3 = false;
-    $scope.transfer = {};
-    $scope.theAccounts = [];
-    $scope.today = new Date();
+    function init(){
+        $scope.section = 'PAY';
+        $scope.selection = 1;
+        $scope.payment = {};
+        $scope.payment.select1 = false;
+        $scope.payment.select2 = false;
+        $scope.payment.select3 = false;
+        $scope.transfer = {};
+        $scope.theAccounts = [];
+        $scope.today = new Date();
+        obtenerCuentasPropias();
+        obtenerCuentasTerceros();
+    }
 
     /**
      * Get the own accounts.
@@ -65,12 +69,11 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
             }
     	);
     }
-    obtenerCuentasPropias();
 
     /**
      * Get third party accounts.
      */
-     function obtenerCuentasTerceros(){
+    function obtenerCuentasTerceros(){
         if(userProvider.isCompleteUser()){
             thirdAccountProvider.getThirdAccounts().then(
                 function(data) {
@@ -99,8 +102,6 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
             );
         }
     }
-    obtenerCuentasTerceros();
-
 
     /**
     * Receive the section value from the UI and change the selection to 1.
@@ -203,7 +204,7 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
     /**
      * Send the transfer to an own account (from CSB to CSB).
      */
-    var transferOwnAccount = function() {
+    function transferOwnAccount() {
         transferProvider.transferToOwnAccount($scope.transfer.account._account_id, $scope.transfer.destiny._account_id,
                                              $scope.transfer.amount, $scope.transfer.concept).then(
             function(data) {
@@ -226,7 +227,7 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
     /**
      * Send the transfer to a third party account of CSB.
      */
-    var transferThirdAccount = function() {
+    function transferThirdAccount() {
         transferProvider.transferThirdAccountSameBank($scope.transfer.account._account_id,
                                                      $scope.transfer.destiny._account_id,
                                                      $scope.transfer.amount, $scope.transfer.concept,
@@ -257,7 +258,7 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
     /**
      * Send the transfer to a third party account from another bank.
      */
-    var transferThirdOtherAccount = function() {
+    function transferThirdOtherAccount() {
         transferProvider.transferThirdAccountOtherBank($scope.transfer.account._account_id,
                                                        $scope.transfer.destiny._account_id,
                                                        $scope.transfer.amount, $scope.transfer.concept,
@@ -297,7 +298,6 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
         } else {
             $scope.setServiceError('Error de tipo de tarjeta');
         }
-
     };
 
     /**
@@ -377,4 +377,7 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
     $scope.isCompleteUser = function(){
         return userProvider.isCompleteUser();
     }
+
+    init();
+
 }]);

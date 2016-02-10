@@ -2,75 +2,75 @@
 
 angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'userProvider', '$rootScope', 'timerService' , function ($scope, $location, userProvider, $rootScope, timerService) {
 
-    // the register-flow's current-step
-	$scope.selection = 0;
+  // the register-flow's current-step
+  $scope.selection = 0;
 
-    // stores the register's data inputed by the user
-    $scope.registerData = {};
+  // stores the register's data inputed by the user
+  $scope.registerData = {};
 
-    // is there an error in the register flow
-    $scope.error = false;
+  // is there an error in the register flow
+  $scope.error = false;
 
-    // the error's message (is incorrectData is true)
-    $scope.errorMessage = null;
+  // the error's message (is incorrectData is true)
+  $scope.errorMessage = null;
 
-    /**
-     * initialize the scope with the model's data (coming from the preRegister operation)
-     */
-    $scope.init = function() {
-        var preRegisterData = userProvider.getPreRegistrationData();
-        if(!preRegisterData) {
-          $scope.gotoLogin();
-          return;
-        }
-        $scope.contract = preRegisterData.contract;
-        $scope.nameClient = $scope.contract.name;
-        $scope.clientNumber = $scope.contract.client_id;
-        $scope.bankBranch = $scope.contract.branch_name;
-        $scope.date = $scope.contract.created_at;
-        $scope.roleID = $scope.contract.role_id;
-        $scope.rfc = $scope.contract.rfc;
-        $scope.identifiers = preRegisterData.identifiers;
+  $scope.invalidPassword = true;
 
-        // This is at this moment the default option of identifiers
-        $scope.registerData.identifier = $scope.identifiers[0];
+  /**
+   * initialize the scope with the model's data (coming from the preRegister operation)
+   */
+  $scope.init = function() {
+      var preRegisterData = userProvider.getPreRegistrationData();
+      if(!preRegisterData) {
+        $scope.gotoLogin();
+        return;
+      }
+      $scope.contract = preRegisterData.contract;
+      $scope.nameClient = $scope.contract.name;
+      $scope.clientNumber = $scope.contract.client_id;
+      $scope.bankBranch = $scope.contract.branch_name;
+      $scope.date = $scope.contract.created_at;
+      $scope.roleID = $scope.contract.role_id;
+      $scope.rfc = $scope.contract.rfc;
+      $scope.identifiers = preRegisterData.identifiers;
 
-        $scope.images = {};
-        for (var i = 0; i < preRegisterData.images.length; i++) {
-            $scope.images[i] = { 'id' : preRegisterData.images[i].image_id, 'url' : $rootScope.restAPIBaseUrl + '/' + preRegisterData.images[i].url };
-        }
-        //session-timeout: 9 minutes before the warning message
-        timerService.idleDuration(540);
-        //session-timeout: 1 minute between the warning message and the redirection to the login page
-        timerService.warningDuration(60);
-        timerService.start();
-    };
+      // This is at this moment the default option of identifiers
+      $scope.registerData.identifier = $scope.identifiers[0];
+
+      $scope.images = {};
+      for (var i = 0; i < preRegisterData.images.length; i++) {
+          $scope.images[i] = { 'id' : preRegisterData.images[i].image_id, 'url' : $rootScope.restAPIBaseUrl + '/' + preRegisterData.images[i].url };
+      }
+      //session-timeout: 9 minutes before the warning message
+      timerService.idleDuration(540);
+      //session-timeout: 1 minute between the warning message and the redirection to the login page
+      timerService.warningDuration(60);
+      timerService.start();
+  };
 
   /**
    * go to the next flow's step
    */
-    $scope.completeStep = function(nextStep){
-      $scope.error = false;
-      $scope.errorMessage = null;
-      $scope.selection = nextStep;
-      var progressHeight = document.getElementById("progressBar").offsetHeight;
-      var stepHeight = (((progressHeight / 5)*(nextStep-1)) - progressHeight);
-      $scope.currentProgress = {top: stepHeight};
-    };
+  $scope.completeStep = function(nextStep){
+    $scope.error = false;
+    $scope.errorMessage = null;
+    $scope.selection = nextStep;
+    var progressHeight = document.getElementById("progressBar").offsetHeight;
+    var stepHeight = (((progressHeight / 5)*(nextStep-1)) - progressHeight);
+    $scope.currentProgress = {top: stepHeight};
+  };
 
   /**
    * go back to the login page
    */
   $scope.gotoLogin =function(){
-        $scope.selection = 0;
-        $scope.registerData = {};
-        $scope.error = false;
-        $scope.errorMessage = null;
+    $scope.selection = 0;
+    $scope.registerData = {};
+    $scope.error = false;
+    $scope.errorMessage = null;
     userProvider.resetRegistrationToken();
     $location.path( '/login' );
   };
-
-  $scope.invalidPassword = true;
 
   $scope.validatePassword = function() {
     $scope.error = false;
@@ -217,52 +217,52 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
         }
   };
 
-    /**
-     * confirm token
-     */
-    $scope.confirmToken = function () {
-      userProvider.setCardId($scope.registerData.token);
-      userProvider.setOtp1($scope.registerData.otp1);
-      userProvider.setOtp2($scope.registerData.otp2);
-      registerUser();
-    };
+  /**
+   * confirm token
+   */
+  $scope.confirmToken = function () {
+    userProvider.setCardId($scope.registerData.token);
+    userProvider.setOtp1($scope.registerData.otp1);
+    userProvider.setOtp2($scope.registerData.otp2);
+    registerUser();
+  };
 
-    /**
-     * Register user
-     */
-    function registerUser() {
-      $scope.isRegistering = true;
-      userProvider.registerUser().then(
-          function(data) {
-            //console.log("register succeed");
-            $scope.isRegistering = false;
-            //check if the security token has been activated
-            $scope.tokenRegistrationFailed = false;
-            if($scope.roleID === 1){
-              if(data.token_registration_result != null && data.token_registration_result.result == false){
-                $scope.tokenRegistrationFailed = true;
-              }else{
-                $scope.tokenRegistrationFailed = false;
-              }
-            }
-            $scope.completeStep(6);
-          },
-          function(data) {
-            $scope.isRegistering = false;
-            if(data.status != 401){
-              $scope.setServiceError('Ha ocurrido un error en el registro');
+  /**
+   * Register user
+   */
+  function registerUser() {
+    $scope.isRegistering = true;
+    userProvider.registerUser().then(
+        function(data) {
+          //console.log("register succeed");
+          $scope.isRegistering = false;
+          //check if the security token has been activated
+          $scope.tokenRegistrationFailed = false;
+          if($scope.roleID === 1){
+            if(data.token_registration_result != null && data.token_registration_result.result == false){
+              $scope.tokenRegistrationFailed = true;
+            }else{
+              $scope.tokenRegistrationFailed = false;
             }
           }
-        );
-    }
+          $scope.completeStep(6);
+        },
+        function(data) {
+          $scope.isRegistering = false;
+          if(data.status != 401){
+            $scope.setServiceError('Ha ocurrido un error en el registro');
+          }
+        }
+      );
+  }
 
-    /**
-     * private method: set an error on the register flow
-     */
-    function setError(errorMessage){
-        $scope.error = true;
-        $scope.errorMessage = errorMessage;
-    };
+  /**
+   * private method: set an error on the register flow
+   */
+  function setError(errorMessage){
+      $scope.error = true;
+      $scope.errorMessage = errorMessage;
+  };
 
   if(!userProvider.getRegistrationToken()) {
     $scope.gotoLogin();
@@ -276,4 +276,5 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
   $scope.$on('IdleTimeout', function() {
     $scope.showIdleAlert = true;
    });
+
 }]);

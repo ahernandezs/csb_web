@@ -8,6 +8,8 @@ angular.module('spaApp').controller('TransactionsCtrl', ['$rootScope', '$scope',
   }catch(err){
     $location.path( '/accounts' );
   }
+
+  $scope.selectedCard = null;
   //set the rootScope current account
   $rootScope.currentAccount = $rootScope.accounts[index];
 
@@ -128,8 +130,6 @@ angular.module('spaApp').controller('TransactionsCtrl', ['$rootScope', '$scope',
   $scope.applyServicePayment = function() {
     $scope.selection = 'applyservicespayment';
   }
-
-  $scope.selectedCard = null;
 
   $scope.showCards = function() {
     $scope.selection = "cards";
@@ -273,11 +273,6 @@ angular.module('spaApp').controller('TransactionsCtrl', ['$rootScope', '$scope',
     descending : true
   };
 
-  $('.account-menu-buttons.pull-right .btn').click(function(){
-    $('.account-menu-buttons.pull-right .btn').removeClass('active');
-    $(this).addClass('active');
-  });
-
   $scope.selectSortingClass = function(column){
     return column == $scope.sorting.column && 'glyphicon-chevron-'+($scope.sorting.descending?'down':'up');
   }
@@ -290,5 +285,12 @@ angular.module('spaApp').controller('TransactionsCtrl', ['$rootScope', '$scope',
       sort.column = column;
       sort.descending = false;
     }
-  } 
+  }
+
+  $('.account-menu-buttons.pull-right .btn').click(function(){
+    $('.account-menu-buttons.pull-right .btn').removeClass('active');
+    $(this).addClass('active');
+  });
+
+
 }]);
