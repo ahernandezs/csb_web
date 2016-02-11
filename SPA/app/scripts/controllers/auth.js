@@ -178,7 +178,11 @@ angular.module('spaApp')
     } else if(status === 400) {
       setError('Error al crear sesión');
     } else if(status === 403) {
-      setError('El password o imagen son incorrectos');
+      if(errorObject.code === 500 || errorObject.code === 501 || errorObject.code === 502){
+        setError('Error en el servicio, intente más tarde');
+      }else{
+        setError('El password o imagen son incorrectos');
+      }
     } else if(status === 404){
       setError('Error, recurso no encontrado');
     } else if(status === 406){
