@@ -7,20 +7,20 @@
             <form class="contact-form" name="contactForm">
                 <label class="fieldContainer" ng-class="contactForm.email.$viewValue.length > 0 ? 'selected' : ''">
                     <span>Correo electr&oacute;nico</span>
-                    <input type="email" alphanumeric name="email" maxlength="254" class="input-mail" ng-model="registerData.email" placeholder="Correo electr&oacute;nico" required>
+                    <input type="email" alphanumeric name="email" maxlength="254" class="input-mail" ng-model="registerData.email" placeholder="Correo electr&oacute;nico" required autocomplete="off">
                 </label>
                 <label class="fieldContainer" ng-class="contactForm.repeatEmail.$viewValue.length > 0 ? 'selected' : ''">
                     <span class="double">Confirmar<br>correo electr&oacute;nico</span>
-                    <input type="email" alphanumeric maxlength="254" name="repeatEmail" class="input-mail" ng-model="registerData.repeatEmail" placeholder="Confirma correo electr&oacute;nico" required>
+                    <input type="email" alphanumeric maxlength="254" name="repeatEmail" class="input-mail" ng-model="registerData.repeatEmail" placeholder="Confirma correo electr&oacute;nico" required autocomplete="off">
                 </label>
                 <div class="error" ng-show="contactForm.email.$error.email">Email invalido</div>
                 <label class="fieldContainer" ng-class="contactForm.cellphone.$viewValue.length > 0 ? 'selected' : ''">
                     <span>Celular</span>
-                    <input type="tel" name="cellphone" class="input-mobile" ng-model="registerData.cellphone" numbers-only minlength="10" maxlength="10" placeholder="Celular" required>
+                    <input type="tel" name="cellphone" class="input-mobile" ng-model="registerData.cellphone" numbers-only minlength="10" maxlength="10" placeholder="Celular" required autocomplete="off">
                 </label>
                 <label class="fieldContainer" ng-class="contactForm.repeatCellphone.$viewValue.length > 0 ? 'selected' : ''">
                     <span>Confirma celular</span>
-                    <input type="tel" name="repeatCellphone" class="input-mobile" ng-model="registerData.repeatCellphone" numbers-only minlength="10" maxlength="10" placeholder="Confirma celular" required>
+                    <input type="tel" name="repeatCellphone" class="input-mobile" ng-model="registerData.repeatCellphone" numbers-only minlength="10" maxlength="10" placeholder="Confirma celular" required autocomplete="off">
                 </label>
             </form>
             <div class="error" ng-show="error">{{errorMessage}}</div>

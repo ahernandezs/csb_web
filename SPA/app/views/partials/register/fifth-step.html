@@ -7,15 +7,15 @@
             <form class="token-form" name="tokenForm">
                 <label class="fieldContainer" ng-class="tokenForm.token.$viewValue.length > 0 ? 'selected' : ''">
                      <span>No. de Serie del Token</span>
-                    <input type="text" alphanumeric name="token" maxlength="12" minlength="10" ng-model="registerData.token" placeholder="No. de Serie del Token" required>
+                    <input type="text" alphanumeric name="token" maxlength="12" minlength="10" ng-model="registerData.token" placeholder="No. de Serie del Token" required autocomplete="off">
                 </label>
                 <label class="fieldContainer" ng-class="tokenForm.otp1.$viewValue.length > 0 ? 'selected' : ''">
                      <span>OPT 1</span>
-                    <input type="password" numbers-only minlength="6" maxlength="6" name="otp1" ng-model="registerData.otp1" placeholder="Captura el c&#x000F3;digo de tu token" required>
+                    <input type="password" numbers-only minlength="6" maxlength="6" name="otp1" ng-model="registerData.otp1" placeholder="Captura el c&#x000F3;digo de tu token" required autocomplete="off">
                 </label>
                 <label class="fieldContainer" ng-class="tokenForm.otp2.$viewValue.length > 0 ? 'selected' : ''">
                      <span>OPT 2</span>
-                    <input type="password" numbers-only minlength="6" maxlength="6" name="otp2" ng-model="registerData.otp2" placeholder="Captura un nuevo c&#x000F3;digo de tu token" required>
+                    <input type="password" numbers-only minlength="6" maxlength="6" name="otp2" ng-model="registerData.otp2" placeholder="Captura un nuevo c&#x000F3;digo de tu token" required autocomplete="off">
                 </label>
             </form>
             <div class="error" ng-show="error">{{errorMessage}}</div>
