@@ -3,8 +3,8 @@
     <label for="user"><strong>Nueva Contraseña</strong></label>
     <p>Es necesario crear una nueva contraseña, asegúrate de usar mayúsculas, minúsculas y números</p>
 
-    <input ng-class="incorrectLoginData ? 'rojo' : ''" type="password" name="password" ng-model="loginData.password" id="password" placeholder="Nueva contraseña" ng-minlength="8"  maxlength="15" required>
-    <input ng-class="incorrectLoginData ? 'rojo' : ''" type="password" name="password" ng-model="loginData.password" id="password" placeholder="Confirmar nueva contraseña" ng-minlength="8"  maxlength="15" required>
+    <input autocomplete="off" ng-class="incorrectLoginData ? 'rojo' : ''" type="password" name="password" ng-model="loginData.password" id="password" placeholder="Nueva contraseña" ng-minlength="8"  maxlength="15" required>
+    <input autocomplete="off" ng-class="incorrectLoginData ? 'rojo' : ''" type="password" name="password" ng-model="loginData.password" id="password" placeholder="Confirmar nueva contraseña" ng-minlength="8"  maxlength="15" required>
 
     <label for="user"><strong>Nueva imagen de seguridad</strong></label>
     <p>Selecciona una nueva imagen de seguridad</p>
