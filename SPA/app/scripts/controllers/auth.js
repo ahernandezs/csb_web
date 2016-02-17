@@ -201,7 +201,7 @@ angular.module('spaApp')
       if(errorObject.code === 305 || errorObject.code === 306 || errorObject.code === 307){
         setError(errorObject.message);
       }else{
-        setError('Usuario bloqueado');
+        setError('Error en el servicio, intente más tarde');
       }
      } else if(status === 423) {
       setError('Usuario bloqueado');
