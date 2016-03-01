@@ -1,13 +1,13 @@
 <div ng-switch on="selection">
 	<div class="animate-switch" ng-switch-when="0">
 		<form class="user-login" name="userUnBlock">
-		    <label for="user"><strong>Cambio de contrase&ntilde;a &sol; imagen</strong></label>
+		    <label for="user"><strong>Cambio de contrase&ntilde;a / imagen</strong></label>
 		    <p class="small">Es necesario que ingreses tu <strong>usuario</strong> y el <strong>n&uacute;mero de folio</strong> que se te entreg&oacute; v&iacute;a telef&oacute;nica.</p>
 			<br>
 		    <input ng-class="error ? 'rojo' : ''" ng-model="unlockData.username" type="text" placeholder="Usuario" ng-minlength="5" maxlength="10" ng-pattern="/^[0-9]+$/" required autocomplete="off">
 		    <input ng-class="error ? 'rojo folio' : 'folio'" ng-model="unlockData.folio" type="password" placeholder="Número de folio" ng-minlength="5" maxlength="10" numbers-only required class="w100" autocomplete="off">
 		    <div class="error" ng-show="error">{{errorMessage}}</div>
-		    <p class="small">Si no cuentas con el n&uacute;mero de folio para el cambio de contrase&ntilde;a &sol; imagen, marca al:</p>
+		    <p class="small">Si no cuentas con el n&uacute;mero de folio para el cambio de contrase&ntilde;a / imagen, marca al:</p>
 		    <label class="phone-number">01 800 800 3224</label>
 			<div class="two-buttons">
 				<input type="submit" value="Continuar" ng-click="requestChange()" ng-disabled="userUnBlock.$invalid||checkingUser">
