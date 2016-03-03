@@ -367,18 +367,26 @@ module.exports = function (grunt) {
         }
       }
     },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
+     uglify: {
+      options: {
+        report: 'min'
+      },
+      'all': {
+        options: {
+            ASCIIOnly: true
+        },
+      }
+      //dist: {
+      // files: {
+      //   '<%= yeoman.dist %>/scripts/scripts.js': [
+      //     '<%= yeoman.dist %>/scripts/scripts.js'
+      //   ]
+      // }
+      //}
+     },
+     //concat: {
+     //  dist: {}
+     //},
 
     // Test settings
     karma: {
@@ -439,6 +447,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
+    'uglify',
     'build'
   ]);
 
