@@ -15,7 +15,7 @@
 						<select ng-model="estado" ng-options="estado.name for estado in estados"></select>
 					</div>
 				</div>
-				<span ng-click="search()">Buscar</span>
+				<span ng-click="search()"></span>
 				<div class="sucursal-modulo">
 					<div ng-click="attention = true" ng-class="attention ? 'selected' : ''"></div>
 					<div ng-click="attention = false"ng-class="attention ? '' : 'selected'"></div>
@@ -73,7 +73,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 		<div>
 			<ui-gmap-google-map center='map.center' zoom='map.zoom' bounds="map.bounds">
