@@ -93,15 +93,13 @@ h2.sucursales{
 		+ span{
 			display: block;
 			float: left;
-			width: 10%;
+			width: 40px;
 			height: 38px;
 			cursor: pointer;
-			background: url(../images/ico-lupa-w.png) no-repeat, #FC651B;
-			background-position: 5px;
-			background-size: 25px;
+			background: url(../images/ico-lupa-w.png) no-repeat center, center, $orange;
+			background-size: 30px;
 			border-radius: 3px;
 			color: white;
-			text-align: center;
 			padding-top: 10px;
 		}
 	}
