@@ -205,6 +205,10 @@
 		width: 90%;
 		display: block;
 	}
+	.pass_input{
+		width: 90%;
+		margin-left: 5%;
+	}
 	input[type="text"]:focus, input[type="password"]:focus{
 		border-color:$orange;
 	}
