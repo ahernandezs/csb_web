@@ -12,7 +12,7 @@
         </div>
     </div>
     <!-- password -->
-    <input ng-class="incorrectLoginData ? 'rojo' : ''" type="password" name="password" ng-model="loginData.password" id="password" placeholder="Contraseña" ng-minlength="8"  maxlength="15" required autocomplete="off">
+    <input ng-class="incorrectLoginData ? 'rojo' : ''" type="password" name="password" ng-model="loginData.password" id="password" placeholder="Contraseña" ng-minlength="8"  maxlength="15" required autocomplete="off" class="pass_input">
     <div class="error" ng-show="error"> {{errorMessage}}</div>
     <div class="buttons">
         <input type="submit" value="Continuar" ng-click="login()" ng-disabled="userImagePassword.$invalid || !loginData.selectedImage || isLogin" >
