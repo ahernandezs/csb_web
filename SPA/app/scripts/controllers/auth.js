@@ -250,6 +250,8 @@ angular.module('spaApp')
   }
 
   $scope.unblock = function(){
+    $scope.client = "";
+    $scope.contract = "";
     resetError();
     $scope.step = 2;
     $scope.selection = 0;
