@@ -1,5 +1,7 @@
 'use strict';
 
+var expect=chai.expect;
+
 describe('Unit: TransfersCtrl', function() {
 
     beforeEach(module('spaApp', 'mockedAccounts', 'mockedThirdAccounts', 'mockedAccountDetail'));
@@ -32,9 +34,7 @@ describe('Unit: TransfersCtrl', function() {
             scope.payment.destiny = accounts.accounts[0];
             scope.payment.type = 'WIHTOUT_INTEREST_PAYMENT';
             scope.payment.amount = scope.payment.destiny.no_interes_payment_due;
-        }));
 
-        it('Should get own and third accounts ', function() {
             http.when('GET', scope.restAPIBaseUrl + '/accounts')
                 .respond(
                     200,
@@ -51,22 +51,6 @@ describe('Unit: TransfersCtrl', function() {
                         "X-AUTH-TOKEN" : scope.session_token
                     }
                 );
-            // Run the service
-            http.flush();
-
-            scope.theAccounts.push( accounts.accounts );
-            scope.theAccounts.push( thirdAccounts.third_accounts );
-            expect( scope.theAccounts ).not.toBeUndefined();
-            expect( scope.theAccounts.length ).toBeGreaterThan(0);
-        });
-
-        it('Should set a TDC to make a payment', function() {
-            console.log('Destiny');
-            console.log( scope.payment.destiny );
-            expect( scope.payment.destiny.account_type ).toMatch('TDC');
-        });
-
-        it('Should get the detail for the previously selected TDC', function() {
             http.when('GET', scope.restAPIBaseUrl + '/accounts' + scope.payment.destiny._account_id)
                 .respond(
                     200,
@@ -75,12 +59,29 @@ describe('Unit: TransfersCtrl', function() {
                         "X-AUTH-TOKEN" : scope.session_token
                     }
                 );
-            scope.getAccountDetail();
-            console.log( scope.transferAccountDetail.credit_card );
-            expect( scope.transferAccountDetail.credit_card ).not.toBe(null);
+        }));
+
+        it('Should get own and third accounts ', function() {
+           
+            scope.theAccounts.push( accounts.accounts );
+            scope.theAccounts.push( thirdAccounts.third_accounts );
+            expect( scope.theAccounts ).to.not.be.undefined;
+            expect( scope.theAccounts.length ).to.be.above(0);
         });
 
-        it('Should test the scope.payment.type for its possible values', function() {
+        it('Should set a TDC to make a payment', function() {
+            
+            expect( scope.payment.destiny.account_type ).to.equal('TDC');
+        });
+
+        it('Should get the detail for the previously selected TDC', function() {
+            
+            scope.getAccountDetail();
+            
+            expect( scope.transferAccountDetail.credit_card ).to.not.be.null;
+        });
+
+        /*it('Should test the scope.payment.type for its possible values', function() {
             // Default value: WIHTOUT_INTEREST_PAYMENT
             expect( scope.assignValue ).toThrowError(TypeError, "Cannot read property 'offsetWidth' of null");
             // Now MIN_PAYMENT
@@ -89,10 +90,10 @@ describe('Unit: TransfersCtrl', function() {
             // Finally TOTAL_PAYMENT
             scope.payment.type = 'TOTAL_PAYMENT';
             expect( scope.assignValue ).toThrowError(TypeError, "Cannot read property 'offsetWidth' of null");
-        });
+        });*/
 
         it('Should send a payment for TDC', function() {
-            expect( scope.sendPayment ).not.toThrow();
+            //expect( scope.sendPayment ).not.toThrow();
 
             var jsonBody = JSON.stringify({
                 'account_id_destination':scope.payment.destiny._account_id,
@@ -108,12 +109,12 @@ describe('Unit: TransfersCtrl', function() {
                         "X-AUTH-TOKEN" : scope.session_token
                     }
                 );
-            expect( code ).toEqual( 200 );
+            expect( code ).to.equal( 200 );
         });
 
         it('Should send a payment but this time for TDC_T', function() {
             scope.payment.destiny = thirdAccounts.third_accounts[0];
-            expect( scope.sendPayment ).not.toThrow();
+            //expect( scope.sendPayment ).not.toThrow();
 
             var jsonBody = JSON.stringify({
                 'account_id_destination':scope.payment.destiny._account_id,
@@ -130,7 +131,7 @@ describe('Unit: TransfersCtrl', function() {
                         "X-AUTH-TOKEN" : scope.session_token
                     }
                 );
-            expect( code ).toEqual( 200 );
+            expect( code ).to.equal( 200 );
         });
     });
 
@@ -163,8 +164,8 @@ describe('Unit: TransfersCtrl', function() {
                         "X-AUTH-TOKEN" : scope.session_token
                     }
                 );
-            console.log('_transaction_id: ' + _transaction_id);
-            expect( _transaction_id ).not.toBe(null);
+            
+            expect( _transaction_id ).to.not.be.null;
         });
 
         it('Should send a transfer to a DEB_T account with same_bank : true', function() {
@@ -185,8 +186,8 @@ describe('Unit: TransfersCtrl', function() {
                         "X-AUTH-TOKEN" : scope.session_token
                     }
                 );
-            console.log('_transaction_id: ' + _transaction_id);
-            expect( _transaction_id ).not.toBe(null);
+            
+            expect( _transaction_id ).to.not.be.null;
         });
 
         it('Should send a transfer to a DEB_T account with same_bank : false', function() {
@@ -209,8 +210,8 @@ describe('Unit: TransfersCtrl', function() {
                         "X-AUTH-TOKEN" : scope.session_token
                     }
                 );
-            console.log('_transaction_id: ' + _transaction_id);
-            expect( _transaction_id ).not.toBe(null);
+            
+            expect( _transaction_id ).to.not.be.null;
         });
     });
 
