@@ -1,5 +1,9 @@
 'use strict';
 
+var expect=chai.expect;
+
+'use strict';
+
 describe('LoginCtrl', function() {
   var LoginCtrl, scope, rootScope;
 
@@ -44,44 +48,51 @@ describe('LoginCtrl', function() {
     it('should reset login error flag', function() {
       scope.checkUser();
 
-      expect(scope.error).toBe(false);
+      expect(scope.error).to.be.false;
     });
 
     it('should reset login error message', function() {
       scope.checkUser();
 
-      expect(scope.errorMessage).toEqual("");
+      expect(scope.errorMessage).to.equal("");
     });
 
     it('should enable flag that is checking user', function() {
       scope.checkUser();
 
-      expect(scope.checkingUser).toBe(true);
+      expect(scope.checkingUser).to.be.true;
     });
 
+    it('should be a numeric username',function(){
+    	expect(scope.loginData.username).to.match(/^[0-9]+$/);
+    });
+
+    it('should be username length between 5 and 10',function(){
+    	expect(scope.loginData.username).to.have.length.within(5,10);
+    });
     it('should return a user name', function() {
       scope.checkUser();
       http.flush();
 
-      expect(scope.client_name).toContain('John Doe');
+      expect(scope.client_name).to.contain('John Doe');
     });
 
     it('should enable next step to ask for password', function() {
       scope.checkUser();
       http.flush();
 
-      expect(scope.step).toBe(1);
+      expect(scope.step).to.equal(1);
     });
 
     it('should get images', function() {
       scope.checkUser();
       http.flush();
 
-      expect(scope.images).not.toBe(null);
+      expect(scope.images).to.not.be.null;
     });
   });
 
-describe('when user is authenticated', function() {
+  describe('when user is authenticated', function() {
 
     var http;
 
@@ -112,52 +123,53 @@ describe('when user is authenticated', function() {
 
     it('should reset login error flag', function() {
       scope.login();
-      expect(scope.error).toBe(false);
+      expect(scope.error).to.be.false;
     });
 
     it('should reset login error message', function() {
       scope.login();
-      expect(scope.errorMessage).toEqual("");
+      expect(scope.errorMessage).to.equal("");
     });
 
     it('should enable flag isLogin', function() {
       scope.login();
-      expect(scope.isLogin).toBe(true);
+      expect(scope.isLogin).to.be.true;
     });
 
     it('should disabled flag isLogin', function() {
       scope.login();
       http.flush();
-      expect(scope.isLogin).toBe(false);
+      expect(scope.isLogin).to.be.false;
     });
 
     it('should return session token', function() {
       scope.login();
       http.flush();
-      expect(rootScope.session_token).not.toBe(null);
-      expect(rootScope.session_token).not.toEqual("");
+      expect(rootScope.session_token).to.not.be.null;
+      expect(rootScope.session_token).to.not.equal("");
     });
 
     it('should get last_access_date', function() {
       scope.login();
       http.flush();
-      expect(rootScope.last_access_date).not.toBe(null);
-      expect(rootScope.last_access_date).not.toEqual("");
+      expect(rootScope.last_access_date).to.not.be.null;
+      expect(rootScope.last_access_date).to.not.equal("");
     });
 
     it('should get last_access_media', function() {
       scope.login();
       http.flush();
-      expect(rootScope.last_access_media).not.toBe(null);
-      expect(rootScope.last_access_media).not.toEqual("");
+      expect(rootScope.last_access_media).to.not.be.null;
+      expect(rootScope.last_access_media).to.not.equal("");
     });
 
     it('should get client_name', function() {
       scope.login();
       http.flush();
-      expect(rootScope.client_name).not.toBe(null);
-      expect(rootScope.client_name).not.toEqual("");
+      expect(rootScope.client_name).to.not.be.null;
+      expect(rootScope.client_name).to.not.equal("");
     });
 
   });
+
 });

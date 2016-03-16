@@ -5,17 +5,17 @@
      "userActivity": [
          {
              "date": "12-04-2015",
-             "action": "Action Dummy",
+             "action": "getThirdAccounts",
              "successful":true
          },
          {
              "date": "15-04-2015",
-             "action": "Action Dummy II",
+             "action": "transfer",
              "successful":false
          },
          {
             "date": "20-05-2015",
-             "action": "Action Dummy III",
+             "action": "changePassword",
              "successful":true
          }
      ]

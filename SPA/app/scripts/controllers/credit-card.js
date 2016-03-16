@@ -8,7 +8,7 @@ angular.module('spaApp').controller('creditCardCtrl', ['$scope', '$location', '$
 	var params = {};
 	params.numPage = 0;
 	params.size = 100;
-	$scope.statementStatus.showStatement = false;
+	//$scope.statementStatus.showStatement = false;
 	$scope.previousPeriod = false;
 	$scope.years = [
 		{ label: '2014', value: 2014 },

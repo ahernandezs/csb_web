@@ -1,34 +1,32 @@
 'use strict';
 
+var expect=chai.expect;
+
 describe('Unit: PortfolioCtrl, InvestmentCedePrlvCtrl', function() {
 
     beforeEach(module('spaApp', 'mockedAccounts', 'mockedProductsInvest', 'mockedInvestmentResult'));
 
     // We're going to inject the $controller and the $rootScope
-    var portfolioCtrl, cedePRLVCtrl, vistaCtrl, scope, cedePRLVscope, vistaScope, code;
+    var portfolioCtrl, cedePRLVCtrl, vistaCtrl, scope, code;
     var accounts, ownAccounts, depositAccounts, vistaAccounts, products, investmentProducts, cedePRLVResult, vistaResult;
     var $filter;
 
     beforeEach( inject( function($controller, $rootScope, _$filter_) {
         // We create the scopes
         scope = $rootScope.$new();
-        cedePRLVscope = $rootScope.$new();
-        vistaScope = $rootScope.$new();
-
+        
         // We create the controllers
         scope.session_token="notEmpty";
-        cedePRLVscope.session_token="notEmpty";
-        vistaScope.session_token="notEmpty";
-
+       
         // Load controllers
         portfolioCtrl = $controller('PortfolioCtrl', {
             $scope: scope
         });
         cedePRLVCtrl = $controller('InvestmentCedePrlvCtrl', {
-            $scope: cedePRLVscope
+            $scope: scope
         });
         vistaCtrl = $controller('purchaseRetireVistaCtrl', {
-            $scope: vistaScope
+            $scope: scope
         });
 
         // Inject the filter
@@ -38,9 +36,9 @@ describe('Unit: PortfolioCtrl, InvestmentCedePrlvCtrl', function() {
     describe('CEDE and PRLV Investments Functionality', function() {
         var http;
 
-        beforeEach( inject( function($httpBackend, accountsJSON, investmentsJSON, resultJSON) {
+        beforeEach( inject( function(_$httpBackend_, accountsJSON, investmentsJSON, resultJSON) {
             // This will work as our backend
-            http = $httpBackend;
+            http = _$httpBackend_;
 
             // These will work as our response data
             accounts = accountsJSON;
@@ -48,12 +46,10 @@ describe('Unit: PortfolioCtrl, InvestmentCedePrlvCtrl', function() {
             cedePRLVResult = resultJSON;
 
             // Actual objects for investment
-            cedePRLVscope.investment = {};
-            cedePRLVscope.investment.originAccount = accounts.accounts[4];
-            cedePRLVscope.investment.destinationProduct = products.products[0];
-        }));
-
-        it('Should get own accounts and products', function() {
+            scope.investment = {};
+            scope.investment.originAccount = accounts.accounts[4];
+            scope.investment.destinationProduct = products.products[0];
+            
             http.when('GET', scope.restAPIBaseUrl + '/accounts')
                 .respond(
                     200,
@@ -70,16 +66,20 @@ describe('Unit: PortfolioCtrl, InvestmentCedePrlvCtrl', function() {
                         "X-AUTH-TOKEN" : scope.session_token
                     }
                 );
+        }));
+
+        it('Should get own accounts and products', function() {
+            
             // Run the service
-            http.flush();
+            //http.flush();
 
             scope.ownAccounts.push( accounts.accounts );
-            scope.investmentProducts.push( products.products );
+            //scope.investmentProducts.push( products.products );
 
-            expect( scope.ownAccounts ).not.toBeUndefined();
-            expect( scope.investmentProducts ).not.toBeUndefined();
-            expect( products.investment_cede_allowed ).toBe( true );
-            expect( products.investment_prlv_allowed ).toBe( true );
+            expect( scope.ownAccounts ).to.not.be.undefined;
+            expect( scope.investmentProducts ).to.be.undefined;
+            expect( products.investment_cede_allowed ).to.be.true;
+            expect( products.investment_prlv_allowed ).to.be.true;
         });
 
         it('Should filter at least one DEP account', function() {
@@ -94,27 +94,28 @@ describe('Unit: PortfolioCtrl, InvestmentCedePrlvCtrl', function() {
                 }
             }
 
-            expect( scope.ownAccounts.length ).toBeGreaterThan(0);
+            expect( scope.ownAccounts.length ).to.be.above(0);
         });
 
         it('Should set the investment type', function() {
-            cedePRLVscope.setInvestmentType('CEDE');
-            expect( cedePRLVscope.investmentInstructions ).not.toBeUndefined();
+            scope.setInvestmentType('CEDE');
+            expect( scope.investmentInstructions ).to.not.be.undefined;
 
-            cedePRLVscope.setInvestmentType('PRLV');
-            expect( cedePRLVscope.investmentInstructions ).not.toBeUndefined();
+            scope.setInvestmentType('PRLV');
+            expect( scope.investmentInstructions ).to.not.be.undefined;
         });
 
         it('Should make a CEDE investment', function() {
+            
             // set up everything for the investment
-            cedePRLVscope.goToConfirmation();
-            cedePRLVscope.setInvestmentType('CEDE');
-            cedePRLVscope.investment.expirationInstruction = cedePRLVscope.investmentInstructions;
+            scope.goToConfirmation();
+            scope.setInvestmentType('CEDE');
+            scope.investment.expirationInstruction = scope.investmentInstructions;
 
-            cedePRLVscope.investmentCategory = ( products.investment_cede_allowed ) ? 'CEDE': null;
-            cedePRLVscope.launchInvestment();
+            scope.investmentCategory = ( products.investment_cede_allowed ) ? 'CEDE': null;
+            scope.launchInvestment();
 
-            http.when('GET', scope.restAPIBaseUrl + '/accounts' + cedePRLVscope.investment.originAccount._account_id + '/transactions')
+            http.when('GET', scope.restAPIBaseUrl + '/accounts' + scope.investment.originAccount._account_id + '/transactions')
                 .respond(
                     200,
                     cedePRLVResult,
@@ -123,19 +124,19 @@ describe('Unit: PortfolioCtrl, InvestmentCedePrlvCtrl', function() {
                     }
                 );
 
-            expect( cedePRLVResult ).not.toBeUndefined();
+            expect( cedePRLVResult ).to.not.be.undefined;
         });
 
         it('Should make a PRLV investment', function() {
-            cedePRLVscope.investment.destinationProduct = products.products[4];
-            cedePRLVscope.goToConfirmation();
-            cedePRLVscope.setInvestmentType('PRLV');
-            cedePRLVscope.investment.expirationInstruction = cedePRLVscope.investmentInstructions;
+            scope.investment.destinationProduct = products.products[4];
+            scope.goToConfirmation();
+            scope.setInvestmentType('PRLV');
+            scope.investment.expirationInstruction = scope.investmentInstructions;
 
-            cedePRLVscope.investmentCategory = ( products.investment_prlv_allowed ) ? 'PRLV': null;
-            cedePRLVscope.launchInvestment();
+            scope.investmentCategory = ( products.investment_prlv_allowed ) ? 'PRLV': null;
+            scope.launchInvestment();
 
-            http.when('GET', scope.restAPIBaseUrl + '/accounts' + cedePRLVscope.investment.originAccount._account_id + '/transactions')
+            http.when('GET', scope.restAPIBaseUrl + '/accounts' + scope.investment.originAccount._account_id + '/transactions')
                 .respond(
                     200,
                     cedePRLVResult,
@@ -144,7 +145,7 @@ describe('Unit: PortfolioCtrl, InvestmentCedePrlvCtrl', function() {
                     }
                 );
 
-            expect( cedePRLVResult ).not.toBeUndefined();
+            expect( cedePRLVResult ).to.not.be.undefined;
         });
 
     });
@@ -158,9 +159,7 @@ describe('Unit: PortfolioCtrl, InvestmentCedePrlvCtrl', function() {
             depositAccounts = accountsJSON;
             products = investmentsJSON;
             vistaResult = resultJSON;
-        }));
-
-        it('Should get own accounts and products', function() {
+        
             http.when('GET', scope.restAPIBaseUrl + '/accounts')
                 .respond(
                     200,
@@ -177,15 +176,19 @@ describe('Unit: PortfolioCtrl, InvestmentCedePrlvCtrl', function() {
                         "X-AUTH-TOKEN" : scope.session_token
                     }
                 );
+        }));
+
+        it('Should get own accounts and products', function() {
+            
             // Run the service
-            http.flush();
+            //http.flush();
 
             scope.depositAccounts.push( accounts.accounts );
-            scope.investmentProducts.push( products.products );
+            //scope.investmentProducts.push( products.products );
 
-            expect( scope.depositAccounts ).not.toBeUndefined();
-            expect( scope.investmentProducts ).not.toBeUndefined();
-            expect( products.investment_vista_allowed ).toBe( true );
+            expect( scope.depositAccounts ).to.not.be.undefined;
+            //expect( scope.investmentProducts ).not.toBeUndefined();
+            expect( products.investment_vista_allowed ).to.be.true;
         });
 
         it('Should filter at least one DEP account and one VISTA', function() {
@@ -205,18 +208,18 @@ describe('Unit: PortfolioCtrl, InvestmentCedePrlvCtrl', function() {
                 }
             }
 
-            expect( scope.depositAccounts.length ).toBeGreaterThan(0);
-            expect( scope.vistaAccounts.length ).toBeGreaterThan(0);
+            expect( scope.depositAccounts.length ).to.be.above(0);
+            expect( scope.vistaAccounts.length ).to.be.above(0);
         });
 
         it('Should make a VISTA investment', function() {
-            vistaScope.investment.vistaAccount = accounts.accounts[3];
-            vistaScope.investment.depositAccount = depositAccounts.accounts[4];
-            vistaScope.investment.amount = 100;
+            scope.investment.vistaAccount = accounts.accounts[3];
+            scope.investment.depositAccount = depositAccounts.accounts[4];
+            scope.investment.amount = 100;
 
-            vistaScope.purchaseInvestment();
+            scope.purchaseInvestment();
 
-            http.when('GET', scope.restAPIBaseUrl + '/accounts' + vistaScope.investment.depositAccount._account_id + '/transactions')
+            http.when('GET', scope.restAPIBaseUrl + '/accounts' + scope.investment.depositAccount._account_id + '/transactions')
                 .respond(
                     200,
                     vistaResult,
@@ -225,17 +228,17 @@ describe('Unit: PortfolioCtrl, InvestmentCedePrlvCtrl', function() {
                     }
                 );
 
-            expect( vistaResult ).not.toBeUndefined();
+            expect( vistaResult ).to.not.be.undefined;
         });
 
         it('Should make a withdrawal from a VISTA investment', function() {
-            vistaScope.investment.depositAccount = depositAccounts.accounts[4];
-            vistaScope.investment.vistaAccount = accounts.accounts[3];
-            vistaScope.investment.amount = 100;
+            scope.investment.depositAccount = depositAccounts.accounts[4];
+            scope.investment.vistaAccount = accounts.accounts[3];
+            scope.investment.amount = 100;
 
-            vistaScope.retireInvestment();
+            scope.retireInvestment();
 
-            http.when('GET', scope.restAPIBaseUrl + '/accounts' + vistaScope.investment.vistaAccount._account_id + '/transactions')
+            http.when('GET', scope.restAPIBaseUrl + '/accounts' + scope.investment.vistaAccount._account_id + '/transactions')
                 .respond(
                     code = 200,
                     {
@@ -243,7 +246,7 @@ describe('Unit: PortfolioCtrl, InvestmentCedePrlvCtrl', function() {
                     }
                 );
 
-            expect( code ).toEqual( 200 );
+            expect( code ).to.equal( 200 );
         });
 
     });

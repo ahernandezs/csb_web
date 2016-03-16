@@ -5,7 +5,7 @@ angular.module('mockedBeneficiary',[])
                 "third_accounts": [
                 {
                     "_account_id": "8912345678927890-A-40058",
-                    "bank_name": "BANREGIO",
+                    "bank_name": "CONSUBANCO",
                     "phone": "5566778899",
                     "maskedAccountNumber": "*****13450",
                     "name": "JUAN PEREZ PEREZ",
@@ -16,7 +16,7 @@ angular.module('mockedBeneficiary',[])
                 },
                 {
                     "_account_id": "8912345678927891-A-40058",
-                    "bank_name": "BANREGIO",
+                    "bank_name": "CONSUBANCO",
                     "phone": "5566778899",
                     "maskedAccountNumber": "*****13451",
                     "name": "JUAN PEREZ PEREZ",
