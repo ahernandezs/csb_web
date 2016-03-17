@@ -2,7 +2,7 @@
 
 var expect=chai.expect;
 
-describe('AccountsCtrl', function() {
+describe('Accounts Controller', function() {
   
   var accountsCtrl, dashboardCtrl, mainCtrl, scope, http, accounts, location;
 
@@ -30,7 +30,7 @@ describe('AccountsCtrl', function() {
   /**
    * the the service success
    */
-  describe('when successfully loading accounts', function() {
+  describe('When Successfully Loading Accounts', function() {
     
     beforeEach(inject(function($httpBackend,accountsJSON){
 
@@ -72,7 +72,7 @@ describe('AccountsCtrl', function() {
   /**
    * the the service failure
    */
-  describe('when fails to load accounts', function() {
+  describe('When Fails to Load Accounts', function() {
     
     beforeEach(inject(function($httpBackend){
       var message= "technical error";
@@ -106,7 +106,7 @@ describe('AccountsCtrl', function() {
   /**
    * test the selectAccount method
    */
-  describe('when selecting an account...', function() {
+  describe('When Selecting an Account...', function() {
 
     var creditCardAccount, investmentAccount, depositAccount, creditAccount;
 

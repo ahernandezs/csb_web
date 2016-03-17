@@ -2,7 +2,7 @@
 
 var expect=chai.expect;
 
-describe('Unit: TransfersCtrl', function() {
+describe('Transfers Controller', function() {
 
     beforeEach(module('spaApp', 'mockedAccounts', 'mockedThirdAccounts', 'mockedAccountDetail'));
 

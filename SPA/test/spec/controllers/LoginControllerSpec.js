@@ -4,7 +4,7 @@ var expect=chai.expect;
 
 'use strict';
 
-describe('LoginCtrl', function() {
+describe('Login Controller', function() {
   var LoginCtrl, scope, rootScope;
 
   beforeEach(module('spaApp'));
@@ -17,7 +17,7 @@ describe('LoginCtrl', function() {
     });
   }));
 
-  describe('when is checking user', function() {
+  describe('When is Checking User', function() {
 
     var http;
 
@@ -92,7 +92,7 @@ describe('LoginCtrl', function() {
     });
   });
 
-  describe('when user is authenticated', function() {
+  describe('When User is Authenticated', function() {
 
     var http;
 

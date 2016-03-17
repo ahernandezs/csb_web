@@ -1,9 +1,8 @@
 'use strict';
 
-var assert= chai.assert;
 var expect=chai.expect;
 
-describe('AccountDepositDetailCtrl', function() {
+describe('Account Deposit Detail Controller', function() {
   var acountDepositCtrl, scope, rootScope, http;
 
   beforeEach(module('spaApp'));
@@ -30,7 +29,7 @@ describe('AccountDepositDetailCtrl', function() {
     });
   });
 
-  describe('when search to get transactions between two dates', function() {
+  describe('When Search to Get Transactions Between Two Dates', function() {
     it("should get the transactions response: ", function() {
       // enter in the first fail condition: when the dates are posterior to the "today's date".
       

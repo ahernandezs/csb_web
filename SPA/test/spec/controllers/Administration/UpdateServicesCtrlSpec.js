@@ -2,7 +2,7 @@
 
 var expect=chai.expect;
 
-describe('Unit: Update Services Controller',function(){
+describe('Update Services Controller',function(){
 
 	var scope,updateServicesCtrl;
 

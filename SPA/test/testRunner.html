@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Unit Test Consubanco</title>
+	<link rel="stylesheet" type="text/css" href="../node_modules/mocha/mocha.css">
+</head>
+<body>
+	<div id="mocha"></div>
+
+	<!--Modules Mocha-chai-->
+	<script src="../node_modules/chai/chai.js"></script>
+	<script src="../node_modules/mocha/mocha.js"></script>
+	<script>
+		if(!mocha){
+			console.log("Necesitas el framework de Mocha");
+		}
+		mocha.setup('bdd');
+	</script>
+
+	<!--Bower Components-->
+	<script src="../app/bower_components/angular/angular.js"></script>
+	<script src="../app/bower_components/angular-mocks/angular-mocks.js"></script>
+	<script src="../app/bower_components/jquery/jquery.js"></script>
+	<script src="../app/bower_components/angular-cookies/angular-cookies.js"></script>
+	<script src="../app/bower_components/angular-resource/angular-resource.js"></script>
+	<script src="../app/bower_components/angular-sanitize/angular-sanitize.js"></script>
+	<script src="../app/bower_components/angular-route/angular-route.js"></script>
+	<script src="../app/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+	<script src="../app/bower_components/ng-table/ng-table.js"></script>
+	<script src="../app/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src='http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false'></script>
+	<script src="../app/bower_components/lodash/dist/lodash.compat.js"></script>
+	<script src="../app/bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+	<script src="../app/bower_components/ng-scrollbars/src/scrollbars.js"></script>
+	<script src="../app/bower_components/ng-dialog/js/ngDialog.js"></script>
+	<script src="../app/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
+	
+	<!--Scripts-->
+	<script src="../app/scripts/app.js"></script>
+	<script src="../app/scripts/msj.js"></script>
+	
+	<!--Controllers-->
+	<script src="../app/scripts/controllers/account-deposit-detail.js"></script>
+	<script src="../app/scripts/controllers/accounts.js"></script>
+	<script src="../app/scripts/controllers/admin.js"></script>
+	<script src="../app/scripts/controllers/auth.js"></script>
+	<script src="../app/scripts/controllers/contact.js"></script>
+	<script src="../app/scripts/controllers/credit.js"></script>
+	<script src="../app/scripts/controllers/credit-card.js"></script>
+	<script src="../app/scripts/controllers/dashboard.js"></script>
+	<script src="../app/scripts/controllers/investments.js"></script>
+	<script src="../app/scripts/controllers/mainController.js"></script>
+	<script src="../app/scripts/controllers/map.js"></script>
+	<script src="../app/scripts/controllers/portfolio.js"></script>
+	<script src="../app/scripts/controllers/register.js"></script>
+	<script src="../app/scripts/controllers/transfers.js"></script>
+	
+	<!--Administration Controllers-->
+	<script src="../app/scripts/controllers/administration/change-password.js"></script>
+	<script src="../app/scripts/controllers/administration/update-communication.js"></script>
+	<script src="../app/scripts/controllers/administration/update-services.js"></script>
+	<script src="../app/scripts/controllers/administration/user-preferences-administration.js"></script>
+	
+	<!--Investment Controllers-->
+	<script src="../app/scripts/controllers/investmentControllers/investmentCedePrlvController.js"></script>
+	<script src="../app/scripts/controllers/investmentControllers/purchaseRetireVistaController.js"></script>
+
+	<!--Directives-->
+	<script src="../app/scripts/directives/account.js"></script>
+	<script src="../app/scripts/directives/alphanumeric.js"></script>
+	<script src="../app/scripts/directives/autocomplete.js"></script>
+	<script src="../app/scripts/directives/credits.js"></script>
+	<script src="../app/scripts/directives/currency.js"></script>
+	<script src="../app/scripts/directives/investments.js"></script>
+	<script src="../app/scripts/directives/jqdatepicker.js"></script>
+	<script src="../app/scripts/directives/numbers-only.js"></script>
+	<script src="../app/scripts/directives/password.js"></script>
+	<script src="../app/scripts/directives/tc.js"></script>
+	<script src="../app/scripts/directives/time-access.js"></script>
+
+	<!--Filters-->
+	<script src="../app/scripts/filters/filter-accounts.js"></script>
+
+	<!--Infrastructure-->
+	<script src="../app/scripts/infrastructure/angular-ui-router.min.js"></script>
+	<script src="../app/scripts/infrastructure/httpInterceptor.js"></script>
+	
+	<!--Scroller-->
+	<script src="../app/scripts/scroller/ng-infinite-scroll.min.js"></script>
+	
+	<!--Services-->
+	<script src="../app/scripts/services/api.js"></script>
+	<script src="../app/scripts/services/check_accounts-provider.js"></script>
+	<script src="../app/scripts/services/check_accounts-service.js"></script>
+	<script src="../app/scripts/services/accounts/accounts-provider.js"></script>
+	<script src="../app/scripts/services/accounts/accounts-service.js"></script>
+	<script src="../app/scripts/services/admin/admin-provider.js"></script>
+	<script src="../app/scripts/services/admin/admin-service.js"></script>
+	<script src="../app/scripts/services/admin/security-token-provider.js"></script>
+	<script src="../app/scripts/services/admin/security-token-service.js"></script>
+	<script src="../app/scripts/services/maps/map-provider.js"></script>
+	<script src="../app/scripts/services/maps/map-service.js"></script>
+	<script src="../app/scripts/services/transfers/product-provider.js"></script>
+	<script src="../app/scripts/services/transfers/product-service.js"></script>
+	<script src="../app/scripts/services/transfers/third-account-provider.js"></script>
+	<script src="../app/scripts/services/transfers/third-account-service.js"></script>
+	<script src="../app/scripts/services/transfers/transfer-provider.js"></script>
+	<script src="../app/scripts/services/transfers/transfer-service.js"></script>
+	<script src="../app/scripts/services/users/user-provider.js"></script>
+	<script src="../app/scripts/services/users/user-service.js"></script>
+	<script src="../app/scripts/services/utils/detectIE.js"></script>
+	<script src="../app/scripts/services/utils/errorProvider.js"></script>
+	<script src="../app/scripts/services/utils/errorService.js"></script>
+	<script src="../app/scripts/services/utils/errorsManagement.js"></script>
+	<script src="../app/scripts/services/utils/logoutService.js"></script>
+	<script src="../app/scripts/services/utils/timer.js"></script>
+	
+	<!--Mock Ups-->
+	<script src="mock/account-detail.js"></script>
+	<script src="mock/accounts.js"></script>
+	<script src="mock/beneficiaries.js"></script>
+	<script src="mock/credit-transactions.js"></script>
+	<script src="mock/investment-products.js"></script>
+	<script src="mock/investment-result.js"></script>
+	<script src="mock/limit.js"></script>
+	<script src="mock/third-accounts.js"></script>
+	<script src="mock/user-activity.js"></script>
+
+
+	<!--Unit Tests-->
+	<script src="spec/controllers/AccountDepositDetailCtrlSpec.js"></script>
+	<script src="spec/controllers/AccountsControllerSpec.js"></script>
+	<script src="spec/controllers/AdminCtrlSpec.js"></script>	
+	<script src="spec/controllers/Administration/ChangePassCtrlSpec.js"></script>
+	<script src="spec/controllers/ContactCtrlSpec.js"></script>
+	<script src="spec/controllers/CreditCardCtrlSpec.js"></script>
+	<script src="spec/controllers/CreditCtrlSpec.js"></script>
+	<script src="spec/controllers/InvestmentCtrlSpec.js"></script>
+	<script src="spec/controllers/LoginControllerSpec.js"></script>
+	<script src="spec/controllers/MapCtrlSpec.js"></script>
+	<script src="spec/controllers/PortfolioCtrlSpec.js"></script>
+	<script src="spec/controllers/RegisterCtrlSpec.js"></script>
+	<script src="spec/controllers/TransferCtrlSpec.js"></script>
+	<script src="spec/controllers/Administration/UpdateCommunicationCtrlSpec.js"></script>
+	<script src="spec/controllers/Administration/UpdateServicesCtrlSpec.js"></script>
+	<script src="spec/controllers/Administration/UserPreferencesAdminCtrlSpec.js"></script>
+	
+	
+	<script>mocha.run();</script>
+</body>
+</html>

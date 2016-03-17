@@ -2,7 +2,7 @@
 
 var expect=chai.expect;
 
-describe('Unit: Update Communication Controller', function(){
+describe('Update Communication Controller', function(){
 
 	var scope, updateCommCtrl;
 	beforeEach(module('spaApp'));
@@ -15,7 +15,7 @@ describe('Unit: Update Communication Controller', function(){
 		});
 	}));
 
-	it('When get Communication',function(){
+	it('When Get Communication',function(){
 		scope.getCommunication();
 		expect(scope.stage_updatecommunication).to.equal(1);
 	});

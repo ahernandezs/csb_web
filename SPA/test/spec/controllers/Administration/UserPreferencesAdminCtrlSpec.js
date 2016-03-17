@@ -2,7 +2,7 @@
 
 var expect=chai.expect;
 
-describe('Unit: User Preferences Administration Controller',function(){
+describe('User Preferences Administration Controller',function(){
 
 	var scope,userPrefAdminCtrl;
 	beforeEach(module('spaApp'));
@@ -15,7 +15,7 @@ describe('Unit: User Preferences Administration Controller',function(){
 		});
 	}));
 
-	describe('When getting preferences user',function(){
+	describe('When Getting Preferences User',function(){
 
 		it('should go to user preferences page',function(){
 			scope.userAdministrationStep=2;
@@ -29,7 +29,7 @@ describe('Unit: User Preferences Administration Controller',function(){
 		});
 	});
 
-	describe('When getting security token',function(){
+	describe('When Getting Security Token',function(){
 
 		it('should go to to the security-token configuration page',function(){
 			scope.gotoTokenAdministrationPage();
