@@ -3,7 +3,7 @@
 var expect=chai.expect;
 
 
-describe('AdminCtrl', function() {
+describe('Administration Controller', function() {
    
   var adminCtrl, dashboardCtrl, scope, http, limit, location, thirdAccount, useractivity,beneficiaries;
  

@@ -2,7 +2,7 @@
 
 var expect=chai.expect;
 
-describe('Unit: PortfolioCtrl, InvestmentCedePrlvCtrl', function() {
+describe('Portfolio Controller and Investmen Cede Controller', function() {
 
     beforeEach(module('spaApp', 'mockedAccounts', 'mockedProductsInvest', 'mockedInvestmentResult'));
 

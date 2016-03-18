@@ -30,7 +30,7 @@ describe('Credit Controller', function() {
     });
   });
 
-  describe('when search to get transactions between two dates', function() {
+  describe('When Search to Get Transactions Between Two Dates', function() {
     it("should get the transactions response: ", function() {
       // enter in the first fail condition: when the dates are posterior to the "today's date".
       expect( scope.search ).to.throw(TypeError);

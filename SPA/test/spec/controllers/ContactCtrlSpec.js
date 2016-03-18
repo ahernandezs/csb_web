@@ -2,7 +2,7 @@
 
 var expect=chai.expect;
 
-describe('Unit: Contact Controller',function (){
+describe('Contact Controller',function (){
 
 	var scope,contactCtrl;
 	beforeEach(module('spaApp'));

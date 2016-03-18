@@ -20,7 +20,7 @@ describe('Register Controller', function() {
    
   }));
 
-	describe('When go to login',function(){
+	describe('When Go to Login',function(){
 		
 		beforeEach(inject(function($location){
 			location=$location;
@@ -41,7 +41,7 @@ describe('Register Controller', function() {
 		
 	});
 
-	describe('When select the image',function(){
+	describe('When Select the Image',function(){
 		it('should assign the image id', function(){
 			var imageID="12345678"
 			scope.selectImage(imageID);
@@ -49,7 +49,7 @@ describe('Register Controller', function() {
 		});
 	});
 
-	describe('When confirm token',function(){
+	describe('When Confirm Token',function(){
 		it('should be register user',function(){
 			scope.confirmToken();
 			expect(scope.isRegistering).to.be.true;

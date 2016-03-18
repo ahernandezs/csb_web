@@ -30,7 +30,7 @@ describe('Investment Controller', function() {
     });
   });
 
-  describe('when search to get transactions between two dates', function() {
+  describe('When Search to Get Transactions Between Two Dates', function() {
     it("should get the transactions response: ", function() {
       // enter in the first fail condition: when the dates are posterior to the "today's date".
       expect( scope.search ).to.throw(TypeError);
@@ -52,7 +52,7 @@ describe('Investment Controller', function() {
     }); 
   });
   
-  describe('When Assign the new value for the investment instruction',function(){
+  describe('When Assign the New Value for the Investment Instruction',function(){
     it('should assign a result',function(){
       scope.assignInstruction('selection','show');
       expect(scope.modify.show).to.equal('show');

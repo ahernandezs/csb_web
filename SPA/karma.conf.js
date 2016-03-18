@@ -11,7 +11,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'app/bower_components/angular/angular.js',
+        'app/bower_components/angular/angular.js',
         'app/bower_components/angular-mocks/angular-mocks.js',
         'app/bower_components/jquery/jquery.js',
         'app/bower_components/angular-cookies/angular-cookies.js',
@@ -21,6 +21,7 @@ module.exports = function(config) {
         'app/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
         'app/bower_components/ng-table/ng-table.js',
         'app/bower_components/angular-ui-router/release/angular-ui-router.js',
+        'http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false',
         'app/bower_components/lodash/dist/lodash.compat.js',
         'app/bower_components/angular-google-maps/dist/angular-google-maps.js',
         'app/bower_components/ng-scrollbars/src/scrollbars.js',
@@ -38,10 +39,8 @@ module.exports = function(config) {
         'app/scripts/controllers/portfolio.js',
         'app/scripts/controllers/investmentControllers/investmentCedePrlvController.js',
         'app/scripts/controllers/investmentControllers/purchaseRetireVistaController.js',
-        //'test/mock/**/*.js',
-        //'test/spec/controllers/LoginControllerSpec.js'
-        'tests/mock/**/*.js',
-        'tests/spec/**/*.js'
+        'test/mock/**/*.js',
+        'test/spec/**/*.js'
     ],
 
     // list of files / patterns to exclude
