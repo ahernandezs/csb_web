@@ -44,7 +44,7 @@
 		<div ng-switch-when="3">
 			<div>
 				<button ng-click="logout();" ng-show="result.success">Finalizar</button>
-				<button ng-click="updateService(1,'');" ng-show="result.error">Finalizar</button>
+				<button ng-click="updateService(1,'');result.error=false;" ng-show="result.error">Finalizar</button>
 			</div>
 		</div>
 	</div>
