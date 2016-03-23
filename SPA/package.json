@@ -1,7 +1,9 @@
 {
   "name": "spa",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "karma-cli": "^0.1.2"
+  },
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-as-promised": "^5.2.0",
