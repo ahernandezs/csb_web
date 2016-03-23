@@ -6,6 +6,12 @@ module.exports = function(config) {
     // base path, that will be used to resolve files and exclude
     basePath: '',
 
+    'plugins' : [
+        'karma-mocha',
+        'karma-chai',
+        'karma-sinon',
+        'karma-phantomjs-launcher'
+    ],
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['mocha','chai','sinon'],
 
@@ -66,7 +72,7 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode
