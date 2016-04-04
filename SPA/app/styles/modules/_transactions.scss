@@ -82,6 +82,7 @@ form[name="investmentForm"], form[name="transferForm"], form[name="paymentForm"]
         display: block;
         margin-top: 10px;
     }
+       
 }
 .select-style:active{
     border-color:$orange;
@@ -168,10 +169,10 @@ form[name="investmentForm"], form[name="transferForm"], form[name="paymentForm"]
         background:#4da3d4;
         color:white;
         height: 100%;
-        line-height: 410%;
         vertical-align: middle;
         font-size:1em;
         float:left;
+        padding-top: 16px;
     }
     select {
         float:left;
@@ -193,6 +194,11 @@ form[name="investmentForm"], form[name="transferForm"], form[name="paymentForm"]
     &+ p {
         font-size: 12px;
         margin-top: 3px;
+    }
+}
+.padding-small{
+    > span{
+        padding-top:10px !important;
     }
 }
 input[name="account"] + p{
