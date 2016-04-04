@@ -1,6 +1,6 @@
 <form class="user-login" name="userLoginForm">
     <label for="user"><strong>Iniciar sesi&oacute;n</strong></label>
-    <input ng-class="error ? 'rojo' : ''" ng-model="loginData.username" type="text" name="user" id="user" placeholder="Usuario" ng-minlength="5" maxlength="10" autocomplete="off" ng-pattern="/^[0-9]+$/" required>
+    <input ng-class="error ? 'rojo' : ''" ng-model="loginData.username" type="text" name="user" id="user" placeholder="Usuario" ng-minlength="5" maxlength="10" autocomplete="off" ng-pattern="/^[0-9]+$/" required onpaste="return false">
     <div class="error" ng-show="error">{{errorMessage}}</div>
     <input type="submit" value="Continuar" ng-click="checkUser()" ng-disabled="userLoginForm.$invalid||checkingUser">
     <div class="unlock-a">
