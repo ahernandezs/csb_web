@@ -53,7 +53,8 @@ angular.module('spaApp')
 		};
 
 		this.logout = function() {
-			if ( detectIE.isIE() )
+			var isIE = detectIE.detect();
+			if ( isIE.ie )
 				return $http( { cache: false, url: $rootScope.restAPIBaseUrl+'/logout', method: 'GET', params: { 'time': new Date().getTime() } } );
 			else
 				return $http( { cache: false, url: $rootScope.restAPIBaseUrl+'/logout', method: 'GET' } );
