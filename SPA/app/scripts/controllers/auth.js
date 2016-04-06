@@ -5,8 +5,8 @@
  * inject a login function in the scope
  */
 angular.module('spaApp')
-.controller('LoginCtrl', ['$scope', '$http', '$location', 'api', '$rootScope', '$window', 'userProvider', 'timerService', 'logoutService',
-    function ($scope,$http,$location, api, $rootScope, $window, userProvider, timerService, logoutService) {
+.controller('LoginCtrl', ['$scope', '$http', '$location', 'api', '$rootScope', '$window', 'userProvider', 'timerService', 'logoutService', 'detectIE',
+    function ($scope,$http,$location, api, $rootScope, $window, userProvider, timerService, logoutService, detectIE) {
   /**
    * If user has a valid session token keep him in dashboard
    */
@@ -42,17 +42,21 @@ angular.module('spaApp')
   userProvider.resetRegistrationToken();
 
   /**
-    * cancel the authentication flow and go back to the first step
+    * cancel the authentication flow and go back to the first step, if it is a shitty browser, reload
     */
   $scope.reset=function(){
-    resetError();
-    $scope.loginData = {};
-    $scope.unlockData = {};
-    $scope.step = 0;
-    $scope.showTimeoutAlert = false;
-    $scope.showErrorLogoutAlert = false;
+    var fckie = detectIE.detect();
+    if(fckie.ie && fckie.version === '10>'){
+      $window.location.reload();
+    }else{
+      resetError();
+      $scope.loginData = {};
+      $scope.unlockData = {};
+      $scope.step = 0;
+      $scope.showTimeoutAlert = false;
+      $scope.showErrorLogoutAlert = false;
+    }
   };
-
 
   /************************ Navigation ***********************************/
   /**
