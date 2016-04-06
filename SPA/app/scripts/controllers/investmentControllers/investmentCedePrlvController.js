@@ -83,6 +83,7 @@ angular.module('spaApp').controller('InvestmentCedePrlvCtrl', ['$scope', 'transf
         resetError();
         $scope.step++;
         $scope.today = new Date().getTime();
+        $scope.updateProgress(2);
 	 };
 
     /**
@@ -90,6 +91,7 @@ angular.module('spaApp').controller('InvestmentCedePrlvCtrl', ['$scope', 'transf
      */
     $scope.reset = function() {
         initialize();
+        $scope.updateProgress(1);
      };
 
     /**
@@ -114,11 +116,13 @@ angular.module('spaApp').controller('InvestmentCedePrlvCtrl', ['$scope', 'transf
                 processServiceSuccess,
                 processServiceError
             );
+            $scope.updateProgress(3);
         }else if($scope.investmentCategory === 'PRLV'){
             transferProvider.investPRLV(originAccountId, productId, amount, investAgain).then(
                 processServiceSuccess,
                 processServiceError
             );
+            $scope.updateProgress(3);
         }else{
             $scope.setServiceError('Tipo de inversión desconocido');
          }
@@ -131,5 +135,13 @@ angular.module('spaApp').controller('InvestmentCedePrlvCtrl', ['$scope', 'transf
             }
         );
      }
+
+     $scope.updateProgress = function(nextStep){
+        $scope.currentStep = nextStep;
+        var wrapperWidth = document.getElementById("progressWrapper").offsetWidth
+        var progressWidth = ((wrapperWidth/3)*nextStep*100)/wrapperWidth
+        $scope.stepStyle = {width:progressWidth+"%"}
+        //console.log($scope.stepStyle)
+    }
 
 }]);

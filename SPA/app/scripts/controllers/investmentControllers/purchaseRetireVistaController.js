@@ -64,6 +64,7 @@ angular.module('spaApp').controller('purchaseRetireVistaCtrl', ['$scope', 'trans
         resetError();
         $scope.step++;
         $scope.today = new Date().getTime();
+        $scope.updateProgress(2);
 	 };
 
     /**
@@ -71,6 +72,7 @@ angular.module('spaApp').controller('purchaseRetireVistaCtrl', ['$scope', 'trans
      */
     $scope.reset = function() {
         initialize();
+        $scope.updateProgress(1);
     };
 
      /**
@@ -87,6 +89,7 @@ angular.module('spaApp').controller('purchaseRetireVistaCtrl', ['$scope', 'trans
             },
             processServiceError
         );
+        $scope.updateProgress(3);
     }
 
     /**
@@ -100,6 +103,14 @@ angular.module('spaApp').controller('purchaseRetireVistaCtrl', ['$scope', 'trans
             },
             processServiceError
         );
+        $scope.updateProgress(3);
+    }
+    $scope.updateProgress = function(nextStep){
+        $scope.currentStep = nextStep;
+        var wrapperWidth = document.getElementById("progressWrapper").offsetWidth
+        var progressWidth = ((wrapperWidth/3)*nextStep*100)/wrapperWidth
+        $scope.stepStyle = {width:progressWidth+"%"}
+        //console.log($scope.stepStyle)
     }
 
 }]);
