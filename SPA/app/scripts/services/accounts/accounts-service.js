@@ -73,8 +73,7 @@ angular.module('spaApp')
               method: 'POST',
               data: JSON.stringify({
                              'instruction' : instruction,
-                  'account_id_destination' : ejeAccount,
-                                    'time' : new Date().getTime()
+                  'account_id_destination' : ejeAccount
               }),
               headers: {'Content-Type': 'application/json', 'X-AUTH-TOKEN': $http.defaults.headers.common['X-AUTH-TOKEN']}
           } );
