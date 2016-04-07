@@ -181,7 +181,6 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
         function(data){
           $scope.modify.show = false;
           $scope.result.success = true;
-		  $scope.loadDetail();
         },
         function(errorObject) {
           var status = errorObject.status;
