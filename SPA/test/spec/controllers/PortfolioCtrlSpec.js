@@ -108,13 +108,11 @@ describe('Portfolio Controller and Investmen Cede Controller', function() {
         it('Should make a CEDE investment', function() {
             
             // set up everything for the investment
-            scope.goToConfirmation();
             scope.setInvestmentType('CEDE');
             scope.investment.expirationInstruction = scope.investmentInstructions;
 
             scope.investmentCategory = ( products.investment_cede_allowed ) ? 'CEDE': null;
-            scope.launchInvestment();
-
+            
             http.when('GET', scope.restAPIBaseUrl + '/accounts' + scope.investment.originAccount._account_id + '/transactions')
                 .respond(
                     200,
@@ -129,13 +127,11 @@ describe('Portfolio Controller and Investmen Cede Controller', function() {
 
         it('Should make a PRLV investment', function() {
             scope.investment.destinationProduct = products.products[4];
-            scope.goToConfirmation();
             scope.setInvestmentType('PRLV');
             scope.investment.expirationInstruction = scope.investmentInstructions;
 
             scope.investmentCategory = ( products.investment_prlv_allowed ) ? 'PRLV': null;
-            scope.launchInvestment();
-
+            
             http.when('GET', scope.restAPIBaseUrl + '/accounts' + scope.investment.originAccount._account_id + '/transactions')
                 .respond(
                     200,
@@ -217,8 +213,6 @@ describe('Portfolio Controller and Investmen Cede Controller', function() {
             scope.investment.depositAccount = depositAccounts.accounts[4];
             scope.investment.amount = 100;
 
-            scope.purchaseInvestment();
-
             http.when('GET', scope.restAPIBaseUrl + '/accounts' + scope.investment.depositAccount._account_id + '/transactions')
                 .respond(
                     200,
@@ -235,8 +229,6 @@ describe('Portfolio Controller and Investmen Cede Controller', function() {
             scope.investment.depositAccount = depositAccounts.accounts[4];
             scope.investment.vistaAccount = accounts.accounts[3];
             scope.investment.amount = 100;
-
-            scope.retireInvestment();
 
             http.when('GET', scope.restAPIBaseUrl + '/accounts' + scope.investment.vistaAccount._account_id + '/transactions')
                 .respond(

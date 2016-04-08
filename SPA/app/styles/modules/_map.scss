@@ -79,12 +79,12 @@ h2.sucursales{
 		        padding: 10px !important;
 		        margin: 0 !important;
 		        border: none !important;
-		        box-shadow: none;
-		        background:url(../images/ico-abajo.png) no-repeat 98% center;
-		        background-size:25px;
-		        -webkit-appearance: none;
-		           -moz-appearance: none;
-		                appearance: none;
+		        box-shadow: none !important;
+		        background:url(../images/ico-abajo.png) no-repeat 98% center !important;
+		        background-size:25px !important;
+		        -webkit-appearance: none !important;
+		           -moz-appearance: none !important;
+		                appearance: none !important;
 		    }
 		    select:focus {
 		        outline: none;
