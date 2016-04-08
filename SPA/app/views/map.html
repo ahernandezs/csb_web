@@ -12,9 +12,9 @@
 					<div class="mapinputs">
 						<input type="text" id="Autocomplete" ng-autocomplete="result" details="details" options="options" placeholder="Buscar por dirección" size="28"/>
 						<div class="select-map">
-						<select ng-model="estado" ng-options="estado.name for estado in estados"></select>
+							<select ng-model="estado" ng-options="estado.name for estado in estados"></select>
+						</div>
 					</div>
-				</div>
 				<span ng-click="search()"></span>
 				<div class="sucursal-modulo">
 					<div ng-click="attention = true" ng-class="attention ? 'selected' : ''"></div>
