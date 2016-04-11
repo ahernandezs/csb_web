@@ -327,6 +327,28 @@
 		height:190px;
 	}
 
+	.app{
+		width:105px;
+		height:36px;
+		margin-top:20px;
+		margin-right:15px;
+		cursor: pointer;
+	}
+
+	.apple{
+		background:url(../images/logo-apple-store.svg) no-repeat center center;
+		width:100%;
+		height:100%;
+		background-size:cover;
+	}
+
+	.google{
+		background:url(../images/logo-google-play.svg) no-repeat center center;
+		width:100%;
+		height:100%;
+		background-size:cover;
+	}
+
 }
 
 /* center radio below label */
