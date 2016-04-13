@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('spaApp')
-  .service('logoutService', ['$rootScope', 'userProvider', 'timerService', '$location', '$http',
-    function($rootScope, userProvider, timerService, $location, $http) {
+  .service('logoutService', ['$rootScope', 'userProvider', 'timerService', '$location', '$http', '$window',
+    function($rootScope, userProvider, timerService, $location, $http, $window) {
 
       var options = [];
 
@@ -33,6 +33,7 @@ angular.module('spaApp')
         $rootScope = "";
         $http.defaults.headers.common = "";
         $location.path('login');
+        $window.location.reload();
       };
 
       this.resetError();
