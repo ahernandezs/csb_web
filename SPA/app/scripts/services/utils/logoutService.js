@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('spaApp')
-  .service('logoutService', ['$rootScope', 'userProvider', 'timerService', '$location',
-    function($rootScope, userProvider, timerService, $location) {
+  .service('logoutService', ['$rootScope', 'userProvider', 'timerService', '$location', '$http',
+    function($rootScope, userProvider, timerService, $location, $http) {
 
       var options = [];
 
@@ -30,6 +30,8 @@ angular.module('spaApp')
           timerService.stop();
           $rootScope.session_token = null;
         }
+        $rootScope = "";
+        $http.defaults.headers.common = "";
         $location.path('login');
       };
 
