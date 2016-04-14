@@ -6,7 +6,7 @@
             <div class="mensajeCom">
                 <div class="fieldContainer pull-left" ng-class="data.phone.length > 0 ? 'selected' : ''">
                     <span>N&uacute;mero celular</span>
-                    <input type="text" numbers-only ng-minlength="10" ng-maxlength="10" minlength="10" maxlength="10" class="input-mobile text-left" ng-model="updatedata.phone" placeholder="N&uacute;mero celular">
+                    <input id="phone" type="text" numbers-only ng-minlength="10" ng-maxlength="10" minlength="10" maxlength="10" class="input-mobile text-left" ng-model="updatedata.phone" placeholder="N&uacute;mero celular">
                 </div>
                 <div class="mensajeIco">
                     <img ng-show="updatedata.phoneSelect" ng-click="updatedata.phoneSelect = false" src="images/CSB_ico_paloma_naranja.svg" alt="" height="35px" width="35px" align="right">
@@ -16,7 +16,7 @@
             <div class="mensajeCom">
                 <div class="fieldContainer pull-left" ng-class="data.e_mail.length > 0 ? 'selected' : ''">
                     <span>Correo electr&oacute;nico</span>
-                    <input type="email" alphanumeric class="input-mail text-left" ng-model="updatedata.e_mail" placeholder="Correo electr&oacute;nico" ng-maxlength="40" maxlength="40">
+                    <input id="email" type="email" alphanumeric class="input-mail text-left" ng-model="updatedata.e_mail" placeholder="Correo electr&oacute;nico" ng-maxlength="40" maxlength="40">
                 </div>
                 <div class="mensajeIco">
                     <img ng-show="updatedata.mailSelect" ng-click="updatedata.mailSelect = false" src="images/CSB_ico_paloma_naranja.svg" alt="" height="35px" width="35px" align="right">
