@@ -2,8 +2,6 @@
 
 angular.module('spaApp').controller('changePasswordController', ['$scope', 'adminProvider', 'codeStatusErrors', function ($scope, adminProvider, codeStatusErrors) {
 
-	$scope.stage_password = 1;
-	$scope.change = {};
 	$scope.errorMessage = '';
 	$scope.showError = false;
 	$scope.resultChangePass = false;
@@ -11,17 +9,14 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 
 	$scope.verifyNewPass = function () {
 		if ($scope.change.old === undefined ) {
-			$scope.errorMessage = 'Ingresa la contraseña actual';
-			$scope.error = true;
+			setError('Ingresa la contraseña actual');
 		} else if ( $scope.change.new === undefined && $scope.change.repeatNew === undefined ) {
-			$scope.errorMessage = 'La contraseña debe tener de 8 a 15 caracteres, contar con al menos una mayúscula, una minúscula, y un numérico. NO incluir caracteres especiales';
-			$scope.error = true;
+			setError('La contraseña debe tener de 8 a 15 caracteres, contar con al menos una mayúscula, una minúscula, y un numérico. NO incluir caracteres especiales');
 		} else if ( $scope.change.new !== $scope.change.repeatNew ){
-			$scope.errorMessage = 'Las contraseñas no coinciden';
-			$scope.error = true;
+			setError('Las contraseñas no coinciden');
 		}else{
-			$scope.error = false;
-			$scope.stage_password = 2;
+			$scope.changeCrtl.changeError = false;
+			$scope.changeCrtl.changeStep = 2;
 		}
 	};
 
@@ -38,18 +33,18 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 				} else {
 					var msg = codeStatusErrors.errorMessage(status);
 					if (status === 500){
-					$scope.setServiceError(msg + errorObject.response.message);
+						$scope.setServiceError(msg + errorObject.response.message);
 					} else {
 						$scope.setServiceError(msg);
 					}
 				}
 			}
 		);
-		$scope.stage_password = 3;
+		$scope.changeCrtl.changeStep = 3;
 	};
 
 	$scope.validatePassword = function() {
-		$scope.error = false;
+		$scope.changeCrtl.changeError = false;
 		$scope.invalidPassword = true;
 		var password = $scope.change.new;
 
@@ -74,17 +69,18 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 		}
 	}
 
-	$scope.reset = function(){
-		$scope.stage_password = 1;
+	/*$scope.reset = function(){
+		$scope.changeStep = 1;
 		$scope.change = {};
+		$scope.changeError = false;
 		$scope.errorMessage = '';
 		$scope.showError = false;
 		$scope.resultChangePass = false;
 		$scope.resultErrorPass = false;
-	}
+	}*/
 
 	function setError(errorMessage){
-		$scope.error = true;
+		$scope.changeCrtl.changeError = true;
 		$scope.errorMessage = errorMessage;
 	};
 

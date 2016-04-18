@@ -19,7 +19,7 @@ describe('Change Password Controller',function(){
 
 	it('verify the old password should be equal to undefined',function(){
 		scope.verifyNewPass();
-		expect(scope.error).to.be.true;
+		expect(scope.changeCrtl.changeStep).to.be.equal(2);
 	});
 
 	it('verify the new password should be different to undefined',function(){

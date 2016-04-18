@@ -9,6 +9,16 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 	 * the security-token's state
 	 */
 	var tokenState;
+	$scope.change = {};
+	$scope.changeCrtl = {};
+	$scope.changeCrtl.changeError = false;
+	$scope.changeCrtl.changeStep = 1;
+
+	$scope.reset = function(){
+		$scope.change = {};
+		$scope.changeCrtl.changeError = false;
+		$scope.changeCrtl.changeStep = 1;
+	}
 
 	/**
 	 * used for updatedata
