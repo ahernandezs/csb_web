@@ -30,10 +30,11 @@ angular.module('spaApp')
           timerService.stop();
           $rootScope.session_token = null;
         }
-        $rootScope = "";
-        $http.defaults.headers.common = "";
+        delete $http.defaults.headers.common['X-AUTH-TOKEN'];
+        $rootScope.client_name = '';
+        $rootScope.last_access_media = '';
+        $rootScope.last_access_date = '';
         $location.path('login');
-        $window.location.reload();
       };
 
       this.resetError();
