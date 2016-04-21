@@ -15,6 +15,7 @@ describe('Change Password Controller',function(){
 		});
 
 		scope.change.old=undefined;
+
 	}));
 
 	it('verify the old password should be equal to undefined',function(){
@@ -25,7 +26,7 @@ describe('Change Password Controller',function(){
 	it('verify the new password should be different to undefined',function(){
 		scope.change.new="Buenas154"
 		scope.verifyNewPass();
-		expect(scope.stage_password).to.equal(1);
+		expect(scope.changeCrtl.changeStep).to.equal(1);
 
 	});
 	
@@ -38,4 +39,5 @@ describe('Change Password Controller',function(){
 		scope.reset();
 		expect(scope.errorMessage).to.equal('');
 	});
+
 });

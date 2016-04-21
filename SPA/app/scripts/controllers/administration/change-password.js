@@ -69,16 +69,6 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 		}
 	}
 
-	/*$scope.reset = function(){
-		$scope.changeStep = 1;
-		$scope.change = {};
-		$scope.changeError = false;
-		$scope.errorMessage = '';
-		$scope.showError = false;
-		$scope.resultChangePass = false;
-		$scope.resultErrorPass = false;
-	}*/
-
 	function setError(errorMessage){
 		$scope.changeCrtl.changeError = true;
 		$scope.errorMessage = errorMessage;
