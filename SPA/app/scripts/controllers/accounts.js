@@ -124,13 +124,12 @@
             headers: {
               'Content-type': 'application/json'
             },
-            responseType: 'arraybuffer'
+            responseType: 'blob'
           }).success(function (data, status, headers, config) {
-            var blob = new Blob([data], {type: type});
-            var objectUrl = URL.createObjectURL(blob);
+            var objectUrl = URL.createObjectURL(data);
             // IE 10 || IE 11
             if ( window.navigator.msSaveOrOpenBlob )
-                window.navigator.msSaveBlob(blob, filename);
+                window.navigator.msSaveBlob(objectUrl, filename);
             // NOT IE browsers
             else if ( 'download' in document.createElement('a') ) {
                 var a = document.createElement("a");
