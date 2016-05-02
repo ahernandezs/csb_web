@@ -37,11 +37,12 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 						{'id':'zac','name':'Zacatecas','lat':23.0831271,'lon':-102.5352127,'zoom':7}
 					];
 	$scope.showBranches = false;
+	$scope.selectedItem;
 
 	//search branches
 	$scope.search = function(){
 		if(Object.keys($scope.details).length==0){
-			if($scope.estado!=undefined){
+			if($scope.selectedItem!=undefined){
 				$scope.showBranches = true;
 				mapProvider.getBranches({'lat':$scope.estado.lat,'lng':$scope.estado.lon}).then(
 					function() {
@@ -197,4 +198,7 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 		$scope.showIdleAlert = false;
 	});
 
+	$scope.selectedState=function(item){
+		$scope.selectedItem=item;
+	}
 }]);
