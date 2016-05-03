@@ -1,10 +1,12 @@
 .half{
-	width: 66%;
+	width: 45%;
 	right: 0;
 	z-index:100;
 	position: absolute;
 	top:49px;
 	bottom:94px;
+	height: 50%;
+	margin-top: -35px;
 }
 h2.sucursales{
 	color: $orange;
@@ -28,6 +30,7 @@ h2.sucursales{
 	background:#fff;
 	overflow:hidden;
 	padding: 15px;
+	height: 98%;
 	@include border-radius(4px 4px 0 0);
 	> button{
 		width: 10%;
@@ -63,16 +66,16 @@ h2.sucursales{
 			}
 		}
 		.select-map:active{
-		    border-color:$orange;
+			border-color:$orange;
 		}
 		.select-map{
-		    overflow: hidden;
-		    position: relative;
-		   	float:right;
-		    width: 36%;
-		    padding: 0 2%;
-		    border-left:1px solid $gray;
-		    select {
+			overflow: hidden;
+			position: relative;
+			float:right;
+			width: 36%;
+			padding: 0 2%;
+			border-left:1px solid $gray;
+			select {
 		        float:left;
 		        color:$dgray;
 		        width: 100%;
@@ -108,13 +111,13 @@ h2.sucursales{
 }
 #selectedState{
 	margin-top:-18px;
-	width: 90%;    
+	width: 90%;
 }
-.estado{	
+.estado{
 	.select-style{
-        background:url(../images/ico-abajo.png) no-repeat 98% center, white;
-        background-size:25px;
-        color:$dgray;
+		background:url(../images/ico-abajo.png) no-repeat 98% center, white;
+		background-size:25px;
+		color:$dgray;
 		padding: 19px !important;
 		margin-top: -55px !important;
 		margin-right: 93px !important;
@@ -125,20 +128,19 @@ h2.sucursales{
 		width: 21%;
 		border-left:1px solid $gray;
 		height: 25px;
-
-        p{
-            padding:10px;
-            color:$dgray;
-        }
-        &.selected{
-            > span{
-                display: block;
-                overflow: hidden;
-            }
-            p{
-                font-size: 1em;
-                float:right;
-                width: 67.5%;
+		p{
+			padding:10px;
+			color:$dgray;
+		}
+		&.selected{
+			> span{
+				display: block;
+				overflow: hidden;
+			}
+			p{
+				font-size: 1em;
+				float:right;
+				width: 67.5%;
             }
         }
     }
@@ -146,9 +148,9 @@ h2.sucursales{
         width: 21%;
         padding:0;
         overflow: hidden;
-        overflow-y:scroll; 
+        overflow-y:scroll;
         margin-top: -16px;
-        margin-right: 92px; 
+        margin-right: 92px;
         height: 300px;
         float:right;
         position: relative !important;
@@ -179,7 +181,6 @@ h2.sucursales{
                     margin: 0;
                 }
             }
-
         }
     }
 }
@@ -367,7 +368,6 @@ h2.sucursales{
 			}
 		}
 	}
-
 }
 
 .branches-locator {
