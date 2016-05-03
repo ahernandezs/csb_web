@@ -11,13 +11,12 @@
 					<button ng-click="searchNearMe()" class="naranja">Cerca de m&iacute;</button>
 					<div class="mapinputs">
 						<input type="text" id="Autocomplete" ng-autocomplete="result" details="details" options="options" placeholder="Buscar por dirección" size="28"/>
-						
 					</div>
-				<span id="buscar" ng-click="search()"></span>				
+				<span ng-click="search()"></span>
 				<div ng-show="showBranches">
 					<div class="sucursal-modulo">
-							<div ng-click="attention = true" ng-class="attention ? 'selected' : ''"></div>
-							<div ng-click="attention = false" ng-class="attention ? '' : 'selected'"></div>
+						<div ng-click="attention = true" ng-class="attention ? 'selected' : ''"></div>
+						<div ng-click="attention = false"ng-class="attention ? '' : 'selected'"></div>
 					</div>
 					<div ng-show="attention">
 						<div ng-repeat="branch in map.branches | filter:{description: {category:1}}">
@@ -73,14 +72,13 @@
 			</div>
 			<div ng-hide="showBranches" class="select-map">
 				<div id="select-estado" class="estado">
-            		<div class="dropdown-toggle select-style" type="button" data-toggle="dropdown">
-                    	<p id="selectedState">{{selectedItem}}</p>
-                    </div>
-            		<ul class="dropdown-menu" role="menu">
-                		<li ng-repeat="estado in estados" ng-model="estado" ng-required="true" ng-click="selectedState(estado.name)">{{estado.name}}</li>
-            		</ul>
-        		</div>
-				<!--<select ng-model="estado" ng-options="estado.name for estado in estados"></select>-->
+					<div class="dropdown-toggle select-style" type="button" data-toggle="dropdown">
+						<p id="selectedState">{{selectedItem}}</p>
+					</div>
+					<ul class="dropdown-menu" role="menu">
+						<li ng-repeat="estado in estados" ng-model="estado" ng-required="true" ng-click="selectedState(estado.name)">{{estado.name}}</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<div>
