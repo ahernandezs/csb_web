@@ -20,6 +20,15 @@ module.exports = function (grunt) {
 
   // Define the configuration for all the tasks
   grunt.initConfig({
+
+    shell:{
+      version:{
+        command:["laversion=$(git rev-parse --short HEAD)",
+                  "sed -i 's/HASHVERSION/'$laversion'/' ./app/scripts/services/api.js",
+                  "unset laversion"
+                ].join(';')
+      }
+    },
     
     // Project settings
     yeoman: {
@@ -428,6 +437,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'shell',
     'clean:dist',
     'bower-install',
     'useminPrepare',
@@ -445,6 +455,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
+    'shell',
     'newer:jshint',
     'test',
     'uglify',
