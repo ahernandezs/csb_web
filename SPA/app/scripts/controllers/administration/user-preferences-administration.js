@@ -175,7 +175,7 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 	 * synchronize the user's security-token
 	 */
 	$scope.disableSecurityToken = function(){
-		securityTokenProvider.disableSecurityToken($scope.tokenDisableData.reason.value).then(
+		securityTokenProvider.disableSecurityToken($scope.selectedReason.value).then(
 			function(data){
 				$scope.setServiceError('Su token ha sido desactivado temporalmente');
 				resetTokenSynchronizationData();
@@ -219,4 +219,7 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 		$scope.tokenDisableData = {};
 	}
 
+	$scope.selectReason=function(reason){
+		$scope.selectedReason=reason;
+	}
 }]);

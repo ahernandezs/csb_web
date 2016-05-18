@@ -1,12 +1,15 @@
 <div class="data">
     <h3>Desactivaci&oacute;n temporal del dispositivo de seguridad</h3>
     <form name="disableSecurityTokenForm">
-        <div class="fieldContainer select-style" ng-class="tokenDisableData.reason ? 'selected' : ''">
-            <span class="vcentered">Raz&oacute;n</span>
-            <select ng-model="tokenDisableData.reason" ng-options="item as item.label for item in tokenDisableReasons" ng-required="true">
-                <option value="">Raz&oacute;n</option>
-            </select>
+        <div class="dropdown">
+            <div class="dropdown-toggle select-style razon padding-small" type="button" data-toggle="dropdown" ng-class="selectedReason ? 'selected' : ''">
+                <span>Raz&oacute;n</span>
+                <p>{{selectedReason.label || 'Raz&oacute;n'}}</p>
+            </div>
+            <ul class="dropdown-menu" role="menu">
+                <li ng-repeat="reason in tokenDisableReasons" ng-click="selectReason(reason)" ng-required="true">{{reason.label}}</li>
+            </ul>
         </div>
-       <button ng-disabled="disableSecurityTokenForm.$invalid" ng-click="disableSecurityToken()">Deshabilitar</button>
+       <button ng-disabled="!selectedReason" ng-click="disableSecurityToken()">Deshabilitar</button>
     </form>
 </div>
