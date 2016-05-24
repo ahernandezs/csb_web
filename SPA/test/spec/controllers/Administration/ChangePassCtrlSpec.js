@@ -4,7 +4,7 @@ var expect=chai.expect;
 
 describe('Change Password Controller',function(){
 
-	var scope,changePassCtrl;
+	var scope,changePassCtrl, userPrefCtrl;
 	beforeEach(module('spaApp'));
 
 	beforeEach(inject(function($rootScope,$controller){
@@ -13,31 +13,48 @@ describe('Change Password Controller',function(){
 		changePassCtrl=$controller('changePasswordController',{
 			$scope : scope
 		});
-
-		scope.change.old=undefined;
-
+		userPrefCtrl=$controller('UserPreferencesAdministrationController',{
+			$scope: scope
+		});
 	}));
+
+	it('when initialize the controller',function(){
+		expect(scope.showError).to.be.false;
+		expect(scope.changeCrtl.changeError).to.be.false;
+	});
+
+	it('when reset the default data',function(){
+		scope.reset;
+		expect(scope.changeCrtl.changeStep).to.be.equal(1);
+	});
 
 	it('verify the old password should be equal to undefined',function(){
 		scope.verifyNewPass();
-		expect(scope.changeCrtl.changeStep).to.be.equal(2);
+		expect(scope.changeCrtl.changeStep).to.not.be.equal(2);
 	});
 
 	it('verify the new password should be different to undefined',function(){
-		scope.change.new="Buenas154"
+		scope.change.old="Holas197"
+		scope.change.new="Buenas154";
+		scope.change.repeatNew="Buenas154";
 		scope.verifyNewPass();
-		expect(scope.changeCrtl.changeStep).to.equal(1);
+		expect(scope.changeCrtl.changeStep).to.equal(2);
 
 	});
 	
-	it('validate password', function(){
+	it('verify the modification of new password',function(){
+		scope.modifyPassword();
+		expect(scope.changeCrtl.changeStep).to.be.equal(3);
+	});
+
+	it('validate the new password',function(){
+		scope.change.new="Buenas154";
 		scope.validatePassword();
-		expect(scope.error).to.be.false; 
+		expect(scope.invalidPassword).to.be.false;
 	});
-
-	it('reset defautl data', function(){
-		scope.reset();
-		expect(scope.errorMessage).to.equal('');
+	it('when validate an incorrect new password',function(){
+		scope.change.new="Buen15";
+		scope.validatePassword();
+		expect(scope.changeCrtl.changeError).to.be.true;
 	});
-
 });
