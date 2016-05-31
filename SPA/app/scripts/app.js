@@ -3,7 +3,6 @@
 var app = angular.module('spaApp', [
   'ngCookies',
   'ngResource',
-  'ngSanitize',
   'ngRoute',
   'infinite-scroll',
   'ngTable',
