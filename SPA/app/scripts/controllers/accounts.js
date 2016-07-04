@@ -4,7 +4,7 @@
  * The accounts controller. Gets accounts passing auth parameters
  */
  angular.module('spaApp').controller('AccountsCtrl', ['$rootScope', '$scope', '$location', 'accountsProvider', 'codeStatusErrors',
-     'ngDialog', '$http', 'userProvider', function ( $rootScope, $scope, $location, accountsProvider, codeStatusErrors, ngDialog, $http, userProvider) {
+     'ngDialog', '$http', 'userProvider', 'detectIE', function ( $rootScope, $scope, $location, accountsProvider, codeStatusErrors, ngDialog, $http, userProvider, detectIE) {
 
     $scope.statementStatus = [];
     $scope.showTDCAccount = false;
@@ -113,52 +113,63 @@
     }
 
     $scope.ask4Token = function (format, id) {
-        ngDialog.openConfirm({ template: 'views/partials/token.html', showClose: false }).then(function(otp){
+        var browser = detectIE.detect();
+        if(browser.ie && browser.version === '10>'){
+            var urlDoc = "<div class='contenido'> \
+                                <h4>AVISO</h4> \
+                                <p>Para ese navegador en específico la funcionalidad de descarga de estados de cuenta no se encuentra disponible, favor de actualizar su navegador</p> \
+                            </div> \
+                            <div class='contenido gris'> \
+                                <button ng-click='closeThisDialog();' class='w47'>Aceptar</button> \
+                            </div>";
+            ngDialog.open({ template: urlDoc, showClose: false, plain: true });
+        }else{
+            ngDialog.openConfirm({ template: 'views/partials/token.html', showClose: false }).then(function(otp){
 
-          var type = format === 'XML'?'application/xml':'application/pdf';
-          var filename = format === 'XML'?'EstadodeCuenta.xml':'EstadodeCuenta.pdf';
+              var type = format === 'XML'?'application/xml':'application/pdf';
+              var filename = format === 'XML'?'EstadodeCuenta.xml':'EstadodeCuenta.pdf';
 
-          $http({
-            url: $scope.restAPIBaseUrl+'/files/statement?format='+format+'&id='+id+'&otp='+otp,
-            method: "GET",
-            headers: {
-              'Content-type': 'application/json'
-            },
-            responseType: 'blob'
-          }).success(function (data, status, headers, config) {
-            var objectUrl = URL.createObjectURL(data);
-            // IE 10 || IE 11
-            if ( window.navigator.msSaveOrOpenBlob )
-                window.navigator.msSaveBlob(objectUrl, filename);
-            // NOT IE browsers
-            else if ( 'download' in document.createElement('a') ) {
-                var a = document.createElement("a");
-                document.body.appendChild(a);
-                a.href = objectUrl;
-                a.download = filename;
-                a.click();
-                window.open(objectUrl);
-            // IE 9
-            } else
-                window.document.execCommand('SaveAs', null, objectUrl);
-          }).error(function (data, status, headers, config) {
-            var decodedString = String.fromCharCode.apply(null, new Uint8Array(data));
-            var obj = JSON.parse(decodedString);
+              $http({
+                url: $scope.restAPIBaseUrl+'/files/statement?format='+format+'&id='+id+'&otp='+otp,
+                method: "GET",
+                headers: {
+                  'Content-type': 'application/json'
+                },
+                responseType: 'blob'
+              }).success(function (data, status, headers, config) {
+                var objectUrl = URL.createObjectURL(data);
+                // IE 10 || IE 11
+                if ( window.navigator.msSaveOrOpenBlob )
+                    window.navigator.msSaveBlob(objectUrl, filename);
+                // NOT IE browsers
+                else if ( 'download' in document.createElement('a') ) {
+                    var a = document.createElement("a");
+                    document.body.appendChild(a);
+                    a.href = objectUrl;
+                    a.download = filename;
+                    a.click();
+                    window.open(objectUrl);
+                // IE 9
+                } else
+                    window.document.execCommand('SaveAs', null, objectUrl);
+              }).error(function (data, status, headers, config) {
+                var decodedString = String.fromCharCode.apply(null, new Uint8Array(data));
+                var obj = JSON.parse(decodedString);
 
-            if(status === 403){
-              $scope.manageOtpErrorMessage(obj);
-            } else {
-              var msg = codeStatusErrors.errorMessage(status);
-              if (status === 500){
-                $scope.setServiceError(msg + obj.message);
-              } else {
-                $scope.setServiceError(msg);
-              }
-            }
+                if(status === 403){
+                  $scope.manageOtpErrorMessage(obj);
+                } else {
+                  var msg = codeStatusErrors.errorMessage(status);
+                  if (status === 500){
+                    $scope.setServiceError(msg + obj.message);
+                  } else {
+                    $scope.setServiceError(msg);
+                  }
+                }
 
-          });
-
-        })
+              });
+            })
+        }
     };
 
     $scope.isCompleteUser = function(){
