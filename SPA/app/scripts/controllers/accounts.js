@@ -113,7 +113,8 @@
     }
 
     $scope.ask4Token = function (format, id) {
-        if(detectIE.ie && detectIE.version === '10>'){
+        var browser = detectIE.detect();
+        if(browser.ie && browser.version === '10>'){
             var urlDoc = "<div class='contenido'> \
                                 <h4>AVISO</h4> \
                                 <p>Para ese navegador en específico la funcionalidad de descarga de estados de cuenta no se encuentra disponible, favor de actualizar su navegador</p> \
