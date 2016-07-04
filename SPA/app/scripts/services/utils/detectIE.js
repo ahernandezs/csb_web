@@ -11,7 +11,7 @@ angular.module('spaApp').service('detectIE', function() {
         // IE 10 or older
         var msie = ua.indexOf('MSIE ');
         if (msie > 0)
-            return { 'ie' : true, 'version' : '10>' };
+            return { 'ie' : true, 'version' : parseInt(ua.toLowerCase().split('msie')[1])};
 
         // IE 11
         var trident = ua.indexOf('Trident/');
