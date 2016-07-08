@@ -122,9 +122,9 @@
                             <div class='contenido gris'> \
                                 <button ng-click='closeThisDialog();' class='w47'>Aceptar</button> \
                             </div>";
-            ngDialog.open({ template: urlDoc, showClose: false, plain: true });
+            ngDialog.open({ template: urlDoc, showClose: false, plain: true, closeByNavigation: true });
         }else{
-            ngDialog.openConfirm({ template: 'views/partials/token.html', showClose: false }).then(function(otp){
+            ngDialog.openConfirm({ template: 'views/partials/token.html', showClose: false, closeByNavigation: true }).then(function(otp){
 
               var type = format === 'XML'?'application/xml':'application/pdf';
               var filename = format === 'XML'?'EstadodeCuenta.xml':'EstadodeCuenta.pdf';
