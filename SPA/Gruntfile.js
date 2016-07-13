@@ -456,8 +456,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'shell',
-    'newer:jshint',
-    'test',
     'uglify',
     'build'
   ]);
