@@ -89,8 +89,10 @@ module.exports = function(config) {
     },
 
     coverageReporter: {
-      type : 'html',
-      dir : 'coverage/'
+        reporters:[
+            {type: 'html', dir: 'coverage/' },
+            {type: 'cobertura', dir: 'coverage/', file: 'cobertura.xml'}
+        ]
     },
 
     // Continuous Integration mode
