@@ -10,7 +10,8 @@ module.exports = function(config) {
         'karma-mocha',
         'karma-chai',
         'karma-sinon',
-        'karma-phantomjs-launcher'
+        'karma-phantomjs-launcher',
+        'karma-coverage'
     ],
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['mocha','chai','sinon'],
@@ -74,9 +75,26 @@ module.exports = function(config) {
     // - IE (only Windows)
     browsers: ['PhantomJS'],
 
+    reporters: ['progress', 'coverage'],
+
+    preprocessors: {
+      // source files, that you wanna generate coverage for
+      // do not include tests or libraries
+      // (these files will be instrumented by Istanbul)
+      'app/scripts/*.js': ['coverage'],
+      'app/scripts/controllers/**/*.js': ['coverage'],
+      'app/scripts/directives/**/*.js': ['coverage'],
+      'app/scripts/services/**/*.js': ['coverage']
+
+    },
+
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
+    },
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: false
+    singleRun: true
   });
 };
