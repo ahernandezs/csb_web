@@ -18,6 +18,7 @@ module.exports = function (grunt) {
   //for tunneling purpose
   grunt.loadNpmTasks('grunt-connect-proxy');
 
+  grunt.loadNpmTasks('grunt-sonar-runner');
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -186,8 +187,25 @@ module.exports = function (grunt) {
       }
     },
 
-
-
+    sonarRunner: {
+        analysis: {
+            options: {
+                debug: true,
+                separator: '\n',
+                sonar: {
+                    host: {
+                        url: 'http://localhost:9000'
+                    },
+                    projectKey: 'sonar:grunt-sonar-runner:0.1.0',
+                    projectName: 'Consubanco_front',
+                    projectVersion: '0.0.1',
+                    sources: ['test'].join(','),
+                    language: 'js',
+                    sourceEncoding: 'UTF-8'
+                }
+            }
+        }
+    },
 
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
