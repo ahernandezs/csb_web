@@ -15,7 +15,7 @@
 
     function getAccounts(){
         accountsProvider.getAccounts().then(
-            function(data) {
+            function() {
                 $scope.accounts = $rootScope.accounts;
                 $scope.selectNavigatOption('accounts');
                 $scope.selectAccount( $scope.accounts[0]);
@@ -45,6 +45,8 @@
                 case 'DEP' : $scope.showSavingAccount = true;
                 break;
                 case 'CXN' : $scope.showCreditAccount = true;
+                break;
+                default:
                 break;
             }
         }
@@ -126,7 +128,6 @@
         }else{
             ngDialog.openConfirm({ template: 'views/partials/token.html', showClose: false, closeByNavigation: true }).then(function(otp){
 
-              var type = format === 'XML'?'application/xml':'application/pdf';
               var filename = format === 'XML'?'EstadodeCuenta.xml':'EstadodeCuenta.pdf';
 
               $http({
@@ -136,7 +137,7 @@
                   'Content-type': 'application/json'
                 },
                 responseType: 'blob'
-              }).success(function (data, status, headers, config) {
+              }).success(function (data) {
                 var objectUrl = URL.createObjectURL(data);
                 // IE 10 || IE 11
                 if ( window.navigator.msSaveOrOpenBlob )
@@ -152,7 +153,7 @@
                 // IE 9
                 } else
                     window.document.execCommand('SaveAs', null, objectUrl);
-              }).error(function (data, status, headers, config) {
+              }).error(function (data, status) {
                 var decodedString = String.fromCharCode.apply(null, new Uint8Array(data));
                 var obj = JSON.parse(decodedString);
 

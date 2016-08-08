@@ -18,12 +18,12 @@ angular.module('spaApp')
 
         this.getTransactions = function(accountId, params) {
 
-            var options = '';
+            var options;
             var optionsParams = [];
             params.numPage ? optionsParams.push('page=' + params.numPage) : '';
             params.size ? optionsParams.push('size=' + params.size) : '';
 
-            var search = '';
+            var search;
             var searchParams = [];
 
             var startDate = validateDate(params.date_start);
@@ -63,7 +63,9 @@ angular.module('spaApp')
           try{
             var parsedDate = $.datepicker.parseDate('dd/mm/yy', date);
             newDate = $.datepicker.formatDate( "yy-mm-dd", parsedDate);
-          }catch (e){}
+          }catch (e){
+            return null;
+          }
           return newDate;
         }
 

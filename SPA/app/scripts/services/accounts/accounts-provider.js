@@ -63,7 +63,7 @@ angular.module('spaApp')
       var currentAccount = $rootScope.accounts[index];
       var deferred = $q.defer();
       //we already have all the transactions
-      if(currentAccount.allTransactionsLoaded == true){
+      if(currentAccount.allTransactionsLoaded === true){
         deferred.resolve();
       }else{
         //if accounts has undefinied transactions get transactions from API
@@ -119,7 +119,7 @@ angular.module('spaApp')
 
     updateInstructionInvestment: function(accountId, instruction, ejeAccount) {
         var deferred = $q.defer();
-        ejeAccount = ( instruction == 3 ) ? '' : ejeAccount;
+        ejeAccount = ( instruction === 3 ) ? '' : ejeAccount;
         accountsService.updateInstructionInvestment(accountId, instruction, ejeAccount)
             .success(function(data, status, headers) {
                 deferred.resolve(data);

@@ -46,7 +46,7 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
                     }
                 );
                 if(paymentCreditCardService.accountId){
-                    var result = $.grep($scope.theAccounts, function(e){ return e._account_id == paymentCreditCardService.accountId });
+                    var result = $.grep($scope.theAccounts, function(e){ return e._account_id === paymentCreditCardService.accountId });
                     $scope.payment.destiny = result[0];
                     $scope.payment.destiny.account_type = 'TDC';
                     $scope.payment.destiny._account_id = paymentCreditCardService.accountId;
@@ -80,7 +80,7 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
                     if (typeof data !== 'undefined'){
                         data.forEach(
                             function (value, index, ar) {
-                                if ( value.account_type == 'TDC_T' || value.account_type == 'DEB_T' ) {
+                                if ( value.account_type === 'TDC_T' || value.account_type === 'DEB_T' ) {
                                     value.group = 'Cuentas Terceros';
                                     value.displayName = value.bank_name + ' - ' + value.name + ' ' + value.masked_account_number + ' - ' + value.short_name;
                                     value.detail = value.bank_name + ' | ' + value.name;
@@ -144,7 +144,7 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
      * Get the detail of the selected account (If own account).
      */
     $scope.getAccountDetail = function() {
-        if ( $scope.payment.destiny.account_type == 'TDC' )
+        if ( $scope.payment.destiny.account_type === 'TDC' )
             accountsProvider.getAccountDetail($scope.payment.destiny._account_id).then(
                 function (data) {
                     $scope.transferAccountDetail = $rootScope.accountDetail.credit_card;
@@ -193,9 +193,9 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
      */
     $scope.sendTransfer = function() {
         resetError();
-        if ( $scope.transfer.destiny.account_type == 'DEP' )
+        if ( $scope.transfer.destiny.account_type === 'DEP' )
             transferOwnAccount();
-        else if ( $scope.transfer.destiny.account_type == 'DEB_T' && $scope.transfer.destiny.same_bank )
+        else if ( $scope.transfer.destiny.account_type === 'DEB_T' && $scope.transfer.destiny.same_bank )
             transferThirdAccount();
         else if ( !$scope.transfer.destiny.same_bank )
             transferThirdOtherAccount();
@@ -291,9 +291,9 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
      * Send payment to service (according to the type of credit card).
      */
     $scope.sendPayment = function() {
-        if ( $scope.payment.destiny.account_type == 'TDC' ) {
+        if ( $scope.payment.destiny.account_type === 'TDC' ) {
             payOwnCard();
-        } else if ( $scope.payment.destiny.account_type == 'TDC_T') {
+        } else if ( $scope.payment.destiny.account_type === 'TDC_T') {
             payThirdCard();
         } else {
             $scope.setServiceError('Error de tipo de tarjeta');

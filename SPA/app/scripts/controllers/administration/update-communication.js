@@ -5,15 +5,20 @@ angular.module('spaApp').controller('updateCommunicationController', ['$scope', 
 	$scope.updatedata = {};
 	$scope.captureToken = false;
 
+	var focusInputsIE9 = function() {
+		$( "#email" ).focus();
+		$( "#phone" ).focus();
+	};
+
 	$scope.getCommunication = function(){
 		$scope.stage_updatecommunication = 1;
 		adminProvider.getCommunication().then(
 			function(data){
 				$scope.updatedata = data;
-				$scope.updatedata.mailSelect = $scope.updatedata.prefered_communication_type == 'AMBOS' || $scope.updatedata.prefered_communication_type == 'MAIL' ? true : false;
-				$scope.updatedata.phoneSelect = $scope.updatedata.prefered_communication_type == 'AMBOS' || $scope.updatedata.prefered_communication_type == 'CELULAR' ? true : false;
+				$scope.updatedata.mailSelect = $scope.updatedata.prefered_communication_type === 'AMBOS' || $scope.updatedata.prefered_communication_type === 'MAIL' ? true : false;
+				$scope.updatedata.phoneSelect = $scope.updatedata.prefered_communication_type === 'AMBOS' || $scope.updatedata.prefered_communication_type === 'CELULAR' ? true : false;
 				var isIE = detectIE.detect;
-				if ( isIE.version == '10>' )
+				if ( isIE.version === '10>' )
 					focusInputsIE9();
 			},
 			function(errorObject){
@@ -22,14 +27,6 @@ angular.module('spaApp').controller('updateCommunicationController', ['$scope', 
 		);
 	}
 	$scope.getCommunication();
-
-	/**
-	 * Focus text inputs only for IE9 after loading the communication information.
-	 */
-	var focusInputsIE9 = function() {
-		$( "#email" ).focus();
-		$( "#phone" ).focus();
-	};
 
 	$scope.sendCommunication = function () {
 		var prefered = $scope.updatedata.mailSelect && $scope.updatedata.phoneSelect ? 'AMBOS' : $scope.updatedata.mailSelect ? 'MAIL' : 'CELULAR';

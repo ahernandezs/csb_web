@@ -324,7 +324,7 @@ angular.module('spaApp')
 
 	function consecutivePassword(password) {
 		var isConSeq = false;
-		var asciiCode = 0;
+		var asciiCode;
 		var previousAsciiCode = 0;
 		var numSeqcount = 0;
 
@@ -348,7 +348,7 @@ angular.module('spaApp')
 	$scope.confirmPassword = function () {
 		if(!$scope.unlockData.password){
       setError('Las contraseñas no puede estar vacías');
-		} else if($scope.unlockData.password != $scope.unlockData.passwordAgain){
+		} else if($scope.unlockData.password !== $scope.unlockData.passwordAgain){
       setError('Las contraseñas ingresadas no coinciden');
     } else if ( $scope.confirmImage() ) {
 			userProvider.unlockUserRequest( $scope.unlockData.username, $scope.unlockData.folio,

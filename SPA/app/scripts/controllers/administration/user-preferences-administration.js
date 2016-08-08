@@ -62,7 +62,7 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 	 * goto to the user-preference configuration page
 	 */
 	$scope.gotoUserPreferencesPage = function(){
-		if($scope.userAdministrationStep!=1) $scope.updatedata.otp = '';
+		if($scope.userAdministrationStep !== 1) $scope.updatedata.otp = '';
 		$scope.userAdministrationStep = 1;
 		$scope.stage_updatecommunication = 'stage1';
 	};
@@ -71,7 +71,7 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 	 * check if the user is on the user-preference configuration page
 	 */
 	$scope.isUserPreferencesAdministrationPageActivated = function(){
-		return $scope.userAdministrationStep == 1;
+		return $scope.userAdministrationStep === 1;
 	};
 
 	/**
@@ -88,42 +88,42 @@ angular.module('spaApp').controller('UserPreferencesAdministrationController', [
 	 * return true if the user's security-toke state is NEW
 	 */
 	$scope.isSecurityTokenNew= function(){
-		return tokenState == 0;
+		return tokenState === 0;
 	};
 
 	/**
 	 * return true if the user's security-toke state is ENABLED
 	 */
 	$scope.isSecurityTokenEnabled= function(){
-		return tokenState == 1;
+		return tokenState === 1;
 	};
 
 	/**
 	 * return true if the user's security-toke state is LOCKED
 	 */
 	$scope.isSecurityTokenLocked= function(){
-		return tokenState == 2;
+		return tokenState === 2;
 	};
 
 	/**
 	 * return true if the user's security-toke state is DISABLED
 	 */
 	$scope.isSecurityTokenDisabled= function(){
-		return tokenState == 3;
+		return tokenState === 3;
 	};
 
 	/**
 	 * return true if the user's security-toke state could not be retrived (ERROR)
 	 */
 	$scope.isSecurityTokenError= function(){
-		return tokenState == 99;
+		return tokenState === 99;
 	};
 
 	/**
 	 * check if the user is on the security-token configuration page
 	 */
 	$scope.isUserTokenAdministrationPageActivated = function(){
-		return $scope.userAdministrationStep == 2;
+		return $scope.userAdministrationStep === 2;
 	};
 
 	/**
