@@ -118,10 +118,9 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
   }
 
   function consecutivePassword(password) {
-    var charArray = password.split('');
 
     var isConSeq = false;
-    var asciiCode = 0;
+    var asciiCode;
     var previousAsciiCode = 0;
     var numSeqcount = 0;
 
@@ -148,7 +147,7 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
   $scope.confirmPassword = function () {
     if(! $scope.registerData.password){
       setError('Las contraseñas no puede estar vacías');
-    }else if($scope.registerData.password != $scope.registerData.repeatPass){
+    }else if($scope.registerData.password !== $scope.registerData.repeatPass){
       setError('Las contraseñas ingresadas no coinciden');
     }else{
       userProvider.setPassword($scope.registerData.password);
@@ -183,23 +182,23 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
   $scope.confirmContactInformation = function () {
         var error =false;
         if($scope.registerData.email){
-          if($scope.registerData.email != $scope.registerData.repeatEmail){
+          if($scope.registerData.email !== $scope.registerData.repeatEmail){
             error = true;
             setError('Los correos electrónicos no coinciden');
           }
         }else{
-          if($scope.registerData.contactType == 'byEmail'){
+          if($scope.registerData.contactType === 'byEmail'){
             error = true;
             setError('Debes ingresar una dirección de correo electrónico');
           }
         }
         if($scope.registerData.cellphone){
-          if($scope.registerData.cellphone != $scope.registerData.repeatCellphone){
+          if($scope.registerData.cellphone !== $scope.registerData.repeatCellphone){
             error = true;
             setError('Los numeros de celular ingresados no coinciden');
           }
         }else{
-          if($scope.registerData.contactType == 'byCellPhone'){
+          if($scope.registerData.contactType === 'byCellPhone'){
             error = true;
             setError('Debe ingresar un número de celular');
           }
@@ -239,7 +238,7 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
           //check if the security token has been activated
           $scope.tokenRegistrationFailed = false;
           if($scope.roleID === 1){
-            if(data.token_registration_result != null && data.token_registration_result.result == false){
+            if(data.token_registration_result !== null && data.token_registration_result.result === false){
               $scope.tokenRegistrationFailed = true;
             }else{
               $scope.tokenRegistrationFailed = false;
@@ -249,7 +248,7 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
         },
         function(data) {
           $scope.isRegistering = false;
-          if(data.status != 401){
+          if(data.status !== 401){
             $scope.setServiceError('Ha ocurrido un error en el registro');
           }
         }

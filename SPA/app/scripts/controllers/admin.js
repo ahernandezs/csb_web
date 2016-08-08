@@ -41,7 +41,7 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 				$scope.disableAnt = $scope.page === 0 ? true : false;
 				$scope.disableSig = $scope.page+1 === $scope.totalPages ? true : false;
 			},
-			function(error) {
+			function() {
 				$scope.disableAnt = true;
 				$scope.disableSig = true;
 			}
@@ -126,11 +126,23 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 					if(errorObject.response.code){
 						var validationErrorCode = errorObject.response.code;
 						switch(validationErrorCode){
-							case 100 : msg="El Formato es invalido"; break;
-							case 101 : msg="La CLABE es invalida"; break;
-							case 102 : msg="El número de tarjeta de credito es invalido"; break;
-							case 103 : msg="El número de cuenta es invalido"; break;
-							case 200 : msg="El número de cuenta no está registrado en el sistema"; break;
+							case 100:
+								msg="El Formato es invalido";
+								break;
+							case 101:
+								msg="La CLABE es invalida";
+								break;
+							case 102:
+								msg="El número de tarjeta de credito es invalido";
+								break;
+							case 103:
+								msg="El número de cuenta es invalido";
+								break;
+							case 200:
+								msg="El número de cuenta no está registrado en el sistema";
+								break;
+							default:
+								break;
 						}
 					}
 					$scope.setServiceError(msg);
@@ -143,7 +155,7 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 
 	$scope.sendBeneficiary = function() {
 		thirdAccountProvider.registerThirdAccount($scope.beneficiary.aka, $scope.beneficiary.name, $scope.beneficiary.email, $scope.beneficiary.phone, $scope.beneficiary._account_id, $scope.beneficiary.token).then(
-			function(data) {
+			function() {
 				loadBeneficiary();
 				$scope.selection = 4;
 			},
@@ -165,17 +177,17 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 
 	$scope.setLimits = function(amount, type, otp){
 		adminProvider.setLimits(amount, type, otp).then(
-			function(data){
+			function(){
 				adminProvider.getLimits().then(
 					function(){
 						var limits= $rootScope.limits;
 						for(var i=0; i <  limits.length; i++){
 							var type_name = limits[i].type;
-							if(type_name == "PAYCARD_CONSUBANCO"){
+							if(type_name === "PAYCARD_CONSUBANCO"){
 								limits[i].type_name="Pago a TDC Terceros Consubanco";
-							}else if (type_name == "TRANSFER_CONSUBANCO") {
+							}else if (type_name === "TRANSFER_CONSUBANCO") {
 								limits[i].type_name="Transferencia Terceros Consubanco";
-							}else if (type_name == "TRANSFER_SPEI"){
+							}else if (type_name === "TRANSFER_SPEI"){
 								limits[i].type_name="Transferencia Terceros Otro Banco";
 							}
 						}
@@ -232,15 +244,11 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 		return statuses[activityStatus];
 	};
 
-	function setError(errorMessage){
-		$scope.error = true;
-		$scope.errorMessage = errorMessage;
-	};
-
 	function dispatchThirdAccountByType(data){
 		$scope.third_accounts = data;
 		var third_accounts_own = [];
 		var third_accounts_others = [];
+		var account_type;
 		if (typeof $scope.third_accounts !== 'undefined'){
 			$scope.third_accounts.forEach(function(acc){
 				if(acc.same_bank){
@@ -252,19 +260,19 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 		}
 		if(third_accounts_own.length > 0){
 			for(var i=0; i <  third_accounts_own.length; i++){
-				var account_type= third_accounts_own[i].account_type;
+				account_type= third_accounts_own[i].account_type;
 				if(account_type === 'TDC_T'){
 					third_accounts_own[i].account_type_name = 'Tarjeta de Crédito Propia Mismo Banco';
-				}else if(account_type == 'DEB_T'){
+				}else if(account_type === 'DEB_T'){
 					third_accounts_own[i].account_type_name = 'Débito Propia Mismo Banco';
 				}
 			}
 		}//End if validate
 		if(third_accounts_others.length > 0){
-			for(var i=0; i < third_accounts_others.length; i++){
-				var account_type = third_accounts_others[i].account_type;
+			for(var y=0; y < third_accounts_others.length; y++){
+				account_type = third_accounts_others[y].account_type;
 				if(account_type === 'DEB_T') {
-					third_accounts_others[i].account_type_name = 'Débito Propia Otros Bancos';
+					third_accounts_others[y].account_type_name = 'Débito Propia Otros Bancos';
 				}
 			}
 		}//End if validate
@@ -298,11 +306,11 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 				if($rootScope.limits.length > 0){
 					for(var i=0; i <  $rootScope.limits.length; i++){
 						var type_name = $rootScope.limits[i].type;
-						if(type_name == "PAYCARD_CONSUBANCO"){
+						if(type_name === "PAYCARD_CONSUBANCO"){
 							$rootScope.limits[i].type_name="Pago a TDC Terceros Consubanco";
-						}else if (type_name == "TRANSFER_CONSUBANCO") {
+						}else if (type_name === "TRANSFER_CONSUBANCO") {
 							$rootScope.limits[i].type_name="Transferencia Terceros Consubanco";
-						}else if (type_name == "TRANSFER_SPEI"){
+						}else if (type_name === "TRANSFER_SPEI"){
 							$rootScope.limits[i].type_name="Transferencia Terceros Otro Banco";
 						}
 					}

@@ -199,7 +199,7 @@ module.exports = function (grunt) {
                     projectKey: 'sonar:grunt-sonar-runner:0.1.0',
                     projectName: 'Consubanco_front',
                     projectVersion: '0.0.1',
-                    sources: ['test'].join(','),
+                    sources: ['app/scripts'].join(','),
                     language: 'js',
                     sourceEncoding: 'UTF-8'
                 }

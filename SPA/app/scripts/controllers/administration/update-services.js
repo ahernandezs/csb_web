@@ -11,14 +11,14 @@ angular.module('spaApp').controller('updateServicesController', ['$scope', 'admi
 	$scope.updateService = function(action, state){
 		$scope.actionUpdateState = action;
 		$scope.updateDigitalBankServiceState.state = state;
-		if(action == 1){
+		if(action === 1){
 			$scope.updateDigitalBankServiceState.otp = '';
 		}
 	}
 
 	$scope.updateDigitalBankServiceState = function(){
 		adminProvider.updateDigitalBankServiceState($scope.updateDigitalBankServiceState.state, $scope.updateDigitalBankServiceState.otp).then(
-			function(data){
+			function(){
 				$scope.exception = false;
 				$scope.actionUpdateState = 3;
 				$scope.updateDigitalBankServiceState.otp = '';
@@ -30,11 +30,10 @@ angular.module('spaApp').controller('updateServicesController', ['$scope', 'admi
 						$scope.logout(true);
 				});
 			},
-			function(errorObject){
+			function(){
 				$scope.exception = true;
 				$scope.actionUpdateState = 3;
 				$scope.updateDigitalBankServiceState.otp = '';
-				var status = errorObject.status;
 				$scope.result.error = true;
 			}
 		);

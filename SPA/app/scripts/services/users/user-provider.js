@@ -206,8 +206,8 @@ angular.module('spaApp')
       .success(function(data, status, headers){
         deferred.resolve(data);
       }).error(function(data, status){
-        var data = {'response' : data, 'status': status};
-        return deferred.reject(data);
+        var result = {'response' : data, 'status': status};
+        return deferred.reject(result);
       })
       return deferred.promise;
     },
@@ -260,7 +260,7 @@ angular.module('spaApp')
     },
 
     isCompleteUser: function(){
-      var result = currentLoggedUser != null && currentLoggedUser.role_id == 1 ? true : false;
+      var result = currentLoggedUser != null && currentLoggedUser.role_id === 1 ? true : false;
       return result;
     }
   };

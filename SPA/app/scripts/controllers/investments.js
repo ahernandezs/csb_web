@@ -6,35 +6,35 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
     params.numPage = 0;
     params.size = 100;
     $scope.modify = {};
-	$scope.modify.show = false;
+    $scope.modify.show = false;
     $scope.instructions = [];
     $scope.result = {};
     $scope.searchMessage = 'false';
 
     $scope.searchParams = {};
 
-	$scope.loadDetail = function() {
-		accountsProvider.getAccountDetail($stateParams.accountId).then(
-	        function(data) {
-	            $scope.investmentHeader = $rootScope.accountDetail.investment;
-	            if(typeof $scope.investmentHeader.instruction_investment !== 'undefined'){
-	                $scope.instructions = $scope.investmentHeader.instruction_investment;
-	                $scope.instruction = $scope.instructions.ins_inv_to_print;
-	            }
-	        },
-	        function(errorObject) {
-	            var status = errorObject.status;
-	            var msg = codeStatusErrors.errorMessage(status);
-	            if (status === 500){
-	                $scope.setServiceError(msg + errorObject.response.message);
-	            } else {
-	                $scope.setServiceError(msg);
-	            }
-	        }
-	    );
-	};
+    $scope.loadDetail = function() {
+        accountsProvider.getAccountDetail($stateParams.accountId).then(
+            function(data) {
+                $scope.investmentHeader = $rootScope.accountDetail.investment;
+                if(typeof $scope.investmentHeader.instruction_investment !== 'undefined'){
+                    $scope.instructions = $scope.investmentHeader.instruction_investment;
+                    $scope.instruction = $scope.instructions.ins_inv_to_print;
+                }
+            },
+            function(errorObject) {
+                var status = errorObject.status;
+                var msg = codeStatusErrors.errorMessage(status);
+                if (status === 500){
+                    $scope.setServiceError(msg + errorObject.response.message);
+                } else {
+                    $scope.setServiceError(msg);
+                }
+            }
+        );
+    };
 
-	$scope.loadDetail();
+    $scope.loadDetail();
 
     accountsProvider.getTransactions($scope.selectedAcccountId, params).then(
         function(data){
@@ -124,17 +124,17 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
      * Assign the new value for the investment instruction.
      */
     $scope.assignInstruction = function( selection, show ) {
-		$scope.modify.show = show;
-		$scope.result.success = false;
-		$scope.result.error = false;
+        $scope.modify.show = show;
+        $scope.result.success = false;
+        $scope.result.error = false;
         $scope.instruction = selection;
-        if ( $scope.instruction.ins_inv_id == 1 || $scope.instruction.ins_inv_id == 2 )
+        if( $scope.instruction.ins_inv_id === 1 || $scope.instruction.ins_inv_id === 2 )
             $scope.getEjeAccounts();
     };
 
     $scope.getEjeAccounts = function() {
-		if ( typeof $scope.ejeAccount == 'object' )
-			return;
+        if ( typeof $scope.ejeAccount === 'object' )
+            return;
 
         $scope.ejeAccount = {};
         accountsProvider.getAccounts('DEP').then(

@@ -41,22 +41,22 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 
 	//search branches
 	$scope.search = function(){
-		if(Object.keys($scope.details).length==0){
-			if($scope.selectedItem!=undefined){
+		if(Object.keys($scope.details).length === 0){
+			if($scope.selectedItem !== undefined){
 				$scope.showBranches = true;
 				mapProvider.getBranches({'lat':$scope.estado.lat,'lng':$scope.estado.lon}).then(
 					function() {
 						$scope.map.branches = $rootScope.branches;
 					},
 					function(errorObject) {
-			            var status = errorObject.status;
-			            var msg = codeStatusErrors.errorMessage(status);
-			            if (status === 500){
-			                $scope.setServiceError(msg + errorObject.response.message);
-			            } else {
-			                $scope.setServiceError(msg);
-			            }
-			        }
+						var status = errorObject.status;
+						var msg = codeStatusErrors.errorMessage(status);
+						if (status === 500){
+							$scope.setServiceError(msg + errorObject.response.message);
+						} else {
+							$scope.setServiceError(msg);
+						}
+					}
 				);
 			}
 		}else{
@@ -66,14 +66,14 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 					$scope.map.branches = $rootScope.branches;
 				},
 				function(errorObject) {
-		            var status = errorObject.status;
-		            var msg = codeStatusErrors.errorMessage(status);
-		            if (status === 500){
-		                $scope.setServiceError(msg + errorObject.response.message);
-		            } else {
-		                $scope.setServiceError(msg);
-		            }
-		        }
+					var status = errorObject.status;
+					var msg = codeStatusErrors.errorMessage(status);
+					if (status === 500){
+						$scope.setServiceError(msg + errorObject.response.message);
+					} else {
+						$scope.setServiceError(msg);
+					}
+				}
 			);
 		}
 	};
@@ -88,14 +88,14 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 						$scope.showBranches = true;
 					},
 					function(errorObject) {
-			            var status = errorObject.status;
-			            var msg = codeStatusErrors.errorMessage(status);
-			            if (status === 500){
-			                $scope.setServiceError(msg + errorObject.response.message);
-			            } else {
-			                $scope.setServiceError(msg);
-			            }
-			        }
+						var status = errorObject.status;
+						var msg = codeStatusErrors.errorMessage(status);
+						if (status === 500){
+							$scope.setServiceError(msg + errorObject.response.message);
+						} else {
+							$scope.setServiceError(msg);
+						}
+					}
 				);
 			}, function() {
 				handleNoGeolocation(true);
@@ -116,7 +116,6 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 		options: { draggable: false }
 	};
 	$scope.map.branches = {};
-	var geocoder = new google.maps.Geocoder();
 
 	//Calculates the actual user location by geolocalization
 	if(navigator.geolocation) {
@@ -125,14 +124,14 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 									latitude: position.coords.latitude,
 									longitude: position.coords.longitude
 								};
-		    $scope.marker = {
-		      id: 1,
-		      coords: {
-		        latitude: position.coords.latitude,
-		        longitude: position.coords.longitude
-		      },
-		      options: { draggable: false }
-		    };
+			$scope.marker = {
+				id: 1,
+				coords: {
+					latitude: position.coords.latitude,
+					longitude: position.coords.longitude
+				},
+				options: { draggable: false }
+			};
 
 		}, function() {
 			handleNoGeolocation(true);
@@ -143,6 +142,7 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 
 	function handleNoGeolocation(errorFlag) {
 		var content = errorFlag ? 'Error: The Geolocation service failed.' : 'Error: Your browser does not support geolocation.';
+		return content;
 	}
 
 	//this function fetch all the bank's branches at the beginning
@@ -151,27 +151,27 @@ angular.module('spaApp').controller('MapCtrl', ['$scope', '$rootScope', 'mapProv
 			$scope.map.branches = $rootScope.branches;
 		},
 		function(errorObject) {
-            var status = errorObject.status;
-            var msg = codeStatusErrors.errorMessage(status);
-            if (status === 500){
-                $scope.setServiceError(msg + errorObject.response.message);
-            } else {
-                $scope.setServiceError(msg);
-            }
-        }
+			var status = errorObject.status;
+			var msg = codeStatusErrors.errorMessage(status);
+			if (status === 500){
+				$scope.setServiceError(msg + errorObject.response.message);
+			} else {
+				$scope.setServiceError(msg);
+			}
+		}
 	);
 
 	$scope.selectedBranch = function(branch){
 		$scope.map.center.latitude = branch.coordinates.lat;
 		$scope.map.center.longitude = branch.coordinates.lng;
-	    $scope.marker = {
-	      id: branch.id,
-	      coords: {
-	        latitude: branch.coordinates.lat,
-	        longitude: branch.coordinates.lng
-	      },
-	      options: { draggable: false }
-	    };
+		$scope.marker = {
+		id: branch.id,
+		coords: {
+			latitude: branch.coordinates.lat,
+			longitude: branch.coordinates.lng
+		},
+		options: { draggable: false }
+		};
 
 	};
 

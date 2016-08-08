@@ -22,7 +22,7 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 
 	$scope.modifyPassword = function() {
 		adminProvider.updatePassword($scope.change.old, $scope.change.new, $scope.change.otp).then(
-			function(data){
+			function(){
 				$scope.resultChangePass = true;
 			},
 			function(errorObject) {
@@ -75,12 +75,10 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 	};
 
 	function consecutivePassword(password) {
-		var charArray = password.split('');
-
 		var isConSeq = false;
-		var asciiCode = 0;
 		var previousAsciiCode = 0;
 		var numSeqcount = 0;
+		var asciiCode;
 
 		for(var i = 0; i < password.length; i++) {
 			asciiCode = password.charCodeAt(i);
