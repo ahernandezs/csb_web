@@ -5,8 +5,8 @@
  * inject a login function in the scope
  */
 angular.module('spaApp')
-.controller('LoginCtrl', ['$scope', '$http', '$location', 'api', '$rootScope', '$window', 'userProvider', 'timerService', 'logoutService', 'detectIE',
-    function ($scope,$http,$location, api, $rootScope, $window, userProvider, timerService, logoutService, detectIE) {
+.controller('LoginCtrl', ['$scope', '$http', '$location', 'api', '$rootScope', '$window', 'userProvider', 'timerService', 'logoutService', 'detectIE', '$interval'
+    function ($scope,$http,$location, api, $rootScope, $window, userProvider, timerService, logoutService, detectIE, $interval) {
   /**
    * If user has a valid session token keep him in dashboard
    */
@@ -387,4 +387,12 @@ angular.module('spaApp')
     // get errors from backend
     setErrorWithStatus(parseInt($window.status), null);
   }
+
+  var browser = detectIE.detect();
+  if(browser.ie && browser.version <= 9){
+    $interval(function(){
+      Placeholders.enable();
+    },100,0);
+  }
+
 }]);
