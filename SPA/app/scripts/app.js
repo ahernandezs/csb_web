@@ -151,7 +151,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     });
    }]);
 
-app.run(['api', '$window', '$rootScope',function(api, $window, $rootScope) {
+app.run(['api', '$window', '$rootScope', 'logoutService', function(api, $window, $rootScope, logoutService) {
   api.config();
   api.init();
 
@@ -162,9 +162,9 @@ app.run(['api', '$window', '$rootScope',function(api, $window, $rootScope) {
     e = e || $window.event;
     e.preventDefault = true;
     e.cancelBubble = true;
+    logoutService.closeSession(true);
     if($rootScope.session_token) {
       e.returnValue = message;
-
       return message;
     }
   };
