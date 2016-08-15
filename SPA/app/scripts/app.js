@@ -151,7 +151,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     });
    }]);
 
-app.run(['api', '$window', '$rootScope', 'logoutService', function(api, $window, $rootScope, logoutService) {
+app.run(['api', '$window', '$rootScope', function(api, $window, $rootScope) {
   api.config();
   api.init();
 
@@ -159,10 +159,12 @@ app.run(['api', '$window', '$rootScope', 'logoutService', function(api, $window,
 
   $window.onbeforeunload = function(e) {
     var message = 'Te vas a salir de Consubanco, ¿estás seguro?';
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", $rootScope.restAPIBaseUrl+"/logout", false);
+    xhttp.send();
     e = e || $window.event;
     e.preventDefault = true;
     e.cancelBubble = true;
-    logoutService.closeSession(true);
     if($rootScope.session_token) {
       e.returnValue = message;
       return message;
