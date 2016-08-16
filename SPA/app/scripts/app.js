@@ -158,16 +158,17 @@ app.run(['api', '$window', '$rootScope', function(api, $window, $rootScope) {
   $rootScope.requestStack = [];
 
   $window.onbeforeunload = function(e) {
-    var message = 'Te vas a salir de Consubanco, ¿estás seguro?';
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", $rootScope.restAPIBaseUrl+"/logout", false);
-    xhttp.send();
     e = e || $window.event;
     e.preventDefault = true;
     e.cancelBubble = true;
     if($rootScope.session_token) {
-      e.returnValue = message;
-      return message;
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("GET", $rootScope.restAPIBaseUrl+"/logout", false);
+      xhttp.setRequestHeader('X-AUTH-TOKEN', $rootScope.session_token);
+      xhttp.setRequestHeader('X-BANK-TOKEN', 4);
+      xhttp.setRequestHeader('X-CLIENT-TYPE', 'WEB');
+      xhttp.send();
     }
+    return;
   };
 }]);
