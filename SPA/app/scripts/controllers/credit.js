@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp').controller('creditCtrl', ['$scope', '$stateParams', 'accountsProvider', '$rootScope', 'codeStatusErrors', function ($scope, $stateParams, accountsProvider, $rootScope, codeStatusErrors) {
 
 	var params = {};

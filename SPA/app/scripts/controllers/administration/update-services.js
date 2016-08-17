@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp').controller('updateServicesController', ['$scope', 'adminProvider', 'ngDialog', function ($scope, adminProvider, ngDialog) {
 
 	$scope.actionUpdateState = 1;

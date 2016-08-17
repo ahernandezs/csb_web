@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * login controller
  * inject a login function in the scope
@@ -144,7 +142,6 @@ angular.module('spaApp')
   $scope.preRegister = function(client,contract){
     resetError();
     $scope.registering = true;
-    //TODO:Veryfy with REST service if exists contract?
     userProvider.setClientId(client);
     userProvider.preRegisterUser(contract).then(
       function() {
@@ -248,6 +245,8 @@ angular.module('spaApp')
           break;
         case 99 :
           $scope.setServiceError('Error técnico, no pudimos obtener el estado de tu token');
+          break;
+        default:
           break;
       }
     }

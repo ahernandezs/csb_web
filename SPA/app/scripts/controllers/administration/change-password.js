@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp').controller('changePasswordController', ['$scope', 'adminProvider', 'codeStatusErrors', function ($scope, adminProvider, codeStatusErrors) {
 
 	$scope.errorMessage = '';

@@ -1,12 +1,10 @@
-'use strict';
-
 app.value('userData', false);
 
 /**
  * The accounts controller. Gets accounts passing auth parameters
  */
-angular.module('spaApp').controller('DashBoardCtrl', ['$rootScope', '$scope', '$location', '$routeParams', '$window',
-    'accountsProvider', 'userProvider', 'timerService', 'logoutService', 'userData', function ($rootScope, $scope, $location, $routeParams, $window, accountsProvider, userProvider, timerService, logoutService, userData) {
+angular.module('spaApp').controller('DashBoardCtrl', ['$rootScope', '$scope', '$location', '$window', 'logoutService', 'userData',
+    function ($rootScope, $scope, $location, $window, logoutService, userData) {
 
 	/**
 	 * Call service to close session

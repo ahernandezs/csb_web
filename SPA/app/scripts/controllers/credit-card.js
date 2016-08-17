@@ -1,14 +1,12 @@
-'use strict';
-
 /**
  * The credit card controller.
  */
-angular.module('spaApp').controller('creditCardCtrl', ['$scope', '$location', '$stateParams', 'accountsProvider', '$rootScope', '$http','paymentCreditCardService', 'codeStatusErrors', function ($scope, $location, $stateParams, accountsProvider, $rootScope, $http, paymentCreditCardService, codeStatusErrors) {
+angular.module('spaApp').controller('creditCardCtrl', ['$scope', '$stateParams', 'accountsProvider', '$rootScope', 'paymentCreditCardService', 'codeStatusErrors',
+	function ($scope, $stateParams, accountsProvider, $rootScope, paymentCreditCardService, codeStatusErrors) {
 
 	var params = {};
 	params.numPage = 0;
 	params.size = 100;
-	//$scope.statementStatus.showStatement = false;
 	$scope.previousPeriod = false;
 	$scope.years = [
 		{ label: '2014', value: 2014 },

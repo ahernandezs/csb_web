@@ -1,8 +1,5 @@
-'use strict';
-
-angular.module('spaApp').controller('ContactCtrl', ['$rootScope', '$scope',
-  '$location', 'timerService', 'logoutService', 'userProvider',
-  function ( $rootScope, $scope, $location, timerService, logoutService, userProvider) {
+angular.module('spaApp').controller('ContactCtrl', ['$rootScope', '$scope', 'logoutService',
+  function ( $rootScope, $scope, logoutService) {
 
 	$scope.conSesion = $rootScope.session_token ? true : false;
 

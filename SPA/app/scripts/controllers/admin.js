@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp').controller('AdminCtrl', ['$rootScope', '$scope', 'adminProvider', 'userProvider', 'thirdAccountProvider', 'codeStatusErrors', '$stateParams',
 function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider, codeStatusErrors, $stateParams) {
 
