@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * The accounts controller. Gets accounts passing auth parameters
  */
@@ -117,13 +115,7 @@
     $scope.ask4Token = function (format, id) {
         var browser = detectIE.detect();
         if(browser.ie && browser.version <= 9){
-            var urlDoc = "<div class='contenido'> \
-                                <h4>AVISO</h4> \
-                                <p>La descarga de estados de cuenta no se encuentra disponible para esta versión de su navegador, favor de actualizarlo.</p> \
-                            </div> \
-                            <div class='contenido gris'> \
-                                <button ng-click='closeThisDialog();' class='w47'>Aceptar</button> \
-                            </div>";
+            var urlDoc = "<div class='contenido'><h4>AVISO</h4><p>La descarga de estados de cuenta no se encuentra disponible para esta versión de su navegador, favor de actualizarlo.</p></div><div class='contenido gris'><button ng-click='closeThisDialog();' class='w47'>Aceptar</button></div>";
             ngDialog.open({ template: urlDoc, showClose: false, plain: true, closeByNavigation: true });
         }else{
             ngDialog.openConfirm({ template: 'views/partials/token.html', showClose: false, closeByNavigation: true }).then(function(otp){

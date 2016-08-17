@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp').controller('updateCommunicationController', ['$scope', 'adminProvider', 'codeStatusErrors', 'detectIE',  function ($scope, adminProvider, codeStatusErrors, detectIE) {
 
 	$scope.updatedata = {};

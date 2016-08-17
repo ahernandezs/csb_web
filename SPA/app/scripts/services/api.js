@@ -5,12 +5,11 @@
  */
 
 angular.module('spaApp').factory('api', ['$http', '$rootScope', '$window', function ($http, $rootScope, $window) {
-  var hasBeenConfigured = false;
+
   return {
     init: function (token) {
 
       if($window.x_session_token) {
-        console.log("Session token from web app", $window.x_session_token);
         $rootScope.session_token = $window.x_session_token;
 
         $rootScope.last_access_date = $window.last_access_date
