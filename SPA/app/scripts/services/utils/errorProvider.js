@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp')
   .factory('errorProvider', ['errorService', '$q', function (errorService, $q) {
 

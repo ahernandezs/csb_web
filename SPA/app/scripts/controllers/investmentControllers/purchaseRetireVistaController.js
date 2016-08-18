@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * The transactions controller. For transactions between own accounts.
  */
@@ -19,14 +17,6 @@ angular.module('spaApp').controller('purchaseRetireVistaCtrl', ['$scope', 'trans
         $scope.investmentResult = [];
         resetError();
         $scope.obtenCuentas();
-    }
-
-    /**
-     * set an error message on the current view
-     */
-    function setError(message){
-        $scope.errorMessage = message;
-        $scope.error = true;
     }
 
     /**
@@ -52,7 +42,6 @@ angular.module('spaApp').controller('purchaseRetireVistaCtrl', ['$scope', 'trans
         if (status === 500){
             $scope.setServiceError(msg + errorObject.response.message);
         } else {
-            // $scope.setServiceError('Ha ocurrido un problema, favor de contactar al servicio de atención al cliente');
             $scope.setServiceError(msg);
         }
     }
@@ -81,7 +70,7 @@ angular.module('spaApp').controller('purchaseRetireVistaCtrl', ['$scope', 'trans
     $scope.purchaseInvestment = function(){
         resetError();
         transferProvider.investVista($scope.investment.depositAccount._account_id, $scope.investment.vistaAccount._account_id, $scope.investment.amount).then(
-            function processServiceSuccess(data) {
+            function(data) {
                 $scope.investmentResult = [];
                 $scope.investmentResult.account_number = data.account_number;
                 $scope.investmentResult.expiration_date = data.expiration_date;
@@ -98,7 +87,7 @@ angular.module('spaApp').controller('purchaseRetireVistaCtrl', ['$scope', 'trans
     $scope.retireInvestment = function(){
         resetError();
         transferProvider.retireVista($scope.investment.vistaAccount._account_id, $scope.investment.depositAccount._account_id, $scope.investment.amount).then(
-            function(data){
+            function(){
                 $scope.step++;
             },
             processServiceError

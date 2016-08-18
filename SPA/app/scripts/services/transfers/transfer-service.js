@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp')
 .service('transferService', ['$http', '$rootScope',function ($http, $rootScope) {
      /**

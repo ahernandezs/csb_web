@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp')
   .directive('tc', [function() {
     return {

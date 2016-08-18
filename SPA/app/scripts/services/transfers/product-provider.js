@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp')
 .factory('productProvider', ['$q', 'productService', function ($q, productService) {
 
@@ -12,7 +10,7 @@ angular.module('spaApp')
       getProductsList: function () {
         var deferred = $q.defer();
         if(! investmentProducts) {
-          productService.getProductsList().success(function(data, status, headers) {
+          productService.getProductsList().success(function(data) {
             investmentProducts = data;
             deferred.resolve(data);
           }).error(function(data, status) {
@@ -30,7 +28,7 @@ angular.module('spaApp')
        */
       getProductDetail: function(productId, amount){
         var deferred = $q.defer();
-        productService.getProductDetail(productId, amount).success(function(data, status, headers){
+        productService.getProductDetail(productId, amount).success(function(data){
             data.amount = amount;
             deferred.resolve(data);
         }).error(function(data, status){

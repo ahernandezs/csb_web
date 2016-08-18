@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp')
   .directive('timeAccess', ['$interval', 'dateFilter', function($interval, dateFilter) {
     return {
@@ -9,8 +7,8 @@ angular.module('spaApp')
       },
       restrict: 'E',
       templateUrl: 'views/directives/time-access.html',
-      link: function(scope, element, attrs) {
-        var format, timeoutId;
+      link: function(scope, element) {
+        var timeoutId;
         
         function updateTime() {
 

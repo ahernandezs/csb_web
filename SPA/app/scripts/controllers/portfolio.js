@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp').controller('PortfolioCtrl', ['$rootScope', '$scope', 'accountsProvider', 'productProvider', '$filter', function ($rootScope, $scope, accountsProvider, productProvider, $filter) {
 
     $scope.ownAccounts = [];
@@ -54,9 +52,9 @@ angular.module('spaApp').controller('PortfolioCtrl', ['$rootScope', '$scope', 'a
       $scope.vistaAccounts = [];
 
       accountsProvider.getAccounts().then(
-          function(data) {
+          function() {
               $rootScope.accounts.forEach(
-                  function (value, index, ar) {
+                  function (value){
 
                       switch ( value.account_type ) {
                           case 'DEP':

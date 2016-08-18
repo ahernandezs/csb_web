@@ -1,7 +1,5 @@
-'use strict';
-
 angular.module('spaApp')
-  .directive('ngAutocomplete', function($parse) {
+  .directive('ngAutocomplete', function() {
     return {
 
       scope: {
@@ -10,7 +8,7 @@ angular.module('spaApp')
         options: '='
       },
 
-      link: function(scope, element, attrs, model) {
+      link: function(scope, element) {
 
         var opts;
 

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp')
 .factory('thirdAccountProvider', ['$q','thirdAccountService', function ($q, thirdAccountService){
   
@@ -57,7 +55,7 @@ angular.module('spaApp')
     registerThirdAccount: function(alias, beneficiaryName, e_mail, phone, accountNumber, otp){
       var deferred = $q.defer();
       thirdAccountService.registerThirdAccount(alias, beneficiaryName, e_mail, phone, accountNumber, otp).then(
-        function(response){
+        function(){
           return thirdAccountService.getThirdAcounts();
         }
       ).then(
@@ -80,7 +78,7 @@ angular.module('spaApp')
     unregisterThirdAccount:function(thirdAccountID,otp){
       var deferred = $q.defer();
       thirdAccountService.unregisterThirdAccount(thirdAccountID,otp).then(
-        function(response){
+        function(){
           return thirdAccountService.getThirdAcounts();
         }
       ).then(

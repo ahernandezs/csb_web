@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp')
 .factory('userProvider', ['$q','userService','thirdAccountProvider','accountsProvider','productProvider', function ($q, userService, thirdAccountProvider, accountsProvider, productProvider) {
 
@@ -169,13 +167,11 @@ angular.module('spaApp')
       var deferred = $q.defer();
       userService.preRegisterUser(_clientId, folioId).success(
         function(data, status, headers){
-          //console.log(JSON.stringify(data));
           _registrationToken = headers('X-REGISTER-TOKEN');
           _preRegistrationData = data;
           deferred.resolve(data);
       }).error(
         function(data, status){
-        //console.log('error');
         var result = {'response' : data, 'status': status};
         return deferred.reject(result);
       })
@@ -203,7 +199,7 @@ angular.module('spaApp')
       }
 
       userService.registerUser(_registrationToken, params)
-      .success(function(data, status, headers){
+      .success(function(data){
         deferred.resolve(data);
       }).error(function(data, status){
         var result = {'response' : data, 'status': status};
@@ -215,11 +211,11 @@ angular.module('spaApp')
     unlockUserPreRequest: function(clientId, folioId) {
       var deferred = $q.defer();
       userService.unlockUserPreRequest( clientId, folioId ).
-        success( function(data, status, headers) {
-        	deferred.resolve( data );
+        success( function(data) {
+        	deferred.resolve(data);
         }).
-        error( function( data, status ) {
-        	deferred.reject( data );
+        error( function(data) {
+        	deferred.reject(data);
         });
       return deferred.promise;
     },
@@ -227,11 +223,11 @@ angular.module('spaApp')
     unlockUserRequest: function(clientId, folioId, password, imageId ) {
       var deferred = $q.defer();
       userService.unlockUserRequest( clientId, folioId, password, imageId ).
-        success( function(data, status, headers) {
-        	deferred.resolve( data );
+        success( function(data) {
+        	deferred.resolve(data);
         }).
-        error( function( data, status ) {
-        	deferred.reject( data );
+        error( function(data) {
+        	deferred.reject(data);
         });
       return deferred.promise;
     },
@@ -239,7 +235,7 @@ angular.module('spaApp')
     logout: function(){
       var deferred = $q.defer();
       cleanServices();
-      userService.logout().success(function(data){
+      userService.logout().success(function(){
         deferred.resolve();
       }).error(function(data, status){
         var result = {'result' : data, 'status': status};

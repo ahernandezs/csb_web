@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp')
 .service('productService', ['$http','$rootScope',function ($http, $rootScope) {
 	

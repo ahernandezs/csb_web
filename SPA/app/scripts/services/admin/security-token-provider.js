@@ -1,10 +1,8 @@
-'use strict';
-
 angular.module('spaApp').factory('securityTokenProvider', ['securityTokenService', '$q', function (securityTokenService, $q) {
 
 	return {
 
-		getUserSecurityTokenState: function(otp1, otp2){
+		getUserSecurityTokenState: function(){
 			var deferred = $q.defer();
 			securityTokenService.getUserSecurityTokenState().success(function(data){
 				deferred.resolve(data);
@@ -48,7 +46,7 @@ angular.module('spaApp').factory('securityTokenProvider', ['securityTokenService
 			return deferred.promise;
 		},
 
-		enableSecurityToken: function(tokenId, otp1, otp2){
+		enableSecurityToken: function(){
 			var deferred = $q.defer();
 			securityTokenService.enableSecurityToken().success(function(data){
 				deferred.resolve(data);

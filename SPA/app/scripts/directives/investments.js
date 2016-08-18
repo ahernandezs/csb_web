@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp')
   .directive('investments', [function() {
     return {

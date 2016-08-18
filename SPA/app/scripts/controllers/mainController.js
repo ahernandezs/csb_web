@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * The accounts controller. Gets accounts passing auth parameters
  */
@@ -45,6 +43,8 @@
                     break;
                 case 99 :
                     message = 'Error técnico, no pudimos obtener el estado de tu token';
+                    break;
+                default:
                     break;
             }
         }

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp')
 	.service('userService', ['$http', '$rootScope', 'detectIE', function ($http, $rootScope, detectIE) {
 		this.preRegisterUser = function(clientId, folioId){

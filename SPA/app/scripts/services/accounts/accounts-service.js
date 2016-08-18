@@ -1,9 +1,6 @@
-'use strict';
-
 /**
  * api initializer factory
  */
-
 angular.module('spaApp')
     .service('accountsService', ['$http','$rootScope', function ($http, $rootScope) {
 
@@ -23,7 +20,6 @@ angular.module('spaApp')
             params.numPage ? optionsParams.push('page=' + params.numPage) : '';
             params.size ? optionsParams.push('size=' + params.size) : '';
 
-            var search;
             var searchParams = [];
 
             var startDate = validateDate(params.date_start);
