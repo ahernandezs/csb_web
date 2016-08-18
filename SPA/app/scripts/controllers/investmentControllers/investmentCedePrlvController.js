@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * The transactions controller. For transactions between own accounts.
  */
@@ -18,14 +16,6 @@ angular.module('spaApp').controller('InvestmentCedePrlvCtrl', ['$scope', 'transf
         $scope.obtenCuentas();
     }
     initialize();
-
-    /**
-     * set an error message on the current view
-     */
-    function setError(message){
-        $scope.errorMessage = message;
-        $scope.error = true;
-    }
 
     /**
      * reset the error status to null

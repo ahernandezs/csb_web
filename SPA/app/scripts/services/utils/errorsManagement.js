@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp')
   .service('codeStatusErrors', function() {
     this.errorMessage = function(status) {

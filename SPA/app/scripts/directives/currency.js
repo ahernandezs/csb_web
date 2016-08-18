@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp')
 	.directive('currency', function() {
 		return {
@@ -29,7 +27,9 @@ angular.module('spaApp')
 				});
 
 				element.bind('change', function() {
-					if ( ctrl.$error.currency ) return undefined;
+					if ( ctrl.$error.currency ){
+						return undefined;
+					}
 
 					var formattedModel = format(ctrl.$modelValue);
 
@@ -65,14 +65,12 @@ angular.module('spaApp')
 
 				function format(modelValue) {
 					var value = modelValue ? modelValue.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ',') : undefined;
-
 					if ( !ctrl.$isEmpty(value) ) {
 						if ( value.indexOf(".") !== -1 ) {
 							return '$' + value;
 						} else {
 							return '$' + value + '.00';
 						}
-						ctrl.$setValidity('currency', true);
 					} else {
 						return undefined;
 					}

@@ -20,7 +20,6 @@ angular.module('spaApp').controller('DashBoardCtrl', ['$rootScope', '$scope', '$
 
   $scope.userData = userData;
 
-	//TODO: temporal binding
 	$scope.completeName = $rootScope.client_name;
 	$scope.date = $rootScope.last_access_date;
 	$scope.showAccountHeader = false;

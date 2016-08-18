@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp')
   .service('timerService', ['$rootScope', '$interval', function($rootScope, $interval) {
     var options = {

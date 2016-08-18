@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams', 'accountsProvider', '$rootScope', 'codeStatusErrors', function ($scope, $stateParams, accountsProvider, $rootScope, codeStatusErrors) {
 
     var params = {};
@@ -15,7 +13,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
 
     $scope.loadDetail = function() {
         accountsProvider.getAccountDetail($stateParams.accountId).then(
-            function(data) {
+            function() {
                 $scope.investmentHeader = $rootScope.accountDetail.investment;
                 if(typeof $scope.investmentHeader.instruction_investment !== 'undefined'){
                     $scope.instructions = $scope.investmentHeader.instruction_investment;
@@ -37,7 +35,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
     $scope.loadDetail();
 
     accountsProvider.getTransactions($scope.selectedAcccountId, params).then(
-        function(data){
+        function(){
             $scope.investmentTransactions = $rootScope.transactions;
         },
         function(errorObject) {
@@ -55,7 +53,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
         params.date_end = date_end;
         params.date_start = date_start;
         accountsProvider.getTransactions($scope.selectedAcccountId, params).then(
-            function(data){
+            function(){
                 $scope.investmentTransactions = $rootScope.transactions;
                 $scope.searchMessage = 'true';
             },
@@ -104,7 +102,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
             params.date_end = null;
             params.date_start = null;
             accountsProvider.getTransactions($scope.selectedAcccountId, params).then(
-                function(data){
+                function(){
                     $scope.investmentTransactions = $rootScope.transactions;
                 },
                 function(errorObject) {
@@ -138,7 +136,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
 
         $scope.ejeAccount = {};
         accountsProvider.getAccounts('DEP').then(
-            function(data) {
+            function() {
                 $scope.ejeAccounts = $rootScope.accounts;
                 $scope.ejeAccount = $scope.ejeAccounts[0];
             },
@@ -161,7 +159,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
     $scope.getStatements = function(){
         $scope.statementStatus.showStatement = true
         accountsProvider.getStates($stateParams.accountId).then(
-            function(data) {
+            function() {
                 $scope.statements = $rootScope.statements;
             },
             function(errorObject) {
@@ -178,7 +176,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
 
     $scope.save = function(){
       accountsProvider.updateInstructionInvestment($stateParams.accountId, $scope.instruction.ins_inv_id, $scope.ejeAccount._account_id).then(
-        function(data){
+        function(){
           $scope.modify.show = false;
           $scope.result.success = true;
         },

@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp').service('securityTokenService', ['$http', '$rootScope', function ($http, $rootScope) {
 
 	this.getUserSecurityTokenState = function () {

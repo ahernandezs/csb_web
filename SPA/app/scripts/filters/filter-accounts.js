@@ -7,7 +7,7 @@ filter('byAccountType', function () {
             out: []
         };
         accounts.forEach(
-            function (value, index, ar) {
+            function (value) {
                 types.forEach(
                     function(val) {
                         if (value.account_type === val)

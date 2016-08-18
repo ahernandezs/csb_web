@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp')
 .factory('checkAccountsProvider', ['$rootScope', 'checksService', '$q',  function($rootScope, checksService, $q){
 

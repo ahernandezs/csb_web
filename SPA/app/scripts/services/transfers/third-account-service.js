@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp')
 .service('thirdAccountService', ['$http','$rootScope',function ($http, $rootScope) {
 

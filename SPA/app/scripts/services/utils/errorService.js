@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('spaApp')
   .service('errorService', ['$http', function($http){
 

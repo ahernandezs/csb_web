@@ -1,8 +1,6 @@
-'use strict';
-
 angular.module('spaApp')
-  .service('logoutService', ['$rootScope', 'userProvider', 'timerService', '$location', '$http', '$window',
-    function($rootScope, userProvider, timerService, $location, $http, $window) {
+  .service('logoutService', ['$rootScope', 'userProvider', 'timerService', '$location', '$http',
+    function($rootScope, userProvider, timerService, $location, $http) {
 
       var options = [];
 

@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * api initializer factory
  */
@@ -24,13 +22,7 @@ angular.module('spaApp').factory('api', ['$http', '$rootScope', '$window', funct
       $http.defaults.headers.common['X-CLIENT-VERSION'] = '1.2.HASHVERSION';
     },
     config: function(){
-      // Use this link for deployment
       $rootScope.restAPIBaseUrl = $("#linkApiRoot").attr("href");
-      // Use these or similar link for development
-      //$rootScope.restAPIBaseUrl = "http://192.168.210.136/Abanking-Core";
-      //$rootScope.restAPIBaseUrl = "http://localhost:18080/SBD";
-      //$rootScope.restAPIBaseUrl = 'http://192.168.0.10:80/Abanking-Core';
-      //$rootScope.restAPIBaseUrl = 'http://192.168.0.10:80/SBD';
       $rootScope.useMocks = false;
     }
   };

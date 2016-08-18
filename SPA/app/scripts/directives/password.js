@@ -1,11 +1,11 @@
-'use strict';
-
 angular.module('spaApp').directive('password', function(){
    return {
      require: 'ngModel',
      link: function(scope, element, attrs, modelCtrl) {
        modelCtrl.$parsers.push(function (inputValue) {
-           if (inputValue === undefined) return ''
+           if (inputValue === undefined){
+            return '';
+           }
            var transformedInput = inputValue.replace(/[/°|¬!#$%&)(=?¿*+'~}¡"¨´`^-_{:.;,><áéíóúäëïöüàèìòùâêîôû[]/, '');
            if (transformedInput !== inputValue) {
               modelCtrl.$setViewValue(transformedInput);

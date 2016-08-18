@@ -1,12 +1,10 @@
-'use strict';
-
 angular.module('spaApp')
 .factory('accountsProvider', ['$rootScope', 'accountsService', '$q', function ($rootScope, accountsService, $q) {
 
   return {
     getAccounts: function (type) {
       var deferred = $q.defer();
-      accountsService.getAccounts(type).success(function(data, status, headers) {
+      accountsService.getAccounts(type).success(function(data) {
         $rootScope.accounts = data.accounts;
         deferred.resolve();
       }).error(function(data, status) {
@@ -19,7 +17,7 @@ angular.module('spaApp')
 
     getAccountDetail: function(accountId) {
       var deferred = $q.defer();
-      accountsService.getAccountsDetail(accountId).success(function(data, status, headers) {
+      accountsService.getAccountsDetail(accountId).success(function(data) {
         $rootScope.accountDetail = data;
         deferred.resolve();
       }).error(function(data, status) {
@@ -33,7 +31,7 @@ angular.module('spaApp')
     getTransactions: function(accountId, params){
 
       var deferred = $q.defer();
-      accountsService.getTransactions(accountId, params).success(function(data, status, headers) {
+      accountsService.getTransactions(accountId, params).success(function(data) {
         $rootScope.transactions = data.transactions;
         deferred.resolve();
       }).error(function(data, status) {
@@ -47,7 +45,7 @@ angular.module('spaApp')
 
     transferOwnAccounts: function(sourceAccount, destinationAccount, amount, description, completionDate){
       var deferred = $q.defer();
-      accountsService.postTransfer(sourceAccount, destinationAccount, amount, description, completionDate).success(function(data, status, headers){
+      accountsService.postTransfer(sourceAccount, destinationAccount, amount, description, completionDate).success(function(){
         deferred.resolve();
       }).error(function(data, status){
         var result = {'response' : data, 'status': status};
@@ -67,8 +65,7 @@ angular.module('spaApp')
         deferred.resolve();
       }else{
         //if accounts has undefinied transactions get transactions from API
-          //console.log('getting transactions for account ' + accountId + ' from page ' + numPage);
-          accountsService.getAccount(accountId,numPage, size).success(function(data, status, headers) {
+          accountsService.getAccount(accountId,numPage, size).success(function(data) {
 
             if(data.transactions){
               var items = data.transactions;
@@ -99,7 +96,7 @@ angular.module('spaApp')
      */
     getStates: function(accountId){
       var deferred = $q.defer();
-      accountsService.getStates(accountId).success(function(data, status, headers) {
+      accountsService.getStates(accountId).success(function(data) {
         $rootScope.statements = data.statements;
         deferred.resolve();
       }).error(function(data, status) {
@@ -121,7 +118,7 @@ angular.module('spaApp')
         var deferred = $q.defer();
         ejeAccount = ( instruction === 3 ) ? '' : ejeAccount;
         accountsService.updateInstructionInvestment(accountId, instruction, ejeAccount)
-            .success(function(data, status, headers) {
+            .success(function(data) {
                 deferred.resolve(data);
             }).error(function(data, status) {
                 var result = {'response' : data, 'status': status};

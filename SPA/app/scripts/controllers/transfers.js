@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * The transactions controller. For transactions between own accounts.
  */
@@ -24,9 +22,9 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
      */
     function obtenerCuentasPropias(){
         accountsProvider.getAccounts().then(
-            function(data) {
+            function() {
                $rootScope.accounts.forEach(
-                    function (value, index, ar) {
+                    function (value) {
 
                         value.group = 'Cuentas Propias';
                         switch ( value.account_type ) {
@@ -51,7 +49,6 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
                     $scope.payment.destiny.account_type = 'TDC';
                     $scope.payment.destiny._account_id = paymentCreditCardService.accountId;
                     $scope.getAccountDetail();
-                    //$scope.value = paymentCreditCardService.paymentType;
                     $scope.payment.type = paymentCreditCardService.paymentType;
                     if(paymentCreditCardService.paymentType === 'TOTAL_PAYMENT')
                         $scope.payment.other = paymentCreditCardService.amount;
@@ -79,7 +76,7 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
                 function(data) {
                     if (typeof data !== 'undefined'){
                         data.forEach(
-                            function (value, index, ar) {
+                            function (value) {
                                 if ( value.account_type === 'TDC_T' || value.account_type === 'DEB_T' ) {
                                     value.group = 'Cuentas Terceros';
                                     value.displayName = value.bank_name + ' - ' + value.name + ' ' + value.masked_account_number + ' - ' + value.short_name;
@@ -146,7 +143,7 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
     $scope.getAccountDetail = function() {
         if ( $scope.payment.destiny.account_type === 'TDC' )
             accountsProvider.getAccountDetail($scope.payment.destiny._account_id).then(
-                function (data) {
+                function () {
                     $scope.transferAccountDetail = $rootScope.accountDetail.credit_card;
                     delete $rootScope.accountDetail;
                 },
@@ -170,7 +167,6 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
         var wrapperWidth = document.getElementById("progressWrapper").offsetWidth
         var progressWidth = ((wrapperWidth/3)*nextStep*100)/wrapperWidth
         $scope.stepStyle = {width:progressWidth+"%"}
-        //console.log($scope.stepStyle)
     }
 
     /**
@@ -233,13 +229,11 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
                                                      $scope.transfer.amount, $scope.transfer.concept,
                                                      $scope.transfer.otp).then(
             function(data) {
-                //console.log(data);
                 $scope.transferId = data._transaction_id;
                 $scope.selection = 3;
                 $scope.updateProgress(3);
             },
             function(data) {
-                //console.log(data);
                 var status = data.status;
                 if(status === 403){
                     $scope.manageOtpErrorMessage(data.response);
@@ -265,13 +259,11 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
                                                        $scope.transfer.otp, $scope.transfer.reference,
                                                        $scope.transfer.date).then(
             function(data) {
-                //console.log(data);
                 $scope.transferId = data.tracking_key;
                 $scope.selection = 3;
                 $scope.updateProgress(3);
             },
             function(data) {
-                //console.log(data);
                 var status = data.status;
                 if(status === 403){
                     $scope.manageOtpErrorMessage(data.response);
@@ -354,14 +346,6 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
             }
         );
     };
-
-    /**
-     * set an error on the page
-     */
-    function setError(message){
-        $scope.error = true;
-        $scope.errorMessage = message;
-    }
 
     /**
      * reset the error state to false
