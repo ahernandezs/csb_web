@@ -122,26 +122,7 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 					$scope.setServiceError(msg + errorObject.response.message);
 				} else if(status === 406){
 					if(errorObject.response.code){
-						var validationErrorCode = errorObject.response.code;
-						switch(validationErrorCode){
-							case 100:
-								msg="El Formato es invalido";
-								break;
-							case 101:
-								msg="La CLABE es invalida";
-								break;
-							case 102:
-								msg="El número de tarjeta de credito es invalido";
-								break;
-							case 103:
-								msg="El número de cuenta es invalido";
-								break;
-							case 200:
-								msg="El número de cuenta no está registrado en el sistema";
-								break;
-							default:
-								break;
-						}
+						msg = getError(errorObject.response.code);
 					}
 					$scope.setServiceError(msg);
 				}else {
@@ -150,6 +131,30 @@ function ($rootScope, $scope, adminProvider, userProvider, thirdAccountProvider,
 			}
 		);
 	};
+
+	function getError(validationErrorCode){
+		var msg = "";
+		switch(validationErrorCode){
+			case 100:
+				msg="El Formato es invalido";
+				break;
+			case 101:
+				msg="La CLABE es invalida";
+				break;
+			case 102:
+				msg="El número de tarjeta de credito es invalido";
+				break;
+			case 103:
+				msg="El número de cuenta es invalido";
+				break;
+			case 200:
+				msg="El número de cuenta no está registrado en el sistema";
+				break;
+			default:
+				break;
+		}
+		return msg;
+	}
 
 	$scope.sendBeneficiary = function() {
 		thirdAccountProvider.registerThirdAccount($scope.beneficiary.aka, $scope.beneficiary.name, $scope.beneficiary.email, $scope.beneficiary.phone, $scope.beneficiary._account_id, $scope.beneficiary.token).then(

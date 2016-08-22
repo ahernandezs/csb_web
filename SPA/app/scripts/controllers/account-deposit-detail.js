@@ -81,7 +81,7 @@ angular.module('spaApp').controller('AccountDepositDetailCtrl', ['$scope','$root
 		$scope.searchMessage = 'false';
 	};
 
-	$scope.search = function() {
+	function validateDate(){
 		var todaysDate = new Date();
 		var startDate;
 		var endDate;
@@ -97,15 +97,17 @@ angular.module('spaApp').controller('AccountDepositDetailCtrl', ['$scope','$root
 		if($scope.searchParams.date_start && $scope.searchParams.date_end) {
 			if (startDate > todaysDate || endDate > todaysDate){
 				$scope.setServiceError('Búsqueda no realizada: Fecha Inicial y/o Fecha Final NO pueden ser posteriores a la Fecha de Hoy');
-				return;
-			}
-			if (startDate > endDate) {
+			} else if (startDate > endDate) {
 				$scope.setServiceError('Búsqueda no realizada: Fecha Inicial debe ser anterior a la Fecha Final');
-				return;
+			} else {
+				$scope.getTransactions($scope.searchParams.date_start, $scope.searchParams.date_end);
 			}
-			$scope.getTransactions($scope.searchParams.date_start, $scope.searchParams.date_end);
 			return;
 		}
+	}
+
+	$scope.search = function() {
+		validateDate();
 		if($scope.searchParams.date_start === null && $scope.searchParams.date_end === null) {
 			params.date_end = null;
 			params.date_start = null;
