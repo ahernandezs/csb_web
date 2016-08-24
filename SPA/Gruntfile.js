@@ -201,7 +201,16 @@ module.exports = function (grunt) {
                     projectVersion: '0.0.1',
                     sources: ['app/scripts'].join(','),
                     language: 'js',
-                    sourceEncoding: 'UTF-8'
+                    sourceEncoding: 'UTF-8',
+                    javascript: {
+                        lcov: {
+                            reportPath: 'reports/lcov.info'
+                        },
+                        jstestdriver:{
+                            reportsPath: 'reports'
+                        }
+                    },
+                    tests: 'test'
                 }
             }
         }
