@@ -11,7 +11,8 @@ module.exports = function(config) {
         'karma-chai',
         'karma-sinon',
         'karma-phantomjs-launcher',
-        'karma-coverage'
+        'karma-coverage',
+        'karma-junit-reporter'
     ],
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['mocha','chai','sinon'],
@@ -60,10 +61,8 @@ module.exports = function(config) {
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
     logLevel: config.LOG_INFO,
 
-
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
-
 
     // Start these browsers, currently available:
     // - Chrome
@@ -75,7 +74,7 @@ module.exports = function(config) {
     // - IE (only Windows)
     browsers: ['PhantomJS'],
 
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress', 'junit','coverage'],
 
     preprocessors: {
       // source files, that you wanna generate coverage for
@@ -85,18 +84,23 @@ module.exports = function(config) {
       'app/scripts/controllers/**/*.js': ['coverage'],
       'app/scripts/directives/**/*.js': ['coverage'],
       'app/scripts/services/**/*.js': ['coverage']
-
     },
 
     coverageReporter: {
         reporters:[
-            {type: 'html', dir: 'coverage/' },
-            {type: 'cobertura', dir: 'coverage/', file: 'cobertura.xml'}
+            {type: 'lcov', dir: 'reports', subdir: '.'}
         ]
+    },
+
+    junitReporter: {
+        outputDir: 'reports',
+        outputFile: 'TESTS-xunit.xml',
+        useBrowserName: false,
     },
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
     singleRun: true
   });
+
 };
