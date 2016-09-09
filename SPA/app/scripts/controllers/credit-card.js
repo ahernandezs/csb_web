@@ -30,18 +30,22 @@ angular.module('spaApp').controller('creditCardCtrl', ['$scope', '$stateParams',
 	$scope.year = $scope.years[0];
 	$scope.searchMessage = 'false';
 
+	function error(errorObject){
+		var status = errorObject.status;
+		var msg = codeStatusErrors.errorMessage(status);
+		if (status === 500){
+			$scope.setServiceError(msg + errorObject.response.message);
+		} else {
+			$scope.setServiceError(msg);
+		}
+	};
+
 	accountsProvider.getAccountDetail($stateParams.accountId).then(
 		function() {
 			$scope.creditsHeader = $rootScope.accountDetail.credit_card;
 		},
 		function(errorObject) {
-			var status = errorObject.status;
-			var msg = codeStatusErrors.errorMessage(status);
-			if (status === 500){
-				$scope.setServiceError(msg + errorObject.response.message);
-			} else {
-				$scope.setServiceError(msg);
-			}
+			error(errorObject);
 		}
 	);
 
@@ -50,13 +54,7 @@ angular.module('spaApp').controller('creditCardCtrl', ['$scope', '$stateParams',
 			$scope.creditCardTransactions = $rootScope.transactions;
 		},
 		function(errorObject) {
-			var status = errorObject.status;
-			var msg = codeStatusErrors.errorMessage(status);
-			if (status === 500){
-				$scope.setServiceError(msg + errorObject.response.message);
-			} else {
-				$scope.setServiceError(msg);
-			}
+			error(errorObject);
 		}
 	);
 
@@ -67,13 +65,7 @@ angular.module('spaApp').controller('creditCardCtrl', ['$scope', '$stateParams',
 				$scope.statements = $rootScope.statements;
 			},
 			function(errorObject) {
-				var status = errorObject.status;
-				var msg = codeStatusErrors.errorMessage(status);
-				if (status === 500){
-					$scope.setServiceError(msg + errorObject.response.message);
-				} else {
-					$scope.setServiceError(msg);
-				}
+				error(errorObject);
 			}
 		);
 	};
@@ -105,13 +97,7 @@ angular.module('spaApp').controller('creditCardCtrl', ['$scope', '$stateParams',
 					$scope.creditCardTransactions = $rootScope.transactions;
 				},
 				function(errorObject) {
-					var status = errorObject.status;
-					var msg = codeStatusErrors.errorMessage(status);
-					if (status === 500){
-						$scope.setServiceError(msg + errorObject.response.message);
-					} else {
-						$scope.setServiceError(msg);
-					}
+					error(errorObject);
 				}
 			);
 		}

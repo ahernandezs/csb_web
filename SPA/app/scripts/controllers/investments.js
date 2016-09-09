@@ -11,6 +11,16 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
 
     $scope.searchParams = {};
 
+    function error(errorObject){
+        var status = errorObject.status;
+        var msg = codeStatusErrors.errorMessage(status);
+        if (status === 500){
+            $scope.setServiceError(msg + errorObject.response.message);
+        } else {
+            $scope.setServiceError(msg);
+        }
+    };
+
     $scope.loadDetail = function() {
         accountsProvider.getAccountDetail($stateParams.accountId).then(
             function() {
@@ -21,13 +31,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
                 }
             },
             function(errorObject) {
-                var status = errorObject.status;
-                var msg = codeStatusErrors.errorMessage(status);
-                if (status === 500){
-                    $scope.setServiceError(msg + errorObject.response.message);
-                } else {
-                    $scope.setServiceError(msg);
-                }
+                error(errorObject);
             }
         );
     };
@@ -39,13 +43,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
             $scope.investmentTransactions = $rootScope.transactions;
         },
         function(errorObject) {
-            var status = errorObject.status;
-            var msg = codeStatusErrors.errorMessage(status);
-            if (status === 500){
-                $scope.setServiceError(msg + errorObject.response.message);
-            } else {
-                $scope.setServiceError(msg);
-            }
+            error(errorObject);
         }
     );
 
@@ -58,13 +56,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
                 $scope.searchMessage = 'true';
             },
             function(errorObject) {
-                var status = errorObject.status;
-                var msg = codeStatusErrors.errorMessage(status);
-                if (status === 500){
-                    $scope.setServiceError(msg + errorObject.response.message);
-                } else {
-                    $scope.setServiceError(msg);
-                }
+                error(errorObject);
             }
         );
     };
@@ -106,18 +98,12 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
                     $scope.investmentTransactions = $rootScope.transactions;
                 },
                 function(errorObject) {
-                    var status = errorObject.status;
-                    var msg = codeStatusErrors.errorMessage(status);
-                    if (status === 500){
-                        $scope.setServiceError(msg + errorObject.response.message);
-                    } else {
-                        $scope.setServiceError(msg);
-                    }
+                    error(errorObject);
                 }
             );
         }
     };
-
+ 
     /*
      * Assign the new value for the investment instruction.
      */
@@ -141,17 +127,11 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
                 $scope.ejeAccount = $scope.ejeAccounts[0];
             },
             function(errorObject) {
-                var status = errorObject.status;
-                var msg = codeStatusErrors.errorMessage(status);
-                if (status === 500){
-                    $scope.setServiceError(msg + errorObject.response.message);
-                } else {
-                    $scope.setServiceError(msg);
-                }
+                error(errorObject);
             }
         );
     };
-
+ 
     $scope.assignEjeAccount = function( account ) {
         $scope.ejeAccount = account;
     };
@@ -163,13 +143,7 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
                 $scope.statements = $rootScope.statements;
             },
             function(errorObject) {
-                var status = errorObject.status;
-                var msg = codeStatusErrors.errorMessage(status);
-                if (status === 500){
-                    $scope.setServiceError(msg + errorObject.response.message);
-                } else {
-                    $scope.setServiceError(msg);
-                }
+                error(errorObject);
             }
         );
     };
@@ -181,13 +155,8 @@ angular.module('spaApp').controller('InvestmentsCtrl', ['$scope',  '$stateParams
           $scope.result.success = true;
         },
         function(errorObject) {
-          var status = errorObject.status;
           $scope.result.error = true;
-          var msg = codeStatusErrors.errorMessage(status);
-          if (status === 500)
-            $scope.setServiceError(msg + errorObject.response.message);
-          else
-            $scope.setServiceError(msg);
+          error(errorObject);
         }
       );
     };
