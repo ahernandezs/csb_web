@@ -27,18 +27,21 @@ angular.module('spaApp').controller('AccountDepositDetailCtrl', ['$scope','$root
 	$scope.searchParams = {};
 	$scope.searchMessage = 'false';
 
+	function error(errorObject){
+		var status = errorObject.status;
+		var msg = codeStatusErrors.errorMessage(status);
+		if (status === 500){
+			$scope.setServiceError(msg + errorObject.response.message);
+		} else {
+			$scope.setServiceError(msg);
+		}
+	};
 	accountsProvider.getAccountDetail($scope.selectedAcccountId).then(
 		function() {
 			$scope.accountDetail = $rootScope.accountDetail;
 		},
 		function(errorObject) {
-			var status = errorObject.status;
-			var msg = codeStatusErrors.errorMessage(status);
-			if (status === 500){
-				$scope.setServiceError(msg + errorObject.response.message);
-			} else {
-				$scope.setServiceError(msg);
-			}
+			error(errorObject);
 		}
 	);
 
@@ -47,13 +50,7 @@ angular.module('spaApp').controller('AccountDepositDetailCtrl', ['$scope','$root
 			$scope.accountTransactions = $rootScope.transactions;
 		},
 		function(errorObject) {
-			var status = errorObject.status;
-			var msg = codeStatusErrors.errorMessage(status);
-			if (status === 500){
-				$scope.setServiceError(msg + errorObject.response.message);
-			} else {
-				$scope.setServiceError(msg);
-			}
+			error(errorObject);
 		}
 	);
 
@@ -66,13 +63,7 @@ angular.module('spaApp').controller('AccountDepositDetailCtrl', ['$scope','$root
 				$scope.searchMessage = 'true';
 			},
 			function(errorObject) {
-				var status = errorObject.status;
-				var msg = codeStatusErrors.errorMessage(status);
-				if (status === 500){
-					$scope.setServiceError(msg + errorObject.response.message);
-				} else {
-					$scope.setServiceError(msg);
-				}
+				error(errorObject);
 			}
 		);
 	};
@@ -116,13 +107,7 @@ angular.module('spaApp').controller('AccountDepositDetailCtrl', ['$scope','$root
 					$scope.investmentTransactions = $rootScope.transactions;
 				},
 				function(errorObject) {
-					var status = errorObject.status;
-					var msg = codeStatusErrors.errorMessage(status);
-					if (status === 500){
-						$scope.setServiceError(msg + errorObject.response.message);
-					} else {
-						$scope.setServiceError(msg);
-					}
+					error(errorObject);
 				}
 			);
 		}
@@ -135,13 +120,7 @@ angular.module('spaApp').controller('AccountDepositDetailCtrl', ['$scope','$root
 				$scope.statements = $rootScope.statements;
 			},
 			function(errorObject) {
-				var status = errorObject.status;
-				var msg = codeStatusErrors.errorMessage(status);
-				if(status === 500){
-					$scope.setServiceError(msg + errorObject.response.message);
-				} else {
-					$scope.setServiceError(msg);
-				}
+				error(errorObject);
 			}
 		);
 	};
