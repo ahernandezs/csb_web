@@ -4,7 +4,7 @@
 angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$location', '$routeParams', 'accountsProvider', 'userProvider', 'thirdAccountProvider', 'transferProvider', '$controller','paymentCreditCardService', '$filter', 'codeStatusErrors', function ($rootScope, $scope, $location, $routeParams, accountsProvider, userProvider, thirdAccountProvider, transferProvider, $controller,paymentCreditCardService, $filter, codeStatusErrors) {
 
     function init(){
-        $scope.section = 'PAY';
+        $scope.section = 'TRA';
         $scope.selection = 1;
         $scope.payment = {};
         $scope.payment.select1 = false;
@@ -13,6 +13,7 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
         $scope.transfer = {};
         $scope.theAccounts = [];
         $scope.today = new Date();
+        $scope.transfer={"date":"today"};
         obtenerCuentasPropias();
         obtenerCuentasTerceros();
     }

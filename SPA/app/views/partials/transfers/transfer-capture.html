@@ -45,14 +45,14 @@
             <input name="amount" type="text" currency numbers-only ng-model="transfer.amount" placeholder="Importe" class="input-importe" ng-required="true" maxlength="15">
         </label>
         <span class="optionalContainer" ng-if="transfer.destiny && transfer.destiny.account_type != 'DEP' && !transfer.destiny.same_bank">
-            <div class="choices">
+            <div ng-show="false" class="choices">
                 <p>Fecha de aplicaci&oacute;n</p>
                 <label>
-                    <input type="radio" name="date" ng-model="transfer.date" value="today" ng-required="true"/>
+                    <input type="radio" name="date" ng-model="transfer.date" value="today" ng-required="false"/>
                     <p>Hoy</p>
                 </label>
                 <label>
-                    <input type="radio" name="date" ng-model="transfer.date" value="tomorrow" ng-required="true"/>
+                    <input type="radio" name="date" ng-model="transfer.date" value="tomorrow" ng-required="false"/>
                     <p>D&iacute;a h&aacute;bil siguiente</p>
                 </label>
             </div>
