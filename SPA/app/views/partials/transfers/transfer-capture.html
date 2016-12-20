@@ -58,12 +58,12 @@
             </div>
                 <label class="fieldContainer" ng-class="transfer.reference.length > 0 ? 'selected' : ''">
                     <span>N&uacute;mero de referencia</span>
-                    <input class="input-otp" type="text" ng-model="transfer.reference" numbers-only minlength="7" maxlength="7" placeholder="N&uacute;mero de referencia">
+                    <input class="input-otp" type="text" name="referencia" ng-model="transfer.reference" numbers-only ng-minlength="1" maxlength="7" placeholder="N&uacute;mero de referencia" ng-required="true">
                 </label>
         </span>
         <label class="fieldContainer" ng-class="transfer.concept.length > 0 ? 'selected' : ''">
             <span class="big">Concepto</span>
-            <input type="text" alphanumeric ng-model="transfer.concept" placeholder="Concepto" ng-required="true" maxlength="200">
+            <input type="text" alphanumeric ng-model="transfer.concept" placeholder="Concepto" ng-required="true" maxlength="40">
         </label>
     </form>
     <div class="double-btn">
