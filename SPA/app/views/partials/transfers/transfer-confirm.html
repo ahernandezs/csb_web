@@ -28,7 +28,7 @@
                 <td>Importe:</td>
                 <td class="bolder">{{ transfer.amount | currency:"$"}}</td>
             </tr>
-            <tr>
+            <tr ng-if="transfer.destiny && transfer.destiny.account_type != 'DEP' && !transfer.destiny.same_bank">
                 <td>Referencia:</td>
                 <td>{{transfer.reference}}</td>
             </tr>
