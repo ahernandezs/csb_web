@@ -130,6 +130,7 @@ angular.module('spaApp').controller('TransfersCtrl', ['$rootScope', '$scope', '$
                 $scope.payment = {};
                 $scope.transfer = {};
                 $scope.theAccounts = [];
+                $scope.today= new Date();
                 obtenerCuentasPropias();
                 obtenerCuentasTerceros();
 
