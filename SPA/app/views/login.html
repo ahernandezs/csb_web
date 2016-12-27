@@ -59,7 +59,7 @@
                         <form class="user-registration" ng-submit="preRegister(client,contract)" ng-show="step == 0" name="registrationForm">
                             <label for="user-register"><strong>¿Eres nuevo aqu&iacute;?</strong></label>
                             <input type="text" ng-model="client" name="user-register" id="user-register" minlength="5" maxlength="10" pattern="^[0-9]{1,10}$" placeholder="Número de Cliente" required>
-                            <input type="text" ng-model="contract" name="contract-number" name="contract-number" id="contract-number" minlength="5" maxlength="20" ng-pattern="/^[0-9]+$/" placeholder="Folio de Contrato de Banca Digital" required>
+                            <input type="text" ng-model="contract" name="contract-number" name="contract-number" id="contract-number" minlength="5" maxlength="20" ng-pattern="/^[0-9]+$/" placeholder="Folio de Consubanco por Internet" required>
                             <div class="error" ng-show="registerError">{{errorMessage}}</div>
                             <input type="submit" value="Regístrate" ng-disabled="registrationForm.$invalid||registering">
                         </form>
