@@ -149,11 +149,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     });
    }]);
 
-app.run(['api', '$window', '$rootScope', function(api, $window, $rootScope) {
+app.run(['api', '$window', '$rootScope','$templateCache', function(api, $window, $rootScope,$templateCache) {
   api.config();
   api.init();
 
   $rootScope.requestStack = [];
+
+  $rootScope.$on('$viewContentLoaded', function() {
+      $templateCache.removeAll();
+   });
 
   $window.onbeforeunload = function(e) {
     e = e || $window.event;
