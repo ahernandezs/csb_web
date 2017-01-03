@@ -1,0 +1,119 @@
+
+/*Login 2*/
+/*Background*/
+.login2{
+	width: 100%;
+	height: 100%;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-image: url("../images/background.jpg");
+	background-size: cover;
+	margin: 0 auto;
+	background-color: #483D8B;
+	color:white;
+}
+.contentLogin2{
+	padding-top:4%;
+}
+/*----Columns----*/
+.col-1{
+	float:left;
+	padding-left: 2%;
+	width:25%;
+	background-color: lightblue;
+	margin-left: 10%;
+}
+.btnLogin{
+	float:left;
+	margin-left: 4%;
+}
+.btnRegister{
+	float:right;
+	margin-right: 13%;
+}
+.btnBar{
+	margin-top: 5%;
+}
+.boxWhite{
+	background-color: white;
+	width: 90%;
+	height: 100%;
+	margin-top: 21%;
+	margin-bottom: 5%;
+}
+.user-login{
+	width: 100%;
+	padding-top: 20%;
+}
+.unlock-a{
+	padding-top: 30% !important;
+}
+.user-registration{
+	width: 100%;
+	padding-top: 30%;
+    margin-bottom: 30%;
+}
+.col-2{
+	float:right;
+	width:52%;
+	margin-right: 8%;
+}
+
+/*Carrusel*/
+.imgCarousel{
+	width:100%;
+	height:100%;
+}
+.info{
+	float:right;
+}
+/* Buttons Bar*/
+.btnsBar{
+	width: 75%;
+    float: right;
+    padding-top: 1%;
+}
+.btnsBar >  button{
+	padding-left: 2%;
+	padding-right: 2%;
+}
+
+/*Copyrights Bar*/
+.rightsBar{
+	float: inherit;
+    padding-top: 37%;   
+}
+.copy{
+	float:left;
+	background-color: gray;
+	width:50%;
+	padding-top: 2%;
+    padding-bottom: 1%;
+    padding-left:2%;
+}
+.legal{
+	float:right;
+	padding-right:2%;
+}
+.right{
+	float:right;
+	background-color: gray;
+	width:50%;
+	padding-top: 2%;
+    padding-bottom: 1%;
+}
+.headerLogin2{
+	height:10%;
+}
+.headerLogin2 > img{
+	height:100%;	
+}
+.footerLogin2{
+	float:right;
+	padding-right:2%;
+	background-color:black;
+	width:100%;
+	padding-bottom: .5%;
+    padding-top: .5%;
+}
