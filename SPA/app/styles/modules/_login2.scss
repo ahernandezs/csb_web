@@ -1,119 +1,149 @@
 
 /*Login 2*/
-/*Background*/
 .login2{
-	width: 100%;
-	height: 100%;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-image: url("../images/background.jpg");
-	background-size: cover;
-	margin: 0 auto;
-	background-color: #483D8B;
-	color:white;
-}
-.contentLogin2{
-	padding-top:4%;
-}
-/*----Columns----*/
-.col-1{
-	float:left;
-	padding-left: 2%;
-	width:25%;
-	background-color: lightblue;
-	margin-left: 10%;
-}
-.btnLogin{
-	float:left;
-	margin-left: 4%;
-}
-.btnRegister{
-	float:right;
-	margin-right: 13%;
-}
-.btnBar{
-	margin-top: 5%;
-}
-.boxWhite{
-	background-color: white;
-	width: 90%;
-	height: 100%;
-	margin-top: 21%;
-	margin-bottom: 5%;
-}
-.user-login{
-	width: 100%;
-	padding-top: 20%;
-}
-.unlock-a{
-	padding-top: 30% !important;
-}
-.user-registration{
-	width: 100%;
-	padding-top: 30%;
-    margin-bottom: 30%;
-}
-.col-2{
-	float:right;
-	width:52%;
-	margin-right: 8%;
+	padding-top: 2em;
+	background: url("../images/background.jpg") repeat;
+	#logo{
+		height: 80px;
+		background:url("../images/logosf.png") no-repeat center center;
+		background-size:auto 80px;
+		overflow:hidden;
+		line-height: 999999;
+	}
+	//Login box
+	.content-login-2{
+		overflow: hidden;
+		width: 90%;
+		margin: 2em auto;
+		.col-1{
+			width: 23%;
+			.login-box{
+				padding:1em;
+				text-align: center;
+				background: rgba(41,118,182,0.4);
+				.btn{
+					display: inline-block;
+					margin: 0 0.5em;
+					&:hover,&:active,&:focus{
+						outline: none;
+						box-shadow:none;
+					}
+					&.btn-orange{
+						background: $orange;
+						border:none;
+						&:hover,&:active,&:focus{
+							color: white;
+							background:$blue;
+							border:none;
+						}
+					}
+					&.btn-white{
+						background:white;
+						color: black;
+						border:none;
+						&:hover,&:active,&:focus{
+							background:#efefef;
+						}
+					}
+				}
+			}
+			.box-white{
+				background: white;
+				margin-top: 1em;
+				.user-login,
+				.user-registration{
+					width: 100%;
+					padding:3em 1em 0;
+					.unlock-a{
+						font-size: 0.8em;
+						text-align: left;
+						margin: 6em 0 1em;
+					}
+				}
+				.user-registration{
+					padding-bottom: 3em;
+				}
+			}
+		}
+		.col-2{
+			width:70%;
+			.carousel{
+				overflow: hidden;
+				max-height: 500px;
+				width: 100%;
+				.item{
+					position: relative;
+					.go-store{
+						position: absolute;
+						left:3em;
+						top:2.5em;
+						&.ios{
+							margin-top:55px;
+						}
+						img{
+							width: 140px;
+							height: auto;
+						}
+					}
+				}
+				img{
+					width: 100%;
+					max-height: 500px;
+					object-fit: cover;
+				}
+			}
+		}
+	}
 }
 
-/*Carrusel*/
-.imgCarousel{
-	width:100%;
-	height:100%;
-}
-.info{
-	float:right;
-}
-/* Buttons Bar*/
-.btnsBar{
-	width: 75%;
-    float: right;
-    padding-top: 1%;
-}
-.btnsBar >  button{
-	padding-left: 2%;
-	padding-right: 2%;
+// Buttons Bar
+.buttons-bar{
+	text-align: center;
+	width: 80%;
+	margin: 2em auto;
+	padding-bottom: 100px;
+	.btn{
+		color: white;
+		border:none;
+		background:$blue;
+		margin: 0 0.5em;
+		&:hover{
+			background:$orange;
+		}
+	}
 }
 
-/*Copyrights Bar*/
-.rightsBar{
-	float: inherit;
-    padding-top: 37%;   
-}
-.copy{
-	float:left;
-	background-color: gray;
-	width:50%;
-	padding-top: 2%;
-    padding-bottom: 1%;
-    padding-left:2%;
-}
-.legal{
-	float:right;
-	padding-right:2%;
-}
-.right{
-	float:right;
-	background-color: gray;
-	width:50%;
-	padding-top: 2%;
-    padding-bottom: 1%;
-}
-.headerLogin2{
-	height:10%;
-}
-.headerLogin2 > img{
-	height:100%;	
-}
-.footerLogin2{
-	float:right;
-	padding-right:2%;
-	background-color:black;
-	width:100%;
-	padding-bottom: .5%;
-    padding-top: .5%;
+// Footer
+.footer-login-2{
+	position: fixed;
+	left:0;
+	right:0;
+	bottom:0;
+	.legal{
+		overflow: hidden;
+		background: #151b22;
+		padding:2em 1em;
+		font-size: 0.8em;
+		p,a,a:hover{
+			color: gray;
+		}
+	}
+	ul{
+		text-align: right;
+		background: black;
+		padding:0.5em 1em;
+		li{
+			display: inline-block;
+			border-right:1px solid white;
+			padding:0 1em 0 0.8em;
+			&:last-child{
+				padding-right:0;
+				border:none;
+			}
+			a{
+				color: white;
+				font-size: 0.8em;
+			}
+		}
+	}
 }

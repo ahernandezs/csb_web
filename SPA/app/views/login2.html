@@ -1,66 +1,16 @@
 <div class="login2">
-	<!--<div ng-include="'views/partials/login2/headerLogin2.html'"></div>-->
-    <div class="contentLogin2">
-    	<div class="col-1">
-    		<div class="btnBar">
-    			<button class="btnLogin" ng-click="goToLogin2()">Iniciar Sesi&oacute;n</button>
-    			<button class="btnRegister" ng-click="goToRegister()">Registrarse</button>
-    		</div>
-    		<div class="boxWhite">
-    			<div ng-switch on="option">
-    				<div class="animate-switch" ng-switch-when="0">
-    					<div ng-switch on="step">
-                			<div class="animate-switch" ng-switch-when="0">
-                   				<div ng-include="'views/partials/login/user_login.html'"></div>
-                			</div>
-                			<div class="animate-switch" ng-switch-when="1">
-                    			<div ng-include="'views/partials/login/image_login.html'"></div>
-                			</div>
-                			<div class="animate-switch" ng-switch-when="2">
-                   				<div ng-include="'views/partials/login/unblock.html'"></div>
-                			</div>
-            			</div>
-    				</div>
-    				<div class="animate-switch" ng-switch-when="1">
-    					<form class="user-registration" ng-submit="preRegister(client,contract)" name="registrationForm">
-        					<label for="user-register"><strong>¿Eres nuevo aqu&iacute;?</strong></label>
-        					<input type="text" ng-model="client" name="user-register" id="user-register" minlength="5" maxlength="10" pattern="^[0-9]{1,10}$" placeholder="Número de Cliente" required>
-        					<input type="text" ng-model="contract" name="contract-number" name="contract-number" id="contract-number" minlength="5" maxlength="20" ng-pattern="/^[0-9]+$/" placeholder="Folio de Consubanco por Internet" required>
-        					<div class="error" ng-show="registerError">{{errorMessage}}</div>
-        					<input type="submit" value="Regístrate" ng-disabled="registrationForm.$invalid||registering">
-    					</form>
-    				</div>    			
-    			</div>    		
-    		</div>
-    	</div>
-    	<div class="col-2">
-        	<div id="myCarousel" class="carousel slide" data-ride="carousel">
-  				<!-- Indicators -->
-  				<ol class="carousel-indicators">
-    				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    				<li data-target="#myCarousel" data-slide-to="1"></li>
-    				<li data-target="#myCarousel" data-slide-to="2"></li>
-    				<li data-target="#myCarousel" data-slide-to="3"></li>
-  				</ol>
-  				<!-- Wrapper for slides -->
-  				<div class="carousel-inner" role="listbox">
-    				<div class="item active">
-      					<div ng-include="'views/partials/login2/slider01.html'"></div>
-    				</div>
-    				<div class="item">
-     					<div ng-include="'views/partials/login2/slider02.html'"></div>
-    				</div>
-    				<div class="item">
-      					<div ng-include="'views/partials/login2/slider03.html'"></div>
-    				</div>
-    				<div class="item">
-      					<div ng-include="'views/partials/login2/slider04.html'"></div>
-   				 	</div>
- 				</div>  				
-			</div>
-    	</div>
+    <h1 id="logo">Consubanco | Cr&eacute;ditos | Tarjetas de cr&eacute;dito | Inversiones</h1>
+    <div class="content-login-2">
+        <!-- Login box -->
+    	<div class="col-1 pull-left">
+            <div ng-include="'views/partials/login2/login-box.html'"></div>
+        </div>
+
+        <!-- Carousel -->
+        <div class="col-2 pull-right">
+            <div ng-include="'views/partials/login2/carousel.html'"></div>
+        </div>
     </div>
-    <div ng-include="'views/partials/login2/btnBar.html'"></div>
-    <div ng-include="'views/partials/login2/rights.html'"></div>
-    <div ng-include="'views/partials/login2/footerLogin2.html'"></div>
+    <div ng-include="'views/partials/login2/btnBar.html'" class="buttons-bar"></div>
+    <div ng-include="'views/partials/login2/footerLogin2.html'" class="footer-login-2"></div>
 </div>
