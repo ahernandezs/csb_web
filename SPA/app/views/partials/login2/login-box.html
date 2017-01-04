@@ -1,0 +1,30 @@
+<div class="login-box">
+    <button class="btn btn-orange" ng-click="goToLogin2()">Iniciar Sesi&oacute;n</button>
+    <button class="btn btn-white" ng-click="goToRegister()">Registrarse</button>
+    <div class="box-white">
+        <div ng-switch on="option">
+            <div class="animate-switch" ng-switch-when="0">
+                <div ng-switch on="step">
+                    <div class="animate-switch" ng-switch-when="0">
+                        <div ng-include="'views/partials/login/user_login.html'"></div>
+                    </div>
+                    <div class="animate-switch" ng-switch-when="1">
+                        <div ng-include="'views/partials/login/image_login.html'"></div>
+                    </div>
+                    <div class="animate-switch" ng-switch-when="2">
+                        <div ng-include="'views/partials/login/unblock.html'"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="animate-switch" ng-switch-when="1">
+                <form class="user-registration" ng-submit="preRegister(client,contract)" name="registrationForm">
+                    <label for="user-register"><strong>¿Eres nuevo aqu&iacute;?</strong></label>
+                    <input type="text" ng-model="client" name="user-register" id="user-register" minlength="5" maxlength="10" pattern="^[0-9]{1,10}$" placeholder="Número de Cliente" required>
+                    <input type="text" ng-model="contract" name="contract-number" name="contract-number" id="contract-number" minlength="5" maxlength="20" ng-pattern="/^[0-9]+$/" placeholder="Folio de Consubanco por Internet" required>
+                    <div class="error" ng-show="registerError">{{errorMessage}}</div>
+                    <input type="submit" value="Regístrate" ng-disabled="registrationForm.$invalid||registering">
+                </form>
+            </div>              
+        </div>          
+    </div>
+</div>
