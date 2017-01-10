@@ -40,7 +40,7 @@ angular.module('spaApp')
   userProvider.resetRegistrationToken();
 
   /**
-    * cancel the authentication flow and go back to the first step, if it is a shitty browser, reload
+    * cancel the authentication flow and go back to the first step
     */
   $scope.reset=function(){
     var fckie = detectIE.detect();
@@ -62,6 +62,7 @@ angular.module('spaApp')
   **/
   $scope.checkUser = function(){
     resetError();
+    $rootScope.requestStack = [];
     if(!$scope.loginData.username.trim()) {
       setError('!Usuario incorrecto¡ favor de verificarlo');
     }else{
@@ -224,6 +225,7 @@ angular.module('spaApp')
     $scope.error = false;
     $scope.registerError = false;
     $scope.errorMessage = '';
+    $scope.requestStack = [];
   }
 
   /**
