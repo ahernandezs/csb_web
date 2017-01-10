@@ -1,6 +1,6 @@
 <div class="login-box">
-    <button class="btn btn-orange" ng-click="goToLogin2()">Iniciar Sesi&oacute;n</button>
-    <button class="btn btn-white" ng-click="goToRegister()">Registrarse</button>
+    <button ng-class="option===0 ? 'btn-blue' : 'btn-white'" class="btn" ng-click="goToLogin2()">Iniciar Sesi&oacute;n</button>
+    <button ng-class="option===1 ? 'btn-blue' : 'btn-white'" class="btn" ng-click="goToRegister()">Registrarse</button>
     <div class="box-white">
         <div ng-switch on="option">
             <div class="animate-switch" ng-switch-when="0">

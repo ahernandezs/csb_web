@@ -30,12 +30,11 @@
 						outline: none;
 						box-shadow:none;
 					}
-					&.btn-orange{
-						background: $orange;
+					&.btn-blue{
+						background: $blue;
 						border:none;
 						&:hover,&:active,&:focus{
 							color: white;
-							background:$blue;
 							border:none;
 						}
 					}
