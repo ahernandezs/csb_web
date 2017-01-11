@@ -3,18 +3,11 @@
  * inject a login function in the scope
  */
 angular.module('spaApp')
-.controller('LoginCtrl', ['$scope', '$http', '$location', 'api', '$rootScope', '$window', 'userProvider', 'timerService', 'logoutService', 'detectIE', '$interval',
+.controller('Login2Ctrl', ['$scope', '$http', '$location', 'api', '$rootScope', '$window', 'userProvider', 'timerService', 'logoutService', 'detectIE', '$interval',
     function ($scope,$http,$location, api, $rootScope, $window, userProvider, timerService, logoutService, detectIE, $interval) {
   /**
    * If user has a valid session token keep him in dashboard
    */
-
-  if($rootScope.session_token && $location.$$path === '/login') {
-    $location.path('/accounts');
-  }else{
-    //just in case, we clean the previous user's session
-    userProvider.cleanSession();
-  }
   /**
    * the login function connect the Rest-API: if the response status is OK, redirect to route "accounts",
    * else put an error message in the scope
@@ -30,6 +23,7 @@ angular.module('spaApp')
   /**
    * the flow step : 0= checkLogin, 1=login
    */
+  $scope.option= 0; 
   $scope.step = 0;
 
   //for the loader
@@ -40,8 +34,14 @@ angular.module('spaApp')
   userProvider.resetRegistrationToken();
 
   /**
-    * cancel the authentication flow and go back to the first step
+    * cancel the authentication flow and go back to the first step, if it is a shitty browser, reload
     */
+  $scope.goToLogin2=function(){
+  	$scope.option=0;
+  };
+  $scope.goToRegister=function(){
+  	$scope.option=1;
+  };
   $scope.reset=function(){
     var fckie = detectIE.detect();
     if(fckie.ie && fckie.version === '10>'){
@@ -62,7 +62,6 @@ angular.module('spaApp')
   **/
   $scope.checkUser = function(){
     resetError();
-    $rootScope.requestStack = [];
     if(!$scope.loginData.username.trim()) {
       setError('!Usuario incorrecto¡ favor de verificarlo');
     }else{
@@ -225,7 +224,6 @@ angular.module('spaApp')
     $scope.error = false;
     $scope.registerError = false;
     $scope.errorMessage = '';
-    $scope.requestStack = [];
   }
 
   /**

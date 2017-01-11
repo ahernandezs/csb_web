@@ -1,0 +1,176 @@
+
+/*Login 2*/
+.login2{
+	padding-top: 1em;
+	background: url("../images/background.jpg") repeat;
+	background-size:cover;
+	#logo{
+		height: 80px;
+		background:url("../images/logosf.png") no-repeat center center;
+		background-size:auto 80px;
+		overflow:hidden;
+		line-height: 999999;
+	}
+	//Login box
+	.content-login-2{
+		overflow: hidden;
+		width: 90%;
+		margin: 1em auto;
+		.col-1{
+			padding-bottom: 50px;
+			width: 30%;
+			.login-box{
+				padding:1em;
+				text-align: center;
+				background: rgba(41,118,182,0.4);
+				.btn{
+					display: inline-block;
+					margin: 0 0.5em;
+					&:hover,&:active,&:focus{
+						outline: none;
+						box-shadow:none;
+					}
+					&.btn-blue{
+						background: $blue;
+						border:none;
+						&:hover,&:active,&:focus{
+							color: white;
+							border:none;
+						}
+					}
+					&.btn-white{
+						background:white;
+						color: black;
+						border:none;
+						&:hover,&:active,&:focus{
+							background:#efefef;
+						}
+					}
+				}
+			}
+			.box-white{
+				background: white;
+				margin-top: 1em;
+				.user-login,
+				.user-registration{
+					width: 100%;
+					padding:1em 1em 0;
+					input{
+						margin:0.3em 0 !important;
+					}
+					.phone-number{
+						font-size: 1.2em;
+					}
+					.unlock-a{
+						font-size: 0.8em;
+						text-align: left;
+						margin: 4em 0 0;
+					}
+					//password & images box
+					h3,h2{
+						font-size: 0.9em;
+					}
+					.radioGroupBelow{
+						padding:5px 0;
+						span{
+							width: 40px;
+							height: 40px;
+						}
+					}
+				}
+				.user-registration{
+					padding-bottom: 3em;
+				}
+			}
+		}
+		.col-2{
+			width:68%;
+			.carousel{
+				overflow: hidden;
+				max-height: 420px;
+				width: 100%;
+				.item{
+					position: relative;
+					.go-store{
+						position: absolute;
+						left:3em;
+						top:2.5em;
+						&.ios{
+							margin-top:55px;
+						}
+						img{
+							width: 140px;
+							height: auto;
+						}
+					}
+				}
+				img{
+					width: 100%;
+					height: auto;			}
+			}
+		}
+	}
+}
+
+@media only screen and (min-height:770px){
+	.login2{
+		.content-login-2{
+			.col-2{
+				.carousel{
+					max-height: 500px;
+				}
+			}
+		}
+	}
+}
+
+// Buttons Bar
+.buttons-bar{
+	text-align: center;
+	width: 80%;
+	margin: auto;
+	.btn{
+		color: white;
+		border:none;
+		background:$blue;
+		margin: 1em 0.5em;
+		&:hover{
+			background:$orange;
+		}
+	}
+}
+
+// Footer
+.footer-login-2{
+	position: fixed;
+	left:0;
+	right:0;
+	bottom:0;
+	.legal{
+		overflow: hidden;
+		background: #151b22;
+		padding:1.2em 1em;
+		font-size: 0.8em;
+		p,a,a:hover{
+			color: gray;
+		}
+	}
+	ul{
+		text-align: right;
+		background: black;
+		padding:0.5em 1em;
+		li{
+			display: inline-block;
+			border-right:1px solid white;
+			padding:0 1em 0 0.8em;
+			&:last-child{
+				padding-right:0;
+				border:none;
+			}
+			a{
+				color: white;
+				font-size: 0.8em;
+			}
+		}
+	}
+}

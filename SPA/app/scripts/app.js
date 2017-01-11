@@ -40,6 +40,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
       controller: 'LoginCtrl'
     })
 
+    .state('login2',{
+      url: '/login2',
+      templateUrl: 'views/login2.html',
+      controller: 'Login2Ctrl'
+    })
+
     .state('map',{
       url: '/map',
       templateUrl: 'views/map.html',

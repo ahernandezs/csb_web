@@ -23,6 +23,7 @@ angular.module('spaApp').factory('api', ['$http', '$rootScope', '$window', funct
     },
     config: function(){
       $rootScope.restAPIBaseUrl = $("#linkApiRoot").attr("href");
+      //$rootScope.restAPIBaseUrl = "http://ci.anzen.io/SBD";
       $rootScope.useMocks = false;
     }
   };
