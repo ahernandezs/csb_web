@@ -3,8 +3,8 @@
  * inject a login function in the scope
  */
 angular.module('spaApp')
-.controller('Login2Ctrl', ['$scope', '$http', '$location', 'api', '$rootScope', '$window', 'userProvider', 'timerService', 'logoutService', 'detectIE', '$interval',
-    function ($scope,$http,$location, api, $rootScope, $window, userProvider, timerService, logoutService, detectIE, $interval) {
+.controller('Login2Ctrl', ['$scope', '$http', '$location', 'api', '$rootScope', '$window', 'userProvider', 'timerService', 'logoutService', 'detectIE', '$interval', '$window',
+    function ($scope,$http,$location, api, $rootScope, $window, userProvider, timerService, logoutService, detectIE, $interval, $window) {
   /**
    * If user has a valid session token keep him in dashboard
    */
