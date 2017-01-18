@@ -17,6 +17,7 @@
 		width: 90%;
 		margin: 1em auto;
 		.col-1{
+			float:left;
 			padding-bottom: 50px;
 			width: 30%;
 			.login-box{
@@ -86,13 +87,17 @@
 			}
 		}
 		.col-2{
+			float:right;
 			width:68%;
 			.carousel{
+				margin: 0;
+				position: relative;
+				height: 450px;
+				width: 766px;
 				overflow: hidden;
-				max-height: 420px;
-				width: 100%;
 				.item{
 					position: relative;
+					overflow: hidden;
 					.go-store{
 						position: absolute;
 						left:3em;
@@ -107,24 +112,14 @@
 					}
 				}
 				img{
-					width: 100%;
-					height: auto;			}
-			}
-		}
-	}
-}
-
-@media only screen and (min-height:770px){
-	.login2{
-		.content-login-2{
-			.col-2{
-				.carousel{
-					max-height: 500px;
+					width: 766px;
+					height: 450px;
 				}
 			}
 		}
 	}
 }
+
 
 // Buttons Bar
 .buttons-bar{
@@ -172,6 +167,73 @@
 			a{
 				color: white;
 				font-size: 0.8em;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width:1199px){
+	.login2{
+		.content-login-2{
+			.col-1,
+			.col-2{
+				float: none;
+				width: 100%;
+				.carousel{
+					margin: 0 auto;
+				}
+			}
+		}
+	}
+	//footer
+	.footer-login-2{
+		position: relative;
+		.legal{
+			p,a{
+				width: 100%;
+				text-align: center;
+			}
+		}
+		ul{
+			text-align: center;
+		}
+	}
+}
+@media only screen and (max-width:767px){
+	.login2{
+		.content-login-2{
+			.col-2{
+				.carousel{
+					width: 640px;
+					height: 376px;
+					img{
+						width: 640px;
+						height: 376px;
+					}
+				}
+			}
+		}
+	}
+}
+@media only screen and (max-width:641px){
+	.buttons-bar{
+		width: 90%;
+		.btn{
+			width: 100%;
+			margin: 0.5em 0;
+		}
+	}
+	.login2{
+		.content-login-2{
+			.col-2{
+				.carousel{
+					width: 320px;
+					height: 188px;
+					img{
+						width: 320px;
+						height: 188px;
+					}
+				}
 			}
 		}
 	}
