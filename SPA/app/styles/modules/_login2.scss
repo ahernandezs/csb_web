@@ -18,7 +18,7 @@
 		margin: 1em auto;
 		.col-1{
 			float:left;
-			padding-bottom: 50px;
+			padding-bottom: 20px;
 			width: 30%;
 			.login-box{
 				padding:1em;
@@ -89,12 +89,11 @@
 		.col-2{
 			float:right;
 			width:68%;
+			height: 450px;
+			overflow: hidden;
 			.carousel{
 				margin: 0;
 				position: relative;
-				height: 450px;
-				width: 766px;
-				overflow: hidden;
 				.item{
 					position: relative;
 					overflow: hidden;
@@ -112,8 +111,10 @@
 					}
 				}
 				img{
-					width: 766px;
+					width: 100%;
 					height: 450px;
+					object-position: 0 0;
+					object-fit: cover;
 				}
 			}
 		}
@@ -179,9 +180,6 @@
 			.col-2{
 				float: none;
 				width: 100%;
-				.carousel{
-					margin: 0 auto;
-				}
 			}
 		}
 	}
@@ -199,16 +197,14 @@
 		}
 	}
 }
-@media only screen and (max-width:767px){
+@media only screen and (max-width:801px){
 	.login2{
 		.content-login-2{
 			.col-2{
+				height: 300px;
 				.carousel{
-					width: 640px;
-					height: 376px;
 					img{
-						width: 640px;
-						height: 376px;
+						height: 300px;
 					}
 				}
 			}
@@ -216,6 +212,18 @@
 	}
 }
 @media only screen and (max-width:641px){
+	.login2{
+		.content-login-2{
+			.col-2{
+				height: 250px;
+				.carousel{
+					img{
+						height: 250px;
+					}
+				}
+			}
+		}
+	}
 	.buttons-bar{
 		width: 90%;
 		.btn{
@@ -223,15 +231,24 @@
 			margin: 0.5em 0;
 		}
 	}
+}
+@media only screen and (max-width:481px){
 	.login2{
 		.content-login-2{
 			.col-2{
+				height: 180px;
 				.carousel{
-					width: 320px;
-					height: 188px;
 					img{
-						width: 320px;
-						height: 188px;
+						height: 180px;
+					}
+					.item{
+						.go-store{
+							left:1em;
+							top:2em;
+							img{
+								width: 100px;
+							}
+						}
 					}
 				}
 			}
