@@ -5,23 +5,22 @@
         {{activeAccountName}}
         <span>Tarjeta de cr&eacute;dito</span>
     </h2>
-    <div class="payment-actions">
+    <div class="payment-actions border-payment">
         <div>
             <div>
-                <p class="amount"><strong>{{creditsHeader.minimum_payment | currency}}</strong></p>
-                <button class="blue" data-ng-click="doPaymentFlow('MIN_PAYMENT',creditsHeader.minimum_payment)">Pago m&iacute;nimo</button>
+                <p class="amount padding-payment"><strong>{{creditsHeader.minimum_payment | currency}}</strong></p>
+                <span>Pago m&iacute;nimo</span>
             </div>
             <div>
                 <p class="amount"><strong>{{creditsHeader.no_interes_payment_due | currency}}</strong></p>
-                <button class="blue" data-ng-click="doPaymentFlow('WIHTOUT_INTEREST_PAYMENT',creditsHeader.no_interes_payment_due)">Pago para no <span class="block">generar intereses</span></button>
+                <span>Pago para no <span class="block">generar intereses</span></span>
             </div>
             <div>
-                <p class="amount"><strong>{{creditsHeader.delinquent_balance | currency}}</strong></p>
-                <button class="blue" data-ng-click="doPaymentFlow('TOTAL_PAYMENT',creditsHeader.delinquent_balance)">Pago total</button>
+                <p class="amount padding-payment"><strong>{{creditsHeader.delinquent_balance | currency}}</strong></p>
+                <span>Pago total</span>
             </div>
         </div>
     </div>
-    <a ng-click='getStatements()' class="cursor-pointer statement-link" ng-show="isCompleteUser()"><i class="ico-estados"></i>Estados <span>de cuenta</span></a>
 </div> <!-- ends top row -->
 <!-- =============================================================== -->
 <hr ng-show='!showAccountHeader'>
@@ -37,7 +36,7 @@
         <li>Pago para no generar intereses: <span class="amount">{{creditsHeader.no_interes_payment_due | currency}}</span></li>
         <li>Saldo vencido:                  <span class="amount">{{creditsHeader.delinquent_balance | currency}}</span></li>
         <li>L&iacute;mite de cr&eacute;dito:<span class="amount">{{creditsHeader.credit_limit | currency}}</span></li>
-        <li>Cr&eacute;dito disponible:             <span class="amount">{{creditsHeader.available_credit | currency}}</span></li>
+        <li>Cr&eacute;dito disponible:      <span class="amount">{{creditsHeader.available_credit | currency}}</span></li>
     </ul>
 </div> <!-- box ends -->
 </div>
