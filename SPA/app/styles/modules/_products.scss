@@ -218,6 +218,12 @@ hr[ng-show="!showAccountHeader"]{
 		margin-bottom: 2px;
 	}
 }
+.border-payment{
+	border-right: none;
+}
+.padding-payment{
+	padding-bottom: 4%;
+}
 .box + .buscador-fechas{
 	overflow:hidden;
 	> *{
