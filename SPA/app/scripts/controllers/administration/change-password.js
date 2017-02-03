@@ -6,13 +6,15 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 	$scope.resultErrorPass = false;
 
 	$scope.verifyNewPass = function () {
-		if ($scope.change.old === undefined ) {
+		if (passwordIncludesName($scope.change.new)){
+			setError('La contraseña no puede contener tu nombre ni apellidos');
+		} else if ($scope.change.old === undefined ) {
 			setError('Ingresa la contraseña actual');
 		} else if ( $scope.change.new === undefined && $scope.change.repeatNew === undefined ) {
 			setError('La contraseña debe tener de 8 a 15 caracteres, contar con al menos una mayúscula, una minúscula, y un numérico. NO incluir caracteres especiales');
 		} else if ( $scope.change.new !== $scope.change.repeatNew ){
 			setError('Las contraseñas no coinciden');
-		}else{
+		} else{
 			$scope.changeCrtl.changeError = false;
 			$scope.changeCrtl.changeStep = 2;
 		}
@@ -93,6 +95,21 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 		}
 
 		return isConSeq;
+	};
+
+	function passwordIncludesName(password){
+	    var name= $scope.completeName;
+	    var res = name.split(" ");
+	    var upper = password.toUpperCase();
+	    for(i=0 ; i<res.length ; i++){
+	      if(res[i].length > 2){
+	        var separateName=res[i].toUpperCase();
+	        if (upper.includes(separateName)) {
+	          return true;
+	        }
+	      }
+	    }
+	    return false;
 	};
 
 }]);
