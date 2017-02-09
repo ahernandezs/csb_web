@@ -523,7 +523,7 @@
 		td{
 			padding-top:5px;
 			padding-bottom:5px;
-			word-break: break-all;
+			word-wrap: break-word;
 		}
 		td:first-child{
 			text-align: left;
@@ -620,10 +620,6 @@
 	table{width:100%;}
 	th{text-align: center;}
 	td{width: 33%; text-align: center;&:last-child{text-align: center;}}
-	/*.transactions{
-		max-height:600px;
-		overflow:auto;
-	}*/
 }
 
 .w35{
@@ -639,9 +635,9 @@
 	font-size:14px !important
 }
 
-.tabular-data td span:first-child, .transactions td span:first-child{
-	font-size: 14px
-}
+// .tabular-data td span:first-child, .transactions td span:first-child{
+// 	font-size: 14px
+// }
 
 .razon{
 	height: 35px;
