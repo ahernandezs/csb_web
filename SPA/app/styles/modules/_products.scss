@@ -81,7 +81,7 @@
 
 		span {
 			display: block;
-			word-break: break-all;
+			word-wrap: break-word;
 		}
 	}
 	> div {
@@ -482,7 +482,7 @@ hr[ng-show="!showAccountHeader"]{
 }
 
 .transactions td:nth-child(n+4){
-	font-size:16px;
+	//font-size:16px;
 	font-weight: bold;
  	color: #4D4D4D;
 }
