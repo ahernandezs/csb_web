@@ -22,8 +22,8 @@ angular.module('spaApp').factory('api', ['$http', '$rootScope', '$window', funct
       $http.defaults.headers.common['X-CLIENT-VERSION'] = '1.2.HASHVERSION';
     },
     config: function(){
-      $rootScope.restAPIBaseUrl = $("#linkApiRoot").attr("href");
-      //$rootScope.restAPIBaseUrl = "http://ci.anzen.io/SBD";
+      //$rootScope.restAPIBaseUrl = $("#linkApiRoot").attr("href");
+      $rootScope.restAPIBaseUrl = "http://ci.anzen.io/SBD";
       $rootScope.useMocks = false;
     }
   };
