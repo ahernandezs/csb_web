@@ -44,6 +44,8 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
       //session-timeout: 1 minute between the warning message and the redirection to the login page
       timerService.warningDuration(60);
       timerService.start();
+
+      $scope.clientName = $scope.nameClient;
   };
 
   /**
@@ -139,11 +141,28 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
     return isConSeq;
   }
 
+  function passwordIncludesName(password){
+    var name= $scope.clientName;
+    var res = name.split(" ");
+    var upper = password.toUpperCase();
+    for(i=0 ; i<res.length ; i++){
+      if(res[i].length > 2){
+        var separateName=res[i].toUpperCase();
+        if (upper.includes(separateName)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
   /**
   * validate the client's password
   */
   $scope.confirmPassword = function () {
-    if(! $scope.registerData.password){
+    if(passwordIncludesName($scope.registerData.password)){
+      setError('La contraseña no puede contener tu nombre ni apellidos');
+    }else if(!$scope.registerData.password){
       setError('Las contraseñas no puede estar vacías');
     }else if($scope.registerData.password !== $scope.registerData.repeatPass){
       setError('Las contraseñas ingresadas no coinciden');

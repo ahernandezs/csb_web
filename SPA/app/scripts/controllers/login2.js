@@ -270,17 +270,18 @@ angular.module('spaApp')
 	};
 
 	$scope.requestChange = function() {
-		userProvider.unlockUserPreRequest( $scope.unlockData.username, $scope.unlockData.folio ).
-			then( function(data) {
-				resetError();
-				$scope.unlockImages = data.images;
-				$scope.selection++;
-			}, function(data) {
-				if ( data.code === 505 )
-					setError( 'No se pudo obtener el código de desbloqueo para la validación' );
-				else
-					setError( data.message );
-			});
+    userProvider.unlockUserPreRequest( $scope.unlockData.username, $scope.unlockData.folio ).
+      then( function(data) {
+        resetError();
+        $scope.client_name2 = data.client_name;
+        $scope.unlockImages = data.images;
+        $scope.selection++;
+      }, function(data) {
+        if ( data.code === 505 )
+          setError( 'No se pudo obtener el código de desbloqueo para la validación' );
+        else
+          setError( data.message );
+      });
 	};
 
 	$scope.validatePassword = function() {
@@ -344,8 +345,25 @@ angular.module('spaApp')
 		return isConSeq;
 	}
 
+  function passwordIncludesName(password){
+    var name= $scope.client_name2;
+    var res = name.split(" ");
+    var upper = password.toUpperCase();
+    for(i=0 ; i<res.length ; i++){
+      if(res[i].length > 2){
+        var separateName = res[i].toUpperCase();
+        if(upper.includes(separateName)){
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
 	$scope.confirmPassword = function () {
-		if(!$scope.unlockData.password){
+    if(passwordIncludesName($scope.unlockData.password)){
+      setError('La contraseña no puede contener tu nombre ni apellidos');
+    } else if(!$scope.unlockData.password){
       setError('Las contraseñas no puede estar vacías');
 		} else if($scope.unlockData.password !== $scope.unlockData.passwordAgain){
       setError('Las contraseñas ingresadas no coinciden');
