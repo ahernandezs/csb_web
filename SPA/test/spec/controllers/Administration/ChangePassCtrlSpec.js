@@ -28,20 +28,6 @@ describe('Change Password Controller',function(){
 		expect(scope.changeCrtl.changeStep).to.be.equal(1);
 	});
 
-	it('verify the old password should be equal to undefined',function(){
-		scope.verifyNewPass();
-		expect(scope.changeCrtl.changeStep).to.not.be.equal(2);
-	});
-
-	it('verify the new password should be different to undefined',function(){
-		scope.change.old="Holas197"
-		scope.change.new="Buenas154";
-		scope.change.repeatNew="Buenas154";
-		scope.verifyNewPass();
-		expect(scope.changeCrtl.changeStep).to.equal(2);
-
-	});
-	
 	it('verify the modification of new password',function(){
 		scope.modifyPassword();
 		expect(scope.changeCrtl.changeStep).to.be.equal(3);
