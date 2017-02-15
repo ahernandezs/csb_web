@@ -1,7 +1,7 @@
 .contacto{
 	background:white;
-	padding:30px 20px !important;
-	margin-top: 50px;
+	padding: 20px !important;
+	margin-top: 40px;
 	width: 50%;
 	color:black;
 	@include border-radius(4px);
@@ -17,12 +17,12 @@
 	> a{
 		background:url(../images/ico-mail.png) no-repeat 5px center;
 		background-size:30px;
-		padding: 5px 0 5px 50px;
+		padding:5px 0 0 50px;
 		font-weight: bold;
 		&:hover{color:$blue;}
 	}
 	div{
-		margin: 20px 0 30px 0;
+		margin: 20px 0;
 		a{
 			padding: 15px 15px 15px 50px;
 			background:url(../images/ico-phone-orange.png) no-repeat 5px center;
