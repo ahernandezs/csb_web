@@ -349,7 +349,7 @@ angular.module('spaApp')
     var name= $scope.client_name2;
     var res = name.split(" ");
     var upper = password.toUpperCase();
-    for(i=0 ; i<res.length ; i++){
+    for(var i=0 ; i<res.length ; i++){
       if(res[i].length > 2){
         var separateName = res[i].toUpperCase();
         if(upper.includes(separateName)){
