@@ -75,6 +75,7 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
   $scope.validatePassword = function() {
     $scope.error = false;
     $scope.invalidPassword = true;
+    var fullName= $scope.clientName;
     var password = $scope.registerData.password;
     if(password) {
       var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/g;
@@ -109,6 +110,12 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
 
       if(consecutivePassword(password)) {
         setError('No puede tener secuencia de caracteres como 123 o abc');
+        return;
+      }
+
+      var rexNombres = new RegExp(fullName.replace(/\b\s(.|..)\b/g," ").replace(/\s+/g,"|"),'gi');
+      if(rexNombres.test(password)){
+        setError('La contraseña no puede contener tu nombre ni apellidos');
         return;
       }
 

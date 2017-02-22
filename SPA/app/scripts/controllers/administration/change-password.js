@@ -46,6 +46,7 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 	$scope.validatePassword = function() {
 		$scope.changeCrtl.changeError = false;
 		$scope.invalidPassword = true;
+		var fullName= $scope.clientName;
 		var password = $scope.change.new;
 
 		if(password) {
@@ -65,6 +66,13 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 				setError('No puede tener secuencia de caracteres como 123 o abc');
 				return;
 			}
+
+			var rexNombres = new RegExp(fullName.replace(/\b\s(.|..)\b/g," ").replace(/\s+/g,"|"),'gi');
+			if(rexNombres.test(password)){
+				setError('La contraseña no puede contener tu nombre ni apellidos');
+				return;
+			}
+
 			$scope.invalidPassword = false;
 		}
 	}

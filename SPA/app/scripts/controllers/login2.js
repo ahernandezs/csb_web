@@ -287,6 +287,7 @@ angular.module('spaApp')
 	$scope.validatePassword = function() {
 		$scope.error = false;
 		$scope.invalidPassword = true;
+		var fullName= $scope.clientName;
 		var password = $scope.unlockData.password;
 		if(password) {
 			var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/g;
@@ -317,6 +318,12 @@ angular.module('spaApp')
 				setError('No puede tener secuencia de caracteres como 123 o abc');
 				return;
 			}
+
+      var rexNombres = new RegExp(fullName.replace(/\b\s(.|..)\b/g," ").replace(/\s+/g,"|"),'gi');
+      if(rexNombres.test(password)){
+        setError('La contraseña no puede contener tu nombre ni apellidos');
+        return;
+      }
 
 			$scope.invalidPassword = false;
 		}
