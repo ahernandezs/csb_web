@@ -46,7 +46,7 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 	$scope.validatePassword = function() {
 		$scope.changeCrtl.changeError = false;
 		$scope.invalidPassword = true;
-		var fullName= $scope.clientName;
+		var fullName= $scope.completeName;
 		var password = $scope.change.new;
 
 		if(password) {
