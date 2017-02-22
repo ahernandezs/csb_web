@@ -172,7 +172,9 @@
 		}
 	}
 }
-
+.rnCarousel{
+	overflow: visible !important;
+}
 @media only screen and (max-width:1199px){
 	.login2{
 		.content-login-2{
