@@ -19,8 +19,8 @@
             <div class="animate-switch" ng-switch-when="1">
                 <form class="user-registration" ng-submit="preRegister(client,contract)" name="registrationForm">
                     <label for="user-register"><strong>¿Eres nuevo aqu&iacute;?</strong></label>
-                    <input type="text" ng-model="client" name="user-register" id="user-register" minlength="5" maxlength="10" pattern="^[0-9]{1,10}$" placeholder="Número de Cliente" required>
-                    <input type="text" ng-model="contract" name="contract-number" name="contract-number" id="contract-number" minlength="5" maxlength="20" ng-pattern="/^[0-9]+$/" placeholder="Folio de Consubanco por Internet" required>
+                    <input type="text" ng-model="client" name="user-register" id="user-register" minlength="5" maxlength="10" pattern="^[0-9]{1,10}$" placeholder="Número de Cliente"  autocomplete="off required>
+                    <input type="text" ng-model="contract" name="contract-number" name="contract-number" id="contract-number" minlength="5" maxlength="20" ng-pattern="/^[0-9]+$/" placeholder="Folio de Consubanco por Internet"  autocomplete="off required>
                     <div class="error" ng-show="registerError">{{errorMessage}}</div>
                     <input type="submit" value="Regístrate" ng-disabled="registrationForm.$invalid||registering">
                 </form>
