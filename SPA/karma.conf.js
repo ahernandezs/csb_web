@@ -34,6 +34,8 @@ module.exports = function(config) {
         'app/bower_components/angular-google-maps/dist/angular-google-maps.js',
         'app/bower_components/ng-scrollbars/src/scrollbars.js',
         'app/bower_components/ng-dialog/js/ngDialog.js',
+        'app/bower_components/angular-carousel/dist/angular-carousel.js',
+        'app/bower_components/angular-touch/angular-touch.js',
         'app/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js',
         'app/scripts/*.js',
         'app/scripts/controllers/**/*.js',
