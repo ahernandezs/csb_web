@@ -7,7 +7,8 @@ var app = angular.module('spaApp', [
   'ui.router',
   'uiGmapgoogle-maps',
   'ngScrollbars',
-  'ngDialog'
+  'ngDialog',
+  'angular-carousel'
 ]);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'uiGmapGoogleMapApiProvider', 'ScrollBarsProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, uiGmapGoogleMapApiProvider, ScrollBarsProvider) {
