@@ -319,7 +319,7 @@ angular.module('spaApp')
 				return;
 			}
 
-      var rexNombres = new RegExp(name.replace(/\b\s(.|..)\b/g," ").replace(/\s+/g,"|"),'gi');
+      var rexNombres = new RegExp(fullName.replace(/\b\s(.|..)\b/g," ").replace(/\s+/g,"|"),'gi');
       if(rexNombres.test(password)){
         setError('La contraseña no puede contener tu nombre ni apellidos');
         return;
