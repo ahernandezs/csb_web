@@ -48,6 +48,7 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 		$scope.invalidPassword = true;
 		var fullName= $scope.completeName;
 		var password = $scope.change.new;
+		var rePassword = $scope.change.repeatNew;
 
 		if(password) {
 			var pattern = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/g);
@@ -72,6 +73,12 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 				setError('La contraseña no puede contener tu nombre ni apellidos');
 				return;
 			}
+
+			if (password !== rePassword){
+				setError('Las contraseñas no coinciden');
+				return;
+			}
+
 
 			$scope.invalidPassword = false;
 		}

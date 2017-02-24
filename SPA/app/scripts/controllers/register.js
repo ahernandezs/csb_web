@@ -77,6 +77,7 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
     $scope.invalidPassword = true;
     var fullName= $scope.clientName;
     var password = $scope.registerData.password;
+    var rePassword = $scope.registerData.repeatPass;
     if(password) {
       var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/g;
       if(!pattern.test(password)) {
@@ -118,6 +119,11 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
         setError('La contraseña no puede contener tu nombre ni apellidos');
         return;
       }
+
+      if (password !== rePassword){
+				setError('Las contraseñas no coinciden');
+				return;
+			}
 
       $scope.invalidPassword = false;
 
