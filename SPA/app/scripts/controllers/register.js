@@ -120,6 +120,11 @@ angular.module('spaApp').controller('RegisterCtrl', ['$scope','$location', 'user
         return;
       }
 
+      if (rePassword === undefined || rePassword == ""){
+        setError("Confirma tu contraseña");
+				return;
+			}
+
       if (password !== rePassword){
 				setError('Las contraseñas no coinciden');
 				return;

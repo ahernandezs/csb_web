@@ -92,6 +92,13 @@ angular.module('spaApp')
 	 */
   $scope.selectImage = function(imageId) {
     $scope.loginData.selectedImage = imageId;
+    var password = $scope.unlockData.password;
+    var rePassword = $scope.unlockData.passwordAgain;
+    if (password !== "" && password === rePassword){
+      resetError();
+      $scope.invalidPassword = false;
+    }
+
   };
 
   /**
@@ -326,12 +333,22 @@ angular.module('spaApp')
         return;
       }
 
+      if (rePassword === undefined || rePassword == ""){
+        setError("Confirma tu contraseña");
+				return;
+			}
+
       if (password !== rePassword){
 				setError('Las contraseñas no coinciden');
 				return;
 			}
 
-			$scope.invalidPassword = false;
+      if($scope.loginData.selectedImage === undefined || $scope.loginData.selectedImage === false){
+        setError("Debe elegir una imagen");
+        return;
+      }
+
+      $scope.invalidPassword = false;
 		}
 	};
 

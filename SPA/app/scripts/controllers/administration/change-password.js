@@ -74,6 +74,11 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 				return;
 			}
 
+			if (rePassword === undefined || rePassword == ""){
+				setError("Confirma tu nueva contraseña");
+				return;
+			}
+
 			if (password !== rePassword){
 				setError('Las contraseñas no coinciden');
 				return;
