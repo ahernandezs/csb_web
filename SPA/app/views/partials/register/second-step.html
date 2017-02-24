@@ -17,7 +17,7 @@
                     </label>
                     <label class="fieldContainer last" ng-class="registerPasswordForm.repeatPass.$viewValue.length > 0 ? 'selected' : ''">
                         <span>Confirmar contraseña</span>
-                        <input autocomplete="off" type="password" class="input-password" name="repeatPass" password ng-model="registerData.repeatPass" placeholder="Confirmar contrase&ntilde;a" minlength="8" maxlength="15" required>
+                        <input autocomplete="off" type="password" class="input-password" name="repeatPass" password ng-model="registerData.repeatPass" placeholder="Confirmar contrase&ntilde;a" ng-change="validatePassword()" minlength="8" maxlength="15" required>
                     </label>
                 </div>
                 <div class="error" ng-show="error">{{errorMessage}}</div>
