@@ -121,12 +121,15 @@
 	}
 }
 
-
+body .ng-scope:first-child{
+	height: auto!important;
+}
 // Buttons Bar
 .buttons-bar{
 	text-align: center;
 	width: 80%;
 	margin: auto;
+	padding-bottom: 77px;
 	.btn{
 		color: white;
 		border:none;
