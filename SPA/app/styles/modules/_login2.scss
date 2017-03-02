@@ -1,4 +1,3 @@
-
 /*Login 2*/
 .login2{
 	padding-top: 1em;
@@ -126,6 +125,12 @@
 /*body .ng-scope:first-child{
 	height: auto!important;
 }*/
+@media screen\0 {
+	.buttons-bar{
+	    top: -50px;
+	    position: relative;
+	}
+}
 // Buttons Bar
 .buttons-bar{
 	text-align: center;
