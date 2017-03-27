@@ -26,11 +26,12 @@ angular.module('spaApp').controller('changePasswordController', ['$scope', 'admi
 				$scope.resultChangePass = true;
 			},
 			function(errorObject) {
+				$scope.resultChangePass = false;
 				$scope.resultErrorPass = true;
 				var status = errorObject.status;
 				if(status === 403){
 					$scope.manageOtpErrorMessage(errorObject.response);
-				} else {
+				}else {
 					var msg = codeStatusErrors.errorMessage(status);
 					if (status === 500){
 						$scope.setServiceError(msg + errorObject.response.message);
